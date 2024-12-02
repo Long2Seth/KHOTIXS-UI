@@ -36,11 +36,13 @@ export default function NavbarComponent() {
 
                     {/*Search form*/}
                     <section className="max-w-[1500px] rounded-[5px] flex justify-center drop-shadow-xl ">
+
+
                         <form className="w-full rounded-[5px] bg-gray-50 flex ">
                             {/* Search Component */}
-                            <div className=" flex items-center gap-0  ">
+                            <div className=" flex items-center gap-0  w-[50%] ">
                                 <input type="text" placeholder="Search for events by name"
-                                       className="bg-transparent rounded-tl-[5px] text-[18px] focus:text-gray-500 rounded-bl-[5px] pl-5 w-full focus:outline-none pr-4 border-0 focus:ring-0 px-0 py-2"
+                                       className="bg-transparent h-full rounded-tl-[5px] text-[16px] focus:text-gray-500 rounded-bl-[5px] pl-5 w-full focus:outline-none pr-4 border-0 focus:ring-0 px-0 py-2"
                                        name="topic"/>
                                 <hr className=" w-[20px] bg-gray-400 rotate-90 "/>
                             </div>
@@ -49,13 +51,13 @@ export default function NavbarComponent() {
                             <div className=" flex items-center ">
                                 <Select>
                                     <SelectTrigger
-                                        className="w-[180px] text-[18px] bg-red-950 focus:outline-none ring-0 text-gray-400 bg-transparent border-0"
+                                        className="w-[180px] text-[16px] bg-red-950 focus:outline-none ring-0 text-gray-400 bg-transparent border-0"
                                     >
                                         <SelectValue placeholder="Select location"/>
                                     </SelectTrigger>
                                     <SelectContent className="text-gray-800 bg-gray-100">
                                         <SelectGroup>
-                                            <SelectItem value="Phnome Phenh">Apple</SelectItem>
+                                            <SelectItem value="Phnome Phenh">Phnome Phenh</SelectItem>
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>
@@ -63,9 +65,9 @@ export default function NavbarComponent() {
                             </div>
 
                             {/* Popover Component */}
-                            <div  className="" >
+                            <div  className=" w-[50%] " >
                                 <Popover>
-                                    <PopoverTrigger className=" text-[18px] bg-red-950 focus:outline-none ring-0 " asChild>
+                                    <PopoverTrigger className=" text-[16px] bg-red-950 focus:outline-none ring-0 " asChild>
                                         <Button
                                             variant="ghost"
                                             className={cn(
@@ -74,11 +76,11 @@ export default function NavbarComponent() {
                                             )}
                                         >
                                             <CalendarIcon className="mr-2 text-gray-400 "/>
-                                            {date ? format(date, "PPP") : <span className=" text-gray-400 ">Pick a date</span>}
+                                            {date ? format(date, "PPP") : <span className=" text-gray-400 ">Enter date</span>}
                                         </Button>
                                     </PopoverTrigger>
-                                    <PopoverContent className="w-auto p-0 text-gray-400 ">
-                                        <Calendar className=" text-gray-400"
+                                    <PopoverContent className="w-auto p-0 text-black outline-none border-0 ">
+                                        <Calendar className=" text-gray-600 border-0 "
                                             mode="single"
                                             selected={date}
                                             onSelect={setDate}
@@ -89,7 +91,7 @@ export default function NavbarComponent() {
                             </div>
 
                             <button
-                                className="flex flex-row items-center justify-center rounded-tr-[5px] rounded-br-[5px] px-3 ">
+                                className="  flex flex-row items-center justify-center rounded-tr-[5px] rounded-br-[5px]">
                                 <div className="bg-primary-color text-2xl text-white p-3 rounded-tr-[5px] rounded-br-[5px] ">
                                     <IoSearch/>
                                 </div>
@@ -99,16 +101,18 @@ export default function NavbarComponent() {
 
 
                     {/*Login and Sign up buttons*/}
-                    <div className="flex items-center gap-4">
+                    <div className=" flex items-center ">
                         <ModeToggle/>
-                        <Button
-                            className="rounded-[5px] border-[1px] border-primary-color text-primary-color font-medium">
-                            Login
-                        </Button>
-                        <Button
-                            className="bg-primary-color rounded-[5px] text-secondary-color-text font-[10px] hover:bg-primary-color">
-                            Sign up
-                        </Button>
+                        <div className=" flex items-center gap-2 ">
+                            <Button
+                                className="rounded-[5px] text-[16px] border-[1px] border-primary-color text-primary-color font-medium">
+                                Login
+                            </Button>
+                            <Button
+                                className="bg-primary-color text-[16px] rounded-[5px] text-secondary-color-text font-[10px] hover:bg-primary-color">
+                                Sign up
+                            </Button>
+                        </div>
 
 
                     </div>
