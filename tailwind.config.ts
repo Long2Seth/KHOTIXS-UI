@@ -56,6 +56,9 @@ export default {
                 },
 
 
+
+
+
                 'khotixs-background-white': '#f5f5f5',
                 'khotixs-background-dark': '#000000',
                 'primary-color': '#480028',
@@ -73,7 +76,6 @@ export default {
             },
             fontSize:{
                 'description': '16px',
-
             },
             borderRadius: {
                 lg: 'var(--radius)',

@@ -11,3 +11,10 @@ body {
 .text-description {
   @apply font-bold text-[18px]
 }
+
+
+[data-theme='dark'] {
+  --primary-color: #fff;
+  --secondary-color-text: #000;
+}
+
