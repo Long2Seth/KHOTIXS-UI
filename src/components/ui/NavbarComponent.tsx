@@ -1,5 +1,6 @@
 'use client'
 import Link from "next/link"
+import Image from 'next/image';
 import {Button} from "@/components/ui/button"
 import {ModeToggle} from "@/components/ui/ModeToggle";
 import {IoSearch} from "react-icons/io5";
@@ -30,7 +31,7 @@ export default function NavbarComponent() {
 
                     {/*KHOTIXS LOGO*/}
                     <Link href="#" className="flex items-center">
-                        <img width={60} src="/khotixs_logo.png" alt="Khotixs Logo"/>
+                        <Image width={60} height={60} src="/khotixs_logo.png" alt="Khotixs Logo"/>
                     </Link>
 
 
