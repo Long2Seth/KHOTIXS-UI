@@ -22,9 +22,11 @@ import * as React from "react";
 export default function NavbarComponent() {
     const [date, setDate] = React.useState<Date>()
     return (
-        <nav className="fixed mt-[10px] inset-x-0 top-0 z-50 bg-white shadow-sm dark:bg-gray-950/90">
-            <div className="w-full max-w-7xl mx-auto px-4">
-                <div className="flex justify-between h-14 items-center">
+        <nav className=" w-full  mt-[10px] inset-x-0 top-0 z-50 bg-white shadow-sm dark:bg-gray-950/90">
+            <section className=" w-full py-[5px] px-[140px] ">
+
+
+                <div className="flex justify-between h-14 items-center mx-auto ">
 
                     {/*KHOTIXS LOGO*/}
                     <Link href="#" className="flex items-center">
@@ -33,44 +35,50 @@ export default function NavbarComponent() {
 
 
                     {/*Search form*/}
-                    <section className=" w-[1300px] ">
-                        <form
-                            className=" mx-auto max-w-xl px-6 rounded-[5px] bg-gray-50 flex focus-within:border-gray-300">
-
-                            <div>
+                    <section className="max-w-[1500px] rounded-[5px] flex justify-center drop-shadow-xl ">
+                        <form className="w-full rounded-[5px] bg-gray-50 flex ">
+                            {/* Search Component */}
+                            <div className=" flex items-center gap-0  ">
                                 <input type="text" placeholder="Search for events by name"
-                                       className="bg-transparent w-full focus:outline-none pr-4  border-0 focus:ring-0 px-0 py-2"
+                                       className="bg-transparent rounded-tl-[5px] text-[18px] focus:text-gray-500 rounded-bl-[5px] pl-5 w-full focus:outline-none pr-4 border-0 focus:ring-0 px-0 py-2"
                                        name="topic"/>
+                                <hr className=" w-[20px] bg-gray-400 rotate-90 "/>
                             </div>
-                            <div>
+
+                            {/* Select Component */}
+                            <div className=" flex items-center ">
                                 <Select>
-                                    <SelectTrigger className="w-[180px]">
-                                        <SelectValue placeholder="Secele location"/>
+                                    <SelectTrigger
+                                        className="w-[180px] text-[18px] bg-red-950 focus:outline-none ring-0 text-gray-400 bg-transparent border-0"
+                                    >
+                                        <SelectValue placeholder="Select location"/>
                                     </SelectTrigger>
-                                    <SelectContent>
+                                    <SelectContent className="text-gray-800 bg-gray-100">
                                         <SelectGroup>
                                             <SelectItem value="Phnome Phenh">Apple</SelectItem>
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>
+                                <hr className=" w-[20px] bg-gray-400 rotate-90 "/>
                             </div>
 
-                            <div>
+                            {/* Popover Component */}
+                            <div  className="" >
                                 <Popover>
-                                    <PopoverTrigger asChild>
+                                    <PopoverTrigger className=" text-[18px] bg-red-950 focus:outline-none ring-0 " asChild>
                                         <Button
-                                            variant={"outline"}
+                                            variant="ghost"
                                             className={cn(
-                                                "w-[200px] justify-start text-left font-normal",
+                                                "w-[200px] justify-start text-left bg-transparent border-0 focus:ring-0 focus:outline-none",
                                                 !date && "text-muted-foreground"
                                             )}
                                         >
-                                            <CalendarIcon/>
-                                            {date ? format(date, "PPP") : <span>Pick a date</span>}
+                                            <CalendarIcon className="mr-2 text-gray-400 "/>
+                                            {date ? format(date, "PPP") : <span className=" text-gray-400 ">Pick a date</span>}
                                         </Button>
                                     </PopoverTrigger>
-                                    <PopoverContent className="w-auto p-0">
-                                        <Calendar
+                                    <PopoverContent className="w-auto p-0 text-gray-400 ">
+                                        <Calendar className=" text-gray-400"
                                             mode="single"
                                             selected={date}
                                             onSelect={setDate}
@@ -79,9 +87,10 @@ export default function NavbarComponent() {
                                     </PopoverContent>
                                 </Popover>
                             </div>
+
                             <button
-                                className=" flex flex-row items-center justify-center rounded-[5px] px-3 tracking-wide border disabled:cursor-not-allowed disabled:opacity-50 transition ease-in-out duration-150 text-base bg-primary-color text-white focus:outline-none py-1.5 h-[38px] ">
-                                <div className=" bg-primary-color text-2xl  text-white ">
+                                className="flex flex-row items-center justify-center rounded-tr-[5px] rounded-br-[5px] px-3 ">
+                                <div className="bg-primary-color text-2xl text-white p-3 rounded-tr-[5px] rounded-br-[5px] ">
                                     <IoSearch/>
                                 </div>
                             </button>
@@ -103,8 +112,10 @@ export default function NavbarComponent() {
 
 
                     </div>
+
+
                 </div>
-            </div>
+            </section>
         </nav>
     )
 }
