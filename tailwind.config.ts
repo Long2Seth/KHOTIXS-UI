@@ -68,7 +68,8 @@ export default {
                 'label-vip': '#D8AC0E',
                 'label-premium': '#5521B5',
                 'label-regular': '#FFA500',
-                'label-free': '#03543F',
+                'label-free': '#0EB638',
+                'label-paid': '#B3261E',
                 'label-text-secondary': '#000000',
                 'label-text-primary': '#ffffff',
 
