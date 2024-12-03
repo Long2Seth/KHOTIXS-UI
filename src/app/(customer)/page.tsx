@@ -9,7 +9,6 @@ export default function Home() {
 
             </section>
 
-
             <section className="w-full bg-khotixs-background-white px-[140px] py-[100px] text-[50px] font-bold flex flex-col justify-center items-center h-[500px]">
                 <h1 className="text-primary-color-text ">EVENT CATEGORIES</h1>
                 <section className="w-full flex justify-center gap-4 mt-8">
