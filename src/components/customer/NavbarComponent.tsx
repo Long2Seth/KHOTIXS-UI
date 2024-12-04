@@ -31,7 +31,7 @@ export default function NavbarComponent() {
             <section className="w-full h-[60px] bg-white py-[10px] px-[140px] flex  justify-center gap-5">
                 <CiBullhorn className="  w-[40px] p-[8px] rounded-[50%] text-gray-400 bg-gray-200  h-full "/>
                 <p className=" font-semibold flex items-center">Do you organize events? </p>
-                <Button className=" font-semibold text-white hover:bg-primary-color bg-primary-color rounded-[5px] ">
+                <Button className=" font-semibold text-white hover:bg-primary-color bg-primary-color rounded-[5px]">
                     Become A Partner <span><FaArrowRightLong/></span>
                 </Button>
 

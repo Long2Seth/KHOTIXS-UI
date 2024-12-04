@@ -12,7 +12,6 @@ export default {
         extend: {
             colors: {
 
-
                 //
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
@@ -56,9 +55,6 @@ export default {
                 },
 
 
-
-
-
                 'khotixs-background-white': '#f5f5f5',
                 'khotixs-background-dark': '#000000',
                 'primary-color': '#480028',
@@ -72,7 +68,6 @@ export default {
                 'label-paid': '#B3261E',
                 'label-text-secondary': '#000000',
                 'label-text-primary': '#ffffff',
-
 
             },
             fontSize:{

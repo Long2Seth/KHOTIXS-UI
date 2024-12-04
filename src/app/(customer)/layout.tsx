@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import '../globals.css';
 import NavbarComponent from "@/components/customer/NavbarComponent";
 import { ThemeProvider } from "next-themes";
-import {FooterComponent} from "@/components/customer/FooterComponent";
+import { FooterComponent } from "@/components/customer/FooterComponent";
 
 export const metadata: Metadata = {
     title: "KHOTIXS",
@@ -10,25 +10,25 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
+    children,
+}: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-        <body className=" bg-khotixs-background-white ">
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-        >
-            <NavbarComponent />
-            {children}
-            <FooterComponent/>
+            <body className=" bg-khotixs-background-white ">
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="light"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    <NavbarComponent />
+                    {children}
+                    <FooterComponent />
 
-        </ThemeProvider>
-        </body>
+                </ThemeProvider>
+            </body>
         </html>
     );
 }
