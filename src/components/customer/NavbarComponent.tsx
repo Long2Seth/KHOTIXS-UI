@@ -20,6 +20,7 @@ import {CalendarIcon} from "lucide-react";
 import {format} from "date-fns";
 import {Calendar} from "@/components/ui/calendar";
 import * as React from "react";
+import {NavigationMenuDemo} from "@/components/customer/NavigationMenuDemo";
 
 export default function NavbarComponent() {
     const [date, setDate] = React.useState<Date>();
@@ -50,7 +51,7 @@ export default function NavbarComponent() {
                                 <input
                                     type="text"
                                     placeholder="Search for events by name"
-                                    className="bg-transparent h-full rounded-tl-[5px] text-[16px] focus:text-gray-500 rounded-bl-[5px] pl-5 w-full focus:outline-none pr-4 border-0 focus:ring-0 px-0 py-2"
+                                    className="bg-transparent h-full rounded-tl-[5px] text-lg focus:text-gray-500 rounded-bl-[5px] pl-5 w-full focus:outline-none pr-4 border-0 focus:ring-0 px-0 py-2"
                                     name="topic"
                                 />
                                 <hr className="w-[20px] bg-gray-400 rotate-90"/>
@@ -61,7 +62,7 @@ export default function NavbarComponent() {
                                 <Select onValueChange={setSelectedLocation}>
                                     <SelectTrigger
                                         className={cn(
-                                            "w-[180px] text-[16px] focus:outline-none ring-0 bg-transparent border-0",
+                                            "w-[180px] text-lg focus:outline-none ring-0 bg-transparent border-0",
                                             selectedLocation ? "text-black" : "text-gray-400"
                                         )}
                                     >
@@ -78,9 +79,9 @@ export default function NavbarComponent() {
 
 
                             {/* Popover Component */}
-                            <div className="w-[55%]">
+                            <div className="w-[60%]">
                                 <Popover>
-                                    <PopoverTrigger className="text-[16px] bg-red-950 focus:outline-none ring-0"
+                                    <PopoverTrigger className="text-lg bg-red-950 focus:outline-none ring-0"
                                                     asChild>
                                         <Button
                                             variant="ghost"
@@ -96,7 +97,7 @@ export default function NavbarComponent() {
                                     </PopoverTrigger>
                                     <PopoverContent className="w-auto p-0 text-black outline-none border-0">
                                         <Calendar
-                                            className="text-gray-600 border-0"
+                                            className="text-gray-600 border-0 bg-white z-50 rounded-[5px] "
                                             mode="single"
                                             selected={date}
                                             onSelect={setDate}
@@ -119,13 +120,15 @@ export default function NavbarComponent() {
                     {/* Login and Sign up buttons */}
                     <div className="flex items-center">
                         <ModeToggle/>
+                        <NavigationMenuDemo/>
+
                         <div className="flex items-center gap-2">
                             <Button
-                                className="rounded-[5px] text-[16px] border-[1px] border-primary-color text-primary-color font-medium">
+                                className="rounded-[5px] text-lg border-[1px] border-primary-color text-primary-color font-medium">
                                 Login
                             </Button>
                             <Button
-                                className="bg-primary-color text-[16px] rounded-[5px] text-secondary-color-text font-[10px] hover:bg-primary-color">
+                                className="bg-primary-color text-lg rounded-[5px] text-secondary-color-text font-[10px] hover:bg-primary-color">
                                 Sign up
                             </Button>
                         </div>
