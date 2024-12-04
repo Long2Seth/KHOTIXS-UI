@@ -1,11 +1,16 @@
 import React from "react";
 import "./globals.css"
 import { Metadata } from "next";
+import StoreProvider from "./StoreProvider";
 
 export const metadata: Metadata = {
-    title: "EBuy",
-    description: "Thanks!"
-}
+    title: {
+        template: "%s - KHOTIXS",
+        default: "KHOTIXS - Buy and Sell Event Tickets Online",
+    },
+    description: "Welcome to KHOTIXS, the best place to buy and sell tickets for events online.",
+    keywords: ["event tickets", "buy tickets online", "sell tickets", "event organizers", "ticket buyers"],
+};
 
 export default function RootLayout({
     children,
@@ -15,7 +20,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                {children}
+                <StoreProvider>
+                    {children}
+                </StoreProvider>
             </body>
         </html>
     )

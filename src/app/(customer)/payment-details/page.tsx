@@ -7,8 +7,8 @@ export default function page(){
             {/* Section Title */}
             <section className={`px-[135px] pt-[50px]`}>
                 <TitleAndDesComponent
-                    title="Order Info Requirement"
-                    description="Please fill in the information below to complete your order!"
+                    title="Payment Details"
+                    description="Please check your Payment Details!"
                 />
             </section>
 
