@@ -17,27 +17,11 @@ export const upcomingData: Event[] = [
     },
     {
         image: "/cover.png",
-        date: "2024-12-02",
-        title: "Event Two: An Exclusive Gathering for Music Enthusiasts Featuring Renowned Artists from Around the Globe",
-        location: "London, UK - The Royal Albert Hall, known for its grandeur and rich history, setting the stage for an unforgettable VIP experience.",
-        price: 200,
-        labelType: "VIP"
-    },
-    {
-        image: "/cover.png",
-        date: "2024-12-03",
-        title: "Event Three: A Cultural Extravaganza Showcasing the Best of Asian Music and Dance",
-        location: "Tokyo, Japan - Tokyo Dome, a state-of-the-art arena providing an electrifying atmosphere for audiences worldwide.",
-        price: 300,
-        labelType: "PREMIUM"
-    },
-    {
-        image: "/cover.png",
         date: "2024-12-04",
         title: "Event Four: A Symphony of Sound and Light in the Heart of Sydney",
         location: "Sydney, Australia - Sydney Opera House, an architectural marvel hosting a breathtaking regular concert experience.",
         price: 400,
-        labelType: "REGULAR"
+        labelType: "VIP"
     },
 ];
 
