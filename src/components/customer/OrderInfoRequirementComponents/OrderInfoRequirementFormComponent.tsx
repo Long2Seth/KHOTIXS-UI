@@ -15,7 +15,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
+// Create schema for the form.
 const formSchema = z.object({
   fullName: z.string().min(2, { message: "Full Name is required" }),
   email: z.string().email({ message: "Email is required" }),
@@ -27,11 +29,17 @@ const formSchema = z.object({
 
 export default function OrderInfoRequirementFormComponent() {
 
+  // Router
   const router = useRouter();
 
+  // Toast
+  const { toast } = useToast();
+
+  // Styles
   const requiredStyle = "text-red-500";
   const msgStyle = "italic";
 
+  // Initialize form values
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,15 +49,27 @@ export default function OrderInfoRequirementFormComponent() {
     },
   })
 
+  // Function to handle form submission
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log({
       values,
     });
     form.reset();
+
+    if(values.fullName && values.email && values.phoneNumber){
+      toast({
+        title: "Success!",
+        description: "Your information has been submitted successfully!",
+      })
+      setTimeout(() => {
+        router.push("/payment-details");
+      },3000)
+    }
   }
 
   return (
     <>
+      {/* Form */}
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -100,7 +120,12 @@ export default function OrderInfoRequirementFormComponent() {
             >
               Cancel
             </Button>
-            <Button type="submit" className="w-full bg-primary-color hover:bg-red-900">Payment Details</Button>
+            <Button
+              type="submit"
+              className="w-full bg-primary-color hover:bg-red-900"
+            >
+              Payment Details
+            </Button>
           </div>
         </form>
       </Form>

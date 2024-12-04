@@ -1,8 +1,7 @@
 import StepperComponent from "@/components/customer/StepperComponent/StepperComponent";
-import OrderInfoRequirementFormComponent from "@/components/customer/OrderInfoRequirementComponents/OrderInfoRequirementFormComponent";
 import TitleAndDesComponent from "@/components/customer/TitleAndDesComponent/TitleAndDesComponent";
 
-export default function page() {
+export default function page(){
     return (
         <>
             {/* Section Title */}
@@ -16,8 +15,7 @@ export default function page() {
             {/* Section Order */}
             <section className={`px-[135px] py-[50px] flex flex-col justify-center items-center gap-[40px]`}>
                 <StepperComponent />
-                <OrderInfoRequirementFormComponent />
             </section>
         </>
-    );
+    )
 }

@@ -3,6 +3,7 @@ import '../globals.css';
 import NavbarComponent from "@/components/customer/NavbarComponent";
 import { ThemeProvider } from "next-themes";
 import { FooterComponent } from "@/components/customer/FooterComponent";
+import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
     title: "KHOTIXS",
@@ -26,7 +27,7 @@ export default function RootLayout({
                     <NavbarComponent />
                     {children}
                     <FooterComponent />
-
+                    <Toaster />
                 </ThemeProvider>
             </body>
         </html>
