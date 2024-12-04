@@ -33,35 +33,30 @@ export function CardUpcoming({ event }: CardUpcomingProps) {
     };
 
     return (
-        <section className=" w-[500px] h-[500px] bg-white rounded-[10px] flex flex-col justify-start items-start">
-            {/*<section*/}
-            {/*    className="rounded-tr-[10px] rounded-tl-[10px] w-[500px] h-[50%] bg-cover bg-center hover:scale-[101%]"*/}
-            {/*    style={{ backgroundImage: `url(${event.image})` }}*/}
-            {/*>*/}
-            {/*</section>*/}
+        <section className=" lg:min-w-[350px] lg:max-w-[400px] xl:max-w-[500px] h-auto bg-white rounded-[10px] flex flex-col justify-start items-start">
             <a className=" group block overflow-hidden ">
                 <img
                     src={`${event.image}`}
                     alt=""
-                    className="rounded-tr-[10px] rounded-tl-[10px] w-[500px] h-[250px] bg-cover bg-center hover:scale-[101%] "
+                    className=" rounded-tr-[10px] rounded-tl-[10px] w-full lg:max-h-[50%] xl:max-h-[500px] bg-cover bg-center hover:scale-[101%] "
                 />
-                <section className="relative flex w-full h-[250px] px-[25px] py-5 gap-10">
+                <section className="relative flex w-full lg:max-h-[40%] xl:max-h-[500px] px-[30px] lg:py-[25px] xl:py-5  gap-10">
                     <div className="text-center">
-                        <p className="font-semibold text-lg uppercase">{month}</p>
-                        <p className="font-bold text-4xl">{day}</p>
+                        <p className="font-semibold lg:text-sm xl:text-lg uppercase">{month}</p>
+                        <p className="font-bold lg:text-2xl text-4xl">{day}</p>
                     </div>
-                    <div className="absolute top-[70px] left-[30px]">
-                        <hr className="w-[100px] rotate-90 bg-black"/>
+                    <div className="absolute lg:top-[50px] lg:left-[50px] xl:top-[70px] xl:left-[30px]">
+                        <hr className=" lg:w-[50px] xl:w-[100px] rotate-90 bg-black"/>
                     </div>
-                    <div>
-                        <p className="font-bold text-2xl h-[100px] line-clamp-3 uppercase ">{event.title}</p>
+                    <div className=" h-auto w-full ">
+                        <p className="font-bold lg:text-md xl:text-2xl line-clamp-3 uppercase ">{event.title}</p>
                         <div className="flex">
-                            <HiOutlineLocationMarker className="w-[20px] h-[30px] text-gray-600"/>
-                            <p className=" pl-[8px] text-lg font-light my-1 text-gray-600 line-clamp-2">{event.location}</p>
+                            <HiOutlineLocationMarker className=" my-2 lg:w-[70px] lg:h-[20px] xl:w-[50px] xl:h-[40px] text-gray-600"/>
+                            <p className=" lg:text-sm xl:text-lg font-light my-2 text-gray-600 line-clamp-2">{event.location}</p>
                         </div>
                     </div>
                     <button
-                        className={`absolute text-xl font-medium bottom-0 right-0 min-w-[80px] text-white px-3 py-2 rounded-br-[10px] rounded-bl-[10px] rounded-tl-[10px] ${getLabelClass(event.labelType)}`}
+                        className={`absolute lg:text-md xl:text-xl font-medium bottom-0 right-0 min-w-[80px] text-white lg:p-1 xl:px-3 xl:py-2 rounded-br-[10px] rounded-bl-[10px] rounded-tl-[10px] ${getLabelClass(event.labelType)}`}
                     >
                         {event.labelType.toLowerCase() === 'free' ? 'FREE' : `$${event.price}`}
                     </button>

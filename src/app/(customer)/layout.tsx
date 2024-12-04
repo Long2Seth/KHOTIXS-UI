@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-        <body className=" bg-khotixs-background-white ">
+        <body className=" bg-khotixs-background-white dark:bg-khotixs-background-dark ">
         <ThemeProvider
             attribute="class"
             defaultTheme="light"

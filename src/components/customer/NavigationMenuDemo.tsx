@@ -20,9 +20,9 @@ export function NavigationMenuDemo() {
                     <NavigationMenuTrigger className=" text-lg font-medium ">About & Contact</NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <section
-                            className="  relative flex w-[450px] h-auto rounded-[5px] outline-none border-0 bg-khotixs-background-white ">
+                            className="  relative flex w-[450px] h-auto rounded-[5px] hover:rounded-[5px] outline-none border-5 border-none ring-0  bg-khotixs-background-white dark:bg-khotixs-background-dark ">
 
-                            <a className=" w-[50%] cursor-pointer p-[20px] hover:bg-gray-200  "
+                            <a className=" w-[50%] cursor-pointer p-[20px] hover:bg-gray-200 rounded-[5px] hover:rounded-[5px] dark:hover:bg-primary-color"
                                href="/about">
                                 <div>
                                     <h1 className="  text-2xl font-semibold ">About</h1>
@@ -32,7 +32,7 @@ export function NavigationMenuDemo() {
                                 </div>
                             </a>
 
-                            <a className=" w-[50%] cursor-pointer p-[20px] hover:bg-gray-200 "
+                            <a className=" w-[50%] cursor-pointer p-[20px] rounded-[5px] hover:rounded-[5px] hover:bg-gray-200  dark:hover:bg-primary-color"
                                href="/contact-us">
                                 <div>
                                     <h1 className=" text-2xl font-semibold ">Contact</h1>
