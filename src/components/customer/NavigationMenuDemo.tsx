@@ -23,7 +23,7 @@ export function NavigationMenuDemo() {
                             className="  relative flex w-[450px] h-auto rounded-[5px] outline-none border-0 bg-khotixs-background-white ">
 
                             <a className=" w-[50%] cursor-pointer p-[20px] hover:bg-gray-200  "
-                               href=".">
+                               href="/about">
                                 <div>
                                     <h1 className="  text-2xl font-semibold ">About</h1>
                                     <p>
@@ -33,7 +33,7 @@ export function NavigationMenuDemo() {
                             </a>
 
                             <a className=" w-[50%] cursor-pointer p-[20px] hover:bg-gray-200 "
-                               href=".">
+                               href="/contact-us">
                                 <div>
                                     <h1 className=" text-2xl font-semibold ">Contact</h1>
                                     <p>
