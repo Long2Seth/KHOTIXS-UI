@@ -8,7 +8,7 @@ export default function Home() {
         <main className=" flex flex-col ">
 
             {/* Hero section*/}
-            <section className=" h-[520px] w-full ">
+            <section className=" h-[520px] w-full bg-black ">
 
             </section>
 
@@ -28,7 +28,7 @@ export default function Home() {
                         tickets.
                     </p>
                 </section>
-                <section className=" h-auto mt-10 grid grid-cols-2 justify-center items-center gap-10">
+                <section className=" h-auto mt-10 grid lg:grid-cols-1 xl:grid-cols-2 justify-center items-center gap-10">
                     {upcomingData.map((event, index) => (
                         <CardUpcoming key={index} event={event}/>
                     ))}
@@ -51,7 +51,7 @@ export default function Home() {
                 </section>
 
 
-                <section className=" h-auto mt-10 grid grid-cols-3 justify-center items-center gap-10">
+                <section className=" h-auto mt-10 grid lg:grid-cols-1 xl:grid-cols-2  grid-cols-3 justify-center items-center gap-10">
                     {generalData.map((event, index) => (
                         <CardUpcoming key={index} event={event}/>
                     ))}
@@ -72,7 +72,7 @@ export default function Home() {
                 </section>
 
 
-                <section className=" h-auto mt-10 grid grid-cols-3 justify-center items-center gap-10">
+                <section className=" h-auto mt-10 grid lg:grid-cols-1 xl:grid-cols-2  grid-cols-3 justify-center items-center gap-10">
                     {generalData.map((event, index) => (
                         <CardUpcoming key={index} event={event}/>
                     ))}
@@ -93,7 +93,7 @@ export default function Home() {
                 </section>
 
 
-                <section className=" h-auto mt-10 grid grid-cols-3 justify-center items-center gap-10">
+                <section className=" h-auto mt-10 grid lg:grid-cols-1 xl:grid-cols-2  grid-cols-3 justify-center items-center gap-10">
                     {generalData.map((event, index) => (
                         <CardUpcoming key={index} event={event}/>
                     ))}
@@ -114,7 +114,7 @@ export default function Home() {
                 </section>
 
 
-                <section className=" h-auto mt-10 grid grid-cols-3 justify-center items-center gap-10">
+                <section className=" h-auto mt-10 grid lg:grid-cols-1 xl:grid-cols-2  grid-cols-3 justify-center items-center gap-10">
                     {generalData.map((event, index) => (
                         <CardUpcoming key={index} event={event}/>
                     ))}
@@ -137,7 +137,7 @@ export default function Home() {
                 </section>
 
 
-                <section className=" h-auto mt-10 grid grid-cols-3 justify-center items-center gap-10">
+                <section className=" h-auto mt-10 grid lg:grid-cols-1 xl:grid-cols-2  grid-cols-3 justify-center items-center gap-10">
                     {generalData.map((event, index) => (
                         <CardUpcoming key={index} event={event}/>
                     ))}
