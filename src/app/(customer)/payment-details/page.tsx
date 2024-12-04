@@ -12,10 +12,12 @@ export default function page(){
                 />
             </section>
 
-            {/* Section Order */}
+            {/* Section Payment */}
             <section className={`px-[135px] py-[50px] flex flex-col justify-center items-center gap-[40px]`}>
                 <StepperComponent />
             </section>
+
+            {/* Section End */}
         </>
     )
 }
