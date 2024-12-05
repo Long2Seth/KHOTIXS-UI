@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export function FooterComponent() {
     return (
-        <footer className="w-full bg-white py-[100px]">
+        <footer className="w-full bg-khotixs-background-white dark:bg-khotixs-background-dark py-[100px]">
 
 
             {/* Main Footer Section */}
@@ -28,7 +28,7 @@ export function FooterComponent() {
 
                 {/* Event Category */}
                 <div className="w-1/4">
-                    <h3 className="font-bold text-lg mb-4 text-primary-color-text  ">Event Category</h3>
+                    <h3 className="font-bold text-lg mb-4 text-primary-color-text dark:text-secondary-color-text  ">Event Category</h3>
                     <ul className="space-y-2">
                         <li>Concerts</li>
                         <li>Technology</li>
@@ -41,7 +41,7 @@ export function FooterComponent() {
 
                 {/* Support & Information */}
                 <div className="w-1/4">
-                    <h3 className="font-bold text-lg mb-4 text-primary-color-text">Support & Information</h3>
+                    <h3 className="font-bold text-lg mb-4 text-primary-color-text dark:text-secondary-color-text  ">Support & Information</h3>
                     <ul className="space-y-2">
                         <li>How to use?</li>
                         <li>Policy</li>
@@ -52,7 +52,7 @@ export function FooterComponent() {
 
                 {/* Sponsors and Organizer */}
                 <div className="w-1/4">
-                    <h3 className="text-primary-color-text font-bold text-lg mb-4">Sponsors By</h3>
+                    <h3 className="font-bold text-lg mb-4 text-primary-color-text dark:text-secondary-color-text  ">Sponsors By</h3>
                     <div className="flex space-x-4 mb-4">
                         <Image
                             width={50}
@@ -67,7 +67,7 @@ export function FooterComponent() {
                             alt="Sponsor 2 Logo"
                         />
                     </div>
-                    <h3 className=" text-primary-color-text font-bold text-lg mb-4">Organize By</h3>
+                    <h3 className="font-bold text-lg mb-4 text-primary-color-text dark:text-secondary-color-text  ">Organize By</h3>
                     <div>
                         <Image
                             width={80}
@@ -82,7 +82,7 @@ export function FooterComponent() {
             </section>
 
             {/* Footer Bottom Section */}
-            <section className="w-full font-medium text-lg text-center py-[50px] text-primary-color-text ">
+            <section className="w-full font-medium text-lg text-center py-[50px] text-primary-color-text dark:text-secondary-color-text">
                 &copy; 2024 2nd ITE, CSTAD
             </section>
         </footer>

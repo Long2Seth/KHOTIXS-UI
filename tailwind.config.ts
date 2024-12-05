@@ -59,17 +59,25 @@ export default {
 
 
 
+                // For Background
                 'khotixs-background-white': '#f5f5f5',
-                'khotixs-background-dark': '#000000',
-                'primary-color': '#480028',
-                'secondary-color': '#AC1ED2',
+                'khotixs-background-dark': 'rgb(32 0 46)',
+
+                'primary-color': '#AC1ED2',
+                'secondary-color': '#480028',
+
+                // For Text
                 'primary-color-text': '#000000',
                 'secondary-color-text': '#ffffff',
+
+                // For Label Card
                 'label-vip': '#D8AC0E',
                 'label-premium': '#5521B5',
                 'label-regular': '#FFA500',
                 'label-free': '#0EB638',
                 'label-paid': '#B3261E',
+
+                // For Label Text Of Card
                 'label-text-secondary': '#000000',
                 'label-text-primary': '#ffffff',
 

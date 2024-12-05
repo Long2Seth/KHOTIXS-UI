@@ -120,7 +120,7 @@ export default function About() {
 
                 <section className=" grid grid-cols-2 justify-between w-full gap-5  ">
 
-                    <h1  className="text-5xl font-semibold uppercase" >OUR LOCATION</h1>
+                    <h1  className=" text-5xl font-semibold uppercase" >OUR LOCATION</h1>
 
                 </section>
 

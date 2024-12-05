@@ -27,8 +27,8 @@ export default function NavbarComponent() {
     const [selectedLocation, setSelectedLocation] = React.useState<string | undefined>();
 
     return (
-        <nav className=" w-full top-[-60px] sticky z-50 bg-white flex flex-col dark:bg-gray-950/90 ">
-            <section className="w-full h-[60px] bg-white py-[10px] px-[140px] flex  justify-center gap-5">
+        <nav className=" w-full top-[-60px] sticky z-50 bg-white flex flex-col dark:bg-khotixs-background-dark ">
+            <section className="w-full h-[60px] bg-white py-[10px] px-[140px] flex  justify-center gap-5 dark:bg-khotixs-background-dark ">
                 <CiBullhorn className="  w-[40px] p-[8px] rounded-[50%] text-gray-400 bg-gray-200  h-full "/>
                 <p className=" font-semibold flex items-center">Do you organize events? </p>
                 <Button className=" font-semibold text-white hover:bg-primary-color bg-primary-color rounded-[5px] ">
@@ -36,7 +36,7 @@ export default function NavbarComponent() {
                 </Button>
 
             </section>
-            <section className="w-full py-[15px] px-[140px] shadow-inner ">
+            <section className="w-full py-[15px] px-[140px] shadow-inner dark:shadow-inner dark:shadow-gray-800/90 ">
                 <div className="flex justify-between h-14 items-center mx-auto">
                     {/* KHOTIXS LOGO */}
                     <Link href="#" className="flex items-center">
@@ -47,7 +47,7 @@ export default function NavbarComponent() {
                     <section className="max-w-[1500px] rounded-[5px] flex justify-center drop-shadow-xl">
                         <form className="w-full rounded-[5px] bg-gray-50 flex ">
                             {/* Search Component */}
-                            <div className="flex items-center gap-0 w-[70%]">
+                            <div className="flex items-center gap-0 w-[100%]">
                                 <input
                                     type="text"
                                     placeholder="Search for events by name"
@@ -58,7 +58,7 @@ export default function NavbarComponent() {
                             </div>
 
                             {/* Select Component */}
-                            <div className="flex items-center gap-0 w-[50%]">
+                            <div className="flex items-center gap-0 w-[30%]">
                                 <Select onValueChange={setSelectedLocation}>
                                     <SelectTrigger
                                         className={cn(
@@ -124,11 +124,11 @@ export default function NavbarComponent() {
 
                         <div className="flex items-center gap-2">
                             <Button
-                                className="rounded-[5px] text-lg border-[1px] border-primary-color text-primary-color font-medium">
+                                className="rounded-[5px] text-lg border-[1px] border-primary-color text-primary-color font-medium dark:text-secondary-color-text dark:border-label-text-primary ">
                                 Login
                             </Button>
                             <Button
-                                className="bg-primary-color text-lg rounded-[5px] text-secondary-color-text font-[10px] hover:bg-primary-color">
+                                className=" bg-primary-color text-lg border-[1px] rounded-[5px] text-secondary-color-text font-[10px] hover:bg-primary-color border-primary-color">
                                 Sign up
                             </Button>
                         </div>
