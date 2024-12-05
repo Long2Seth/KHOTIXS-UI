@@ -80,6 +80,7 @@ export default {
                 // For Label Text Of Card
                 'label-text-secondary': '#000000',
                 'label-text-primary': '#ffffff',
+                'label-description': '#4A5568',
 
 
             },

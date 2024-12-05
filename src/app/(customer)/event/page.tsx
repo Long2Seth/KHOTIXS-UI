@@ -10,7 +10,15 @@ import {
     BreadcrumbList, BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
-import {RiCalendarLine, RiFirefoxLine, RiHome5Line, RiMap2Line, RiTimerLine} from "react-icons/ri";
+import {
+    RiArrowRightLine,
+    RiCalendarLine,
+    RiErrorWarningLine,
+    RiFirefoxLine,
+    RiHome5Line,
+    RiMap2Line,
+    RiTimerLine
+} from "react-icons/ri";
 import {Button} from "@/components/ui/button";
 
 // import CoverEvent from "@/public/event/cover-event.jpg";
@@ -20,6 +28,7 @@ type TicketType = {
     name: string
     event: string
     price: number
+    free?: boolean
     soldOut?: boolean
     quantity: number
     date: string
@@ -31,7 +40,7 @@ type TicketType = {
 export default function EventDetails() {
 
     const [tickets, setTickets] = useState<TicketType[]>([
-        { id: 'vip', event:'THE Q RISE OF THE QUEEN', name: 'VIP - TICKETS', price: 60.00, soldOut: true, quantity: 0, date: 'Friday',dd: '30', mmm: 'NOV',  yyyy: '2024'},
+        { id: 'vip', event:'THE Q RISE OF THE QUEEN', name: 'VIP - TICKETS', price: 0, free: true, soldOut: true, quantity: 0, date: 'Friday',dd: '30', mmm: 'NOV',  yyyy: '2024'},
         { id: 'premium', event:'THE Q RISE OF THE QUEEN', name: 'PREMIUM - TICKETS', price: 30.00, soldOut: true, quantity: 0, date: 'Friday',dd: '30', mmm: 'NOV',  yyyy: '2024'},
         { id: 'standing', event:'THE Q RISE OF THE QUEEN', name: 'STANDING - TICKETS', price: 15.00, soldOut: false, quantity: 3, date: 'Friday',dd: '30', mmm: 'NOV',  yyyy: '2024'}
     ])
@@ -49,9 +58,10 @@ export default function EventDetails() {
     const total = tickets.reduce((sum: number, ticket: TicketType) => sum + (ticket.price * ticket.quantity), 0)
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-black">
-            <main className="container mx-auto lg:px-20 xl:px-32 px-2 py-8">
-                <div className="mb-6 flex items-center gap-2 text-sm text-muted-foreground">
+        <main className="min-h-screen bg-gray-50 dark:bg-black">
+            <div className="container mx-auto px-2 py-8">
+                {/*breadcrumb*/}
+                <section className="mb-6 flex items-center gap-2 text-sm text-muted-foreground">
                     <Breadcrumb>
                         <BreadcrumbList>
                             <BreadcrumbItem>
@@ -67,24 +77,25 @@ export default function EventDetails() {
                             </BreadcrumbItem>
                             <BreadcrumbSeparator/>
                             <BreadcrumbItem>
-                                <BreadcrumbPage className="text-secondary-color dark:text-secondary-color">Event
+                                <BreadcrumbPage className="text-primary-color dark:text-primary-color">Event
                                     Details</BreadcrumbPage>
                             </BreadcrumbItem>
                         </BreadcrumbList>
                     </Breadcrumb>
-                </div>
-                <div className="flex space-x-2">
-                    <h1 className="mb-6 lg:text-3xl font-bold tracking-tight md:text-lg">THE Q RISE OF THE QUEEN </h1>
-                    <div
-                        className="flex items-center rounded-[6px] px-2 text-label-premium h-6 bg-khotixs-background-white font-bold text-xs lg:mt-2 space-x-1">
+                </section>
+                {/*Event title*/}
+                <section className="flex space-x-2">
+                    <h1 className="mb-6 lg:text-3xl font-bold tracking-tight text-xl">THE Q RISE OF THE QUEEN </h1>
+                    <div className="flex items-center rounded-[6px] px-2 text-label-premium h-6 bg-khotixs-background-white font-bold text-xs lg:mt-2 mt-1.5 space-x-1">
                         <RiFirefoxLine className=""/>
                         <p>Upcoming</p>
                     </div>
-                </div>
-                <div className="grid gap-8 lg:grid-cols-2">
+                </section>
+                {/*Event details*/}
+                <section className="grid md:gap-2 lg:gap-8 md:grid-cols-2">
                     <div>
                         {/* cover of event*/}
-                        <div className="relative mb-6  overflow-hidden rounded-lg">
+                        <section className="relative mb-6  overflow-hidden rounded-lg">
                             <Image
                                 src="/event/cover-event.jpg"
                                 alt="Event banner"
@@ -93,35 +104,35 @@ export default function EventDetails() {
                                 className="object-cover rounded-xl"
                                 priority
                             />
-                        </div>
+                        </section>
 
                         {/* event date and time*/}
-                        <div className="space-y-6">
-                            <div className="space-y-2">
+                        <section className="space-y-6">
+                            <section className="space-y-2">
                                 <h2 className="text-md lg:text-lg font-semibold">DATE AND TIME</h2>
-                                <div className="flex gap-2 items-center">
+                                <div className="flex gap-2 items-center dark:text-label-text-primary text-label-description">
                                     <RiCalendarLine className="w-5"/>
-                                    <p className="text-xs md:text-base text-muted-foreground">30 November 2024</p>
+                                    <p className="text-xs lg:text-base">30 November 2024</p>
                                 </div>
-                                <div className="flex gap-2 items-center">
+                                <div className="flex gap-2 items-center dark:text-label-text-primary text-label-description">
                                     <RiTimerLine className="w-5"/>
-                                    <p className="text-xs md:text-base text-muted-foreground">5:00PM-10:00PM</p>
+                                    <p className="text-xs lg:text-base">5:00PM-10:00PM</p>
                                 </div>
-                            </div>
+                            </section>
 
                             {/* event location*/}
-                            <div className="space-y-2">
+                            <section className="space-y-2">
                                 <h2 className="text-md lg:text-lg font-semibold">LOCATION</h2>
-                                <div className="flex gap-2 items-center">
+                                <div className="flex gap-2 items-center dark:text-label-text-primary text-label-description">
                                     <RiMap2Line className="w-5"/>
-                                    <p className="text-xs md:text-base text-muted-foreground">កីឡាដ្ឋានខេត្ត វាលបែកចាន ក្រុងបាត់ដំបង</p>
+                                    <p className="text-xs lg:text-base">កីឡាដ្ឋានខេត្ត វាលបែកចាន ក្រុងបាត់ដំបង</p>
                                 </div>
-                            </div>
+                            </section>
 
                             {/* event description*/}
-                            <div className="space-y-2">
+                            <section className="space-y-2">
                                 <h2 className="text-md lg:text-lg font-semibold">EVENT DESCRIPTION</h2>
-                                <p className="text-xs md:text-base text-muted-foreground">
+                                <p className="text-xs lg:text-base dark:text-label-text-primary text-label-description">
                                     ក្តីស្រមៃដែលគ្រប់គ្នាៗចង់ឲកើតមានឡើង ក្តីស្រមៃនោះបានក្លាយជាការពិតហើយ! STING
                                     MUSICVERSE សូមនាំយក ការប្រគុំតន្រ្តី THE Q RISE OF THE QUEEN – AOK SOKUNKANHA SOLO
                                     TOUR CONCERT ទៅដល់ខេត្តបាត់ដំបង ( កីឡាដ្ឋានខេត្ត វាលបែកចាន ក្រុងបាត់ដំបង ) នៅថ្ងៃទី
@@ -130,78 +141,126 @@ export default function EventDetails() {
                                     Premium - $30
                                     Standing - $15
                                 </p>
-                            </div>
-
-                            <p className="text-xs md:text-base text-label-paid">ចំណាំ: សូមបង្ហាញកូដ QR
+                            </section>
+                            {/*Note*/}
+                            <p className="text-xs lg:text-base text-label-paid">ចំណាំ: សូមបង្ហាញកូដ QR
                                 ទៅកាន់ក្រុមការងារដើម្បីផ្ទៀងផ្ទាត់សំបុត្រមុនចូលទស្សនា។</p>
-                        </div>
+                        </section>
                     </div>
-                    <section>
-                        <div className="">
-                            <div className="space-y-4">
-                                {tickets.map((ticket) => (
-                                    <div key={ticket.id}
-                                         className="flex justify-between rounded-xl border">
-                                        <div
-                                            className="relative h-32 w-48 rounded-xl overflow-hidden bg-cover bg-center"
-                                            style={{backgroundImage: `url('/event/ticket.png')`}}
-                                        >
-                                            <div className="absolute inset-0 flex flex-col justify-center items-center">
-                                                <h3 className="font-bold text-lg lg:text-2xl text-white">{ticket.dd} {ticket.mmm}</h3>
-                                                <p className="text-xs lg:text-sm  text-muted-foreground text-white">{ticket.date} {ticket.yyyy}</p>
-                                            </div>
+                    {/*Tickets*/}
+                    <div>
+                        <div className="space-y-4 mt-4 md:mt-0">
+                            {tickets.map((ticket) => (
+                                <div key={ticket.id}
+                                     className="flex rounded-xl border">
+                                    <section
+                                        className="flex-none relative h-24 w-24 md:h-20 md:w-28 lg:h-28 lg:w-32 rounded-xl overflow-hidden bg-cover bg-center"
+                                        style={{backgroundImage: `url('/event/ticket.png')`}}
+                                    >
+                                        <div className="absolute inset-0 flex flex-col justify-center items-center">
+                                            <h3 className="text-sm sm:text-md lg:text-lg font-semibold text-white">{ticket.dd} {ticket.mmm}</h3>
+                                            <p className="text-xs text-muted-foreground text-white">{ticket.date} {ticket.yyyy}</p>
                                         </div>
-                                        <section className="space-y-1 p-4">
-                                            <h3 className="font-bold text-lg lg:text-2xl uppercase">{ticket.name}</h3>
-                                            <p  className="text-base lg:text-xl uppercase line-clamp-1">{ticket.event}</p>
-                                            <div className="flex space-x-2">
-                                                <p className="rounded-[6px] bg-blue-100 bg-opacity-70 px-2 py-1 text-xs font-bold text-label-premium">${ticket.price.toFixed(2)}</p>
-                                                {ticket.soldOut ? (
-                                                    <span
-                                                        className="rounded-[6px] bg-red-100 bg-opacity-70 px-2 py-1 text-xs font-bold text-red-600">SOLD OUT
-                                                </span>
-                                                ) : (<></>)}
-                                            </div>
+                                    </section>
+                                    <div className="grow flex justify-between items-center p-2 lg:p-4">
+                                        <section className="">
+                                            <h3 className="text-sm sm:text-md lg:text-lg font-semibold uppercase">{ticket.name}</h3>
+                                            <p className="text-xs lg:text-base uppercase line-clamp-1 dark:text-label-text-primary text-label-description">{ticket.event}</p>
+                                            <div className="flex space-x-2 mt-1">
+                                                {ticket.free ? (
+                                                    <>
+                                                        <p className="rounded-[6px] bg-label-free lg:px-2 lg:py-1 px-1.5 py-0.5 text-[10px] lg:text-xs font-bold text-label-text-primary uppercase">$ Free</p>
+                                                        {ticket.soldOut ? (
+                                                            <p className="rounded-[6px] dark:bg-label-text-primary bg-red-100 dark:bg-opacity-70 bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-[10px] lg:text-xs font-bold text-red-600">SOLD OUT</p>
+                                                        ) : (<></>)}
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <p className="rounded-[6px] bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-[10px] lg:text-xs font-bold text-label-premium">${ticket.price.toFixed(2)}</p>
+                                                        {ticket.soldOut ? (
+                                                            <p className="rounded-[6px] dark:bg-label-text-primary bg-red-100 dark:bg-opacity-70 bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-[10px] lg:text-xs font-bold text-red-600">SOLD OUT</p>
+                                                        ) : (<></>)}
+                                                    </>)}
 
+                                            </div>
                                         </section>
-
-                                        <div className="flex items-center gap-2 pr-4">
-                                        <Button
-                                            className="p-1 bg-blue-100 bg-opacity-70 text-label-premium h-[25px] rounded-[4px]"
-                                                    onClick={() => updateQuantity(ticket.id, false)}
-                                                    disabled={ticket.quantity === 0}
-                                                >
-                                                    <MinusIcon className="h-2 w-2"/>
-                                                </Button>
-                                                <span className="w-4 font-bold text-center">{ticket.quantity}</span>
-                                                <Button
-                                                    className="p-1 bg-blue-100 bg-opacity-70 text-label-premium h-[25px] rounded-[4px]"
-                                                    size="sm"
-                                                    onClick={() => updateQuantity(ticket.id, true)}
-                                                >
-                                                    <PlusIcon className="h-2 w-2"/>
-                                                </Button>
-                                            </div>
+                                        {/*Count Button*/}
+                                        <section className="flex items-center gap-1 lg:gap-2">
+                                            <Button
+                                                className="p-1 bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 text-label-premium h-[20px] lg:h-[25px] rounded-[4px]"
+                                                onClick={() => updateQuantity(ticket.id, false)}
+                                                disabled={ticket.quantity === 0}
+                                            >
+                                                <MinusIcon className="h-2 w-2"/>
+                                            </Button>
+                                            <span className="w-4 font-bold text-center">{ticket.quantity}</span>
+                                            <Button
+                                                className="p-1 bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 text-label-premium h-[20px] lg:h-[25px] rounded-[4px]"
+                                                size="sm"
+                                                onClick={() => updateQuantity(ticket.id, true)}
+                                            >
+                                                <PlusIcon className="h-2 w-2"/>
+                                            </Button>
+                                        </section>
                                     </div>
-                                ))}
-
-                                <div className="mt-6 space-y-4">
-                                    <div className="flex justify-between border-t pt-4">
-                                        <span className="font-medium">Total</span>
-                                        <span className="font-medium">${total.toFixed(2)}</span>
-                                    </div>
-                                    <Button className="w-full" size="sm">
-                                        Place Order
+                                </div>
+                            ))}
+                            {/*Sub Total*/}
+                            <section className="flex justify-between items-center py-4">
+                                <hr className="border w-full"/>
+                                <span className="font-bold w-60 text-center dark:text-label-text-primary text-label-description dark:text-label-primary">Sub Total</span>
+                                <hr className="border w-full"/>
+                            </section>
+                            {/*Total*/}
+                            <section className="mt-6 space-y-4">
+                                {/*{tickets.map((ticket) => (*/}
+                                {/*    <>*/}
+                                {/*        {ticket.price === 0 && ticket.free ? (*/}
+                                {/*            <div*/}
+                                {/*                className="flex items-center justify-between border p-4 pl-6 rounded-[8px]">*/}
+                                {/*                <span*/}
+                                {/*                    className="font-bold text-lg lg:text-2xl text-label-free uppercase">$ free</span>*/}
+                                {/*                <Button*/}
+                                {/*                    className="bg-primary-color hover:bg-primary-color hover:bg-opacity-85 text-label-text-primary rounded-[6px] h-[45px] font-bold">*/}
+                                {/*                    Place Order <RiArrowRightLine/>*/}
+                                {/*                </Button>*/}
+                                {/*            </div>*/}
+                                {/*        ) : (*/}
+                                {/*            <>*/}
+                                {/*                <div*/}
+                                {/*                    className="flex items-center justify-between border p-4 pl-6 rounded-[8px]">*/}
+                                {/*                    <span*/}
+                                {/*                        className="font-bold text-lg lg:text-2xl text-label-paid">${total.toFixed(2)}</span>*/}
+                                {/*                    <Button*/}
+                                {/*                        className="bg-primary-color hover:bg-primary-color hover:bg-opacity-85 text-label-text-primary rounded-[6px] h-[45px] font-bold">*/}
+                                {/*                        Place Order <RiArrowRightLine/>*/}
+                                {/*                    </Button>*/}
+                                {/*                </div>*/}
+                                {/*            </>*/}
+                                {/*        )}*/}
+                                {/*    </>*/}
+                                {/*))}*/}
+                                <div className="flex items-center justify-between border p-4 pl-6 rounded-[8px]">
+                                    <span
+                                        className="font-bold text-lg lg:text-2xl text-label-paid">${total.toFixed(2)}</span>
+                                    <Button
+                                        className="bg-primary-color hover:bg-primary-color hover:bg-opacity-85 text-label-text-primary rounded-[6px] h-[45px] font-bold">
+                                        Place Order <RiArrowRightLine/>
                                     </Button>
-                                    <p className="text-center text-sm text-muted-foreground">
+                                </div>
+
+                                <div
+                                    className="flex items-center space-x-2 dark:text-label-text-primary text-label-description">
+                                    <RiErrorWarningLine className="w-5"/>
+                                    <p className="text-center text-xs lg:text-base text-muted-foreground">
                                         We accept KHQR & Credit / Debit Card
                                     </p>
                                 </div>
-                            </div>
+                            </section>
                         </div>
-                    </section>
-                </div>
-            </main>
-        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
     )
 }
