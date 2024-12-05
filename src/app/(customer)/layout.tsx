@@ -29,7 +29,7 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <NavbarComponent />\
+                    <NavbarComponent />
                     <StoreProvider>
                         {children}
                     </StoreProvider>

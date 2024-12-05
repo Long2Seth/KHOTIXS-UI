@@ -63,7 +63,6 @@ export default function OrderInfoRequirementFormComponent() {
     console.log({
       values,
     });
-    form.reset();
 
     if(values.fullName && values.email && values.phoneNumber){
       toast({
@@ -87,7 +86,7 @@ export default function OrderInfoRequirementFormComponent() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-[670px] space-y-2.5">
+          className="w-full lg:w-[670px] space-y-2.5">
           <FormField
             control={form.control}
             name="fullName"
@@ -136,7 +135,7 @@ export default function OrderInfoRequirementFormComponent() {
             </Button>
             <Button
               type="submit"
-              className="w-full bg-primary-color hover:bg-red-900"
+              className="w-full bg-secondary-color hover:bg-red-900"
             >
               Payment Details
             </Button>
