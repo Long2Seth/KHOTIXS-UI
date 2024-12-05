@@ -12,7 +12,6 @@ export default {
         extend: {
             colors: {
 
-
                 //
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
@@ -83,7 +82,6 @@ export default {
                 'label-text-secondary': '#000000',
                 'label-text-primary': '#ffffff',
                 'label-description': '#4A5568',
-
 
             },
             fontSize:{
