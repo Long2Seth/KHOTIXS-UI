@@ -65,6 +65,8 @@ export default {
 
                 'primary-color': '#AC1ED2',
                 'secondary-color': '#480028',
+                // Background Skeleton
+                'skeleton-color': '#f6f6f6',
 
                 // For Text
                 'primary-color-text': '#000000',
