@@ -12,6 +12,7 @@ const MyComponent = () => {
             <NavbarOrganizerComponent/>
             <OrganizerDashboard/>
             <EventsTable/>
+
         </div>
     );
 };
