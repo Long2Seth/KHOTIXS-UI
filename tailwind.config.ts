@@ -12,7 +12,6 @@ export default {
         extend: {
             colors: {
 
-
                 //
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
@@ -80,7 +79,6 @@ export default {
                 // For Label Text Of Card
                 'label-text-secondary': '#000000',
                 'label-text-primary': '#ffffff',
-
 
             },
             fontSize:{

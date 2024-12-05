@@ -7,11 +7,11 @@ export function FooterComponent() {
 
 
             {/* Main Footer Section */}
-            <section className="w-full px-[140px]  text-gray-400 flex justify-between">
+            <section className="  px-[140px] text-gray-400 grid md:grid-cols-2 xl:grid-cols-4 justify-between gap-y-20 ">
 
 
                 {/* Logo and Description */}
-                <div className="w-1/4">
+                <div className="w-[200px] ">
                     <Link href="#" className="flex items-center mb-4">
                         <Image
                             width={100}
@@ -27,7 +27,7 @@ export function FooterComponent() {
                 </div>
 
                 {/* Event Category */}
-                <div className="w-1/4">
+                <div className="w-[200px] ">
                     <h3 className="font-bold text-lg mb-4 text-primary-color-text dark:text-secondary-color-text  ">Event Category</h3>
                     <ul className="space-y-2">
                         <li>Concerts</li>
@@ -40,7 +40,7 @@ export function FooterComponent() {
                 </div>
 
                 {/* Support & Information */}
-                <div className="w-1/4">
+                <div className="w-[200px] ">
                     <h3 className="font-bold text-lg mb-4 text-primary-color-text dark:text-secondary-color-text  ">Support & Information</h3>
                     <ul className="space-y-2">
                         <li>How to use?</li>
@@ -51,28 +51,28 @@ export function FooterComponent() {
                 </div>
 
                 {/* Sponsors and Organizer */}
-                <div className="w-1/4">
+                <div className="w-[200px] ">
                     <h3 className="font-bold text-lg mb-4 text-primary-color-text dark:text-secondary-color-text  ">Sponsors By</h3>
                     <div className="flex space-x-4 mb-4">
                         <Image
-                            width={50}
-                            height={50}
-                            src="/sponsor1_logo.png"
+                            width={100}
+                            height={100}
+                            src="/MPTG.png"
                             alt="Sponsor 1 Logo"
                         />
                         <Image
-                            width={50}
-                            height={50}
-                            src="/sponsor2_logo.png"
+                            width={100}
+                            height={100}
+                            src="/CBRD.png"
                             alt="Sponsor 2 Logo"
                         />
                     </div>
                     <h3 className="font-bold text-lg mb-4 text-primary-color-text dark:text-secondary-color-text  ">Organize By</h3>
                     <div>
                         <Image
-                            width={80}
-                            height={50}
-                            src="/organizer_logo.png"
+                            width={300}
+                            height={100}
+                            src="/CSTAD-LOGO.png"
                             alt="Organizer Logo"
                         />
                     </div>
