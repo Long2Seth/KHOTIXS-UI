@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
+import preOrderSlice from './features/pre-order/preOrderSlice'
 
 // Create Store
 export const makeStore = () => {
     return configureStore({
         reducer: {
+            preOrder: preOrderSlice,
         },
     })
 }

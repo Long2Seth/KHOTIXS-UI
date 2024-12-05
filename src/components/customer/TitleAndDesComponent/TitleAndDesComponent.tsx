@@ -8,7 +8,7 @@ type TitleAndDesComponentProps = {
 export default function TitleAndDesComponent({ title, description }: TitleAndDesComponentProps) {
     return (
         <>
-            <h1 className={`uppercase text-[48px] font-bold`}>
+            <h1 className={`uppercase text-[24px] lg:text-[48px] font-bold`}>
                 {title}
             </h1>
             <div className="flex gap-[5px] items-center">

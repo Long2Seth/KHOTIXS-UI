@@ -45,7 +45,7 @@ export default function StepperComponent() {
                     </span>
                 </li>
                 <li className="flex items-center">
-                    <span className="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
+                    <span className="flex items-center sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
                         Pay <span className="hidden sm:inline-flex sm:ms-2">Now</span>
                     </span>
                 </li>
