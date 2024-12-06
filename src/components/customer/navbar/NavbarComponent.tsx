@@ -22,7 +22,6 @@ import SkeletonNavbarComponent from "@/components/customer/navbar/SkeletonNavbar
 
 const NavbarComponent = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const [isDropdownOpen, setDropdownOpen] = useState(false);
     const [isMenuOpen, setMenuOpen] = useState(false);
     const [activeItem, setActiveItem] = useState<string | null>(null);
     const [selectedLocation, setSelectedLocation] = React.useState<string | undefined>();
@@ -38,7 +37,6 @@ const NavbarComponent = () => {
     }, []);
 
     const closeMenus = () => {
-        setDropdownOpen(false);
         setMenuOpen(false);
     };
 
@@ -49,7 +47,7 @@ const NavbarComponent = () => {
 
     useEffect(() => {
         if (!isMenuOpen) {
-            setDropdownOpen(false);
+            closeMenus();
         }
     }, [isMenuOpen]);
 
