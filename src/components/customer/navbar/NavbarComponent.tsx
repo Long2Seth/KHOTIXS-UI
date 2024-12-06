@@ -19,13 +19,15 @@ import {ModeToggle} from "@/components/ui/modeToggle";
 import {NavigationMenuDemo} from "@/components/customer/navbar/NavigationMenuDemo";
 import SkeletonNavbarComponent from "@/components/customer/navbar/SkeletonNavbar";
 
-
 const NavbarComponent = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isMenuOpen, setMenuOpen] = useState(false);
     const [activeItem, setActiveItem] = useState<string | null>(null);
     const [selectedLocation, setSelectedLocation] = React.useState<string | undefined>();
     const [date, setDate] = React.useState<Date>();
+
+
+
 
     useEffect(() => {
         // Simulate a network request delay
