@@ -25,19 +25,19 @@ export default function About() {
                     </p>
                 </div>
             </section>
-            <section className=" w-full h-auto my-20  px-[140px] text-primary-color  ">
+            <section className=" w-full h-auto my-20  px-[140px] text-primary-color-text dark:text-secondary-color-text   ">
                 <section className=" flex flex-col justify-center items-center gap-[60px] ">
                     <div className=" flex flex-col justify-center items-center ">
                         <h1 className=" text-5xl font-semibold uppercase ">
                             Welcome To Our Website
                         </h1>
-                        <hr className="w-[160px] h-2 bg-primary-color "/>
+                        <hr className="w-[160px] h-2 bg-primary-color dark:bg-white "/>
                     </div>
                     <div className=" flex flex-col justify-center items-center gap-10 ">
                         <h1 className=" text-5xl font-semibold uppercase ">
                             KHOTIXS
                         </h1>
-                        <p className=" text-center max-w-[1000px] text-lg text-black  ">
+                        <p className=" text-center max-w-[1000px] text-lg text-black dark:text-gray-200 ">
                             Welcome to KHOTIXS – Cambodia’s trusted platform for effortless ticket booking and event
                             management. Whether you’re looking to book tickets for concerts, sports events, or cultural
                             activities, or you’re an event organizer seeking to reach a broader audience, KHOTIXS is
@@ -53,14 +53,14 @@ export default function About() {
             </section>
 
 
-            <section className=" w-full h-auto my-20  px-[140px] text-primary-color  ">
+            <section className=" w-full h-auto my-20  px-[140px] text-primary-color-text dark:text-secondary-color-text   ">
 
                 <section className=" grid grid-cols-2 justify-between w-full gap-5  ">
 
                     <section
-                        className=" bg-white text-center max-w-full flex flex-col justify-center px-10 py-10 rounded-[5px] gap-y-5 ">
+                        className=" bg-white text-center max-w-full flex flex-col justify-center px-10 py-10 rounded-[5px] gap-y-5 dark:bg-secondary-color ">
                         {/*Icon*/}
-                        <LuTarget className=" w-full h-[120px] text-primary-color "/>
+                        <LuTarget className=" w-full h-[120px] text-primary-color-text dark:text-secondary-color-text  "/>
 
                         {/*Title*/}
                         <h1 className=" text-3xl font-semibold uppercase ">
@@ -68,7 +68,7 @@ export default function About() {
                         </h1>
 
                         {/* Description*/}
-                        <p className=" text-center max-w-[1000px] text-lg text-black  ">
+                        <p className=" text-center max-w-[1000px] text-lg text-black dark:text-secondary-color-text  ">
                             Our mission is to empower individuals and organizations by providing a seamless,
                             user-friendly
                             ticketing solution that connects event organizers with their audiences. We aim to make every
@@ -76,9 +76,9 @@ export default function About() {
                         </p>
                     </section>
                     <section
-                        className=" bg-white text-center max-w-full flex flex-col justify-center px-10 py-10 rounded-[5px] gap-y-5  ">
+                        className=" bg-white text-center max-w-full flex flex-col justify-center px-10 py-10 rounded-[5px] gap-y-5 dark:bg-secondary-color  ">
                         {/* Icon */}
-                        <MdRemoveRedEye className=" w-full h-[120px] text-primary-color "/>
+                        <MdRemoveRedEye className=" w-full h-[120px] text-primary-color-text dark:text-secondary-color-text  "/>
 
                         {/* Tittle */}
                         <h1 className=" text-3xl font-semibold uppercase ">
@@ -86,7 +86,7 @@ export default function About() {
                         </h1>
 
                         {/* Description */}
-                        <p className=" text-center max-w-[1000px] text-lg text-black  ">
+                        <p className=" text-center max-w-[1000px] text-lg text-black dark:text-secondary-color-text ">
                             Our vision is to become the leading online ticketing platform in Cambodia, fostering a
                             thriving
                             events ecosystem where people can discover, participate in, and celebrate the vibrant
@@ -101,7 +101,7 @@ export default function About() {
             </section>
 
 
-            <section className=" w-full h-auto my-20  px-[140px] text-primary-color  ">
+            <section className=" w-full h-auto my-20  px-[140px] text-primary-color-text dark:text-secondary-color-text   ">
 
                 <h1 className=" text-5xl font-semibold text-center mb-20 "> OUR MENTOR </h1>
 
@@ -115,7 +115,7 @@ export default function About() {
                                 <a href="https://github.com/it-chhaya" target="_blank">
                                     <li className=" flex items-center ">
                                         <IoLogoGithub className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -123,7 +123,7 @@ export default function About() {
                                 <a href="https://web.facebook.com/chhayadevkh" target="_blank">
                                     <li className=" flex items-center ">
                                         <FaFacebook className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://web.facebook.com/chhayadevkh
                                         </p>
                                     </li>
@@ -131,7 +131,7 @@ export default function About() {
                                 <a href="#" target="_blank">
                                     <li className=" flex items-center ">
                                         <FaTelegram className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -139,7 +139,7 @@ export default function About() {
                                 <a href="#" target="_blank">
                                     <li className=" flex items-center ">
                                         <AiFillGoogleCircle className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -156,7 +156,7 @@ export default function About() {
                                 <a href="https://github.com/it-chhaya" target="_blank">
                                     <li className=" flex items-center ">
                                         <IoLogoGithub className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1  dark:bg-secondary-color dark:text-gray-200  ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -164,7 +164,7 @@ export default function About() {
                                 <a href="https://web.facebook.com/chhayadevkh" target="_blank">
                                     <li className=" flex items-center ">
                                         <FaFacebook className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1  dark:bg-secondary-color dark:text-gray-200  ">
                                             https://web.facebook.com/chhayadevkh
                                         </p>
                                     </li>
@@ -172,7 +172,7 @@ export default function About() {
                                 <a href="#" target="_blank">
                                     <li className=" flex items-center ">
                                         <FaTelegram className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1  dark:bg-secondary-color dark:text-gray-200  ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -180,7 +180,7 @@ export default function About() {
                                 <a href="#" target="_blank">
                                     <li className=" flex items-center ">
                                         <AiFillGoogleCircle className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1  dark:bg-secondary-color dark:text-gray-200  ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -193,7 +193,7 @@ export default function About() {
             </section>
 
 
-            <section className=" w-full h-auto my-20  px-[140px] text-primary-color  ">
+            <section className=" w-full h-auto my-20  px-[140px] text-primary-color-text dark:text-secondary-color-text   ">
 
                 <h1 className=" text-5xl font-semibold text-center mb-20 "> OUR MEMBER </h1>
 
@@ -207,7 +207,7 @@ export default function About() {
                                 <a href="https://github.com/it-chhaya" target="_blank">
                                     <li className=" flex items-center ">
                                         <IoLogoGithub className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -215,7 +215,7 @@ export default function About() {
                                 <a href="https://web.facebook.com/chhayadevkh" target="_blank">
                                     <li className=" flex items-center ">
                                         <FaFacebook className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://web.facebook.com/chhayadevkh
                                         </p>
                                     </li>
@@ -223,7 +223,7 @@ export default function About() {
                                 <a href="#" target="_blank">
                                     <li className=" flex items-center ">
                                         <FaTelegram className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -231,7 +231,7 @@ export default function About() {
                                 <a href="#" target="_blank">
                                     <li className=" flex items-center ">
                                         <AiFillGoogleCircle className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -248,7 +248,7 @@ export default function About() {
                                 <a href="https://github.com/it-chhaya" target="_blank">
                                     <li className=" flex items-center ">
                                         <IoLogoGithub className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -256,7 +256,7 @@ export default function About() {
                                 <a href="https://web.facebook.com/chhayadevkh" target="_blank">
                                     <li className=" flex items-center ">
                                         <FaFacebook className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://web.facebook.com/chhayadevkh
                                         </p>
                                     </li>
@@ -264,7 +264,7 @@ export default function About() {
                                 <a href="#" target="_blank">
                                     <li className=" flex items-center ">
                                         <FaTelegram className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -272,7 +272,7 @@ export default function About() {
                                 <a href="#" target="_blank">
                                     <li className=" flex items-center ">
                                         <AiFillGoogleCircle className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -289,7 +289,7 @@ export default function About() {
                                 <a href="https://github.com/it-chhaya" target="_blank">
                                     <li className=" flex items-center ">
                                         <IoLogoGithub className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1  dark:bg-secondary-color dark:text-gray-200  ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -297,7 +297,7 @@ export default function About() {
                                 <a href="https://web.facebook.com/chhayadevkh" target="_blank">
                                     <li className=" flex items-center ">
                                         <FaFacebook className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1  dark:bg-secondary-color dark:text-gray-200  ">
                                             https://web.facebook.com/chhayadevkh
                                         </p>
                                     </li>
@@ -305,7 +305,7 @@ export default function About() {
                                 <a href="#" target="_blank">
                                     <li className=" flex items-center ">
                                         <FaTelegram className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1  dark:bg-secondary-color dark:text-gray-200  ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -313,7 +313,7 @@ export default function About() {
                                 <a href="#" target="_blank">
                                     <li className=" flex items-center ">
                                         <AiFillGoogleCircle className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1  dark:bg-secondary-color dark:text-gray-200  ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -330,7 +330,7 @@ export default function About() {
                                 <a href="https://github.com/it-chhaya" target="_blank">
                                     <li className=" flex items-center ">
                                         <IoLogoGithub className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -338,7 +338,7 @@ export default function About() {
                                 <a href="https://web.facebook.com/chhayadevkh" target="_blank">
                                     <li className=" flex items-center ">
                                         <FaFacebook className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://web.facebook.com/chhayadevkh
                                         </p>
                                     </li>
@@ -346,7 +346,7 @@ export default function About() {
                                 <a href="#" target="_blank">
                                     <li className=" flex items-center ">
                                         <FaTelegram className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -354,7 +354,7 @@ export default function About() {
                                 <a href="#" target="_blank">
                                     <li className=" flex items-center ">
                                         <AiFillGoogleCircle className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -371,7 +371,7 @@ export default function About() {
                                 <a href="https://github.com/it-chhaya" target="_blank">
                                     <li className=" flex items-center ">
                                         <IoLogoGithub className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -379,7 +379,7 @@ export default function About() {
                                 <a href="https://web.facebook.com/chhayadevkh" target="_blank">
                                     <li className=" flex items-center ">
                                         <FaFacebook className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://web.facebook.com/chhayadevkh
                                         </p>
                                     </li>
@@ -387,7 +387,7 @@ export default function About() {
                                 <a href="#" target="_blank">
                                     <li className=" flex items-center ">
                                         <FaTelegram className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -395,7 +395,7 @@ export default function About() {
                                 <a href="#" target="_blank">
                                     <li className=" flex items-center ">
                                         <AiFillGoogleCircle className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[210px] line-clamp-1 dark:bg-secondary-color dark:text-gray-200 ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -412,7 +412,7 @@ export default function About() {
                                 <a href="https://github.com/it-chhaya" target="_blank">
                                     <li className=" flex items-center ">
                                         <IoLogoGithub className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1  dark:bg-secondary-color dark:text-gray-200  ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -420,7 +420,7 @@ export default function About() {
                                 <a href="https://web.facebook.com/chhayadevkh" target="_blank">
                                     <li className=" flex items-center ">
                                         <FaFacebook className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1  dark:bg-secondary-color dark:text-gray-200  ">
                                             https://web.facebook.com/chhayadevkh
                                         </p>
                                     </li>
@@ -428,7 +428,7 @@ export default function About() {
                                 <a href="#" target="_blank">
                                     <li className=" flex items-center ">
                                         <FaTelegram className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1  dark:bg-secondary-color dark:text-gray-200  ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>
@@ -436,7 +436,7 @@ export default function About() {
                                 <a href="#" target="_blank">
                                     <li className=" flex items-center ">
                                         <AiFillGoogleCircle className=" w-[35px] h-[35px] "/>
-                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1 ">
+                                        <p className=" bg-gray-200 px-1 rounded-[5px] max-w-[280px] line-clamp-1  dark:bg-secondary-color dark:text-gray-200  ">
                                             https://github.com/it-chhaya
                                         </p>
                                     </li>

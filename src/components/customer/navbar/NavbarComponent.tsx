@@ -86,7 +86,7 @@ const NavbarComponent = () => {
                             {/* Search form */}
                             <section className=" lg:w-[590px] rounded-[5px] flex justify-center drop-shadow-xl">
 
-                                <form className=" w-full rounded-[5px] bg-gray-50 flex ">
+                                <form className=" w-full rounded-[5px] bg-gray-50 flex items-center ">
 
                                     {/* Search  */}
                                     <div className=" flex items-center w-auto lg:w-[30%] ">
