@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="caab8f64-a5b9-425d-9461-94d083424caa" name="Changes" comment="Merge branch 'long-piseth' of https://github.com/KHOTIXS-ISTAD/KHOTIXS-UI into phal-sophanmai">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/customer/User-Profile/Payment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/User-Profile/Payment.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/input.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/popover.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/popover.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="caab8f64-a5b9-425d-9461-94d083424caa" name="Changes" comment="Merge branch 'long-piseth' of https://github.com/KHOTIXS-ISTAD/KHOTIXS-UI into phal-sophanmai" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -77,7 +72,7 @@
       <workItem from="1733397600558" duration="2450000" />
       <workItem from="1733442233979" duration="1911000" />
       <workItem from="1733447613778" duration="13547000" />
-      <workItem from="1733466073230" duration="1912000" />
+      <workItem from="1733466073230" duration="2224000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'long-piseth' of https://github.com/KHOTIXS-ISTAD/KHOTIXS-UI into phal-sophanmai">
       <option name="closed" value="true" />
