@@ -4,8 +4,6 @@ import * as React from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 
-import { Button } from "@/components/ui/button"
-
 export function ModeToggle() {
     const { theme, setTheme } = useTheme()
     const [isDark, setIsDark] = React.useState(false)
@@ -20,16 +18,15 @@ export function ModeToggle() {
     }
 
     return (
-        <Button
-            className="border-0 "
-            variant="outline"
+        <div
+            className=" cursor-pointer border-0 mr-[35px] lg:mr-0  text-primary-color hover:text-primary-color "
             onClick={toggleTheme}
         >
             {isDark ? (
-                <Moon width={20} height={20} />
+                <Moon width={25} height={25} />
             ) : (
-                <Sun width={30} height={30}/>
+                <Sun className=" text-primary-color hover:text-primary-color h-50 w-50" width={25} height={25}/>
             )}
-        </Button>
+        </div>
     )
 }
