@@ -116,14 +116,18 @@ export default function About() {
             </section>
 
 
-            <section className=" w-full h-auto my-20  px-[140px] text-primary-color-text dark:text-secondary-color-text  ">
-
-                <section className=" grid grid-cols-2 justify-between w-full gap-5  ">
-
-                    <h1  className=" text-5xl font-semibold uppercase" >OUR LOCATION</h1>
-
-                </section>
-
+            {/* Our Location Section */}
+            <section className="w-full my-20 px-[140px] text-primary-color-text dark:text-secondary-color-text">
+                <h1 className="text-5xl font-semibold uppercase">OUR LOCATION</h1>
+                <div className="mt-10 ">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.6314046843904!2d104.89920651123596!3d11.578259843843679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310951e96d257a6f%3A0x6b66703c5fc0c7cc!2sScience%20and%20Technology%20Advanced%20Development%20Co.%2C%20Ltd.!5e0!3m2!1sen!2sus!4v1733450750727!5m2!1sen!2sus"
+                        style={{ border: 0 , height: '600px' , width: '100%' }}
+                        allowFullScreen
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
             </section>
 
         </main>
