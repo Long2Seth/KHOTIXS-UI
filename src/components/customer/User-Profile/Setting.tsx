@@ -7,7 +7,6 @@ import {IoSettingsOutline} from "react-icons/io5";
 // import {DialogFooter} from "@/components/ui/dialog";
 
 import { Switch } from "@/components/ui/switch"
-import { HiOutlineUserCircle } from "react-icons/hi2";
 import { IoEyeOffOutline } from "react-icons/io5";
 import {Button} from "@/components/ui/button";
 import {
@@ -28,11 +27,12 @@ import {
 } from "@/components/ui/tabs"
 import {router} from "next/client";
 import React from "react";
+import {CgProfile} from "react-icons/cg";
 
 export default function Setting () {
     return (
-        <section className="container">
-            <div className=" w-[1103px] mx-auto h-auto flex justify-center items-center lg:flex md:block mt-2 mb-5">
+        <section className="container mt-7">
+            <div className=" w-[1200px] mx-auto h-auto flex justify-center items-center lg:flex md:block mb-5">
                 <div
                     className="rounded-lg h-auto py-2 w-[100%] md:w-full lg:w-[92%] flex justify-center lg:justify-between md:justify-center gap-3.5">
                     <Link
@@ -81,7 +81,7 @@ export default function Setting () {
                         >
                             <div className="flex flex-col items-center justify-center">
                                 <div className="mb-2">
-                                    <HiOutlineUserCircle  className="text-3xl text-label-text-description"/>
+                                    <CgProfile className="text-3xl text-label-text-description"/>
                                 </div>
                                 <div className="text-[16px] text-label-text-description">
                                     PROFILE
@@ -109,19 +109,17 @@ export default function Setting () {
                     </Link>
                 </div>
             </div>
-
             <div className="w-[1103px] mx-auto flex justify-center items-center">
                 <Tabs defaultValue="account" className="w-[1030px] mb-5">
-                    <TabsList className="grid w-[400px] grid-cols-2">
-
+                    <TabsList className="grid w-[400px] h-full grid-cols-2">
                         <TabsTrigger
                             value="account"
-                            className=" h-full  rounded-l-[5px]">
+                            className=" h-full border-2 rounded-l-[5px]">
                             Change Password
                         </TabsTrigger>
                         <TabsTrigger
                             value="password"
-                            className=" h-full rounded-r-[5px] ">
+                            className=" h-full border-2 rounded-r-[5px] ">
                             General Notification
                         </TabsTrigger>
 
@@ -131,7 +129,7 @@ export default function Setting () {
                     <TabsContent value="password">
                         <div className="flex justify-between py-5">
                             <div className="pl-6 pt-[-50px]">
-                                <h2 className="text-xl text-primary-color-text">News and updates</h2>
+                                <h2 className="text-xl font-bold ">News and updates</h2>
                                 <p>New about events and order tickets</p>
                             </div>
                             <div className="flex items-center space-x-2">
@@ -141,7 +139,7 @@ export default function Setting () {
                         </div>
                         <div className="flex justify-between pb-5">
                             <div className="pl-6 pt-[-50px]">
-                                <h2 className="text-xl text-primary-color-text">News and updates</h2>
+                                <h2 className="text-xl font-bold ">News and updates</h2>
                                 <p>New about events and order tickets</p>
                             </div>
                             <div className="flex items-center space-x-2">
@@ -151,7 +149,7 @@ export default function Setting () {
                         </div>
                         <div className="flex justify-between">
                             <div className="pl-6 pt-[-50px]">
-                                <h2 className="text-xl text-primary-color-text">News and updates</h2>
+                                <h2 className="text-xl font-bold">News and updates</h2>
                                 <p>New about events and order tickets</p>
                             </div>
                             <div className="flex items-center space-x-2">
@@ -163,7 +161,7 @@ export default function Setting () {
 
                     {/*Change Password*/}
                     <TabsContent value="account" className="py-5">
-                        <Card >
+                        <Card>
                             <CardHeader>
                                 <CardTitle className="text-secondary-color">CHANGE PASSWORD</CardTitle>
                                 <CardDescription className="text-sm font-medium">
@@ -179,7 +177,8 @@ export default function Setting () {
                                     <div className="relative">
                                         <Input id="new" type="password"
                                                className="rounded-[5px] text-label-text-description border-[1px] border-secondary-color  "/>
-                                        <IoEyeOffOutline className="absolute right-4 top-3 cursor-pointer text-label-text-description"/>
+                                        <IoEyeOffOutline
+                                            className="absolute right-4 top-3 cursor-pointer text-label-text-description"/>
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-2 gap-[18px]">
@@ -191,7 +190,8 @@ export default function Setting () {
                                         <div className="relative">
                                             <Input id="new" type="password"
                                                    className="rounded-[5px] text-label-text-description border-[1px] border-secondary-color  "/>
-                                            <IoEyeOffOutline className="absolute right-4 top-3 cursor-pointer text-label-text-description"/>
+                                            <IoEyeOffOutline
+                                                className="absolute right-4 top-3 cursor-pointer text-label-text-description"/>
                                         </div>
                                     </div>
                                     <div className="space-y-1">
@@ -202,7 +202,8 @@ export default function Setting () {
                                         <div className="relative">
                                             <Input id="new" type="password"
                                                    className="rounded-[5px] text-label-text-description border-[1px] border-secondary-color  "/>
-                                            <IoEyeOffOutline className="absolute right-4 top-3 cursor-pointer text-label-text-description"/>
+                                            <IoEyeOffOutline
+                                                className="absolute right-4 top-3 cursor-pointer text-label-text-description"/>
                                         </div>
                                     </div>
                                 </div>
@@ -217,7 +218,7 @@ export default function Setting () {
                                 </Button>
                                 <Button
                                     type="submit"
-                                    className="w-full bg-primary-color hover:bg-red-900"
+                                    className="w-full bg-secondary-color hover:bg-red-900"
                                 >
                                     Pay Now
                                 </Button>

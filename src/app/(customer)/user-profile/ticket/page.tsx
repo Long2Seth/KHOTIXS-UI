@@ -1,10 +1,10 @@
-import Upcoming from "@/components/customer/upcoming";
+import Tickets from "@/components/customer/User-Profile/Tickets";
 
 
 export default function Page(){
     return (
         <div>
-            <Upcoming/>
+            <Tickets/>
         </div>
     )
 }

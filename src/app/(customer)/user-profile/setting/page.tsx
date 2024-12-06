@@ -1,4 +1,4 @@
-import Setting from "@/components/customer/ChangePassword";
+import Setting from "@/components/customer/User-Profile/Setting";
 
 
 export default function Page(){
