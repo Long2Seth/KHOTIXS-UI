@@ -77,6 +77,7 @@ export default {
                 'label-regular': '#FFA500',
                 'label-free': '#0EB638',
                 'label-paid': '#B3261E',
+                'label-published': '#006FEE',
 
                 // For Label Text Of Card
                 'label-text-secondary': '#000000',
