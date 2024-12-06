@@ -6,7 +6,12 @@ import { CgProfile } from "react-icons/cg"
 import { IoSettingsOutline } from "react-icons/io5"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
-
+import { IoEyeOutline } from "react-icons/io5";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
 import {
     Pagination,
     PaginationContent,
@@ -31,10 +36,9 @@ import { MdOutlineMoreVert } from "react-icons/md";
 const events = [
     { id: 1, thumbnail: '/cher-chhaya.png', eventName: 'Summer Music Festival', paymentDate: '2023-07-15', qty: 2, amount: 150.00 },
     { id: 2, thumbnail: '/CSTAD-LOGO.png', eventName: 'Tech Conference 2023', paymentDate: '2023-08-01', qty: 1, amount: 299.99 },
-    { id: 1, thumbnail: '/globe.svg', eventName: 'Summer Music Festival', paymentDate: '2023-07-15', qty: 2, amount: 150.00 },
-    { id: 1, thumbnail: '/cher-chhaya.png', eventName: 'Summer Music Festival', paymentDate: '2023-07-15', qty: 2, amount: 150.00 },
-    { id: 1, thumbnail: '/CSTAD-LOGO.png', eventName: 'Summer Music Festival', paymentDate: '2023-07-15', qty: 2, amount: 150.00 },
-    { id: 2, thumbnail: '/khotixs_logo.png', eventName: 'Tech Conference 2023', paymentDate: '2023-08-01', qty: 1, amount: 299.99 },
+    { id: 3, thumbnail: '/khotixs_logo.png', eventName: 'Summer Music Festival', paymentDate: '2023-07-15', qty: 2, amount: 150.00 },
+    { id: 4, thumbnail: '/CSTAD-LOGO.png', eventName: 'Summer Music Festival', paymentDate: '2023-07-15', qty: 2, amount: 150.00 },
+    { id: 5, thumbnail: '/khotixs_logo.png', eventName: 'Tech Conference 2023', paymentDate: '2023-08-01', qty: 1, amount: 299.99 },
     // Add more events as needed
 ]
 
@@ -141,7 +145,7 @@ export default function Payment(){
                                 <TableCell className="font-medium">{event.id}</TableCell>
                                 <TableCell>
                                     <Image
-                                        src={event.thumbnail || '/fallback-image.png'}
+                                        src={event.thumbnail || ''}
                                         alt={event.eventName}
                                         width={60}
                                         height={40}
@@ -158,8 +162,32 @@ export default function Payment(){
                                 </TableCell>
                                 <TableCell className="text-center">
                                     <Button variant="ghost" size="icon" className="h-8 w-8">
-                                        <MdOutlineMoreVert className="h-5 w-5" />
-                                        <span className="sr-only">More options</span>
+
+                                        <Popover>
+                                            <PopoverTrigger asChild>
+                                                <Button className="bg-khotixs-background-white text-primary-color-text hover:bg-khotixs-background-white ">
+                                                    <MdOutlineMoreVert className="h-5 w-5" />
+                                                </Button>
+                                            </PopoverTrigger>
+                                            <PopoverContent className="w-50 ">
+                                                <div className="grid gap-4">
+                                                    <div className="space-y-2">
+                                                        <h4 className="font-medium text-[16px] leading-none ">Action</h4>
+                                                        <div className="flex items-center">
+                                                            <p className="p-2"><IoEyeOutline /></p>
+                                                            <p>View</p>
+                                                        </div><div className="flex items-center">
+                                                            <p className="p-2"><IoEyeOutline /></p>
+                                                            <p>View</p>
+                                                        </div><div className="flex items-center">
+                                                            <p className="p-2"><IoEyeOutline /></p>
+                                                            <p>View</p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </PopoverContent>
+                                        </Popover>
                                     </Button>
                                 </TableCell>
                             </TableRow>
