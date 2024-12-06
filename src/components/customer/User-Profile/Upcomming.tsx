@@ -2,23 +2,22 @@ import Image from "next/image";
 import {Banknote, CalendarIcon, MapPinIcon} from "lucide-react";
 import React from "react";
 
-export default function Upcomming(){
+export default function Upcoming(){
     return(
         <section>
-            <div className="w-[1103px] mx-auto flex justify-start items-start">
-                <div className="w-[1103px] flex justify-between bg-white shadow-lg rounded-lg overflow-hidden">
+                <div className="w-[1115px] mx-auto h-auto flex justify-between mb-5 shadow-lg ">
                     <div className="flex">
-                        <div className="relative w-full md:w-1/3 md:h-auto">
+                        <div className="relative md:w-1/3 md:h-auto">
                             <Image
                                 src="/cher-chhaya.png"
                                 width={150}
                                 height={80}
                                 alt="Ticket"
-                                className="py-2 pl-2"
+                                className="py-3 pl-3"
                             />
                         </div>
                         <div className="py">
-                            <div className="flex justify-between items-center my-2 ">
+                            <div className="flex justify-between items-center my-3 ">
                                 <h2 className="text-xl font-bold">THE Q RISE OF THE QUEEN</h2>
                                 <span
                                     className="bg-purple-600 text-white text-xs font-semibold px-2 py-1 rounded mr-8">Premium</span>
@@ -42,12 +41,11 @@ export default function Upcomming(){
 
                     <div className="px-3 py-3 ">
                         <button
-                            className="w-[100px] bg-secondary-color hover:bg-red-900 text-white font-bold py-2 px-4 rounded">
+                            className="w-[70px] bg-secondary-color hover:bg-red-900 text-white font-bold py-2 px-4 rounded">
                             View
                         </button>
                     </div>
                 </div>
-            </div>
         </section>
     )
 }
