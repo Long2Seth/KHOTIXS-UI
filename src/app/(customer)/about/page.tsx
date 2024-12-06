@@ -10,7 +10,7 @@ import {AiFillGoogleCircle} from "react-icons/ai";
 
 export default function About() {
     return (
-        <main className=" flex flex-col ">
+        <main className=" flex flex-col dark:bg-khotixs-background-dark ">
             {/* Hero section*/}
             <section className=" relative h-[600px] w-full ">
                 <div className=" absolute bg-primary-color h-[600px] w-[520px] rounded-bl-[100%] left-[-200px] ">

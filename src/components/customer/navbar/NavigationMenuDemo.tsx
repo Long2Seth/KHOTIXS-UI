@@ -14,10 +14,10 @@ import {
 
 export function NavigationMenuDemo() {
     return (
-        <NavigationMenu className=" hidden lg:block ">
+        <NavigationMenu className=" hidden lg:block dark:bg-khotixs-background-dark ">
             <NavigationMenuList>
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger className=" lg:text-md xl:text-lg font-medium ">About & Contact</NavigationMenuTrigger>
+                    <NavigationMenuTrigger className=" lg:text-md xl:text-lg font-medium dark:bg-khotixs-background-dark  ">About & Contact</NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <section
                             className="relative flex lg:w-[400px] xl:w-[450px] h-auto rounded-[5px] hover:rounded-[5px] outline-none border-5 border-none ring-0  bg-khotixs-background-white dark:bg-khotixs-background-dark ">

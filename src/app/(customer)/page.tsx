@@ -10,7 +10,7 @@ export default function Home() {
             {/* Hero section*/}
             <img className=" w-full " src="/icons/hero-section.gif"/>
 
-t
+
             <CardCategory/>
 
 
