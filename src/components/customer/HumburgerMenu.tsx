@@ -1,5 +1,6 @@
 "use client"
-
+import {IoMenu} from "react-icons/io5";
+import { IoMdCloseCircle } from 'react-icons/io';
 import * as React from "react"
 
 import {cn} from "@/lib/utils"
@@ -12,23 +13,22 @@ import {
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 
-export function NavigationMenuDemo() {
+export function HumburgerMenu() {
     return (
         <NavigationMenu>
             <NavigationMenuList>
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger className=" text-lg font-medium ">About & Contact</NavigationMenuTrigger>
+                    <NavigationMenuTrigger className=" lg:text-md xl:text-lg font-medium ">
+                        <IoMenu/>
+                    </NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <section
-                            className="  relative flex w-[450px] h-auto rounded-[5px] hover:rounded-[5px] outline-none border-5 border-none ring-0  bg-khotixs-background-white dark:bg-khotixs-background-dark ">
+                            className="relative flex md:flex-col h-auto rounded-[5px] hover:rounded-[5px] outline-none border-5 border-none ring-0  bg-khotixs-background-white dark:bg-khotixs-background-dark ">
 
                             <a className=" w-[50%] cursor-pointer p-[20px] rounded-[5px] hover:bg-secondary-color hover:text-secondary-color-text"
                                href="/about">
                                 <div>
                                     <h1 className="  text-2xl font-semibold ">About</h1>
-                                    <p>
-                                        Re-usable components built using Radix UI and Tailwind CSS
-                                    </p>
                                 </div>
                             </a>
 
@@ -36,9 +36,6 @@ export function NavigationMenuDemo() {
                                href="/contact-us">
                                 <div>
                                     <h1 className=" text-2xl font-semibold ">Contact</h1>
-                                    <p>
-                                        How to install dependencies and structure your app.
-                                    </p>
                                 </div>
                             </a>
 
