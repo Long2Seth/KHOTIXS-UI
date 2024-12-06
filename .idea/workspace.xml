@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="caab8f64-a5b9-425d-9461-94d083424caa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/(customer)/event/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/customer/event/EventDetail.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/customer/event/EventDetailsSkeleton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/breadcrumb.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(customer)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(customer)/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(customer)/about/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(customer)/about/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +33,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;long-piseth&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/CSTAD/Final/KHOTIXS-UI/src/components/customer&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
