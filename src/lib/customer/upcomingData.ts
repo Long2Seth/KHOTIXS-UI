@@ -11,7 +11,7 @@ export const upcomingData: Event[] = [
         image: "/cover.png",
         date: "2024-12-01",
         title: "THE Q - RISE OF THE QUEEN AOK SOKUNKANHA SOLO CONCERT: A GRAND CELEBRATION OF MUSIC AND ARTISTRY FEATURING AOK SOKUNKANHA",
-        location: "New York, USA - Madison Square Garden, one of the most iconic venues in the world, hosting a spectacular evening of unparalleled musical performances and artistic excellence.",
+        location: "New York, USA - Central Park, transforming into a magical realm of music and joy for an enchanting evening under the stars.",
         price: 0,
         labelType: "FREE"
     },

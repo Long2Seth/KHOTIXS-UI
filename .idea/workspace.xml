@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="caab8f64-a5b9-425d-9461-94d083424caa" name="Changes" comment="Initial commit from Create Next App">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/chiso.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/event/cover-event.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/event/ticket.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/sarandy.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/seakngim.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/sophanmai.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(customer)/event/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(customer)/user-profile/payment/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(customer)/user-profile/profile/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(customer)/user-profile/setting/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(customer)/user-profile/ticket/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customer/HumburgerMenu.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customer/User-Profile/Payment.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customer/User-Profile/Profile.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customer/User-Profile/Setting.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customer/User-Profile/Tickets.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customer/User-Profile/Upcomming.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customer/card/SkeletonCardCategoryComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customer/event/EventDetail.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customer/event/EventDetailsSkeleton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customer/navbar/NavbarComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customer/navbar/SkeletonNavbar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ui/breadcrumb.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ui/dialog.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ui/pagination.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ui/skeleton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ui/switch.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ui/tabs.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/navbar/navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(customer)/about/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(customer)/about/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(customer)/contact-us/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(customer)/contact-us/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(customer)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(customer)/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(customer)/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(customer)/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(organizer)/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/organizer/dashboard/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(organizer)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/organizer/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(organizer)/payment&amp;revenue/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/organizer/payment&amp;revenue/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/customer/CardCategory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/CardCategory.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/customer/CardComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/CardComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/customer/FooterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/FooterComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/customer/NavbarComponent.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/customer/NavigationMenuDemo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/navbar/NavigationMenuDemo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/organizer/event-table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organizer/event-table.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/organizer/header-organizer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organizer/header-organizer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/organizer/navbarOrganizerComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organizer/navbarOrganizerComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/organizer/organizer-dash.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organizer/organizer-dash.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/modeToggle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/modeToggle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/navigation-menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/navigation-menu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/use-toast.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/use-toast.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/customer/upcomingData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/customer/upcomingData.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="PhanmaiPhal &lt;phannmai576@gmail.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2pnCp3TYzJ9INRZndHjzta3oPOr" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "Merging vuth-sarandy",
+    "last_opened_file_path": "D:/CSTAD/Final/KHOTIXS-UI/src/components/customer",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Users/vuthsarandy/Documents/CSTAD/NextJS-For-MS/KHOTIXS-UI/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\CSTAD\Final\KHOTIXS-UI\src\components\customer" />
+      <recent name="D:\CSTAD\Final\KHOTIXS-UI\src\app\(customer)" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/organizer" />
+      <recent name="D:\CSTAD\Final\KHOTIXS-UI\src\components\customer\User-Profile" />
+      <recent name="D:\CSTAD\Final\KHOTIXS-UI\src\app\(customer)" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-WS-242.23726.96" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="caab8f64-a5b9-425d-9461-94d083424caa" name="Changes" comment="" />
+      <created>1733392632031</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1733392632031</updated>
+      <workItem from="1733392633271" duration="525000" />
+      <workItem from="1733393196765" duration="1499000" />
+      <workItem from="1733394828812" duration="724000" />
+      <workItem from="1733397600558" duration="2450000" />
+      <workItem from="1733442233979" duration="1911000" />
+      <workItem from="1733447613778" duration="2433000" />
+      <workItem from="1733454935563" duration="2219000" />
+    </task>
+    <task id="LOCAL-00001" summary="Merge branch 'long-piseth' of https://github.com/KHOTIXS-ISTAD/KHOTIXS-UI into phal-sophanmai">
+      <option name="closed" value="true" />
+      <created>1733393048958</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1733393048958</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Merge branch 'long-piseth' of https://github.com/KHOTIXS-ISTAD/KHOTIXS-UI into phal-sophanmai" />
+    <MESSAGE value="Initial commit from Create Next App" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit from Create Next App" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/app/(customer)/layout.tsx</url>
+          <line>17</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

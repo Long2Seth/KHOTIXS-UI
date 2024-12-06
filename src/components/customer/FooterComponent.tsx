@@ -3,11 +3,11 @@ import Link from "next/link";
 
 export function FooterComponent() {
     return (
-        <footer className="w-full bg-khotixs-background-white dark:bg-khotixs-background-dark py-[100px]">
+        <footer className="w-full bg-white dark:bg-khotixs-background-dark py-[100px]">
 
 
             {/* Main Footer Section */}
-            <section className="  px-[140px] text-gray-400 grid md:grid-cols-2 xl:grid-cols-4 justify-between gap-y-20 ">
+            <section className="container mx-auto text-gray-400 grid md:grid-cols-2 xl:grid-cols-4 justify-center md:justify-between gap-y-20 ">
 
 
                 {/* Logo and Description */}
