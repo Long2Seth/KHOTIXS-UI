@@ -1,6 +1,7 @@
 import {CardCategory} from "@/components/customer/CardCategory";
 import {CardComponent} from "@/components/customer/CardComponent";
 import {upcomingData, generalData} from "@/lib/customer/upcomingData";
+import Image from "next/image";
 
 
 export default function Home() {

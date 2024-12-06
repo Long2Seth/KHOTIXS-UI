@@ -3,8 +3,6 @@ import NavbarOrganizerComponent from "@/components/organizer/navbarOrganizerComp
 import HeaderOrganizer from "@/components/organizer/header-organizer";
 import OrganizerDashboard from "@/components/organizer/organizer-dash";
 import {EventsTable} from "@/components/organizer/event-table";
-import PaymentTable from "@/components/organizer/table-payment";
-import RevenueDashboard from "@/components/organizer/revenue-table";
 
 const MyComponent = () => {
     return (
@@ -14,8 +12,6 @@ const MyComponent = () => {
             <NavbarOrganizerComponent/>
             <OrganizerDashboard/>
             <EventsTable/>
-            <RevenueDashboard/>
-            <PaymentTable/>
 
         </div>
     );
