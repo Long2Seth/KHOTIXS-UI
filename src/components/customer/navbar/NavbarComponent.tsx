@@ -37,11 +37,6 @@ const NavbarComponent = () => {
         return () => clearTimeout(timer);
     }, []);
 
-    const toggleDropdown = (itemName: string) => {
-        setDropdownOpen(!isDropdownOpen);
-        setActiveItem(itemName);
-    };
-
     const closeMenus = () => {
         setDropdownOpen(false);
         setMenuOpen(false);

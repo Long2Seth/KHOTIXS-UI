@@ -1,6 +1,5 @@
 "use client"
 import {IoMenu} from "react-icons/io5";
-import { IoMdCloseCircle } from 'react-icons/io';
 import * as React from "react"
 
 import {cn} from "@/lib/utils"
