@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import '../globals.css';
-import NavbarComponent from "@/components/customer/NavbarComponent";
+import NavbarComponent from "@/components/customer/navbar/NavbarComponent";
 import { ThemeProvider } from "next-themes";
 import { FooterComponent } from "@/components/customer/FooterComponent";
 import { Toaster } from "@/components/ui/toaster"
 import StoreProvider from "../StoreProvider";
+import NavbarUserProfile from "@/components/customer/navbar/NavbarUserProfile";
 
 export const metadata: Metadata = {
     title: {
@@ -22,14 +23,15 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className=" bg-khotixs-background-white ">
+            <body className=" bg-khotixs-background-white dark:bg-khotixs-background-dark ">
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="light"
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <NavbarComponent />
+                    {/*<NavbarComponent />*/}
+                    <NavbarUserProfile/>
                     <StoreProvider>
                         {children}
                     </StoreProvider>

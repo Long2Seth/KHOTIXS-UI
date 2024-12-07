@@ -4,7 +4,61 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="caab8f64-a5b9-425d-9461-94d083424caa" name="Changes" comment="Merge branch 'long-piseth' of https://github.com/KHOTIXS-ISTAD/KHOTIXS-UI into phal-sophanmai" />
+    <list default="true" id="caab8f64-a5b9-425d-9461-94d083424caa" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/public/chiso.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/event/cover-event.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/event/ticket.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/chhaya.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/sarandy.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/seakngim.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/sophanmai.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(customer)/event/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/organizer/dashboard/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customer/HumburgerMenu.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customer/card/SkeletonCardCategoryComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customer/event/EventDetail.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customer/event/EventDetailsSkeleton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customer/navbar/NavbarComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customer/navbar/SkeletonNavbar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/organizer/event-table.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/organizer/header-organizer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/organizer/navbarOrganizerComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/organizer/organizer-dash.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ui/badge.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ui/breadcrumb.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ui/chart.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ui/skeleton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/navbar/navbar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/organizer/barchartData.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/organizer/eventData.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/organizer/navData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(customer)/about/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(customer)/about/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(customer)/contact-us/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(customer)/contact-us/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(customer)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(customer)/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(customer)/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(customer)/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(organizer)/dashboard/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(organizer)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/organizer/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/customer/CardCategory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/CardCategory.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/customer/CardComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/CardComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/customer/FooterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/FooterComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/customer/NavbarComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/navbar/NavbarUserProfile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/customer/NavigationMenuDemo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/navbar/NavigationMenuDemo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/customer/User-Profile/Payment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/User-Profile/Payment.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/customer/User-Profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/User-Profile/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/customer/User-Profile/Setting.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/User-Profile/Setting.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/customer/User-Profile/Tickets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/User-Profile/Tickets.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/customer/User-Profile/Upcomming.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/User-Profile/Upcomming.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/label.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/label.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/modeToggle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/modeToggle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/navigation-menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/navigation-menu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/tabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/tabs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/use-toast.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/use-toast.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/customer/upcomingData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/customer/upcomingData.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,13 +84,14 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;phal-sophanmai&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging phal-sophanmai&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/CSTAD/Final/KHOTIXS-UI/src/components/customer&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;D:\\CSTAD\\Final\\KHOTIXS-UI\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -71,8 +126,12 @@
       <workItem from="1733394828812" duration="724000" />
       <workItem from="1733397600558" duration="2450000" />
       <workItem from="1733442233979" duration="1911000" />
-      <workItem from="1733447613778" duration="13547000" />
-      <workItem from="1733466073230" duration="2224000" />
+      <workItem from="1733447613778" duration="2433000" />
+      <workItem from="1733454935563" duration="2219000" />
+      <workItem from="1733479008975" duration="393000" />
+      <workItem from="1733492281649" duration="1108000" />
+      <workItem from="1733556134207" duration="12016000" />
+      <workItem from="1733585716665" duration="13484000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'long-piseth' of https://github.com/KHOTIXS-ISTAD/KHOTIXS-UI into phal-sophanmai">
       <option name="closed" value="true" />
@@ -88,17 +147,33 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Merge branch 'long-piseth' of https://github.com/KHOTIXS-ISTAD/KHOTIXS-UI into phal-sophanmai" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'long-piseth' of https://github.com/KHOTIXS-ISTAD/KHOTIXS-UI into phal-sophanmai" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/components/customer/User-Profile/Profile.tsx</url>
-          <line>171</line>
-          <option name="timeStamp" value="10" />
+          <url>file://$PROJECT_DIR$/src/components/customer/User-Profile/Setting.tsx</url>
+          <line>176</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/customer/User-Profile/Payment.tsx</url>
+          <line>293</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

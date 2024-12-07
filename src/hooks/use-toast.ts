@@ -18,14 +18,6 @@ type ToasterToast = ToastProps & {
   action?: ToastActionElement
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const actionTypes = {
-  ADD_TOAST: "ADD_TOAST",
-  UPDATE_TOAST: "UPDATE_TOAST",
-  DISMISS_TOAST: "DISMISS_TOAST",
-  REMOVE_TOAST: "REMOVE_TOAST",
-} as const
-
 let count = 0
 
 function genId() {
@@ -33,25 +25,30 @@ function genId() {
   return count.toString()
 }
 
-type ActionType = typeof actionTypes
+type ActionType = {
+  ADD_TOAST: "ADD_TOAST"
+  UPDATE_TOAST: "UPDATE_TOAST"
+  DISMISS_TOAST: "DISMISS_TOAST"
+  REMOVE_TOAST: "REMOVE_TOAST"
+}
 
 type Action =
-  | {
-      type: ActionType["ADD_TOAST"]
-      toast: ToasterToast
-    }
-  | {
-      type: ActionType["UPDATE_TOAST"]
-      toast: Partial<ToasterToast>
-    }
-  | {
-      type: ActionType["DISMISS_TOAST"]
-      toastId?: ToasterToast["id"]
-    }
-  | {
-      type: ActionType["REMOVE_TOAST"]
-      toastId?: ToasterToast["id"]
-    }
+    | {
+  type: ActionType["ADD_TOAST"]
+  toast: ToasterToast
+}
+    | {
+  type: ActionType["UPDATE_TOAST"]
+  toast: Partial<ToasterToast>
+}
+    | {
+  type: ActionType["DISMISS_TOAST"]
+  toastId?: ToasterToast["id"]
+}
+    | {
+  type: ActionType["REMOVE_TOAST"]
+  toastId?: ToasterToast["id"]
+}
 
 interface State {
   toasts: ToasterToast[]
@@ -87,7 +84,7 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         toasts: state.toasts.map((t) =>
-          t.id === action.toast.id ? { ...t, ...action.toast } : t
+            t.id === action.toast.id ? { ...t, ...action.toast } : t
         ),
       }
 
@@ -107,12 +104,12 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         toasts: state.toasts.map((t) =>
-          t.id === toastId || toastId === undefined
-            ? {
-                ...t,
-                open: false,
-              }
-            : t
+            t.id === toastId || toastId === undefined
+                ? {
+                  ...t,
+                  open: false,
+                }
+                : t
         ),
       }
     }
@@ -147,10 +144,10 @@ function toast({ ...props }: Toast) {
   const id = genId()
 
   const update = (props: ToasterToast) =>
-    dispatch({
-      type: "UPDATE_TOAST",
-      toast: { ...props, id },
-    })
+      dispatch({
+        type: "UPDATE_TOAST",
+        toast: { ...props, id },
+      })
   const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id })
 
   dispatch({
