@@ -6,7 +6,7 @@ export default function page() {
     return (
         <>
             {/* Section Title */}
-            <section className={`container mx-auto px-[20px] lg:px-[135px] pt-[50px]`}>
+            <section className="container mx-auto px-[20px] pt-[50px] lg:px-[135px]">
                 <TitleAndDesComponent
                     title="Order Info Requirement"
                     description="Please fill in the information below to complete your order!"
@@ -14,7 +14,7 @@ export default function page() {
             </section>
 
             {/* Section Order */}
-            <section className={`container mx-auto px-[20px] lg:px-[135px] py-[50px] flex flex-col justify-center items-center gap-[40px]`}>
+            <section className="container mx-auto flex flex-col items-center justify-center gap-[40px] px-[20px] py-[50px] lg:px-[135px]">
                 <StepperComponent />
                 <OrderInfoRequirementFormComponent />
             </section>
