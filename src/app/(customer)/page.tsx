@@ -17,7 +17,7 @@ export default function Home() {
             <section
                 className=" container mx-auto w-full bg-khotixs-background-white dark:bg-khotixs-background-dark py-[30px]  md:py-[50px] flex flex-col justify-center items-center h-auto ">
                 <section className=" w-full flex flex-col justify-center items-center ">
-                    <h1 className="text-primary-color-text lg:text-2xl xl:text-3xl 2xl:text-5xl font-bold dark:text-secondary-color-text ">
+                    <h1 className=" text-primary-color-text lg:text-2xl xl:text-3xl 2xl:text-5xl font-bold dark:text-secondary-color-text ">
                         UPCOMING EVENTS
                     </h1>
                     <p className=" px-[20px] py-[8px] lg:max-w-[700px] xl:max-w-[60%] text-sm md:px-[120px] md:text-md lg:text-lg xl:px-[10px] xl:text-xl 2xl:text-xl font-light lg:my-[20px] text-center ">

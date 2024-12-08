@@ -27,44 +27,15 @@ import {
 } from "@/components/ui/table"
 import { MdOutlineMoreVert } from "react-icons/md";
 
+// Mock data for the events
 const events = [
-    {
-        id: "1",
-        thumbnail: "/cher-chhaya.png",
-        eventName: "SMILE OF CAMBODIA' RETURNS ",
-        paymentDate: "30-Oct-2024, 12:00AM",
-        qty: 4,
-        amount: 23.00,
-    } , {
-        id: "2",
-        thumbnail: "/cher-chhaya.png",
-        eventName: "SMILE OF CAMBODIA' RETURNS TO ANGKOR WAT FOR CULTURAL CELEBRATION",
-        paymentDate: "30-Oct-2024, 12:00AM",
-        qty: 4,
-        amount: 23.00,
-    } ,{
-        id: "3",
-        thumbnail: "/cher-chhaya.png",
-        eventName: "SMILE OF CAMBODIA' RETURNS TO ANGKOR WAT FOR CULTURAL CELEBRATION",
-        paymentDate: "30-Oct-2024, 12:00AM",
-        qty: 4,
-        amount: 23.00,
-    } ,{
-        id: "3",
-        thumbnail: "/cher-chhaya.png",
-        eventName: "SMILE OF CAMBODIA' RETURNS TO ANGKOR WAT FOR CULTURAL CELEBRATION",
-        paymentDate: "30-Oct-2024, 12:00AM",
-        qty: 4,
-        amount: 23.00,
-    } ,{
-        id: "4",
-        thumbnail: "/cher-chhaya.png",
-        eventName: "SMILE OF CAMBODIA' RETURNS TO ANGKOR WAT FOR CULTURAL CELEBRATION",
-        paymentDate: "30-Oct-2024, 12:00AM",
-        qty: 4,
-        amount: 23.00,
-    }
-
+    { id: 1, thumbnail: '/cher-chhaya.png', eventName: 'Summer Music Festival', paymentDate: '2023-07-15', qty: 2, amount: 150.00 },
+    { id: 2, thumbnail: '/CSTAD-LOGO.png', eventName: 'Tech Conference 2023', paymentDate: '2023-08-01', qty: 1, amount: 299.99 },
+    { id: 1, thumbnail: '/globe.svg', eventName: 'Summer Music Festival', paymentDate: '2023-07-15', qty: 2, amount: 150.00 },
+    { id: 1, thumbnail: '/cher-chhaya.png', eventName: 'Summer Music Festival', paymentDate: '2023-07-15', qty: 2, amount: 150.00 },
+    { id: 1, thumbnail: '/CSTAD-LOGO.png', eventName: 'Summer Music Festival', paymentDate: '2023-07-15', qty: 2, amount: 150.00 },
+    { id: 2, thumbnail: '/khotixs_logo.png', eventName: 'Tech Conference 2023', paymentDate: '2023-08-01', qty: 1, amount: 299.99 },
+    // Add more events as needed
 ]
 
 export default function Payment(){
@@ -78,7 +49,7 @@ export default function Payment(){
                     >
                         <div
                             role="alert"
-                            className=" dark:bg-green-900 w-[79px] h-[60px] md:w-[120px] md:h-[60px] lg:w-full lg:h-[60px] border-r-2 dark:border-green-700 text-green-900 p-2 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105"
+                            className="  w-[79px] h-[60px] md:w-[120px] md:h-[60px] lg:w-full lg:h-[60px] border-r-2 p-2 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105"
                         >
                             <div className="flex flex-col my-2 items-center justify-center">
                                 <div className="mb-2">
@@ -96,7 +67,7 @@ export default function Payment(){
                     >
                         <div
                             role="alert"
-                            className=" dark:bg-green-900 w-[60px] h-[50px] md:w-[120px] md:h-[60px] lg:w-full lg:h-[60px] border-r-2 dark:border-green-700 text-green-900 p-2 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105"
+                            className=" w-[60px] h-[50px] md:w-[120px] md:h-[60px] lg:w-full lg:h-[60px] border-r-2 p-2 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105"
                         >
                             <div className="flex flex-col items-center justify-center">
                                 <div className="mb-2">
@@ -114,7 +85,7 @@ export default function Payment(){
                     >
                         <div
                             role="alert"
-                            className="dark:bg-green-900 w-[79px] h-[60px] md:w-[170px] md:h-[60px] lg:w-full lg:h-[60px] border-r-2  dark:border-green-700 text-green-900 p-2 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105"
+                            className=" w-[79px] h-[60px] md:w-[170px] md:h-[60px] lg:w-full lg:h-[60px] border-r-2 p-2 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105"
                         >
                             <div className="flex flex-col items-center justify-center">
                                 <div className="mb-2">
@@ -132,7 +103,7 @@ export default function Payment(){
                     >
                         <div
                             role="alert"
-                            className=" dark:bg-green-900 w-[79px] h-[60px] md:w-[170px] md:h-[60px] lg:w-full lg:h-[60px] text-green-900 p-2 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105"
+                            className=" w-[79px] h-[60px] md:w-[170px] md:h-[60px] lg:w-full lg:h-[60px] p-2 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105"
                         >
                             <div className="flex flex-col items-center justify-center">
                                 <div className="mb-2">
@@ -147,25 +118,26 @@ export default function Payment(){
                 </div>
             </div>
 
-            <div className="w-[1200px] mx-auto h-auto">
+            <div className="w-[1115px] mx-auto h-auto">
                 <h1 className="text-3xl font-bold text-[#4A0635] mb-6">HISTORY PAYMENT</h1>
             </div>
-            <div className="w-[1200px] mx-auto h-auto">
+
+            <div className="w-[1115px] mx-auto h-auto">
                 <Table>
-                    <TableHeader className="bg-gray-100">
+                    <TableHeader>
                         <TableRow>
                             <TableHead className="w-[80px]">ID</TableHead>
                             <TableHead className="w-[100px]">THUMBNAIL</TableHead>
-                            <TableHead className="w-[100px]">EVENT NAME</TableHead>
-                            <TableHead className="w-[80px]">PAYMENT DATE</TableHead>
+                            <TableHead className="w-[200px]">EVENT NAME</TableHead>
+                            <TableHead className="w-[120px]">PAYMENT DATE</TableHead>
                             <TableHead className="w-[60px] text-right">QTY</TableHead>
                             <TableHead className="w-[100px] text-right">AMOUNT</TableHead>
                             <TableHead className="w-[80px] text-center">ACTION</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {events.map((event, index) => (
-                            <TableRow key={event.id} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                        {events.map((event) => (
+                            <TableRow key={event.id}>
                                 <TableCell className="font-medium">{event.id}</TableCell>
                                 <TableCell>
                                     <Image
@@ -176,8 +148,7 @@ export default function Payment(){
                                         className="rounded-md object-cover"
                                     />
                                 </TableCell>
-
-                                <TableCell className="max-w-[40%]">
+                                <TableCell className="max-w-[200px]">
                                     <p className="truncate font-medium">{event.eventName}</p>
                                 </TableCell>
                                 <TableCell className="whitespace-nowrap">{event.paymentDate}</TableCell>
@@ -186,8 +157,9 @@ export default function Payment(){
                                     ${event.amount.toFixed(2)}
                                 </TableCell>
                                 <TableCell className="text-center">
-                                    <Button className="h-5 w-5 bg-white">
-                                        <MdOutlineMoreVert className="h-4 w-4 text-black"/>
+                                    <Button variant="ghost" size="icon" className="h-8 w-8">
+                                        <MdOutlineMoreVert className="h-5 w-5" />
+                                        <span className="sr-only">More options</span>
                                     </Button>
                                 </TableCell>
                             </TableRow>
@@ -195,7 +167,8 @@ export default function Payment(){
                     </TableBody>
                 </Table>
             </div>
-            <div className="py-5">
+
+            <div className="mt-6 flex justify-center">
                 <Pagination>
                     <PaginationContent>
                         <PaginationItem>
@@ -205,9 +178,7 @@ export default function Payment(){
                             <PaginationLink href="#">1</PaginationLink>
                         </PaginationItem>
                         <PaginationItem>
-                            <PaginationLink href="#" isActive className="rounded-[5px] border-spacing-0.5 border-[#4A5568]">
-                                2
-                            </PaginationLink>
+                            <PaginationLink href="#" isActive>2</PaginationLink>
                         </PaginationItem>
                         <PaginationItem>
                             <PaginationLink href="#">3</PaginationLink>
@@ -221,6 +192,7 @@ export default function Payment(){
                     </PaginationContent>
                 </Pagination>
             </div>
-        </section>
+
+</section>
     )
 }

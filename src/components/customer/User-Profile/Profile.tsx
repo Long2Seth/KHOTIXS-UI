@@ -39,7 +39,7 @@ export default function Profile() {
                     >
                         <div
                             role="alert"
-                            className=" dark:bg-green-900 w-[79px] h-[60px] md:w-[120px] md:h-[60px] lg:w-full lg:h-[60px] border-r-2 dark:border-green-700 text-green-900 p-2 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105"
+                            className=" w-[79px] h-[60px] md:w-[120px] md:h-[60px] lg:w-full lg:h-[60px] border-r-2 p-2 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105"
                         >
                             <div className="flex flex-col my-2 items-center justify-center">
                                 <div className="mb-2">
@@ -57,7 +57,7 @@ export default function Profile() {
                     >
                         <div
                             role="alert"
-                            className=" dark:bg-green-900 w-[60px] h-[50px] md:w-[120px] md:h-[60px] lg:w-full lg:h-[60px] border-r-2 dark:border-green-700 text-green-900 p-2 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105"
+                            className="  w-[60px] h-[50px] md:w-[120px] md:h-[60px] lg:w-full lg:h-[60px] border-r-2 p-2 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105"
                         >
                             <div className="flex flex-col items-center justify-center">
                                 <div className="mb-2">
@@ -75,7 +75,7 @@ export default function Profile() {
                     >
                         <div
                             role="alert"
-                            className="dark:bg-green-900 w-[79px] h-[60px] md:w-[170px] md:h-[60px] lg:w-full lg:h-[60px] border-r-2  dark:border-green-700 text-green-900 p-2 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105"
+                            className=" w-[79px] h-[60px] md:w-[170px] md:h-[60px] lg:w-full lg:h-[60px] border-r-2 p-2 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105"
                         >
                             <div className="flex flex-col items-center justify-center">
                                 <div className="mb-2">
@@ -93,7 +93,7 @@ export default function Profile() {
                     >
                         <div
                             role="alert"
-                            className=" dark:bg-green-900 w-[79px] h-[60px] md:w-[170px] md:h-[60px] lg:w-full lg:h-[60px] text-green-900 p-2 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105"
+                            className=" w-[79px] h-[60px] md:w-[170px] md:h-[60px] lg:w-full lg:h-[60px] p-2 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105"
                         >
                             <div className="flex flex-col items-center justify-center">
                                 <div className="mb-2">
@@ -107,10 +107,10 @@ export default function Profile() {
                     </Link>
                 </div>
             </div>
-            <div className="container mx-auto p-4">
+            <div className="w-[1115px] mx-auto ">
                 <h1 className=" w-[1200px] mx-auto h-auto flex justify-start items-start text-3xl font-bold text-[#4A0635] mb-6">MY
                     PROFILE</h1>
-                <div className="w-[1200px] mx-auto h-auto flex justify-start items-start  flex gap-7">
+                <div className="w-[1155px] mx-auto h-auto flex justify-start items-start">
                     {/* Profile Image Section */}
                     <div className="flex flex-col items-center gap-4">
                         <Avatar className="w-[160px] h-[160px] rounded-[5px]">
