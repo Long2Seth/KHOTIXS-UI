@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import '../globals.css';
 import NavbarComponent from "@/components/customer/navbar/NavbarComponent";
 import { ThemeProvider } from "next-themes";
-import { FooterComponent } from "@/components/customer/FooterComponent";
+import { FooterComponent } from "@/components/customer/footer/FooterComponent";
 import { Toaster } from "@/components/ui/toaster"
 import StoreProvider from "../StoreProvider";
 
