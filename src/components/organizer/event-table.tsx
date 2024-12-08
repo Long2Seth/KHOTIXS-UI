@@ -23,23 +23,23 @@ import { events } from "@/lib/organizer/eventData"; // Import the events data
 export function EventsTable() {
     return (
         <div className="space-y-4 py-2">
-            <h1 className="text-3xl font-bold py-5 text-[#5F0F40]">EVENTS MANAGEMENT</h1>
-            <div className="flex items-center gap-4">
-                <Input className="max-w-sm" placeholder="Search" />
+            <h1 className="text-3xl font-bold py-5 text-[#5F0F40] dark:text-secondary-color-text">EVENTS MANAGEMENT</h1>
+            <div className="flex items-center gap-4 ">
+                <Input className="max-w-sm bg-khotixs-background-white text-primary-color-text" placeholder="Search" />
                 <Select>
-                    <SelectTrigger className="w-[180px]">
+                    <SelectTrigger className="w-[180px] bg-khotixs-background-white text-primary-color-text">
                         <SelectValue placeholder="Categories" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-khotixs-background-white text-primary-color-text">
                         <SelectItem value="concert">Concert</SelectItem>
                         <SelectItem value="general">General</SelectItem>
                     </SelectContent>
                 </Select>
                 <Select>
-                    <SelectTrigger className="w-[180px]">
+                    <SelectTrigger className="w-[180px] text-primary-color-text bg-khotixs-background-white">
                         <SelectValue placeholder="Publish" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-khotixs-background-white text-primary-color-text">
                         <SelectItem value="published">Published</SelectItem>
                         <SelectItem value="unpublished">Unpublished</SelectItem>
                     </SelectContent>
@@ -48,21 +48,21 @@ export function EventsTable() {
                     New Event
                 </Button>
             </div>
-            <div className="border rounded-lg">
+            <div className="border rounded-lg ">
                 <Table>
                     <TableHeader>
-                        <TableRow>
-                            <TableHead>EVENT TITLE</TableHead>
-                            <TableHead>CATEGORY</TableHead>
-                            <TableHead>START AT</TableHead>
-                            <TableHead>END AT</TableHead>
-                            <TableHead>STATUS</TableHead>
+                        <TableRow className="bg-khotixs-background-white hover:bg-khotixs-background-white">
+                            <TableHead className="dark:text-primary-color-text">EVENT TITLE</TableHead>
+                            <TableHead className="dark:text-primary-color-text">CATEGORY</TableHead>
+                            <TableHead className="dark:text-primary-color-text">START AT</TableHead>
+                            <TableHead className="dark:text-primary-color-text">END AT</TableHead>
+                            <TableHead className="dark:text-primary-color-text">STATUS</TableHead>
                             <TableHead className="w-[50px]"></TableHead>
                         </TableRow>
                     </TableHeader>
-                    <TableBody>
+                    <TableBody className="bg-khotixs-background-white">
                         {events.map((event) => (
-                            <TableRow key={event.title}>
+                            <TableRow className="dark:text-primary-color-text" key={event.title}>
                                 <TableCell className="font-medium">{event.title}</TableCell>
                                 <TableCell>{event.category}</TableCell>
                                 <TableCell>{event.startAt}</TableCell>

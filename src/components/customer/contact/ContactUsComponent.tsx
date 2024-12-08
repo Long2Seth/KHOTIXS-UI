@@ -5,6 +5,7 @@ import {ContactSkeletonComponent} from "@/components/customer/contact/ContactSke
 import {GrLocation} from "react-icons/gr";
 import {FiPhone} from "react-icons/fi";
 import {HiOutlineMail} from "react-icons/hi";
+import {Input} from "@/components/ui/input";
 
 
 export default function ContactUsComponent(){
@@ -94,22 +95,22 @@ export default function ContactUsComponent(){
                                                 <label htmlFor="name" className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">
                                                     Name <span className="text-red-500">*</span>
                                                 </label>
-                                                <input
+                                                <Input
                                                     type="text"
                                                     id="name"
                                                     placeholder="Name"
-                                                    className="p-2 border border-gray-300 rounded-[5px] focus:outline-none focus:ring-1 text-lg focus:ring-primary-color dark:bg-khotixs-background-white"
+                                                    className="p-2 border border-gray-300 rounded-[5px] focus:outline-none text-lg focus:ring-primary-color dark:bg-khotixs-background-white dark:text-primary-color-text"
                                                 />
                                             </div>
                                             <div className="flex flex-col">
                                                 <label htmlFor="email" className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">
                                                     Email <span className="text-red-500">*</span>
                                                 </label>
-                                                <input
+                                                <Input
                                                     type="email"
                                                     id="email"
                                                     placeholder="Email"
-                                                    className="p-2 border border-gray-300 rounded-[5px] focus:outline-none focus:ring-1 text-lg focus:ring-primary-color dark:bg-khotixs-background-white"
+                                                    className="p-2 border border-gray-300 rounded-[5px] focus:outline-none text-lg focus:ring-primary-color dark:bg-khotixs-background-white dark:text-primary-color-text"
                                                 />
                                             </div>
                                             <div className="flex flex-col">
@@ -119,7 +120,7 @@ export default function ContactUsComponent(){
                                                 <textarea
                                                     id="message"
                                                     placeholder="Message"
-                                                    className="p-2 border border-gray-300 rounded-[5px] focus:outline-none focus:ring-1 text-lg focus:ring-primary-color dark:bg-khotixs-background-white"
+                                                    className="p-2 border border-gray-300 rounded-[5px] focus:outline-none text-lg focus:ring-primary-color dark:bg-khotixs-background-white dark:text-primary-color-text"
                                                 ></textarea>
                                             </div>
                                             <button

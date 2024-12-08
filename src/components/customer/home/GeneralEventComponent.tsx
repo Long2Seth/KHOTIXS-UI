@@ -24,7 +24,7 @@ export function GeneralEventComponent() {
                             <h1 className="text-primary-color-text lg:text-2xl xl:text-3xl 2xl:text-5xl font-bold dark:text-secondary-color-text ">
                                 GENERAL EVENT
                             </h1>
-                            <p className=" px-[20px] py-[8px] lg:max-w-[700px] xl:max-w-[60%] text-sm md:px-[120px] md:text-md lg:text-lg xl:text-xl xl:px-[10px] 2xl:text-xl font-light  text-center ">
+                            <p className=" text-gray-700 px-[20px] py-[8px] lg:max-w-[700px] xl:max-w-[60%] text-sm md:px-[120px] md:text-md lg:text-lg xl:text-xl xl:px-[10px] 2xl:text-[20px] font-light  text-center ">
                                 The General Event feature provides comprehensive information about a specific event,
                                 ensuring
                                 users have all the details needed to make an informed decision about attending or

@@ -24,7 +24,7 @@ export function UpcomingEventComponent() {
                             <h1 className=" text-primary-color-text lg:text-2xl xl:text-3xl 2xl:text-5xl font-bold dark:text-secondary-color-text ">
                                 UPCOMING EVENTS
                             </h1>
-                            <p className=" px-[20px] py-[8px] lg:max-w-[700px] xl:max-w-[60%] text-sm md:px-[120px] md:text-md lg:text-lg xl:px-[10px] xl:text-xl 2xl:text-xl font-light lg:my-[20px] text-center ">
+                            <p className=" text-2xl px-[20px] py-[8px] lg:max-w-[700px] xl:max-w-[60%] text-sm md:px-[120px] md:text-md lg:text-lg xl:px-[10px] xl:text-xl 2xl:text-xl font-light lg:my-[20px] text-center ">
                                 The General Event feature provides comprehensive information about a specific event,
                                 ensuring
                                 users have all the details needed to make an informed decision about attending or

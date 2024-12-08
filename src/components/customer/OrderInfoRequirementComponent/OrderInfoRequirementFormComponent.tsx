@@ -1,6 +1,6 @@
 'use client'
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -22,6 +22,9 @@ import {
     setEmail,
     setPhoneNumber,
 } from "@/redux/features/pre-order/preOrderSlice";
+import {
+    OrderInfoRequirementFormSkeleton
+} from "@/components/customer/OrderInfoRequirementComponent/OrderInfoRequirementFormSkeleton";
 
 // Create schema for the form.
 const formSchema = z.object({
@@ -34,6 +37,8 @@ const formSchema = z.object({
 });
 
 export default function OrderInfoRequirementFormComponent() {
+
+    const [isLoading, setIsLoading] = useState(true);
 
     // Dispatch
     const dispatch = useAppDispatch();
@@ -58,13 +63,20 @@ export default function OrderInfoRequirementFormComponent() {
         },
     })
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 2000);
+        return () => clearTimeout(timer);
+    }, []);
+
     // Function to handle form submission
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log({
             values,
         });
 
-        if(values.fullName && values.email && values.phoneNumber){
+        if (values.fullName && values.email && values.phoneNumber) {
             toast({
                 title: "Success!",
                 description: "Your information has been submitted successfully!",
@@ -76,72 +88,82 @@ export default function OrderInfoRequirementFormComponent() {
 
             setTimeout(() => {
                 router.push("/payment-details");
-            },3000)
+            }, 3000)
         }
     }
 
     return (
         <>
-            {/* Form */}
-            <Form {...form}>
-                <form
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    className="w-full space-y-2.5 lg:w-[670px]">
-                    <FormField
-                        control={form.control}
-                        name="fullName"
-                        render={({ field }) => (
-                            <FormItem>
-                                <Label>Full Name <span className={requiredStyle}>*</span></Label>
-                                <FormControl>
-                                    <Input placeholder="Full Name" {...field} />
-                                </FormControl>
-                                <FormMessage className={msgStyle} />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="email"
-                        render={({ field }) => (
-                            <FormItem>
-                                <Label>Email <span className={requiredStyle}>*</span></Label>
-                                <FormControl>
-                                    <Input placeholder="Email" {...field} />
-                                </FormControl>
-                                <FormMessage className={msgStyle} />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="phoneNumber"
-                        render={({ field }) => (
-                            <FormItem>
-                                <Label>Phone Number <span className={requiredStyle}>*</span></Label>
-                                <FormControl>
-                                    <Input placeholder="Phone Number" {...field} />
-                                </FormControl>
-                                <FormMessage className={msgStyle} />
-                            </FormItem>
-                        )}
-                    />
-                    <div className="flex gap-[10px] pt-[10px]">
-                        <Button
-                            className="w-full bg-white text-primary-color-text border-solid border-[1px] border-black hover:bg-slate-200"
-                            onClick={() => router.back()}
-                        >
-                            Cancel
-                        </Button>
-                        <Button
-                            type="submit"
-                            className="w-full bg-secondary-color hover:bg-red-900"
-                        >
-                            Payment Details
-                        </Button>
-                    </div>
-                </form>
-            </Form>
+            {isLoading ? <OrderInfoRequirementFormSkeleton /> : (
+                <Form {...form}>
+                    <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className="w-full space-y-2.5 lg:w-[670px]">
+                        <FormField
+                            control={form.control}
+                            name="fullName"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <Label>Full Name <span className={requiredStyle}>*</span></Label>
+                                    <FormControl>
+                                        <Input
+                                            className=" p-[12px] dark:text-primary-color-text dark:bg-khotixs-background-white "
+                                            placeholder="Full Name"
+                                            {...field} />
+                                    </FormControl>
+                                    <FormMessage className={msgStyle} />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <Label>Email <span className={requiredStyle}>*</span></Label>
+                                    <FormControl>
+                                        <Input
+                                            className="p-[12px] dark:text-primary-color-text dark:bg-khotixs-background-white "
+                                            placeholder="Email"
+                                            {...field} />
+                                    </FormControl>
+                                    <FormMessage className={msgStyle} />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="phoneNumber"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <Label>Phone Number <span className={requiredStyle}>*</span></Label>
+                                    <FormControl>
+                                        <Input
+                                            className="p-[12px] dark:text-primary-color-text dark:bg-khotixs-background-white "
+                                            placeholder="Phone Number"
+                                            {...field} />
+                                    </FormControl>
+                                    <FormMessage className={msgStyle} />
+                                </FormItem>
+                            )}
+                        />
+                        <div className="flex gap-[10px] pt-[10px]">
+                            <Button
+                                className="w-full bg-white p-[12px] text-primary-color-text border-solid border-[1px] border-black hover:bg-slate-200"
+                                onClick={() => router.back()}
+                            >
+                                Cancel
+                            </Button>
+                            <Button
+                                type="submit"
+                                className="w-full bg-secondary-color p-[12px] hover:bg-red-900 dark:text-secondary-color-text    "
+                            >
+                                Payment Details
+                            </Button>
+                        </div>
+                    </form>
+                </Form>
+            )}
         </>
     );
 }
