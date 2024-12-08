@@ -4,61 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="caab8f64-a5b9-425d-9461-94d083424caa" name="Changes" comment="Initial commit from Create Next App">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/chiso.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/event/cover-event.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/event/ticket.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sarandy.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/seakngim.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sophanmai.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(customer)/event/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(customer)/user-profile/payment/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(customer)/user-profile/profile/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(customer)/user-profile/setting/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(customer)/user-profile/ticket/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/customer/HumburgerMenu.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/customer/User-Profile/Payment.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/customer/User-Profile/Profile.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/customer/User-Profile/Setting.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/customer/User-Profile/Tickets.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/customer/User-Profile/Upcomming.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/customer/card/SkeletonCardCategoryComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/customer/event/EventDetail.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/customer/event/EventDetailsSkeleton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/customer/navbar/NavbarComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/customer/navbar/SkeletonNavbar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/breadcrumb.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/dialog.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/pagination.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/skeleton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/switch.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/tabs.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/navbar/navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(customer)/about/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(customer)/about/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(customer)/contact-us/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(customer)/contact-us/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(customer)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(customer)/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(customer)/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(customer)/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(organizer)/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/organizer/dashboard/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(organizer)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/organizer/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(organizer)/payment&amp;revenue/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/organizer/payment&amp;revenue/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/customer/CardCategory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/CardCategory.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/customer/CardComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/CardComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/customer/FooterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/FooterComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/customer/NavbarComponent.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/customer/NavigationMenuDemo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/customer/navbar/NavigationMenuDemo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organizer/event-table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organizer/event-table.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organizer/header-organizer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organizer/header-organizer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organizer/navbarOrganizerComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organizer/navbarOrganizerComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organizer/organizer-dash.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organizer/organizer-dash.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/modeToggle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/modeToggle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/navigation-menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/navigation-menu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/use-toast.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/use-toast.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/customer/upcomingData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/customer/upcomingData.ts" afterDir="false" />
-    </list>
+    <list default="true" id="caab8f64-a5b9-425d-9461-94d083424caa" name="Changes" comment="Initial commit from Create Next App" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -85,7 +31,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "Merging vuth-sarandy",
+    "git-widget-placeholder": "vuth-sarandy",
     "last_opened_file_path": "D:/CSTAD/Final/KHOTIXS-UI/src/components/customer",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -166,7 +112,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/app/(customer)/layout.tsx</url>
           <line>17</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
