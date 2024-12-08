@@ -1,5 +1,3 @@
-
-
 "use client";
 import Link from "next/link";
 import { GiNotebook } from "react-icons/gi";
@@ -108,7 +106,7 @@ export default function Profile() {
                             className="relative cursor-pointer aspect-square overflow-hidden rounded-lg"
                         >
                             <Image
-                                src="/sophanmai.JPG"
+                                src={image}
                                 alt="Profile"
                                 fill
                                 className="object-cover"
@@ -212,7 +210,7 @@ export default function Profile() {
                                                             className="relative cursor-pointer aspect-square overflow-hidden rounded-lg"
                                                         >
                                                             <Image
-                                                                src="/sophanmai.JPG"
+                                                                src={image}
                                                                 alt="Profile"
                                                                 fill
                                                                 className="object-cover"
@@ -286,7 +284,7 @@ export default function Profile() {
                                                         </Label>
                                                         <Input
                                                             id="username"
-                                                            value="ក្តីស្រមៃដែលគ្រប់គ្នាៗចង់ឲកើតមានឡើង ក្តីស្រមៃនោះបាន"
+                                                            value="ក្តីស្រមៃដែលគ្រប់គ្នាៗចង់ឲកើតមានឡើង ក្តីស្រមៃន���ះបាន"
                                                             className="w-full h-[120px] justify-start dark:bg-khotixs-background-dark"
                                                         />
                                                     </div>
@@ -319,11 +317,3 @@ export default function Profile() {
         </section>
     );
 }
-
-
-// <Button
-//     type="submit"
-//     className="w-full bg-secondary-color hover:bg-red-900 dark:text-secondary-color-text"
-// >
-//     EDIT
-// </Button>
