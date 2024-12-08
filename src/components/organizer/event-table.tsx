@@ -50,19 +50,19 @@ export function EventsTable() {
             </div>
             <div className="border rounded-lg ">
                 <Table>
-                    <TableHeader>
-                        <TableRow className="bg-khotixs-background-white hover:bg-khotixs-background-white">
-                            <TableHead className="dark:text-primary-color-text">EVENT TITLE</TableHead>
-                            <TableHead className="dark:text-primary-color-text">CATEGORY</TableHead>
-                            <TableHead className="dark:text-primary-color-text">START AT</TableHead>
-                            <TableHead className="dark:text-primary-color-text">END AT</TableHead>
-                            <TableHead className="dark:text-primary-color-text">STATUS</TableHead>
+                    <TableHeader className="">
+                        <TableRow>
+                            <TableHead className="dark:text-secondary-color-text">EVENT TITLE</TableHead>
+                            <TableHead className="dark:text-secondary-color-text">CATEGORY</TableHead>
+                            <TableHead className="dark:text-secondary-color-text">START AT</TableHead>
+                            <TableHead className="dark:text-secondary-color-text">END AT</TableHead>
+                            <TableHead className="dark:text-secondary-color-text">STATUS</TableHead>
                             <TableHead className="w-[50px]"></TableHead>
                         </TableRow>
                     </TableHeader>
-                    <TableBody className="bg-khotixs-background-white">
+                    <TableBody className="dark:bg-khotixs-background-dark">
                         {events.map((event) => (
-                            <TableRow className="dark:text-primary-color-text" key={event.title}>
+                            <TableRow className="dark:text-secondary-color-text" key={event.title}>
                                 <TableCell className="font-medium">{event.title}</TableCell>
                                 <TableCell>{event.category}</TableCell>
                                 <TableCell>{event.startAt}</TableCell>
