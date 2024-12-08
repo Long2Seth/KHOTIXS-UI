@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 import { FooterComponent } from "@/components/customer/footer/FooterComponent";
 import { Toaster } from "@/components/ui/toaster"
 import StoreProvider from "../StoreProvider";
+import NavbarUserProfile from "@/components/customer/navbar/NavbarUserProfile";
 
 export const metadata: Metadata = {
     title: {
@@ -30,6 +31,7 @@ export default function RootLayout({
                     disableTransitionOnChange
                 >
                     <NavbarComponent />
+                    {/*<NavbarUserProfile/>*/}
                     <StoreProvider>
                         {children}
                     </StoreProvider>
