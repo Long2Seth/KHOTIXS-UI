@@ -34,7 +34,7 @@ export default function PolicyComponent (){
                                 {/* Privacy Policy */}
                                 <div className=" bg-white dark:bg-secondary-color p-4 rounded-[6px] ">
                                     <div className="relative flex items-center gap-3 my-2 ">
-                                        <h2 className="text-secondary-color dark:text-secondary-color-text text-2xl xl:text-3xl 2xl:text-5xl font-semibold uppercase w-full text-center mb-2">
+                                        <h2 className="text-secondary-color dark:text-secondary-color-text text-2xl font-semibold mb-2">
                                             Privacy Policy
                                         </h2>
                                     </div>
