@@ -4,6 +4,7 @@ import {ThemeProvider} from "next-themes";
 import StoreProvider from "@/app/StoreProvider";
 import {Toaster} from "@/components/ui/toaster";
 import {FooterComponent} from "@/components/customer/footer/FooterComponent";
+import FooterOrganizer from "@/components/organizer/FooterOrganizer";
 
 
 export const metadata: Metadata = {
@@ -30,7 +31,7 @@ export default function RootLayout({
             <StoreProvider>
                 {children}
             </StoreProvider>
-            <FooterComponent />
+            <FooterOrganizer />
             <Toaster />
         </ThemeProvider>
         </body>
