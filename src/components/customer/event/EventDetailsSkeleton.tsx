@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export default function EventDetailsSkeleton() {
     return (
-        <main className="min-h-screen bg-gray-50 dark:bg-black">
+        <main className="min-h-screen bg-gray-50 dark:bg-khotixs-background-dark">
             <div className="container mx-auto px-2 py-8">
                 {/* Breadcrumb skeleton */}
                 <section className="mb-6 flex items-center gap-2">
@@ -54,7 +54,7 @@ export default function EventDetailsSkeleton() {
                                         <Skeleton className="h-4 w-3/4 mb-2" />
                                         <Skeleton className="h-6 w-20" />
                                     </section>
-                                        <Skeleton className="h-8 w-24" />
+                                    <Skeleton className="h-8 w-24" />
                                 </div>
                             </div>
                         ))}

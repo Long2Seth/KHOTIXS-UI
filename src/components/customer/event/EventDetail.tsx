@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Image from "next/image"
 import { MinusIcon, PlusIcon } from 'lucide-react'
 import Link from "next/link"
+import {useRouter} from "next/navigation";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -38,6 +39,8 @@ type TicketType = {
 
 
 export default function EventDetails() {
+
+    const router = useRouter()
     const [tickets, setTickets] = useState<TicketType[]>([
         { id: 'vip', event:'THE Q RISE OF THE QUEEN', name: 'VIP - TICKETS', price: 0, free: true, soldOut: true, quantity: 0, date: 'Friday',dd: '30', mmm: 'NOV',  yyyy: '2024'},
         { id: 'premium', event:'THE Q RISE OF THE QUEEN', name: 'PREMIUM - TICKETS', price: 30.00, soldOut: true, quantity: 0, date: 'Friday',dd: '30', mmm: 'NOV',  yyyy: '2024'},
@@ -242,6 +245,7 @@ export default function EventDetails() {
                                     <span
                                         className="font-bold text-lg lg:text-2xl text-label-paid">${total.toFixed(2)}</span>
                                     <Button
+                                        onClick={() => router.push('/order-info-requirement')}
                                         className="bg-primary-color hover:bg-primary-color hover:bg-opacity-85 text-label-text-primary rounded-[6px] h-[45px] font-bold">
                                         Place Order <RiArrowRightLine/>
                                     </Button>
