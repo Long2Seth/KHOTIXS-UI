@@ -20,3 +20,17 @@
   --secondary-color-text: #000;
 }
 
+
+/* Only light mode*/
+/* For normal */
+/* For title use font size this */
+/* text-title-color text-lg md:text-2xl xl:text-4xl font-bold */
+/* For description use font size this */
+/* text-description-color text-base md:text-lg xl:text-xl */
+
+/* For Card */
+/* For title use font size this */
+/* text-title-color text-base md:text-lg xl:text-xl font-bold */
+/* For description use font size this */
+/* text-description-color text-sm md:text-base xl:text-lg */
+

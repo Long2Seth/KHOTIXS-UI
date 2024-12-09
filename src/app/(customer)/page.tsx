@@ -12,7 +12,7 @@ export default function Home() {
 
     return (
 
-        <main className=" flex flex-col bg-khotixs-background-white dark:bg-khotixs-background-dark ">
+        <main className=" flex flex-col bg-khotixs-background-white dark:bg-khotixs-background-dark space-y-[30px] ">
 
 
             {/* Hero section*/}

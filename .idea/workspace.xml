@@ -9,6 +9,8 @@
 <<<<<<< HEAD
     <list default="true" id="caab8f64-a5b9-425d-9461-94d083424caa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
 =======
     <list default="true" id="caab8f64-a5b9-425d-9461-94d083424caa" name="Changes" comment="Merge branch 'long-piseth' of https://github.com/KHOTIXS-ISTAD/KHOTIXS-UI into phal-sophanmai">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -72,6 +74,7 @@
       <change beforePath="$PROJECT_DIR$/src/hooks/use-toast.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/use-toast.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/customer/upcomingData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/customer/upcomingData.ts" afterDir="false" />
 >>>>>>> origin/phal-sophanmai
+>>>>>>> origin/long-piseth
     </list>
 =======
     <list default="true" id="caab8f64-a5b9-425d-9461-94d083424caa" name="Changes" comment="Initial commit from Create Next App" />
