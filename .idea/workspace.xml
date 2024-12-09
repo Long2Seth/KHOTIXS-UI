@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <list default="true" id="caab8f64-a5b9-425d-9461-94d083424caa" name="Changes" comment="Initial commit from Create Next App" />
 =======
 <<<<<<< HEAD
@@ -79,6 +80,9 @@
 >>>>>>> origin/long-piseth
     </list>
 >>>>>>> origin/dev
+=======
+    <list default="true" id="caab8f64-a5b9-425d-9461-94d083424caa" name="Changes" comment="Initial commit from Create Next App" />
+>>>>>>> origin/vuth-sarandy
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -130,9 +134,12 @@
 <<<<<<< HEAD
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "vuth-sarandy",
+<<<<<<< HEAD
 =======
     "git-widget-placeholder": "phal-sophanmai",
 >>>>>>> origin/dev
+=======
+>>>>>>> origin/vuth-sarandy
     "last_opened_file_path": "D:/CSTAD/Final/KHOTIXS-UI/src/components/customer",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
