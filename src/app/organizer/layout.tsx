@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import "../globals.css";
+import {ThemeProvider} from "next-themes";
+import StoreProvider from "@/app/StoreProvider";
+import {Toaster} from "@/components/ui/toaster";
+import {FooterComponent} from "@/components/customer/footer/FooterComponent";
 
 
 export const metadata: Metadata = {
@@ -8,17 +12,28 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-    children,
-}: Readonly<{
+                                       children,
+                                   }: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body
-                className=" antialiased "
-            >
+        <html lang="en" suppressHydrationWarning>
+        <body className=" bg-khotixs-background-white dark:bg-khotixs-background-dark ">
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+        >
+
+
+            <StoreProvider>
                 {children}
-            </body>
+            </StoreProvider>
+            <FooterComponent />
+            <Toaster />
+        </ThemeProvider>
+        </body>
         </html>
     );
 }
