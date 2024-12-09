@@ -70,7 +70,8 @@ export function CardComponent({event}: CardUpcomingProps) {
 
                 </section>
                 <button
-                    className={`absolute font-medium bottom-0 right-0 min-w-[60px] text-white text-[10px] md:text-md lg:text-lg xl:text-xl md:p-[2px] lg:p-1 xl:px-3 xl:py-2 rounded-br-[5px] rounded-l-[5px]  ${getLabelClass(event.labelType)}`}
+                    style={{fontWeight: 500}}
+                    className={`absolute bottom-0 right-0 min-w-[60px] text-white text-[10px] md:text-md lg:text-lg xl:text-xl md:p-[2px] lg:p-1 xl:px-3 xl:py-2 rounded-br-[5px] rounded-l-[5px]  ${getLabelClass(event.labelType)}`}
                 >
                     {event.labelType.toLowerCase() === 'free' ? 'FREE' : `$${event.price}`}
                 </button>
