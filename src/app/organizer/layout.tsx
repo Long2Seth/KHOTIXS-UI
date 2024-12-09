@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import {ThemeProvider} from "next-themes";
-import NavbarComponent from "@/components/customer/navbar/NavbarComponent";
 import StoreProvider from "@/app/StoreProvider";
-import {FooterComponent} from "@/components/customer/FooterComponent";
 import {Toaster} from "@/components/ui/toaster";
-import NavbarOrganizerComponent from "@/components/organizer/categoriesOrganizerComponent";
-import CategoriesOrganizerComponent from "@/components/organizer/categoriesOrganizerComponent";
-import HeaderOrganizer from "@/components/organizer/header-organizer";
+import {FooterComponent} from "@/components/customer/footer/FooterComponent";
 
 
 export const metadata: Metadata = {

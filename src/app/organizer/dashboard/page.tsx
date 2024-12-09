@@ -1,5 +1,5 @@
 import React from 'react';
-import NavbarOrganizerComponent from "@/components/organizer/categoriesOrganizerComponent";
+// import NavbarOrganizerComponent from "@/components/organizer/categoriesOrganizerComponent";
 import HeaderOrganizer from "@/components/organizer/header-organizer";
 import OrganizerDashboard from "@/components/organizer/organizer-dash";
 import {EventsTable} from "@/components/organizer/event-table";
