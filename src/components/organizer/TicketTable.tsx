@@ -49,7 +49,7 @@ export default function TicketTable() {
                         <SelectItem value="hidden">Hidden</SelectItem>
                     </SelectContent>
                 </Select>
-                <Button onClick={() => router.push("/ticket")} className="bg-primary-color hover:bg-primary-color/90">New Ticket</Button>
+                <Button onClick={() => router.push("/events/tickets")} className="bg-primary-color hover:bg-primary-color/90">New Ticket</Button>
             </div>
 
             <Card>
