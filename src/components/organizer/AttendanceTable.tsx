@@ -1,15 +1,12 @@
-'use client'
+"use client"
 
-import { useState } from "react"
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
-import { Badge } from "@/components/ui/badge"
+import React, { useState } from "react"
+import { Calendar } from 'lucide-react'
+import * as XLSX from "xlsx"
+import { format } from "date-fns"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 import {
     Select,
     SelectContent,
@@ -17,135 +14,124 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import {
-    Pagination,
-    PaginationContent,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from "@/components/ui/pagination"
-import {Card} from "@/components/ui/card";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Calendar as CalendarComponent } from "@/components/ui/calendar"
 
-const attendanceData = [
-    {
-        id: "4435",
-        userName: "PROEUNG CHISO",
-        eventName: "THE VOICE KIDS CAMBODIA SEASON3",
-        location: "PHNOM PENH",
-        qty: 1,
-        ticketType: "VIP",
-        status: "checked-in"
-    },
-    {
-        id: "3547",
-        userName: "POV SOKNEM",
-        eventName: "CAMBODIA'S PREMIER CULINARY AND HOSPITALITY EXPO, CAMFOOD & CAMHOTEL 2024",
-        location: "PHNOM PENH",
-        qty: 1,
-        ticketType: "STANDING",
-        status: "checked-in"
-    },
-    {
-        id: "4478",
-        userName: "PHAL SOPHANMAI",
-        eventName: "CELEBRATE COMBODIA'S 71 YEARS OF INDEPENDENCE",
-        location: "PHNOM PENH",
-        qty: 1,
-        ticketType: "STANDING",
-        status: "absent"
-    },
-    // Add more data as needed
-]
+// Import data
+import { payments } from "@/lib/organizer/tablePaymentData"
 
-export function AttendanceTable() {
-    // const [currentPage, setCurrentPage] = useState(1)
-    const [rowsPerPage, setRowsPerPage] = useState(10)
+export default function AttendanceTable() {
+    const [search, setSearch] = useState("")
+    const [date, setDate] = useState<Date>()
+
+    // Filter payments based on search term
+    const filteredPayments = payments.filter(payment =>
+        payment.username.toLowerCase().includes(search.toLowerCase()) ||
+        payment.id.toLowerCase().includes(search.toLowerCase())
+    )
+
+    // Export to Excel function
+    const exportToExcel = () => {
+        const ws = XLSX.utils.json_to_sheet(payments)
+        const wb = XLSX.utils.book_new()
+        XLSX.utils.book_append_sheet(wb, ws, "Payments")
+        XLSX.writeFile(wb, "payments.xlsx")
+    }
 
     return (
-        <div className="space-y-4">
-            <Card>
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>ID</TableHead>
-                            <TableHead>USER NAME</TableHead>
-                            <TableHead>EVENT NAME</TableHead>
-                            <TableHead>LOCATION</TableHead>
-                            <TableHead>QTY</TableHead>
-                            <TableHead>TICKET TYPE</TableHead>
-                            <TableHead>STATUS</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {attendanceData.map((row) => (
-                            <TableRow key={row.id}>
-                                <TableCell>{row.id}</TableCell>
-                                <TableCell>{row.userName}</TableCell>
-                                <TableCell className="max-w-[300px]">{row.eventName}</TableCell>
-                                <TableCell>{row.location}</TableCell>
-                                <TableCell>{row.qty}</TableCell>
-                                <TableCell>{row.ticketType}</TableCell>
-                                <TableCell>
-                                    <Badge
-                                        variant="secondary"
-                                        className={
-                                            row.status === "checked-in"
-                                                ? "bg-green-100 text-green-700"
-                                                : "bg-red-100 text-red-700"
-                                        }
-                                    >
-                                        {row.status === "checked-in" ? "Checked-In" : "Absent"}
-                                    </Badge>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </Card>
-
-            <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">
-            Showing 1 to 10 of 20 entries
-          </span>
-                    <Select
-                        value={rowsPerPage.toString()}
-                        onValueChange={(value) => setRowsPerPage(parseInt(value))}
+        <div className="-mx-[27px]">
+            <CardHeader>
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <CardTitle>
+                        <h1 className="text-2xl font-bold">ATTENDANCE</h1>
+                        <p className="text-sm text-muted-foreground">Real-time insights for data-driven decisions</p>
+                    </CardTitle>
+                    <Button
+                        onClick={exportToExcel}
+                        className="bg-secondary-color hover:bg-[#4c1777] w-full sm:w-auto"
                     >
-                        <SelectTrigger className="w-[70px]">
-                            <SelectValue>{rowsPerPage}</SelectValue>
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="10">10</SelectItem>
-                            <SelectItem value="20">20</SelectItem>
-                            <SelectItem value="50">50</SelectItem>
-                        </SelectContent>
-                    </Select>
+                        Export Excel
+                    </Button>
                 </div>
-
-                <div className="flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">
-            Page 1 of 2
-          </span>
-                    <Pagination>
-                        <PaginationContent>
-                            <PaginationItem>
-                                <PaginationPrevious href="#" />
-                            </PaginationItem>
-                            <PaginationItem>
-                                <PaginationLink href="#" isActive>1</PaginationLink>
-                            </PaginationItem>
-                            <PaginationItem>
-                                <PaginationLink href="#">2</PaginationLink>
-                            </PaginationItem>
-                            <PaginationItem>
-                                <PaginationNext href="#" />
-                            </PaginationItem>
-                        </PaginationContent>
-                    </Pagination>
+            </CardHeader>
+            <CardContent>
+                <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                    <Input
+                        placeholder="Search"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="w-full sm:max-w-[300px]"
+                    />
+                    <div className="flex flex-col sm:flex-row gap-4">
+                        <Select>
+                            <SelectTrigger className="w-full sm:w-[180px]">
+                                <SelectValue placeholder="Events" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="queen">The Rise Of The Queen</SelectItem>
+                            </SelectContent>
+                        </Select>
+                        <Select>
+                            <SelectTrigger className="w-full sm:w-[180px]">
+                                <SelectValue placeholder="Publish" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="published">Published</SelectItem>
+                                <SelectItem value="draft">Draft</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+                    <Popover>
+                        <PopoverTrigger asChild>
+                            <Button variant="outline" className="w-full sm:w-[300px] justify-start text-left font-normal">
+                                <Calendar className="mr-2 h-4 w-4" />
+                                {date ? format(date, "PPP") : <span>Pick a date</span>}
+                            </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0">
+                            <CalendarComponent
+                                mode="single"
+                                selected={date}
+                                onSelect={setDate}
+                                initialFocus
+                            />
+                        </PopoverContent>
+                    </Popover>
                 </div>
-            </div>
+                <div className="overflow-x-auto">
+                    <div className="inline-block min-w-full align-middle">
+                        <div className="overflow-hidden border rounded-lg">
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead className="p-2 sm:p-4">ID</TableHead>
+                                        <TableHead className="p-2 sm:p-4">USERNAME</TableHead>
+                                        <TableHead className="p-2 sm:p-4">EVENT</TableHead>
+                                        <TableHead className="p-2 sm:p-4">PAYMENT METHOD</TableHead>
+                                        <TableHead className="p-2 sm:p-4">PAYMENT DATE</TableHead>
+                                        <TableHead className="p-2 sm:p-4 text-right">AMOUNT</TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                    {filteredPayments.map((payment) => (
+                                        <TableRow key={payment.id}>
+                                            <TableCell className="p-2 sm:p-4">{payment.id}</TableCell>
+                                            <TableCell className="p-2 sm:p-4">{payment.username}</TableCell>
+                                            <TableCell className="p-2 sm:p-4">{payment.event}</TableCell>
+                                            <TableCell className="p-2 sm:p-4">{payment.paymentMethod}</TableCell>
+                                            <TableCell className="p-2 sm:p-4">{payment.paymentDate}</TableCell>
+                                            <TableCell className="p-2 sm:p-4 text-right text-green-500">
+                                                + ${payment.amount.toFixed(2)}
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </div>
+                    </div>
+                </div>
+            </CardContent>
         </div>
     )
 }
