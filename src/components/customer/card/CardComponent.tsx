@@ -1,9 +1,9 @@
 'use client';
 import * as React from "react";
-import { HiOutlineLocationMarker } from "react-icons/hi";
+import {HiOutlineLocationMarker} from "react-icons/hi";
 import {useRouter} from "next/navigation";
 
-interface CardUpcomingProps {
+type CardUpcomingProps = {
     event: {
         image: string;
         date: string;
@@ -14,11 +14,13 @@ interface CardUpcomingProps {
     };
 }
 
-export function CardComponent({ event }: CardUpcomingProps) {
+export function CardComponent({event}: CardUpcomingProps) {
     const date = new Date(event.date);
-    const month = date.toLocaleString('default', { month: 'short' });
+    const month = date.toLocaleString('default', {month: 'short'});
     const day = String(date.getDate()).padStart(2, '0');
     const router = useRouter();
+
+
     const getLabelClass = (labelType: string) => {
         switch (labelType.toLowerCase()) {
             case 'free':
@@ -35,7 +37,6 @@ export function CardComponent({ event }: CardUpcomingProps) {
     };
 
     return (
-
         <section
             onClick={() => router.push(`/event`)}
             className=" relative cursor-pointer bg-white rounded-[10px] flex flex-col justify-start items-start h-auto max-w-[300px] sm:h-[215px] md:h-[235px] lg:max-w-[480px] lg:h-[450px] xl:max-w-[610px] xl:h-[530px] dark:bg-secondary-color ">

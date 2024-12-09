@@ -1,11 +1,9 @@
-
-
 "use client";
 import Link from "next/link";
 import { GiNotebook } from "react-icons/gi";
 import { RiSecurePaymentLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
-import { IoSettingsOutline } from "react-icons/io5";
+// import { IoSettingsOutline } from "react-icons/io5";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -21,9 +19,71 @@ import {
 } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { router } from "next/client";
-import { Camera, Mail, MapPin, Phone } from "lucide-react";
+import {Camera, Mail, MapPin, Phone, Settings} from "lucide-react";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
+import { cn } from "@/lib/utils"
+import { usePathname } from "next/navigation"
+
+interface NavItem {
+    label: string
+    icon: React.ReactNode
+    href: string
+}
+
+export function NavMenu() {
+    const pathname = usePathname()
+
+    const navItems: NavItem[] = [
+        {
+            label: "TICKETS",
+            icon: <GiNotebook className="h-[32px] w-[32px]" />,
+            href: "/user-profile/ticket",
+        },
+        {
+            label: "PAYMENT",
+            icon: <RiSecurePaymentLine className="h-[32px] w-[32px]" />,
+            href: "/user-profile/payment",
+        },
+        {
+            label: "PROFILE",
+            icon: <CgProfile className="h-[32px] w-[32px]" />,
+            href: "/user-profile/profile",
+        },
+        {
+            label: "SETTING",
+            icon: <Settings className="h-[32px] w-[32px]" />,
+            href: "/user-profile/settings",
+        },
+    ]
+
+    return (
+        <div className="flex justify-center items-start w-full">
+            <nav className="w-full max-w-[1200px]">
+                <ul className="grid grid-cols-2 gap-px bg-border md:grid-cols-4">
+                    {navItems.map((item) => {
+                        const isActive = pathname === item.href
+                        return (
+                            <li key={item.href} className="bg-khotixs-background-white dark:bg-khotixs-background-dark">
+                                <Link
+                                    href={item.href}
+                                    className={cn(
+                                        "flex flex-col items-center text-[18px] justify-center p-4 transition duration-300 ease-in-out transform hover:scale-105",
+                                        isActive && "text-primary"
+                                    )}
+                                >
+                                    {item.icon}
+                                    <span className="mt-2 text-[18px] font-medium">{item.label}</span>
+                                </Link>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </nav>
+        </div>
+
+    )
+}
 
 export default function Profile() {
     const [image, setImage] = useState<string>("/placeholder.svg");
@@ -43,72 +103,18 @@ export default function Profile() {
 
     return (
         <section className="container mx-auto mt-7 px-4 sm:px-6 lg:px-8">
-            <div className="w-full mx-auto h-auto flex justify-center items-center mb-5">
-                <div className="rounded-lg w-full max-w-[1200px] flex flex-wrap justify-center gap-y-4">
-                    <Link
-                        href="/user-profile/ticket"
-                        className="flex justify-center items-center w-[48%] sm:w-[45%] md:w-[22%] lg:w-[22%] h-[60px] rounded-lg shadow-sm"
-                    >
-                        <div
-                            className="w-full h-full border-l-4 border-primary-color p-4 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105">
-                            <div className="flex flex-col items-center justify-center">
-                                <GiNotebook className="text-3xl text-label-text-description mb-2"/>
-                                <div className="text-[16px] text-label-text-description">TICKETS</div>
-                            </div>
-                        </div>
-                    </Link>
-
-                    <Link
-                        href="/user-profile/payment"
-                        className="flex justify-center items-center w-[48%] sm:w-[45%] md:w-[22%] lg:w-[22%] h-[60px] rounded-lg shadow-sm"
-                    >
-                        <div
-                            className="w-full h-full border-l-4 border-primary-color p-4 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105">
-                            <div className="flex flex-col items-center justify-center">
-                                <RiSecurePaymentLine className="text-3xl text-label-text-description mb-2"/>
-                                <div className="text-[16px] text-label-text-description">PAYMENT</div>
-                            </div>
-                        </div>
-                    </Link>
-
-                    <Link
-                        href="/user-profile/profile"
-                        className="flex justify-center items-center w-[48%] sm:w-[45%] md:w-[22%] lg:w-[22%] h-[60px] rounded-lg shadow-sm"
-                    >
-                        <div
-                            className="w-full h-full border-l-4 border-primary-color p-4 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105">
-                            <div className="flex flex-col items-center justify-center">
-                                <CgProfile className="text-3xl text-label-text-description mb-2"/>
-                                <div className="text-[16px] text-label-text-description">PROFILE</div>
-                            </div>
-                        </div>
-                    </Link>
-
-                    <Link
-                        href="/user-profile/setting"
-                        className="flex justify-center items-center w-[48%] sm:w-[45%] md:w-[22%] lg:w-[22%] h-[60px] rounded-lg shadow-sm"
-                    >
-                        <div
-                            className="w-full h-full border-l-4 border-primary-color p-4 rounded-lg flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105">
-                            <div className="flex flex-col items-center justify-center">
-                                <IoSettingsOutline className="text-3xl text-label-text-description mb-2"/>
-                                <div className="text-[16px] text-label-text-description">SETTING</div>
-                            </div>
-                        </div>
-                    </Link>
-                </div>
-            </div>
+            <NavMenu/>
             <div className="w-full max-w-[1200px] mx-auto py-4">
                 <h1 className="w-full text-3xl font-bold text-[#4A0635] mb-6 md:text-start text-center">MY PROFILE</h1>
                 <div className="w-full flex flex-col md:flex-row justify-start items-center md:items-start gap-6">
                     {/* Profile Image Section */}
                     <div className="relative w-[170px] rounded-lg border-4 border-white shadow-lg">
-                        <div
+                    <div
                             onClick={handleImageClick}
                             className="relative cursor-pointer aspect-square overflow-hidden rounded-lg"
                         >
                             <Image
-                                src="/sophanmai.JPG"
+                                src="/cher-chhaya.png"
                                 alt="Profile"
                                 fill
                                 className="object-cover"
@@ -191,7 +197,7 @@ export default function Profile() {
                                         <DialogTrigger asChild>
                                             <Button
                                                 type="submit"
-                                                className="w-full bg-secondary-color hover:bg-red-900 dark:text-secondary-color-text"
+                                                className="w-full bg-primary-color hover:bg-red-900 dark:text-secondary-color-text"
                                             >
                                                 EDIT
                                             </Button>
@@ -212,7 +218,7 @@ export default function Profile() {
                                                             className="relative cursor-pointer aspect-square overflow-hidden rounded-lg"
                                                         >
                                                             <Image
-                                                                src="/sophanmai.JPG"
+                                                                src="/cher-chhaya.png"
                                                                 alt="Profile"
                                                                 fill
                                                                 className="object-cover"
@@ -286,7 +292,7 @@ export default function Profile() {
                                                         </Label>
                                                         <Input
                                                             id="username"
-                                                            value="ក្តីស្រមៃដែលគ្រប់គ្នាៗចង់ឲកើតមានឡើង ក្តីស្រមៃនោះបាន"
+                                                            value="ក្តីស្រមៃដែលគ្រប់គ្នាៗចង់ឲកើតមានឡើង ក្តីស្រមៃន���ះបាន"
                                                             className="w-full h-[120px] justify-start dark:bg-khotixs-background-dark"
                                                         />
                                                     </div>
@@ -302,7 +308,7 @@ export default function Profile() {
                                                     </Button>
                                                     <Button
                                                         type="submit"
-                                                        className="w-full bg-secondary-color hover:bg-red-900 dark:text-secondary-color-text"
+                                                        className="w-full bg-primary-color hover:bg-red-900 dark:text-secondary-color-text"
                                                     >
                                                         Save
                                                     </Button>
@@ -319,11 +325,3 @@ export default function Profile() {
         </section>
     );
 }
-
-
-// <Button
-//     type="submit"
-//     className="w-full bg-secondary-color hover:bg-red-900 dark:text-secondary-color-text"
-// >
-//     EDIT
-// </Button>
