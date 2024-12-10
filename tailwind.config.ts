@@ -65,6 +65,7 @@ export default {
                 'secondary-color-text': '#ffffff',
                 "title-color": "#1e1e1e",
                 "description-color": "#374151",
+                "dark-description-color": "#E5E7EB",
 
                 // For Label Card
                 'label-vip': '#D8AC0E',

@@ -55,8 +55,8 @@ export default function PaymentDetailsComponent() {
                         {/* Card Your Order */}
                         <section>
                             <div
-                                className="flex flex-col gap-5 w-full lg:w-[670px] border border-[#E5E7EB] rounded-[8px] p-[20px]">
-                                <h2 className="text-[18px] uppercase font-bold">your order</h2>
+                                className="flex flex-col gap-5 w-full lg:w-[670px] border border-[#E5E7EB] rounded-[8px] p-[20px] bg-white dark:bg-khotixs-background-dark ">
+                                <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold uppercase dark:text-dark-description-color ">your order</h2>
                                 <div className="grid gap-2.5 lg:gap-0 grid-cols-1 lg:grid-cols-2">
                                     <div className="flex items-center">
                                         <p className={detailStyle}>The Q Of Rise The Queen</p>
@@ -86,8 +86,8 @@ export default function PaymentDetailsComponent() {
                         {/* Personal Details */}
                         <section>
                             <div
-                                className="flex flex-col gap-5 w-full lg:w-[670px] border border-[#E5E7EB] rounded-[8px] p-[20px]">
-                                <h2 className="text-[18px] uppercase font-bold">personal details</h2>
+                                className="flex flex-col gap-5 w-full lg:w-[670px] border border-[#E5E7EB] rounded-[8px] p-[20px] bg-white dark:bg-khotixs-background-dark ">
+                                <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold uppercase dark:text-dark-description-color ">personal details</h2>
                                 <div className="flex flex-col gap-2.5">
                                     <div className="grid grid-cols-2">
                                         <p className={detailStyle}>Name</p>
@@ -105,7 +105,7 @@ export default function PaymentDetailsComponent() {
                             </div>
                         </section>
                         {/* Total */}
-                        <section>
+                        <section className="bg-white dark:bg-khotixs-background-dark ">
                             <div
                                 className="flex flex-col gap-5 w-full lg:w-[670px] border border-[#E5E7EB] rounded-[8px] p-[20px]">
                                 <h2 className="text-[18px] uppercase font-bold">total</h2>
@@ -113,7 +113,7 @@ export default function PaymentDetailsComponent() {
                             </div>
                         </section>
                         {/* Payment Method */}
-                        <section>
+                        <section className=" bg-white dark:bg-khotixs-background-dark  ">
                             <div
                                 className="flex flex-col gap-5 w-full lg:w-[670px] border border-[#E5E7EB] rounded-[8px] p-[20px]">
                                 <h2 className="text-[18px] uppercase font-bold">payment method</h2>
@@ -129,14 +129,14 @@ export default function PaymentDetailsComponent() {
                         <section>
                             <div className="flex gap-[10px] pt-[10px]">
                                 <Button
-                                    className="w-full bg-white hover:bg-slate-200 text-primary-color-text border-solid border-[1px] border-black"
+                                    className="w-full bg-white p-[12px] text-red-600 border-[1px] border-red-600 hover:bg-slate-200 dark:bg-khotixs-background-dark dark:text-red-600 dark:border-red-600 rounded-[6px] "
                                     onClick={() => router.back()}
                                 >
                                     Back
                                 </Button>
                                 <Button
                                     onClick={payNow}
-                                    className="w-full bg-secondary-color hover:bg-red-900"
+                                    className="w-full text-secondary-color-text bg-primary-color hover:bg-primary-color rounded-[6px] border border-primary-color "
                                 >
                                     Pay Now
                                 </Button>

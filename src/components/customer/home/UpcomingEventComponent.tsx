@@ -21,10 +21,10 @@ export function UpcomingEventComponent() {
                     <section
                         className=" container mx-auto w-full bg-khotixs-background-white dark:bg-khotixs-background-dark flex flex-col justify-center items-center h-auto ">
                         <section className=" w-full flex flex-col justify-center items-center ">
-                            <h1 className=" text-title-color text-lg lg:text-2xl xl:text-3xl 2xl:text-5xl font-bold dark:text-secondary-color-text ">
+                            <h1 className=" text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">
                                 UPCOMING EVENTS
                             </h1>
-                            <p className=" text-description-color text-base md:text-lg xl:text-xl lg:max-w-[700px] xl:max-w-[60%] md:px-[120px] md:text-md lg:text-lg xl:px-[10px] font-light lg:my-[20px] text-center ">
+                            <p className=" text-description-color m-[10px] px-[20px] text-base md:text-lg xl:text-xl max-w-[400px] lg:max-w-[700px] xl:max-w-[60%] md:px-[120px] md:text-md lg:text-lg xl:px-[10px] font-light lg:my-[20px] text-center dark:text-dark-description-color  ">
                                 The General Event feature provides comprehensive information about a specific event,
                                 ensuring
                                 users have all the details needed to make an informed decision about attending or
@@ -33,7 +33,7 @@ export function UpcomingEventComponent() {
                             </p>
                         </section>
                         <section
-                            className=" md:gap-5 h-auto px-[20px] sm:px-[120px] md:px-[145px] md:mt-1 grid grid-cols-2 justify-center items-center gap-2 lg:px-[20px] 2xl:px-[270px] ">
+                            className=" grid grid-cols-2 gap-2 md:px-[85px] lg:px[90px] xl:gap-10 ">
                             {upcomingData.map((event, index) => (
                                 <CardComponent key={index} event={event}/>
                             ))}

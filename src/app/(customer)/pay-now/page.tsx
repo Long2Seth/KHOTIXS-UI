@@ -1,7 +1,7 @@
 import StepperComponent from "@/components/customer/StepperComponent/StepperComponent";
 import TitleAndDesComponent from "@/components/customer/TitleAndDesComponent/TitleAndDesComponent";
 
-export default function page(){
+export default function PayNow(){
     return (
         <>
             {/* Section Title */}

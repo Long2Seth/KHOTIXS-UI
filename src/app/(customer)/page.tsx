@@ -6,13 +6,14 @@ import SportEventComponent from "@/components/customer/home/SportEventComponent"
 import CommunityEventComponent from "@/components/customer/home/CommunityEventComponent";
 import ConferenceEventComponent from "@/components/customer/home/ConferenceEventComponent";
 import Image from "next/image";
+import TechnologyComponent from "@/components/customer/technology/TechnologyComponent";
 
 
 export default function Home() {
 
     return (
 
-        <main className=" flex flex-col bg-khotixs-background-white dark:bg-khotixs-background-dark space-y-[30px] ">
+        <main className=" flex flex-col bg-khotixs-background-white dark:bg-khotixs-background-dark space-y-[50px] md:space-y-[80px] xl:space-y-[100px] mb-[50px] md:mb-80px] xl:mb-[100px] ">
 
 
             {/* Hero section*/}
@@ -27,28 +28,32 @@ export default function Home() {
             <CardCategory/>
 
 
-            {/*Upcoming event section*/}
+            {/*Technology section*/}
             <UpcomingEventComponent/>
 
 
-            {/* General event section */}
-            <GeneralEventComponent/>
+            {/*Conference section*/}
+            <TechnologyComponent/>
 
 
-            {/* Concert event section */}
+            {/* Concert section */}
             <ConcertEventComponent/>
 
 
-            {/*Sport event section */}
+            {/*Sport section */}
             <SportEventComponent/>
 
 
-            {/*Community event section */}
+            {/*Community section */}
             <CommunityEventComponent/>
 
 
-            {/*Conference event section*/}
+            {/*Conference section*/}
             <ConferenceEventComponent/>
+
+
+            {/* General section */}
+            <GeneralEventComponent/>
 
 
         </main>

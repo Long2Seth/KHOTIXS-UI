@@ -1,5 +1,5 @@
 'use client';
-import {generalData} from "@/lib/customer/upcomingData";
+import {generalData, upcomingData} from "@/lib/customer/upcomingData";
 import {CardComponent} from "@/components/customer/card/CardComponent";
 import { useEffect,useState} from "react";
 import {CardEventSkeletonComponent} from "@/components/customer/card/CardEventSkeletonComponent";
@@ -20,12 +20,12 @@ export default function CommunityEventComponent() {
             {
                 isLoading ? <CardEventSkeletonComponent/> :
                     <section
-                        className="container mx-auto w-full bg-khotixs-background-white dark:bg-khotixs-background-dark py-[30px]  md:py-[50px] flex flex-col justify-center items-center h-auto ">
+                        className=" container mx-auto w-full bg-khotixs-background-white dark:bg-khotixs-background-dark flex flex-col justify-center items-center h-auto ">
                         <section className=" w-full flex flex-col justify-center items-center ">
-                            <h1 className="text-primary-color-text lg:text-2xl xl:text-3xl 2xl:text-5xl font-bold dark:text-secondary-color-text ">
-                                COMMUNITY EVENTS
+                            <h1 className=" text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">
+                                COMMUNITY
                             </h1>
-                            <p className=" px-[20px] py-[8px] lg:max-w-[700px] xl:max-w-[60%] text-sm md:px-[120px] md:text-md lg:text-lg xl:text-xl xl:px-[10px]  2xl:text-xl font-light  text-center ">
+                            <p className=" text-description-color m-[10px] px-[20px] text-base md:text-lg xl:text-xl max-w-[400px] lg:max-w-[700px] xl:max-w-[60%] md:px-[120px] md:text-md lg:text-lg xl:px-[10px] font-light lg:my-[20px] text-center dark:text-dark-description-color">
                                 The Community Events feature connects users with local gatherings, social activities,
                                 and events
                                 that foster engagement within a community. It provides detailed information and tools to
@@ -37,7 +37,7 @@ export default function CommunityEventComponent() {
 
 
                         <section
-                            className=" w-full h-auto grid grid-cols-2 gap-2 md:gap-5 sm:grid-cols-3 lg:grid-cols-2 2xl:grid-cols-3 md:mt-1 justify-center items-center px-[20px] ">
+                            className=" h-auto grid gap-2 grid-cols-2 max-w-[600px] sm:w-full sm:grid-cols-3 md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center px-[30px] sm:p-0 lg:px-[30px]">
                             {generalData.map((event, index) => (
                                 <CardComponent key={index} event={event}/>
                             ))}

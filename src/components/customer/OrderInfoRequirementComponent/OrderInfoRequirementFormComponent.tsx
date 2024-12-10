@@ -95,74 +95,76 @@ export default function OrderInfoRequirementFormComponent() {
     return (
         <>
             {isLoading ? <OrderInfoRequirementFormSkeleton /> : (
-                <Form {...form}>
-                    <form
-                        onSubmit={form.handleSubmit(onSubmit)}
-                        className="w-full space-y-2.5 lg:w-[670px]">
-                        <FormField
-                            control={form.control}
-                            name="fullName"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <Label>Full Name <span className={requiredStyle}>*</span></Label>
-                                    <FormControl>
-                                        <Input
-                                            className=" p-[12px] dark:text-primary-color-text dark:bg-khotixs-background-white "
-                                            placeholder="Full Name"
-                                            {...field} />
-                                    </FormControl>
-                                    <FormMessage className={msgStyle} />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="email"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <Label>Email <span className={requiredStyle}>*</span></Label>
-                                    <FormControl>
-                                        <Input
-                                            className="p-[12px] dark:text-primary-color-text dark:bg-khotixs-background-white "
-                                            placeholder="Email"
-                                            {...field} />
-                                    </FormControl>
-                                    <FormMessage className={msgStyle} />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="phoneNumber"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <Label>Phone Number <span className={requiredStyle}>*</span></Label>
-                                    <FormControl>
-                                        <Input
-                                            className="p-[12px] dark:text-primary-color-text dark:bg-khotixs-background-white "
-                                            placeholder="Phone Number"
-                                            {...field} />
-                                    </FormControl>
-                                    <FormMessage className={msgStyle} />
-                                </FormItem>
-                            )}
-                        />
-                        <div className="flex gap-[10px] pt-[10px]">
-                            <Button
-                                className="w-full bg-white p-[12px] text-primary-color-text border-solid border-[1px] border-black hover:bg-slate-200"
-                                onClick={() => router.back()}
-                            >
-                                Cancel
-                            </Button>
-                            <Button
-                                type="submit"
-                                className="w-full bg-secondary-color p-[12px] hover:bg-red-900 dark:text-secondary-color-text    "
-                            >
-                                Payment Details
-                            </Button>
-                        </div>
-                    </form>
-                </Form>
+                <section className=" bg-white w-full p-10 space-y-2.5 lg:w-[800px] py-10 rounded-[6px] dark:bg-khotixs-background-dark  ">
+                    <Form {...form}>
+                        <form
+                            onSubmit={form.handleSubmit(onSubmit)}
+                            className="w-full space-y-2.5 lg:w-[670px] mx-auto ">
+                            <FormField
+                                control={form.control}
+                                name="fullName"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <Label  className=" text-base ">Full Name <span className={requiredStyle}>*</span></Label>
+                                        <FormControl>
+                                            <Input
+                                                className="p-2 text-lg border-gray-300 rounded-[6px] dark:border placeholder:text-gray-300 dark:border-gray-400 dark:text-secondary-color-text dark:bg-khotixs-background-dark dark:placeholder:text-gray-400 "
+                                                placeholder="Full Name"
+                                                {...field} />
+                                        </FormControl>
+                                        <FormMessage className={msgStyle} />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="email"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <Label className=" text-base ">Email <span className={requiredStyle}>*</span></Label>
+                                        <FormControl>
+                                            <Input
+                                                className="p-2 text-lg border-gray-300 rounded-[6px] dark:border placeholder:text-gray-300 dark:border-gray-400 dark:text-secondary-color-text dark:bg-khotixs-background-dark dark:placeholder:text-gray-400 "
+                                                placeholder="Email"
+                                                {...field} />
+                                        </FormControl>
+                                        <FormMessage className={msgStyle} />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="phoneNumber"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <Label  className=" text-base ">Phone Number <span className={requiredStyle}>*</span></Label>
+                                        <FormControl>
+                                            <Input
+                                                className="p-2 text-lg border-gray-300 rounded-[6px] dark:border placeholder:text-gray-300 dark:border-gray-400 dark:text-secondary-color-text dark:bg-khotixs-background-dark dark:placeholder:text-gray-400 "
+                                                placeholder="Phone Number"
+                                                {...field} />
+                                        </FormControl>
+                                        <FormMessage className={msgStyle} />
+                                    </FormItem>
+                                )}
+                            />
+                            <div className="flex gap-[10px] pt-[10px]">
+                                <Button
+                                    className="w-full bg-white p-[12px] text-red-600 border-[1px] border-red-600 hover:bg-slate-200 dark:bg-khotixs-background-dark dark:text-red-600 dark:border-red-600 rounded-[6px] "
+                                    onClick={() => router.back()}
+                                >
+                                    Cancel
+                                </Button>
+                                <Button
+                                    type="submit"
+                                    className="w-full bg-primary-color text-secondary-color-text p-[12px] hover:bg-primary-color dark:text-secondary-color-text rounded-[6px]   "
+                                >
+                                    Payment Details
+                                </Button>
+                            </div>
+                        </form>
+                    </Form>
+                </section>
             )}
         </>
     );
