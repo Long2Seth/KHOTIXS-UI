@@ -19,21 +19,22 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Calendar as CalendarComponent } from "@/components/ui/calendar"
 
 // Import data
-import { payments } from "@/lib/organizer/tablePaymentData"
+import {attendanceData} from "@/lib/organizer/attendanceData";
+import {Badge} from "@/components/ui/badge";
 
 export default function AttendanceTable() {
     const [search, setSearch] = useState("")
     const [date, setDate] = useState<Date>()
 
     // Filter payments based on search term
-    const filteredPayments = payments.filter(payment =>
-        payment.username.toLowerCase().includes(search.toLowerCase()) ||
-        payment.id.toLowerCase().includes(search.toLowerCase())
+    const filteredAttendance = attendanceData.filter(attendance =>
+        attendance.userName.toLowerCase().includes(search.toLowerCase()) ||
+        attendance.id.toLowerCase().includes(search.toLowerCase())
     )
 
     // Export to Excel function
     const exportToExcel = () => {
-        const ws = XLSX.utils.json_to_sheet(payments)
+        const ws = XLSX.utils.json_to_sheet(attendanceData)
         const wb = XLSX.utils.book_new()
         XLSX.utils.book_append_sheet(wb, ws, "Payments")
         XLSX.writeFile(wb, "payments.xlsx")
@@ -44,12 +45,12 @@ export default function AttendanceTable() {
             <CardHeader>
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <CardTitle>
-                        <h1 className="text-2xl font-bold">ATTENDANCE</h1>
-                        <p className="text-sm text-muted-foreground">Real-time insights for data-driven decisions</p>
+                        <h1 className="text-2xl font-bold text-primary-color">ATTENDANCE</h1>
+                        <p className="text-base font-normal">Real-time insights for data-driven decisions</p>
                     </CardTitle>
                     <Button
                         onClick={exportToExcel}
-                        className="bg-secondary-color hover:bg-[#4c1777] w-full sm:w-auto"
+                        className="bg-primary-color hover:bg-[#4c1777] w-full sm:w-auto"
                     >
                         Export Excel
                     </Button>
@@ -61,7 +62,7 @@ export default function AttendanceTable() {
                         placeholder="Search"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="w-full sm:max-w-[300px]"
+                        className="w-full sm:max-w-[300px] bg-none"
                     />
                     <div className="flex flex-col sm:flex-row gap-4">
                         <Select>
@@ -105,24 +106,34 @@ export default function AttendanceTable() {
                             <Table>
                                 <TableHeader>
                                     <TableRow>
-                                        <TableHead className="p-2 sm:p-4">ID</TableHead>
-                                        <TableHead className="p-2 sm:p-4">USERNAME</TableHead>
-                                        <TableHead className="p-2 sm:p-4">EVENT</TableHead>
-                                        <TableHead className="p-2 sm:p-4">PAYMENT METHOD</TableHead>
-                                        <TableHead className="p-2 sm:p-4">PAYMENT DATE</TableHead>
-                                        <TableHead className="p-2 sm:p-4 text-right">AMOUNT</TableHead>
+                                        <TableHead className="px-2 text-center">ID</TableHead>
+                                        <TableHead className="px-2">USER NAME</TableHead>
+                                        <TableHead className="px-2 lg:w-80">EVENT NAME</TableHead>
+                                        <TableHead className="px-2 text-center">LOCATION</TableHead>
+                                        <TableHead className="px-2 text-center">QTY</TableHead>
+                                        <TableHead className="px-2 text-center">TICKET TYPE</TableHead>
+                                        <TableHead className="px-2 text-center">STATUS</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
-                                    {filteredPayments.map((payment) => (
-                                        <TableRow key={payment.id}>
-                                            <TableCell className="p-2 sm:p-4">{payment.id}</TableCell>
-                                            <TableCell className="p-2 sm:p-4">{payment.username}</TableCell>
-                                            <TableCell className="p-2 sm:p-4">{payment.event}</TableCell>
-                                            <TableCell className="p-2 sm:p-4">{payment.paymentMethod}</TableCell>
-                                            <TableCell className="p-2 sm:p-4">{payment.paymentDate}</TableCell>
-                                            <TableCell className="p-2 sm:p-4 text-right text-green-500">
-                                                + ${payment.amount.toFixed(2)}
+                                    {filteredAttendance.map((attendance) => (
+                                        <TableRow key={attendance.id}>
+                                            <TableCell className="px-2 text-center">{attendance.id}</TableCell>
+                                            <TableCell className="px-2">{attendance.userName}</TableCell>
+                                            <TableCell className="px-2 lg:w-80 line-clamp-2">{attendance.eventName}</TableCell>
+                                            <TableCell className="px-2 text-center">{attendance.location}</TableCell>
+                                            <TableCell className="px-2 text-center">{attendance.qty}</TableCell>
+                                            <TableCell className="px-2 text-center">{attendance.ticketType}</TableCell>
+                                            <TableCell className="px-2 text-center">
+                                                <Badge
+                                                    className={`rounded-[6px] w-20 justify-center font-normal ${
+                                                        attendance.status === 'checked-in'
+                                                            ? 'bg-label-free text-label-text-primary hover:bg-label-free/90'
+                                                            : 'bg-label-paid text-label-text-primary hover:bg-label-paid/90'
+                                                    }`}
+                                                >
+                                                    {attendance.status === 'checked-in' ? 'Checked-In' : 'Absent'}
+                                                </Badge>
                                             </TableCell>
                                         </TableRow>
                                     ))}

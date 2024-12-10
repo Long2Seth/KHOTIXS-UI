@@ -3,7 +3,6 @@ import "../globals.css";
 import {ThemeProvider} from "next-themes";
 import StoreProvider from "@/app/StoreProvider";
 import {Toaster} from "@/components/ui/toaster";
-import {FooterComponent} from "@/components/customer/footer/FooterComponent";
 import FooterOrganizer from "@/components/organizer/FooterOrganizer";
 
 
