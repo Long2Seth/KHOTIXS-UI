@@ -64,6 +64,8 @@ export default {
 
                 'primary-color': '#AC1ED2',
                 'secondary-color': '#480028',
+                // Background Skeleton
+                'skeleton-color': '#f6f6f6',
 
                 // For Text
                 'primary-color-text': '#000000',
@@ -75,10 +77,12 @@ export default {
                 'label-regular': '#FFA500',
                 'label-free': '#0EB638',
                 'label-paid': '#B3261E',
+                'label-published': '#006FEE',
 
                 // For Label Text Of Card
                 'label-text-secondary': '#000000',
                 'label-text-primary': '#ffffff',
+                'label-description': '#4A5568',
 
             },
             fontSize:{
