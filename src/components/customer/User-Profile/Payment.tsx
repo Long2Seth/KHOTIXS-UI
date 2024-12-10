@@ -1,8 +1,4 @@
 "use client";
-import Link from "next/link";
-import { GiNotebook } from "react-icons/gi";
-import { RiSecurePaymentLine } from "react-icons/ri";
-import { CgProfile } from "react-icons/cg";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { HiOutlineUserRemove } from "react-icons/hi";
@@ -32,72 +28,10 @@ import {
 } from "@/components/ui/table";
 import React, { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import {usePathname} from "next/navigation";
-import {Settings} from "lucide-react";
-import {cn} from "@/lib/utils";
 import {IoEyeOutline} from "react-icons/io5";
+import NavbarMenuComponent from "@/components/customer/User-Profile/navbarMenuComponent";
 
-// List All Menu have 4 tabs
-interface NavItem {
-    label: string
-    icon: React.ReactNode
-    href: string
-}
-export function NavMenu() {
-    const pathname = usePathname()
 
-    const navItems: NavItem[] = [
-        {
-            label: "TICKETS",
-            icon: <GiNotebook className="h-[32px] w-[32px]" />,
-            href: "/user-profile/ticket",
-        },
-        {
-            label: "PAYMENT",
-            icon: <RiSecurePaymentLine className="h-[32px] w-[32px]" />,
-            href: "/user-profile/payment",
-        },
-        {
-            label: "PROFILE",
-            icon: <CgProfile className="h-[32px] w-[32px]" />,
-            href: "/user-profile/profile",
-        },
-        {
-            label: "SETTING",
-            icon: <Settings className="h-[32px] w-[32px]" />,
-            href: "/user-profile/settings",
-        },
-    ]
-
-    return (
-        <div className="flex justify-center items-start w-full">
-            <nav className="w-full max-w-[1200px]">
-                <ul className="grid grid-cols-2 gap-px bg-border md:grid-cols-4">
-                    {navItems.map((item) => {
-                        const isActive = pathname === item.href
-                        return (
-                            <li key={item.href} className="bg-khotixs-background-white dark:bg-khotixs-background-dark">
-                                <Link
-                                    href={item.href}
-                                    className={cn(
-                                        "flex flex-col items-center text-[18px] justify-center p-4 transition duration-300 ease-in-out transform hover:scale-105",
-                                        isActive && "text-primary"
-                                    )}
-                                >
-                                    {item.icon}
-                                    <span className="mt-2 text-[18px] font-medium">{item.label}</span>
-                                </Link>
-                            </li>
-                        )
-                    })}
-                </ul>
-            </nav>
-        </div>
-
-    )
-}
-
-// Mock data for the events
 const events = [
     {
         id: 1,
@@ -165,15 +99,15 @@ export default function Payment() {
         <section className="container mx-auto mt-7 px-4 sm:px-6 lg:px-8">
 
             {/*List all tab have 4*/}
-            <NavMenu />
+            <NavbarMenuComponent/>
 
             {/*List all history payment*/}
 
             <div className="w-full mx-auto h-auto flex justify-center items-center py-4">
                 <div className="w-full max-w-[1200px] ">
-                    <h1 className=" text-3xl font-bold text-[#4A0635] mb-6">HISTORY
+                    <h1 className=" text-3xl font-bold text-[#4A0635] dark:text-khotixs-background-white mb-6">HISTORY
                         PAYMENT</h1>
-                    <div className="w-full mx-auto h-auto flex justify-center items-center rounded-lg border bg-label-text-primary">
+                    <div className="w-full mx-auto h-auto flex justify-center items-center rounded-lg border dark:bg-khotixs-background-dark bg-label-text-primary">
                         <Table className="w-full max-w-[1200px] p-2 ">
                             <TableHeader>
                                 <TableRow>
@@ -243,7 +177,7 @@ export default function Payment() {
             </div>
 
 
-            <div className="mt-6 flex justify-center">
+            <div className="mt-6 flex justify-center ">
                 <Pagination>
                     <PaginationContent>
                         <PaginationItem>
@@ -253,7 +187,7 @@ export default function Payment() {
                             <PaginationLink href="#">1</PaginationLink>
                         </PaginationItem>
                         <PaginationItem>
-                            <PaginationLink href="#" isActive>2</PaginationLink>
+                            <PaginationLink href="#" isActive className="dark:bg-khotixs-background-dark">2</PaginationLink>
                         </PaginationItem>
                         <PaginationItem>
                             <PaginationLink href="#">3</PaginationLink>
@@ -288,7 +222,7 @@ export default function Payment() {
                                 Cancel
                             </Button>
                             <Button
-                                className="w-full bg-secondary-color hover:bg-red-900 dark:text-secondary-color-text"
+                                className="w-full bg-primary-color hover:bg-primary-color dark:text-secondary-color-text"
                                 onClick={() => {
                                     handleDeleteConfirm();
                                     onClose();

@@ -38,7 +38,7 @@ export default function Upcoming() {
                         </div>
                         <div className="md:absolute md:top-4 md:right-3 pt-3 md:pt-0">
                             <button
-                                className="w-full md:w-[80px] bg-primary-color hover:bg-red-900 text-white font-bold py-2 px-4 rounded">
+                                className="w-full md:w-[80px] bg-primary-color hover:bg-primary-color text-white font-bold py-2 px-4 rounded">
                                 View
                             </button>
                         </div>

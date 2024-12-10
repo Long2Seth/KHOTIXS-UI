@@ -1,7 +1,4 @@
 "use client";
-import Link from "next/link";
-import { GiNotebook } from "react-icons/gi";
-import { RiSecurePaymentLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 // import { IoSettingsOutline } from "react-icons/io5";
 import { Input } from "@/components/ui/input";
@@ -19,74 +16,14 @@ import {
 } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { router } from "next/client";
-import {Camera, Mail, MapPin, Phone, Settings} from "lucide-react";
+import {Camera, Mail, MapPin, Phone, } from "lucide-react";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
-import { cn } from "@/lib/utils"
-import { usePathname } from "next/navigation"
+import NavbarMenuComponent from "@/components/customer/User-Profile/navbarMenuComponent";
 
-interface NavItem {
-    label: string
-    icon: React.ReactNode
-    href: string
-}
-
-export function NavMenu() {
-    const pathname = usePathname()
-
-    const navItems: NavItem[] = [
-        {
-            label: "TICKETS",
-            icon: <GiNotebook className="h-[32px] w-[32px]" />,
-            href: "/user-profile/ticket",
-        },
-        {
-            label: "PAYMENT",
-            icon: <RiSecurePaymentLine className="h-[32px] w-[32px]" />,
-            href: "/user-profile/payment",
-        },
-        {
-            label: "PROFILE",
-            icon: <CgProfile className="h-[32px] w-[32px]" />,
-            href: "/user-profile/profile",
-        },
-        {
-            label: "SETTING",
-            icon: <Settings className="h-[32px] w-[32px]" />,
-            href: "/user-profile/settings",
-        },
-    ]
-
-    return (
-        <div className="flex justify-center items-start w-full">
-            <nav className="w-full max-w-[1200px]">
-                <ul className="grid grid-cols-2 gap-px bg-border md:grid-cols-4">
-                    {navItems.map((item) => {
-                        const isActive = pathname === item.href
-                        return (
-                            <li key={item.href} className="bg-khotixs-background-white dark:bg-khotixs-background-dark">
-                                <Link
-                                    href={item.href}
-                                    className={cn(
-                                        "flex flex-col items-center text-[18px] justify-center p-4 transition duration-300 ease-in-out transform hover:scale-105",
-                                        isActive && "text-primary"
-                                    )}
-                                >
-                                    {item.icon}
-                                    <span className="mt-2 text-[18px] font-medium">{item.label}</span>
-                                </Link>
-                            </li>
-                        )
-                    })}
-                </ul>
-            </nav>
-        </div>
-
-    )
-}
 
 export default function Profile() {
-    const [image, setImage] = useState<string>("/placeholder.svg");
+    const [image, setImage] = useState<string>("/cher-chhaya.png");
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleImageClick = () => {
@@ -103,9 +40,9 @@ export default function Profile() {
 
     return (
         <section className="container mx-auto mt-7 px-4 sm:px-6 lg:px-8">
-            <NavMenu/>
+            <NavbarMenuComponent/>
             <div className="w-full max-w-[1200px] mx-auto py-4">
-                <h1 className="w-full text-3xl font-bold text-[#4A0635] mb-6 md:text-start text-center">MY PROFILE</h1>
+                <h1 className="w-full text-3xl font-bold text-[#4A0635] mb-6 md:text-start text-center dark:text-khotixs-background-white">MY PROFILE</h1>
                 <div className="w-full flex flex-col md:flex-row justify-start items-center md:items-start gap-6">
                     {/* Profile Image Section */}
                     <div className="relative w-[170px] rounded-lg border-4 border-white shadow-lg">
@@ -113,12 +50,12 @@ export default function Profile() {
                             onClick={handleImageClick}
                             className="relative cursor-pointer aspect-square overflow-hidden rounded-lg"
                         >
-                            <Image
-                                src="/cher-chhaya.png"
-                                alt="Profile"
-                                fill
-                                className="object-cover"
-                            />
+                        <Image
+                            src={image}
+                            alt="Profile"
+                            fill
+                            className="object-cover"
+                        />
                         </div>
                         <button
                             onClick={handleImageClick}
@@ -197,7 +134,7 @@ export default function Profile() {
                                         <DialogTrigger asChild>
                                             <Button
                                                 type="submit"
-                                                className="w-full bg-primary-color hover:bg-red-900 dark:text-secondary-color-text"
+                                                className="w-full bg-primary-color hover:bg-primary-color dark:text-secondary-color-text"
                                             >
                                                 EDIT
                                             </Button>
@@ -308,7 +245,7 @@ export default function Profile() {
                                                     </Button>
                                                     <Button
                                                         type="submit"
-                                                        className="w-full bg-primary-color hover:bg-red-900 dark:text-secondary-color-text"
+                                                        className="w-full bg-primary-color hover:bg-primary-color dark:text-secondary-color-text"
                                                     >
                                                         Save
                                                     </Button>
