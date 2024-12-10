@@ -3,7 +3,7 @@ import "../globals.css";
 import {ThemeProvider} from "next-themes";
 import StoreProvider from "@/app/StoreProvider";
 import {Toaster} from "@/components/ui/toaster";
-import FooterOrganizer from "@/components/organizer/FooterOrganizer";
+import {FooterComponent} from "@/components/customer/footer/FooterComponent";
 
 
 export const metadata: Metadata = {
@@ -30,7 +30,7 @@ export default function RootLayout({
             <StoreProvider>
                 {children}
             </StoreProvider>
-            <FooterOrganizer />
+            <FooterComponent />
             <Toaster />
         </ThemeProvider>
         </body>

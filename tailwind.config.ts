@@ -1,5 +1,6 @@
-import type {Config} from "tailwindcss";
+import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
+import { PluginAPI } from 'tailwindcss/types/config';
 
 export default {
     darkMode: ["class"],
@@ -11,8 +12,6 @@ export default {
     theme: {
         extend: {
             colors: {
-
-                //
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
                 card: {
@@ -54,10 +53,6 @@ export default {
                     '5': 'hsl(var(--chart-5))'
                 },
 
-
-
-
-
                 // For Background
                 'khotixs-background-white': '#f5f5f5',
                 'khotixs-background-dark': 'rgb(32 0 46)',
@@ -70,6 +65,9 @@ export default {
                 // For Text
                 'primary-color-text': '#000000',
                 'secondary-color-text': '#ffffff',
+                "title-color": "#1e1e1e",
+                "description-color": "#374151",
+                "dark-description-color": "#E5E7EB",
 
                 // For Label Card
                 'label-vip': '#D8AC0E',
@@ -85,7 +83,11 @@ export default {
                 'label-description': '#4A5568',
 
             },
-            fontSize:{
+            fontFamily: {
+                khmer: ['Suwannaphum', 'serif'],
+                serif: ['Suwannaphum', 'serif'], // Add Khmer font to serif style
+            },
+            fontSize: {
                 'description': '16px',
             },
             borderRadius: {
@@ -95,5 +97,14 @@ export default {
             }
         }
     },
-    plugins: [tailwindcssAnimate],
+    plugins: [
+        tailwindcssAnimate,
+        function ({ addUtilities, theme }: PluginAPI) {
+            addUtilities({
+                '.khmer-text': {
+                    fontFamily: theme('fontFamily.khmer'),
+                },
+            });
+        },
+    ],
 } satisfies Config;
