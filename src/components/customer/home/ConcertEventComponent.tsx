@@ -1,5 +1,5 @@
 'use client';
-import {generalData, upcomingData} from "@/lib/customer/upcomingData";
+import {generalData} from "@/lib/customer/upcomingData";
 import {CardComponent} from "@/components/customer/card/CardComponent";
 import { useEffect, useState } from "react";
 import {CardEventSkeletonComponent} from "@/components/customer/card/CardEventSkeletonComponent";
