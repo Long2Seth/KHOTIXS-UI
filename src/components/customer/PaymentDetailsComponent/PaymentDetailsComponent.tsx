@@ -1,18 +1,12 @@
 'use client'
 
 import React from "react";
-import { useAppSelector } from "@/redux/hook";
-import { selectPreOrder } from "@/redux/features/pre-order/preOrderSlice";
-import { OrderInfoType } from "@/lib/definitions";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { MinusIcon, PlusIcon } from "lucide-react";
 
 export default function PaymentDetailsComponent() {
-
-    // Selectors
-    const preOrder: OrderInfoType = useAppSelector(selectPreOrder);
 
     // Router
     const router = useRouter();
@@ -75,15 +69,15 @@ export default function PaymentDetailsComponent() {
                     <div className="flex flex-col gap-2.5">
                         <div className="grid grid-cols-2">
                             <p className={detailStyle}>Name</p>
-                            <p className={detailStyle}>{preOrder.fullName ?? `Empty`}</p>
+                            <p className={detailStyle}>{`Empty`}</p>
                         </div>
                         <div className="grid grid-cols-2">
                             <p className={detailStyle}>Email</p>
-                            <p className={detailStyle}>{preOrder.email ?? `Empty`}</p>
+                            <p className={detailStyle}>{`Empty`}</p>
                         </div>
                         <div className="grid grid-cols-2">
                             <p className={detailStyle}>Phone Number</p>
-                            <p className={detailStyle}>{preOrder.phoneNumber ?? `Empty`}</p>
+                            <p className={detailStyle}>{`Empty`}</p>
                         </div>
                     </div>
                 </div>

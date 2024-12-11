@@ -16,12 +16,6 @@ import {
 } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
-import { useAppDispatch } from "@/redux/hook";
-import { 
-  setFullName,
-  setEmail,
-  setPhoneNumber,
-} from "@/redux/features/pre-order/preOrderSlice";
 
 // Create schema for the form.
 const formSchema = z.object({
@@ -34,9 +28,6 @@ const formSchema = z.object({
 });
 
 export default function OrderInfoRequirementFormComponent() {
-
-  // Dispatch
-  const dispatch = useAppDispatch();
 
   // Router
   const router = useRouter();
@@ -69,10 +60,6 @@ export default function OrderInfoRequirementFormComponent() {
         title: "Success!",
         description: "Your information has been submitted successfully!",
       })
-      
-      dispatch(setFullName(values.fullName));
-      dispatch(setEmail(values.email));
-      dispatch(setPhoneNumber(values.phoneNumber));
 
       setTimeout(() => {
         router.push("/payment-details");
