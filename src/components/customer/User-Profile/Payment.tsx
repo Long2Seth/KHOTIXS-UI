@@ -30,6 +30,7 @@ import React, { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {IoEyeOutline} from "react-icons/io5";
 import NavbarMenuComponent from "@/components/customer/User-Profile/navbarMenuComponent";
+import {Input} from "@/components/ui/input";
 
 
 const events = [
@@ -91,6 +92,8 @@ export default function Payment() {
     const [isOpen, setIsOpen] = useState(false);
     const onClose = () => setIsOpen(false);
 
+    const [search, setSearch] = useState("")
+
     const handleDeleteConfirm = () => {
         // Add your delete logic here
     };
@@ -107,7 +110,17 @@ export default function Payment() {
                 <div className="w-full max-w-[1200px] ">
                     <h1 className=" text-3xl font-bold text-[#4A0635] dark:text-khotixs-background-white mb-6">HISTORY
                         PAYMENT</h1>
-                    <div className="w-full mx-auto h-auto flex justify-center items-center rounded-lg border dark:bg-khotixs-background-dark bg-label-text-primary">
+
+                    <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                        <Input
+                            placeholder="Search"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            className="w-full sm:max-w-[600px] bg-none"/>
+
+                    </div>
+                    <div
+                        className="w-full mx-auto h-auto flex justify-center items-center rounded-lg border dark:bg-khotixs-background-dark bg-label-text-primary">
                         <Table className="w-full max-w-[1200px] p-2 ">
                             <TableHeader>
                                 <TableRow>
@@ -159,7 +172,8 @@ export default function Payment() {
                                                                 <ActionItem icon={<MdOutlineFileDownload/>}
                                                                             label="Download"
                                                                             onClick={() => setIsOpen(true)}/>
-                                                                <ActionItem icon={<HiOutlineUserRemove/>} label="Remove"
+                                                                <ActionItem icon={<HiOutlineUserRemove/>}
+                                                                            label="Remove"
                                                                             onClick={() => setIsOpen(true)}/>
                                                             </div>
                                                         </div>

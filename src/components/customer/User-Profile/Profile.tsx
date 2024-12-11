@@ -220,7 +220,7 @@ export default function Profile() {
                                                             className="focus:outline-none col-span-3 dark:bg-khotixs-background-dark"
                                                         />
                                                     </div>
-                                                    <div className="items-center gap-4">
+                                                    <div className="gap-4">
                                                         <Label
                                                             htmlFor="username"
                                                             className="text-right dark:bg-khotixs-background-dark"

@@ -8,10 +8,10 @@ export default function NavbarMenuComponent() {
             {navMenus.map((item, index) => (
                 <div
                     key={item.label}
-                    className="w-1/2 md:w-auto md:flex-1 relative mb-2 md:mb-0"
+                    className="w-1/2 md:w-auto md:flex-1 relative mb-2 md:mb-0 "
                 >
-                    <Card className="h-full bg-transparent shadow-none border-none transition duration-300 ease-in-out hover:scale-105">
-                        <CardContent className="flex flex-col items-center justify-center p-4 sm:p-6">
+                    <Card className="h-full bg-transparent shadow-none border-none transition duration-300 ease-in-out hover:scale-105 ">
+                        <CardContent className="flex flex-col items-center justify-center p-4 sm:p-6  ">
                             <Link href={item.href} legacyBehavior>
                                 <a className="flex flex-col items-center">
                                     <item.icon className="h-8 w-8 text-gray-700 sm:h-10 sm:w-10 mb-2 sm:mb-3 text-primary" />
