@@ -59,6 +59,8 @@ export default {
 
                 'primary-color': '#AC1ED2',
                 'secondary-color': '#480028',
+                // Background Skeleton
+                'skeleton-color': '#f6f6f6',
 
                 // For Text
                 'primary-color-text': '#000000',
@@ -67,21 +69,23 @@ export default {
                 "description-color": "#374151",
                 "dark-description-color": "#E5E7EB",
 
+                // For border color
+                "light-border-color": "#D1D5DB",
+                "dark-border-color": "#ffffff",
+
                 // For Label Card
                 'label-vip': '#D8AC0E',
                 'label-premium': '#5521B5',
                 'label-regular': '#FFA500',
                 'label-free': '#0EB638',
                 'label-paid': '#B3261E',
+                'label-published': '#006FEE',
 
                 // For Label Text Of Card
                 'label-text-secondary': '#000000',
                 'label-text-primary': '#ffffff',
+                'label-description': '#4A5568',
 
-            },
-            fontFamily: {
-                khmer: ['Suwannaphum', 'serif'],
-                serif: ['Suwannaphum', 'serif'], // Add Khmer font to serif style
             },
             fontSize: {
                 'description': '16px',
@@ -95,12 +99,5 @@ export default {
     },
     plugins: [
         tailwindcssAnimate,
-        function ({ addUtilities, theme }: PluginAPI) {
-            addUtilities({
-                '.khmer-text': {
-                    fontFamily: theme('fontFamily.khmer'),
-                },
-            });
-        },
     ],
 } satisfies Config;

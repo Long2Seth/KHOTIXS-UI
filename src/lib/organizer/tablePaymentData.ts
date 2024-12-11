@@ -63,6 +63,6 @@ export const payments = [
         event: "The Rise Of The Queen",
         paymentMethod: "KHQR",
         paymentDate: "20-NOV-2024, 04:06PM",
-        amount: 120.0,
+        amount: 2000.0,
     },
 ]
