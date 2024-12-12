@@ -17,9 +17,9 @@ export default function Upcoming() {
                         />
                     </div>
                     <div className="w-full relative p-4">
-                        <div className="flex flex-row md:flex-row items-start md:items-start gap-x-2 ">
+                        <div className="flex flex-row md:flex-row items-start md:items-start gap-x-8 ">
                             <h2 className="text-xl font-bold text-start md:text-left ">THE Q RISE OF THE QUEEN</h2>
-                            <button className="bg-label-premium text-white px-[5px] py-[2px] rounded mt-2 md:mt-0">
+                            <button className="bg-label-premium text-white px-[5px] py-[1px] rounded mt-2 md:mt-0">
                                 Premium
                             </button>
                         </div>
@@ -38,7 +38,7 @@ export default function Upcoming() {
                         </div>
                         <div className="md:absolute md:top-4 md:right-3 pt-3 md:pt-0">
                             <button
-                                className="w-full md:w-[80px] bg-secondary-color hover:bg-red-900 text-white font-bold py-2 px-4 rounded">
+                                className="w-full md:w-[80px] bg-primary-color hover:bg-primary-color text-white font-bold py-2 px-4 rounded">
                                 View
                             </button>
                         </div>
