@@ -40,7 +40,7 @@ export function EventsTable() {
                     <div className="flex items-center gap-4">
                         <Input
                             className=" border-[1px] text-md md:text-lg border-light-border-color rounded-[6px] placeholder:text-gray-400 bg-khotixs-background-white text-primary-color-text"
-                            placeholder="Search"/>
+                            placeholder="Search "/>
                         <Select>
                             <SelectTrigger
                                 className="w-[200px] border-[1px] border-light-border-color rounded-[6px] bg-khotixs-background-white text-primary-color-text ">

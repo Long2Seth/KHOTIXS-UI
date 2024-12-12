@@ -1,10 +1,10 @@
 import React from 'react';
-import AttendanceTable from "@/components/organizer/AttendanceTable";
+import OrderTableComponent from "@/components/organizer/order/OrderTableComponent";
 
 const Page = () => {
     return (
         <main className="container mx-auto w-full ">
-            <AttendanceTable/>
+            <OrderTableComponent/>
         </main>
     );
 };

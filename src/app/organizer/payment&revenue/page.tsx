@@ -4,7 +4,7 @@ import PaymentTable from "@/components/organizer/table-payment";
 
 const MyComponent = () => {
     return (
-        <main>
+        <main className=" container mx-auto w-full  ">
             <RevenueDashboard/>
             <PaymentTable/>
 

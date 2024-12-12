@@ -1,11 +1,11 @@
 'use client'
 
-import React, { useState } from "react"
-import { CalendarIcon } from 'lucide-react'
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import React, {useState} from "react"
+import {CalendarIcon} from 'lucide-react'
+import {Button} from "@/components/ui/button"
+import {Card, CardContent} from "@/components/ui/card"
+import {Input} from "@/components/ui/input"
+import {Label} from "@/components/ui/label"
 import {
     Select,
     SelectContent,
@@ -13,13 +13,13 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Calendar } from "@/components/ui/calendar"
-import { cn } from "@/lib/utils"
-import { format } from "date-fns"
+import {Textarea} from "@/components/ui/textarea"
+import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover"
+import {Calendar} from "@/components/ui/calendar"
+import {cn} from "@/lib/utils"
+import {format} from "date-fns"
 import Image from "next/image";
-import { useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
 
 export function EditEvent() {
     const router = useRouter();
@@ -41,143 +41,216 @@ export function EditEvent() {
     return (
         <form className="space-y-8">
             <Card>
-                <CardContent className="pt-6">
-                    <section className="space-y-6">
-                        <p className="uppercase font-semibold">Edit Event</p>
-                        <div className="grid md:grid-cols-2 gap-4">
-                            <section className="space-y-2">
-                                <Label htmlFor="title">Event title <span className="text-red-500">*</span></Label>
-                                <Input id="title" placeholder="Enter event title" className="focus:outline-none" required/>
-                            </section>
+                <CardContent className=" w-full pt-6">
+                    <section className="w-full ">
+                        <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text uppercase m-5">
+                            Edit Event
+                        </h1>
 
-                            <section className="space-y-2">
-                                <Label htmlFor="category">Category</Label>
-                                <Select>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select category"/>
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="concert">Concert</SelectItem>
-                                        <SelectItem value="conference">Technology</SelectItem>
-                                        <SelectItem value="exhibition">Conferences</SelectItem>
-                                        <SelectItem value="exhibition">Sports</SelectItem>
-                                        <SelectItem value="exhibition">Community</SelectItem>
-                                        <SelectItem value="exhibition">General</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                            </section>
-                        </div>
+                        <section
+                            className=" w-full space-y-6 bg-white p-10 rounded-[6px] dark:backdrop-blur dark:bg-opacity-5 ">
 
-                        <section className="space-y-2">
-                            <Label htmlFor="description">Event Description</Label>
-                            <Textarea
-                                id="description"
-                                placeholder="Enter event description"
-                                className="min-h-[100px] focus:outline-none"
-                            />
-                        </section>
+                            <section className="grid md:grid-cols-2 gap-4">
 
-                        <section className="space-y-2">
-                            <Label htmlFor="location">Location <span className="text-red-500">*</span></Label>
-                            <Input id="location" placeholder="Enter location" className="focus:outline-none" required/>
-                        </section>
-                        <div className="grid md:grid-cols-2 gap-4">
-                            <section className="space-y-2">
-                                <Label>Start Date<span className="text-red-500">*</span></Label>
-                                <Popover>
-                                    <PopoverTrigger asChild>
-                                        <Button
-                                            variant={"outline"}
-                                            className={cn(
-                                                "w-full justify-between text-left font-normal",
-                                                !startDate && "text-muted-foreground"
-                                            )}
-                                        >
-                                            {startDate ? format(startDate, "PPP") : <span>Pick a start date</span>}
-                                            <CalendarIcon className="h-4 w-4"/>
-                                        </Button>
-                                    </PopoverTrigger>
-                                    <PopoverContent className="w-auto p-0" align="start">
-                                        <Calendar
-                                            mode="single"
-                                            selected={startDate}
-                                            onSelect={setStartDate}
-                                            initialFocus
-                                        />
-                                    </PopoverContent>
-                                </Popover>
-                            </section>
-                            <section className="space-y-2">
-                                <Label>End Date <span className="text-red-500">*</span></Label>
-                                <Popover>
-                                    <PopoverTrigger asChild>
-                                        <Button
-                                            variant={"outline"}
-                                            className={cn(
-                                                "w-full justify-between text-left font-normal",
-                                                !endDate && "text-muted-foreground"
-                                            )}
-                                        >
-                                            {endDate ? format(endDate, "PPP") : <span>Pick an end date</span>}
-                                            <CalendarIcon className="h-4 w-4"/>
-                                        </Button>
-                                    </PopoverTrigger>
-                                    <PopoverContent className="w-auto p-0" align="start">
-                                        <Calendar
-                                            mode="single"
-                                            selected={endDate}
-                                            onSelect={setEndDate}
-                                            initialFocus
-                                        />
-                                    </PopoverContent>
-                                </Popover>
-                            </section>
-                        </div>
-
-                        <div className="grid md:grid-cols-2 gap-4">
-                            <section className="space-y-2">
-                                <Label htmlFor="capacity">Day Capacity</Label>
-                                <Input id="capacity" type="number" className="focus:outline-none" min="1"/>
-                                <p className="text-sm text-muted-foreground">Day Capacity is 1 if you not set.</p>
-                            </section>
-
-                            <div className="space-y-4">
                                 <section className="space-y-2">
-                                    <Label htmlFor="thumbnail">Upload Thumbnail</Label>
+                                    <Label
+                                        className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text"
+                                        htmlFor="title">
+                                        Event title
+                                        <span className="text-red-500">*</span>
+                                    </Label>
                                     <Input
-                                        id="thumbnail"
-                                        type="file"
-                                        accept="image/*"
-                                        onChange={handleThumbnailChange}
-                                    />
-                                    <p className="text-sm text-muted-foreground">
-                                        Thumbnails are useful for your event view when you post it!
-                                    </p>
+                                        id="title"
+                                        placeholder="Enter event title"
+                                        className=" bg-white border-[1px] text-md md:text-lg border-light-border-color rounded-[6px] placeholder:text-gray-400  text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text"
+                                        required/>
                                 </section>
 
-                                {thumbnail && (
-                                    <section className="space-y-2">
-                                        <Label>Thumbnail Preview</Label>
-                                        <div className="rounded-lg overflow-hidden border">
-                                            <Image
-                                                width={400}
-                                                height={200}
-                                                src={thumbnail}
-                                                alt="Thumbnail preview"
-                                                className="w-full h-full object-cover"
+                                <section className="space-y-2">
+                                    <Label
+                                        htmlFor="category"
+                                        className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">
+                                        Category
+                                    </Label>
+                                    <Select>
+                                        <SelectTrigger
+                                            className=" bg-white border-[1px] text-md md:text-lg border-light-border-color rounded-[6px] placeholder:text-gray-400  text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                                            <SelectValue placeholder="Select category"/>
+                                        </SelectTrigger>
+                                        <SelectContent
+                                            className=" bg-white border-[1px] text-md md:text-lg border-light-border-color rounded-[6px] placeholder:text-gray-400  text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                                            <SelectItem className=" dark:hover:text-primary-color-text"
+                                                        value="concert">Concert</SelectItem>
+                                            <SelectItem className=" dark:hover:text-primary-color-text"
+                                                        value="conference">Technology</SelectItem>
+                                            <SelectItem className=" dark:hover:text-primary-color-text"
+                                                        value="exhibition">Conferences</SelectItem>
+                                            <SelectItem className=" dark:hover:text-primary-color-text"
+                                                        value="exhibition">Sports</SelectItem>
+                                            <SelectItem className=" dark:hover:text-primary-color-text"
+                                                        value="exhibition">Community</SelectItem>
+                                            <SelectItem className=" dark:hover:text-primary-color-text"
+                                                        value="exhibition">General</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </section>
+                            </section>
+
+                            <section className="space-y-2">
+                                <Label
+                                    htmlFor="description"
+                                    className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">
+                                    Event Description
+                                </Label>
+                                <Textarea
+                                    id="description"
+                                    placeholder="Enter event description"
+                                    className=" bg-white border-[1px] focus:outline-none text-md md:text-lg border-light-border-color rounded-[6px] placeholder:text-gray-400  text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text"
+                                />
+                            </section>
+
+                            <section className="space-y-2">
+                                <Label
+                                    htmlFor="location"
+                                    className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">
+                                    Location
+                                    <span className="text-red-500">*</span>
+                                </Label>
+                                <Input
+                                    id="location"
+                                    placeholder="Enter location"
+                                    className=" bg-white border-[1px] text-md md:text-lg border-light-border-color rounded-[6px] placeholder:text-gray-400  text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text"
+                                    required/>
+                            </section>
+
+                            <section className="grid md:grid-cols-2 gap-4">
+                                <section className="space-y-2">
+                                    <Label
+                                        className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">
+                                        Start Date
+                                        <span className="text-red-500">*</span>
+                                    </Label>
+                                    <Popover>
+                                        <PopoverTrigger asChild>
+                                            <Button
+                                                variant={"outline"}
+                                                className={cn(
+                                                    "w-full justify-between text-left font-normal h-[50px] p-5 border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text",
+                                                    !startDate && "text-muted-foreground"
+                                                )}
+                                            >
+                                                {startDate ? format(startDate, "PPP") : <span>Pick a start date</span>}
+                                                <CalendarIcon className="h-4 w-4"/>
+                                            </Button>
+                                        </PopoverTrigger>
+                                        <PopoverContent className="w-auto p-0" align="start">
+                                            <Calendar
+                                                className="bg-white dark:bg-khotixs-background-dark dark:text-secondary-color-text rounded-[6px] "
+                                                mode="single"
+                                                selected={startDate}
+                                                onSelect={setStartDate}
+                                                initialFocus
                                             />
-                                        </div>
+                                        </PopoverContent>
+                                    </Popover>
+                                </section>
+                                <section className="space-y-2">
+                                    <Label
+                                        className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">
+                                        End Date
+                                        <span className="text-red-500">*</span>
+                                    </Label>
+                                    <Popover>
+                                        <PopoverTrigger asChild>
+                                            <Button
+                                                variant={"outline"}
+                                                className={cn(
+                                                    "w-full justify-between text-left font-normal h-[50px] p-5 border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text",
+                                                    !endDate && "text-muted-foreground"
+                                                )}
+                                            >
+                                                {endDate ? format(endDate, "PPP") : <span>Pick an end date</span>}
+                                                <CalendarIcon className="h-4 w-4"/>
+                                            </Button>
+                                        </PopoverTrigger>
+                                        <PopoverContent className="w-auto p-0" align="start">
+                                            <Calendar
+                                                className="bg-white dark:bg-khotixs-background-dark dark:text-secondary-color-text rounded-[6px] "
+                                                mode="single"
+                                                selected={endDate}
+                                                onSelect={setEndDate}
+                                                initialFocus
+                                            />
+                                        </PopoverContent>
+                                    </Popover>
+                                </section>
+                            </section>
+
+                            <section className="grid md:grid-cols-2 gap-4">
+                                <section className="space-y-2">
+                                    <Label
+                                        htmlFor="capacity"
+                                        className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">
+                                        Day Capacity
+                                    </Label>
+                                    <Input
+                                        id="capacity"
+                                        type="number"
+                                        className=" bg-white border-[1px] text-md md:text-lg border-light-border-color rounded-[6px] placeholder:text-gray-400  text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text"
+                                        min="1"/>
+                                    <p className="text-sm text-red-500">Day Capacity is 1 if you not set.</p>
+                                </section>
+
+                                <div className="space-y-4">
+                                    <section className="space-y-2">
+                                        <Label
+                                            htmlFor="thumbnail"
+                                            className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">
+                                            Upload Thumbnail
+                                        </Label>
+                                        <Input
+                                            className=" bg-white border-[1px] text-md md:text-lg border-light-border-color rounded-[6px] placeholder:text-gray-400  text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text"
+                                            id="thumbnail"
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={handleThumbnailChange}
+                                        />
+                                        <p className="text-sm text-red-500">
+                                            Thumbnails are useful for your event view when you post it!
+                                        </p>
                                     </section>
-                                )}
-                            </div>
-                        </div>
+
+                                    {thumbnail && (
+                                        <section className="space-y-2">
+                                            <Label>Thumbnail Preview</Label>
+                                            <div className="rounded-lg overflow-hidden border">
+                                                <Image
+                                                    width={400}
+                                                    height={200}
+                                                    src={thumbnail}
+                                                    alt="Thumbnail preview"
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                        </section>
+                                    )}
+                                </div>
+                            </section>
+
+                            {/* action button */}
+                            <section className="flex justify-end gap-4 rounded-[6px] text-secondary-color-text">
+                                <Button onClick={() => router.push("/events/detail-event")}
+                                        className="bg-primary-color rounded-[6px] my-5 hover:bg-primary-color/90 px-8">Save</Button>
+                            </section>
+
+                        </section>
                     </section>
+
                 </CardContent>
+
+
             </Card>
-            {/* action button */}
-            <section className="flex justify-end gap-4">
-                <Button onClick={() => router.push("/events/detail-event")} className="bg-primary-color hover:bg-primary-color/90 px-8">Save</Button>
-            </section>
+
         </form>
     )
 }

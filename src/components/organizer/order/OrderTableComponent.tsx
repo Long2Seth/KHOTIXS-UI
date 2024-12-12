@@ -22,7 +22,7 @@ import {Calendar as CalendarComponent} from "@/components/ui/calendar"
 import {attendanceData} from "@/lib/organizer/attendanceData";
 import {Badge} from "@/components/ui/badge";
 
-export default function AttendanceTable() {
+export default function OrderTableComponent() {
     const [search, setSearch] = useState("")
     const [date, setDate] = useState<Date>()
 
@@ -45,7 +45,7 @@ export default function AttendanceTable() {
             <CardHeader>
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <CardTitle>
-                        <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text">ATTENDANCE</h1>
+                        <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text">ORDER DATA</h1>
                         <p className="text-description-color text-sm md:text-base xl:text-lg font-light dark:text-dark-description-color ">Real-time
                             insights for data-driven decisions</p>
                     </CardTitle>
@@ -58,7 +58,7 @@ export default function AttendanceTable() {
                 </div>
             </CardHeader>
 
-            <CardContent className=" bg-white p-10 rounded-[6px] dark:backdrop-blur dark:bg-opacity-5 space-y-4 ">
+            <CardContent className="bg-white p-10 rounded-[6px] dark:backdrop-blur dark:bg-opacity-5 space-y-4 ">
                 <div className=" flex flex-col sm:flex-row gap-4 mb-6">
                     <Input
                         placeholder="Search"

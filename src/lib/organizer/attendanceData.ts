@@ -24,7 +24,7 @@ export const attendanceData: AttendanceEntry[] = [
         eventName: "CAMBODIA'S PREMIER CULINARY AND HOSPITALITY EXPO, CAMFOOD & CAMHOTEL 2024",
         location: "PHNOM PENH",
         qty: 1,
-        ticketType: "STANDING",
+        ticketType: "REGULAR",
         status: "checked-in"
     },
     {
@@ -33,7 +33,7 @@ export const attendanceData: AttendanceEntry[] = [
         eventName: "CELEBRATE COMBODIA'S 71 YEARS OF INDEPENDENCE",
         location: "PHNOM PENH",
         qty: 1,
-        ticketType: "STANDING",
+        ticketType: "REGULAR",
         status: "absent"
     },
     {
@@ -42,7 +42,7 @@ export const attendanceData: AttendanceEntry[] = [
         eventName: "DEFIANT MISS GRAND CAMBODIA PLANS NEW EVENT AFTER EXPULSION FROM MISS GRAND INTERNATIONAL",
         location: "PHNOM PENH",
         qty: 1,
-        ticketType: "STANDING",
+        ticketType: "REGULAR",
         status: "checked-in"
     },
     {
@@ -69,7 +69,7 @@ export const attendanceData: AttendanceEntry[] = [
         eventName: "CAMBODIA'S PREMIER CULINARY AND HOSPITALITY EXPO, CAMFOOD & CAMHOTEL 2024",
         location: "PHNOM PENH",
         qty: 1,
-        ticketType: "PREMIUM",
+        ticketType: "FREE",
         status: "checked-in"
     },
     {
@@ -87,7 +87,7 @@ export const attendanceData: AttendanceEntry[] = [
         eventName: "CAMBODIA'S PREMIER CULINARY AND HOSPITALITY EXPO, CAMFOOD & CAMHOTEL 2024",
         location: "PHNOM PENH",
         qty: 1,
-        ticketType: "STANDING",
+        ticketType: "REGULAR",
         status: "checked-in"
     },
     {

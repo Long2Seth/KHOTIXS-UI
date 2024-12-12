@@ -27,7 +27,7 @@ export default function CategoriesOrganizerComponent() {
                                 }`}
                             />
                             <span
-                                className={`text-sm sm:text-base font-semibold text-center ${
+                                className={`text-sm sm:text-base font-semibold text-center  dark:text-secondary-color-text  ${
                                     activeItem === item.label ? 'text-primary-color' : 'text-black'
                                 }`}
                             >

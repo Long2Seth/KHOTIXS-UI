@@ -3,9 +3,10 @@ import {EditEvent} from "@/components/organizer/EditEvent";
 
 const Page = () => {
     return (
-        <div className="p-6 space-y-6 max-w-[90rem] mx-auto">
+        <main
+            className=" container mx-auto w-full space-y-[50px] md:space-y-[80px] xl:space-y-[100px] my-[50px] md:my-[80px] xl:my-[100px] ">
             <EditEvent/>
-        </div>
+        </main>
     );
 };
 
