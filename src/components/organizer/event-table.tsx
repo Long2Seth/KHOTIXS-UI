@@ -50,7 +50,7 @@ export function EventsTable() {
                 </Select>
                 <Button
                     className="bg-[#5F0F40] text-white rounded-xl hover:bg-purple-800"
-                    onClick={() => router.push("/events/create")}
+                    onClick={() => router.push("events/create")}
                 >
                     New Event
                 </Button>
