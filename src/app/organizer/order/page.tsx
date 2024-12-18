@@ -1,7 +1,7 @@
 import React from 'react';
 import OrderTableComponent from "@/components/organizer/order/OrderTableComponent";
 
-const Page = () => {
+export default function OrderPage() {
     return (
         <main className="container mx-auto w-full ">
             <OrderTableComponent/>
@@ -9,4 +9,3 @@ const Page = () => {
     );
 };
 
-export default Page;

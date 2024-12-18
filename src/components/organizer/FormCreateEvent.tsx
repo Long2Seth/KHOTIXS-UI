@@ -246,13 +246,20 @@ export function CreateEventForm() {
             {/* action button */}
             <section className="flex justify-end gap-4 p-6 ">
                 <Button
+                    onClick={() => router.push("/organizer/events")}
                     className="border-red-600 text-red-500 rounded-[6px] hover:text-red-600 hover:bg-red-50 "
                     variant="outline">
                     Cancel
                 </Button>
-                <Button onClick={() => router.push("/events/detail-event")}
-                        className="bg-primary-color border border-primary-color rounded-[6px] text-secondary-color-text hover:bg-primary-color/80 ">Save</Button>
-                <Button className="bg-primary-color border border-primary-color rounded-[6px] text-secondary-color-text hover:bg-primary-color/80">Save & Continue</Button>
+                <Button onClick={() => router.push("/organizer/events")}
+                        className="bg-primary-color border border-primary-color rounded-[6px] text-secondary-color-text hover:bg-primary-color/80 ">
+                    Save
+                </Button>
+                <Button
+                    onClick={() => router.push("/organizer/events/tickets")}
+                    className="bg-primary-color border border-primary-color rounded-[6px] text-secondary-color-text hover:bg-primary-color/80">
+                    Save & Continue
+                </Button>
             </section>
         </form>
     )

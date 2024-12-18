@@ -5,7 +5,7 @@ import {EventsTable} from "@/components/organizer/event-table";
 const MyComponent = () => {
     return (
 
-        <main>
+        <main className="  container mx-auto w-full ">
             <OrganizerDashboard/>
             <EventsTable/>
 

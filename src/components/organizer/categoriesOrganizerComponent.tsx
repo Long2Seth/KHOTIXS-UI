@@ -1,13 +1,21 @@
 'use client';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {Card, CardContent} from "@/components/ui/card";
 import {Badge} from "@/components/ui/badge";
 import {navItems} from "@/lib/organizer/navData";
-import {useRouter} from "next/navigation";
+import {useRouter, usePathname} from "next/navigation";
 
 export default function CategoriesOrganizerComponent() {
-    const [activeItem, setActiveItem] = useState(navItems[0].label); // Keep the label as the state
+    const pathname = usePathname();
+    const [activeItem, setActiveItem] = useState<string | null>(null); // Initialize state with a type that can handle both null and string
     const router = useRouter();
+
+    useEffect(() => {
+        const currentItem = navItems.find(item => item.link === pathname);
+        if (currentItem) {
+            setActiveItem(currentItem.label);
+        }
+    }, [pathname]);
 
     return (
         <nav className="flex max-w-screen-xl mx-auto">
