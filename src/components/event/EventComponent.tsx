@@ -187,7 +187,7 @@ export default function EventComponent() {
                                                                 className={`rounded-[6px] text[10px] md:text-base justify-center font-normal ${orderData.status === 'enable' ? 'bg-label-free text-label-text-primary hover:bg-label-free/90' : 'bg-label-paid text-label-text-primary hover:bg-label-paid/90'}`}>{orderData.status === 'enable' ? 'Enable' : 'Disable'}</Badge>
                                                         </TableCell>
                                                         <TableCell className=" min-w-20">
-                                                            <ActionEventComponent event={orderData}/>
+                                                            <ActionEventComponent/>
                                                         </TableCell>
                                                     </TableRow>
                                                 </TableBody>

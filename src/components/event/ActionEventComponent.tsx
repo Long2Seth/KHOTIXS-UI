@@ -22,21 +22,21 @@ const routes: RouteType[] = [
     {url: "", name: "Delete Event", icon: <AiOutlineDelete className="h-5 w-5"/>},
 ];
 
-type ActionEventComponentProps = {
-    event: {
-        id: string;
-        eventName: string;
-        createBy: string;
-        startDate: string;
-        endDate: string;
-        location: string;
-        status: string;
-        image: string;
-        description: string;
-    }
-}
+// type ActionEventComponentProps = {
+//     event: {
+//         id: string;
+//         eventName: string;
+//         createBy: string;
+//         startDate: string;
+//         endDate: string;
+//         location: string;
+//         status: string;
+//         image: string;
+//         description: string;
+//     }
+// }
 
-export function ActionEventComponent({event}: ActionEventComponentProps) {
+export function ActionEventComponent() {
     const router = useRouter();
 
     return (
