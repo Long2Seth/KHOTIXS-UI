@@ -1,5 +1,12 @@
-import type { Metadata } from "next";
+import type {Metadata} from "next";
 import "../globals.css";
+import {ThemeProvider} from "next-themes";
+import StoreProvider from "@/app/StoreProvider";
+import {Toaster} from "@/components/ui/toaster";
+import FooterOrganizer from "@/components/organizer/FooterOrganizer";
+import NavbarOrganizerComponent from "@/components/organizer/NavbarOrganizerComponent";
+import CategoriesOrganizerComponent from "@/components/organizer/categoriesOrganizerComponent";
+import React from "react";
 
 
 export const metadata: Metadata = {
@@ -8,17 +15,28 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-    children,
-}: Readonly<{
+                                       children,
+                                   }: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body
-                className=" antialiased "
-            >
+        <html lang="en" suppressHydrationWarning>
+        <body className=" bg-khotixs-background-white dark:bg-khotixs-background-dark ">
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+        >
+            <NavbarOrganizerComponent/>
+            <CategoriesOrganizerComponent/>
+            <StoreProvider>
                 {children}
-            </body>
+            </StoreProvider>
+            <FooterOrganizer/>
+            <Toaster/>
+        </ThemeProvider>
+        </body>
         </html>
     );
 }
