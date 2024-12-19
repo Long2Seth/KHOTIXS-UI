@@ -41,20 +41,24 @@ export default function Profile() {
     return (
         <section className="container mx-auto mt-7 px-4 sm:px-6 lg:px-8">
             <NavbarMenuComponent/>
-            <div className="w-full max-w-[1200px] mx-auto py-4">
-                <h1 className="w-full text-3xl font-bold text-[#4A0635] mb-6 md:text-start text-center dark:text-khotixs-background-white">MY PROFILE</h1>
-                <div className="w-full flex flex-col md:flex-row justify-start items-center md:items-start gap-6">
+            <div className="w-full max-w-[1100px] mx-auto py-4">
+                <h1 className="w-full text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text py-5">MY PROFILE</h1>
+
+
+                <div className="w-full bg-white p-5 rounded-[6px] flex flex-col md:flex-row justify-start items-center md:items-start gap-5 dark:backdrop-blur dark:bg-opacity-5">
+
                     {/* Profile Image Section */}
-                    <div className="relative w-[170px] rounded-lg border-4 border-white shadow-lg">
+                    <div className="relative w-[170px] rounded-[6px] border-4 border-white m-1">
+
                         <div
                             onClick={handleImageClick}
-                            className="relative cursor-pointer aspect-square overflow-hidden rounded-lg"
+                            className="relative cursor-pointer aspect-square overflow-hidden rounded-[6px] "
                         >
                             <Image
                                 src={image}
                                 alt="Profile"
                                 fill
-                                className="object-cover"
+                                className="object-cover rounded-[6px]"
                             />
                         </div>
                         <button
@@ -73,60 +77,62 @@ export default function Profile() {
                             aria-label="Image upload input"
                         />
                     </div>
+
+
                     <Card className="w-full md:w-[897px]">
-                        <CardContent className="p-6 dark:bg-khotixs-background-dark">
+                        <CardContent>
                             <div className="flex md:flex-row flex-col gap-6">
                                 {/* Profile Details Section */}
                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-y-2">
                                     <div className="flex items-start gap-2 col-span-1">
-                                        <CgProfile className="w-5 h-5 mt-1 text-gray-500"/>
-                                        <div className="text-sm text-gray-500">Username</div>
+                                        <CgProfile className="w-5 h-5 mt-1 text-gray-300"/>
+                                        <div className="text-title-color text-base md:text-lg xl:text-xl dark:text-gray-300">Username</div>
                                     </div>
                                     <div className="col-span-3">
-                                        <div>PHAL SOPHANMAI</div>
+                                        <p className=" text-title-color text-base md:text-lg xl:text-xl font-medium dark:text-dark-description-color">PHAL SOPHANMAI</p>
                                     </div>
 
                                     <div className="flex items-start gap-2 col-span-1">
-                                        <MdOutlineWorkOutline className="w-5 h-5 mt-1 text-gray-500"/>
-                                        <div className="text-sm text-gray-500">Position</div>
+                                        <MdOutlineWorkOutline className="w-5 h-5 mt-1 text-gray-300"/>
+                                        <div className="text-title-color text-base md:text-lg xl:text-xl dark:text-gray-300">Position</div>
                                     </div>
                                     <div className="col-span-3">
-                                        <div>Team Manager</div>
+                                        <p className=" text-title-color text-base md:text-lg xl:text-xl font-medium dark:text-dark-description-color">Team Manager</p>
                                     </div>
 
                                     <div className="flex items-start gap-2 col-span-1">
-                                        <Phone className="w-5 h-5 mt-1 text-gray-500"/>
-                                        <div className="text-sm text-gray-500">Phone</div>
+                                        <Phone className="w-5 h-5 mt-1 text-gray-300"/>
+                                        <div className="text-title-color text-base md:text-lg xl:text-xl dark:text-gray-300">Phone</div>
                                     </div>
                                     <div className="col-span-3">
-                                        <div>096 830 2233</div>
+                                        <p className=" text-title-color text-base md:text-lg xl:text-xl font-medium dark:text-dark-description-color">096 830 2233</p>
                                     </div>
 
                                     <div className="flex items-start gap-2 col-span-1">
-                                        <Mail className="w-5 h-5 mt-1 text-gray-500"/>
-                                        <div className="text-sm text-gray-500">Email</div>
+                                        <Mail className="w-5 h-5 mt-1 text-gray-300"/>
+                                        <div className="text-title-color text-base md:text-lg xl:text-xl dark:text-gray-300">Email</div>
                                     </div>
                                     <div className="col-span-3">
-                                        <div>phannmai168@gmail.com</div>
+                                        <p className=" text-title-color text-base md:text-lg xl:text-xl font-medium dark:text-dark-description-color"> phannmai168@gmail.com</p>
                                     </div>
 
                                     <div className="flex items-start gap-2 col-span-1">
-                                        <MapPin className="w-5 h-5 mt-1 text-gray-500"/>
-                                        <div className="text-sm text-gray-500">Address</div>
+                                        <MapPin className="w-5 h-5 mt-1 text-gray-300"/>
+                                        <div className="text-title-color text-base md:text-lg xl:text-xl dark:text-gray-300">Address</div>
                                     </div>
                                     <div className="col-span-3">
-                                        <div>24, Street 562, Sangkat Boeung, Kak I, Khan Toul Kork, Phnom Penh</div>
+                                        <p className=" text-title-color text-base md:text-lg xl:text-xl font-medium dark:text-dark-description-color"> 24, Street 562, Sangkat Boeung, Kak I, Khan Toul Kork, Phnom Penh</p>
                                     </div>
 
                                     <div className="flex items-start gap-2 col-span-1">
-                                        <PiNotePencilLight className="w-5 h-5 mt-1 text-gray-500"/>
-                                        <div className="text-sm text-gray-500">Description</div>
+                                        <PiNotePencilLight className="w-5 h-5 mt-1 text-gray-300"/>
+                                        <div className="text-title-color text-base md:text-lg xl:text-xl dark:text-gray-300">Description</div>
                                     </div>
                                     <div className="font-medium text-sm col-span-3">
-                                        <div>ផ្តល់វិញ្ញាបនបត្រទទួលស្គាល់គុណភាព ផ្តល់វិញ្ញាបនបត្រ ជាភាពិកភាពដល់ STING
+                                        <p className=" text-title-color text-base md:text-lg xl:text-xl font-medium dark:text-dark-description-color"> ផ្តល់វិញ្ញាបនបត្រទទួលស្គាល់គុណភាព ផ្តល់វិញ្ញាបនបត្រ ជាភាពិកភាពដល់ STING
                                             MUSICVERSE សម្រាប់ចាក់ ការប្រគំតន្ត្រី THE Q RISE OF THE QUEEN - AOK
                                             SOKUNKANHA
-                                        </div>
+                                        </p>
                                     </div>
                                 </div>
                                 <div>
@@ -134,7 +140,7 @@ export default function Profile() {
                                         <DialogTrigger asChild>
                                             <Button
                                                 type="submit"
-                                                className="w-full bg-primary-color hover:bg-primary-color dark:text-secondary-color-text"
+                                                className="w-full text-white bg-primary-color hover:bg-primary-color/80 dark:text-secondary-color-text"
                                             >
                                                 EDIT
                                             </Button>

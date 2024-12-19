@@ -30,7 +30,7 @@ export function EventsTable() {
 
             <div className=" space-y-5 ">
 
-                <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text">EVENTS
+                <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text pt-5 ">EVENTS
                     MANAGEMENT</h1>
 
                 <div

@@ -1,9 +1,9 @@
 "use client";
-import { Button } from "@/components/ui/button";
+import {Button} from "@/components/ui/button";
 import Image from "next/image";
-import { HiOutlineUserRemove } from "react-icons/hi";
-import { MdOutlineFileDownload, MdOutlineMoreVert } from "react-icons/md";
-import { PiWarningCircleLight } from "react-icons/pi";
+import {HiOutlineUserRemove} from "react-icons/hi";
+import {MdOutlineFileDownload, MdOutlineMoreVert} from "react-icons/md";
+import {PiWarningCircleLight} from "react-icons/pi";
 import {
     Popover,
     PopoverContent,
@@ -26,8 +26,8 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import React, { useState } from "react";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import React, {useState} from "react";
+import {Dialog, DialogContent, DialogTrigger} from "@/components/ui/dialog";
 import {IoEyeOutline} from "react-icons/io5";
 import NavbarMenuComponent from "@/components/customer/User-Profile/navbarMenuComponent";
 import {Input} from "@/components/ui/input";
@@ -77,10 +77,10 @@ const events = [
     // Add more events as needed
 ];
 
-function ActionItem({ icon, label, onClick }: { icon: React.ReactNode; label: string; onClick: () => void }) {
+function ActionItem({icon, label, onClick, className}: { icon: React.ReactNode; label: string; onClick: () => void; className?: string }) {
     return (
         <div
-            className="flex items-center rounded-md hover:bg-accent hover:text-accent-foreground cursor-pointer transition-colors"
+            className={`flex items-center rounded-[6px] hover:border-gray-700 ${className}`}
             onClick={onClick}>
             <div className="p-2">{icon}</div>
             <p>{label}</p>
@@ -92,7 +92,7 @@ export default function Payment() {
     const [isOpen, setIsOpen] = useState(false);
     const onClose = () => setIsOpen(false);
 
-    const [search, setSearch] = useState("")
+    const [searchData, setSearchData] = useState("")
 
     const handleDeleteConfirm = () => {
         // Add your delete logic here
@@ -108,83 +108,92 @@ export default function Payment() {
 
             <div className="w-full mx-auto h-auto flex justify-center items-center py-4">
                 <div className="w-full max-w-[1200px] ">
-                    <h1 className=" text-3xl font-bold text-[#4A0635] dark:text-khotixs-background-white mb-6">HISTORY
+                    <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text mb-6">HISTORY
                         PAYMENT</h1>
 
-                    <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                        <Input
-                            placeholder="Search"
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            className="w-full sm:max-w-[600px] bg-none"/>
+                    <div className=" bg-white dark:backdrop-blur dark:bg-opacity-5 p-5">
+                        <div className="flex flex-col sm:flex-row gap-4 mb-6 ">
+                            <Input
+                                placeholder="Search"
+                                value={searchData}
+                                onChange={(e) => setSearchData(e.target.value)}
+                                className="border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text"
+                            />
 
-                    </div>
-                    <div
-                        className="w-full mx-auto h-auto flex justify-center items-center rounded-lg border dark:bg-khotixs-background-dark bg-label-text-primary">
-                        <Table className="w-full max-w-[1200px] p-2 ">
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead className="w-[80px]">ID</TableHead>
-                                    <TableHead className="w-[100px]">THUMBNAIL</TableHead>
-                                    <TableHead className="w-[200px]">EVENT NAME</TableHead>
-                                    <TableHead className="w-[120px]">PAYMENT DATE</TableHead>
-                                    <TableHead className="w-[60px] text-right">QTY</TableHead>
-                                    <TableHead className="w-[100px] text-right">AMOUNT</TableHead>
-                                    <TableHead className="w-[80px] text-center">ACTION</TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {events.map((event) => (
-                                    <TableRow key={event.id}>
-                                        <TableCell className="font-medium">{event.id}</TableCell>
-                                        <TableCell>
-                                            <Image
-                                                src={event.thumbnail || ''}
-                                                alt={event.eventName}
-                                                width={60}
-                                                height={40}
-                                                className="rounded-md object-cover"
-                                            />
-                                        </TableCell>
-                                        <TableCell className="max-w-[200px]">
-                                            <p className="truncate font-medium ">{event.eventName}</p>
-                                        </TableCell>
-                                        <TableCell className="whitespace-nowrap">{event.paymentDate}</TableCell>
-                                        <TableCell className="text-right">{event.qty}</TableCell>
-                                        <TableCell className="text-right text-red-500">
-                                            ${event.amount.toFixed(2)}
-                                        </TableCell>
-                                        <TableCell className="text-center">
-                                            <Button variant="ghost" size="icon" className="h-8 w-8">
-                                                <Popover>
-                                                    <PopoverTrigger asChild>
-                                                        <Button
-                                                            className="bg-transparent dark:bg-transparent hover:bg-transparent  text-label-text-secondary dark:text-secondary-color-text"><MdOutlineMoreVert/></Button>
-                                                    </PopoverTrigger>
-                                                    <PopoverContent className="w-64 p-0">
-                                                        <div
-                                                            className="p-4 space-y-2 transition-all duration-300 ease-in-out hover:space-y-4">
-                                                            <h4 className="font-medium text-[16px] leading-none">Action</h4>
-                                                            <div
-                                                                className="space-y-1 transition-all duration-300 ease-in-out group-hover:space-y-2">
-                                                                <ActionItem icon={<IoEyeOutline/>} label="View"
-                                                                            onClick={() => setIsOpen(true)}/>
-                                                                <ActionItem icon={<MdOutlineFileDownload/>}
-                                                                            label="Download"
-                                                                            onClick={() => setIsOpen(true)}/>
-                                                                <ActionItem icon={<HiOutlineUserRemove/>}
-                                                                            label="Remove"
-                                                                            onClick={() => setIsOpen(true)}/>
-                                                            </div>
-                                                        </div>
-                                                    </PopoverContent>
-                                                </Popover>
-                                            </Button>
-                                        </TableCell>
+                        </div>
+                        <div
+                            className="w-full mx-auto h-auto flex justify-center items-center rounded-[6px] border dark:bg-khotixs-background-dark bg-label-text-primary">
+                            <Table className="w-full max-w-[1200px] p-2 ">
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead className=" px-2 py-5  w-[80px] text-center">ID</TableHead>
+                                        <TableHead className=" px-2 py-5  w-[100px]">THUMBNAIL</TableHead>
+                                        <TableHead className="px-2 py-5  w-[200px]">EVENT NAME</TableHead>
+                                        <TableHead className="px-2 py-5  w-[120px]">PAYMENT DATE</TableHead>
+                                        <TableHead className=" px-2 py-5  w-[60px] text-right">QTY</TableHead>
+                                        <TableHead className=" px-2 py-5  w-[100px] text-right">AMOUNT</TableHead>
+                                        <TableHead className="px-2 py-5  w-[80px] text-center">ACTION</TableHead>
                                     </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
+                                </TableHeader>
+                                <TableBody>
+                                    {events.map((event) => (
+                                        <TableRow
+                                            className=" hover:bg-khotixs-background-white dark:hover:bg-khotixs-background-dark "
+                                            key={event.id}>
+                                            <TableCell className="font-medium text-center">{event.id}</TableCell>
+                                            <TableCell>
+                                                <Image
+                                                    src={event.thumbnail || ''}
+                                                    alt={event.eventName}
+                                                    width={60}
+                                                    height={40}
+                                                    className="rounded-md object-cover"
+                                                />
+                                            </TableCell>
+                                            <TableCell className="max-w-[200px]">
+                                                <p className="truncate font-medium ">{event.eventName}</p>
+                                            </TableCell>
+                                            <TableCell className="whitespace-nowrap">{event.paymentDate}</TableCell>
+                                            <TableCell className="text-right">{event.qty}</TableCell>
+                                            <TableCell className="text-right text-red-500 font-bold dark:text-red-500">
+                                                ${event.amount.toFixed(2)}
+                                            </TableCell>
+                                            <TableCell className="text-center">
+                                                <Button variant="ghost" size="icon" className="h-8 w-8">
+                                                    <Popover>
+                                                        <PopoverTrigger asChild>
+                                                            <Button
+                                                                className="bg-transparent dark:bg-transparent hover:bg-transparent  text-label-text-secondary dark:text-secondary-color-text"><MdOutlineMoreVert/></Button>
+                                                        </PopoverTrigger>
+                                                        <PopoverContent className="w-auto">
+                                                            <div
+                                                                className="p-4 space-y-2 transition-all duration-300 ease-in-out hover:space-y-4">
+                                                                <div
+                                                                    className="transition-all duration-300 ease-in-out">
+                                                                    <ActionItem
+                                                                        className=" text-label-free hover:bg-gray-200 rounded-[6px] pr-5"
+                                                                        icon={<IoEyeOutline/>}
+                                                                        label="View"
+                                                                        onClick={() => setIsOpen(true)}/>
+                                                                    <ActionItem
+                                                                        className=" text-label-free rounded hover:bg-gray-200 pr-5" icon={<MdOutlineFileDownload/>}
+                                                                                label="Download"
+                                                                                onClick={() => setIsOpen(true)}/>
+                                                                    <ActionItem
+                                                                        className=" text-red-500 rounded-[6px] hover:bg-gray-200 pr-5" icon={<HiOutlineUserRemove/>}
+                                                                                label="Remove"
+                                                                                onClick={() => setIsOpen(true)}/>
+                                                                </div>
+                                                            </div>
+                                                        </PopoverContent>
+                                                    </Popover>
+                                                </Button>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </div>
                     </div>
                 </div>
 
@@ -201,7 +210,8 @@ export default function Payment() {
                             <PaginationLink href="#">1</PaginationLink>
                         </PaginationItem>
                         <PaginationItem>
-                            <PaginationLink href="#" isActive className="dark:bg-khotixs-background-dark">2</PaginationLink>
+                            <PaginationLink href="#" isActive
+                                            className="dark:bg-khotixs-background-dark">2</PaginationLink>
                         </PaginationItem>
                         <PaginationItem>
                             <PaginationLink href="#">3</PaginationLink>
@@ -219,7 +229,7 @@ export default function Payment() {
             {/*List more actions here*/}
             <Dialog open={isOpen} onOpenChange={onClose}>
                 <DialogTrigger>
-                    <DialogContent>
+                    <DialogContent className=" rounded-[6px] bg-white dark:backdrop-blur dark:bg-opacity-5">
                         <div className="flex flex-col items-center">
                             <div className="flex justify-center items-center w-full">
                                 <PiWarningCircleLight className="w-[80px] h-[80px] text-red-600"/>
@@ -230,13 +240,13 @@ export default function Payment() {
                         </div>
                         <div className="flex justify-center items-center gap-4">
                             <Button
-                                className="w-full bg-white dark:text-secondary-color-text dark:bg-khotixs-background-dark hover:bg-slate-200 dark:border-[2px] dark:bg-none text-primary-color-text border-solid border-[2px]"
+                                className="w-full rounded-[6px] border border-red-600 text-red-500 "
                                 onClick={onClose}
                             >
                                 Cancel
                             </Button>
                             <Button
-                                className="w-full bg-primary-color hover:bg-primary-color dark:text-secondary-color-text"
+                                className="w-full text-secondary-color-text bg-primary-color hover:bg-primary-color rounded-[6px] "
                                 onClick={() => {
                                     handleDeleteConfirm();
                                     onClose();

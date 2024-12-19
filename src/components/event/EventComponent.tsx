@@ -50,7 +50,7 @@ export default function EventComponent() {
         <section className="w-full border-primary-color ">
             <CardHeader>
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 ">
-                    <CardTitle>
+                    <CardTitle className=" p-5 ">
                         <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">INFORMATION
                             EVENT
                         </h1>

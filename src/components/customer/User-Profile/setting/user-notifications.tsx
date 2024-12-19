@@ -5,8 +5,8 @@ import { Label } from "@/components/ui/label"
 
 export default function UserNotifications() {
     return (
-        <div className="w-full mx-auto h-auto flex justify-center items-center py-5">
-            <div className="w-full  bg-white dark:bg-khotixs-background-dark rounded-lg shadow-md overflow-hidden">
+        <div className="w-full mx-auto h-auto flex justify-center items-center py-10 ">
+            <div className="w-full  bg-white dark:bg-khotixs-background-dark shadow-md overflow-hidden rounded-[6px] ">
                 <div className="w-full  divide-y divide-gray-200 dark:divide-gray-700">
                     {[
                         "News and updates",

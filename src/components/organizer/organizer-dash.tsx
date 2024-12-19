@@ -17,7 +17,7 @@ export default function OrganizerDashboard() {
                     <div className="grid gap-4">
                         <Card
                             className="dark:bg-khotixs-background-dark dark:border-[1px] rounded-[6px] bg-white border-secondary-color-text dark:border-gray-50">
-                            <CardHeader className="space-y-0 pb-2">
+                            <CardHeader className="space-y-0 p-2">
                                 <CardTitle
                                     className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-dark-description-color">
                                     Event Publish
@@ -30,7 +30,7 @@ export default function OrganizerDashboard() {
 
                         <Card
                             className="dark:bg-khotixs-background-dark dark:border-[1px] rounded-[6px] bg-white border-secondary-color-text dark:border-gray-50">
-                            <CardHeader className="space-y-0 pb-2">
+                            <CardHeader className="space-y-0 p-2">
                                 <CardTitle
                                     className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text">
                                     Event Unpublish
@@ -46,7 +46,7 @@ export default function OrganizerDashboard() {
                     <Card
                         className="dark:bg-khotixs-background-dark dark:border-[1px] rounded-[6px] bg-white border-secondary-color-text dark:border-gray-50">
 
-                        <CardHeader className="dark:text-secondary-color-text">
+                        <CardHeader className="dark:text-secondary-color-text p-2">
 
                             <CardTitle
                                 className=" text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text ">Bar

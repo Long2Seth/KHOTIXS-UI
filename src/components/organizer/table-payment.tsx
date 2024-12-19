@@ -46,7 +46,7 @@ export default function PaymentTable() {
                 <CardHeader>
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <CardTitle
-                            className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">PAYMENT</CardTitle>
+                            className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text p-5">PAYMENT</CardTitle>
                         <Button
                             onClick={exportToExcel}
                             className=" bg-primary-color rounded-[6px] text-base text-secondary-color-text hover:bg-primary-color md:text-lg w-full sm:w-auto"

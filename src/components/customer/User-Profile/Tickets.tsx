@@ -17,13 +17,13 @@ export default function Tickets() {
                         <TabsList className="grid w-[400px] grid-cols-2 ">
                             <TabsTrigger
                                 value="account"
-                                className={`h-full rounded-l-[5px] border-[1px] dark:text-secondary-color-text  ${activeTab === "account" ? "border-bg-primary-color" : "border-gray-300"}`}
+                                className={`h-full rounded-l-[6px] border-[1px] text-description-color text-sm md:text-base xl:text-lg dark:text-secondary-color-text  ${activeTab === "account" ? "border-bg-primary-color" : "border-gray-300"}`}
                             >
                                 Upcoming
                             </TabsTrigger>
                             <TabsTrigger
                                 value="password"
-                                className={`h-full rounded-r-[5px] border-[1px] dark:text-secondary-color-text  ${activeTab === "password" ? "border-bg-primary-color" : "border-gray-300"} py-3`}
+                                className={`h-full rounded-r-[6px] border-[1px] text-description-color text-sm md:text-base xl:text-lg dark:text-secondary-color-text  ${activeTab === "password" ? "border-bg-primary-color" : "border-gray-300"} py-3`}
                             >
                                 History
                             </TabsTrigger>

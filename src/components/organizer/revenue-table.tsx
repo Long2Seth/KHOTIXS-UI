@@ -7,7 +7,7 @@ export default function RevenueDashboard() {
     return (
         <section className="space-y-[50px] md:space-y-[80px] xl:space-y-[100px] my-[50px] md:my-[80px] xl:my-[100px] ">
             <div className="space-y-6">
-                <h2 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text">REVENUE</h2>
+                <h2 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text pl-5">REVENUE</h2>
 
                 <div className="grid gap-6 md:grid-cols-2">
 
