@@ -32,9 +32,9 @@ export default function Upcoming() {
                                 <MapPin  className="w-4 h-4 mr-2"/>
                                 <span> 24, Street 562, Sangkat Boeung, Kak I, Khan Toul Kork, Phnom Penh</span>
                             </div> <div className="flex items-center dark:text-white">
-                                <Banknote className="w-4 h-4 mr-2 "/>
-                                <span >$25.00</span>
-                            </div>
+                            <Banknote className="w-4 h-4 mr-2 "/>
+                            <span >$25.00</span>
+                        </div>
                         </div>
                         <div className="md:absolute md:top-4 md:right-3 pt-3 md:pt-0">
                             <button

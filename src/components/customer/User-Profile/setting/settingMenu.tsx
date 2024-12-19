@@ -50,4 +50,3 @@ export default function SettingMenu({ onTabChange, activeTab }: SettingMenuProps
         </div>
     )
 }
-
