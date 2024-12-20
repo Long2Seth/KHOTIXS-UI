@@ -43,6 +43,7 @@ export function CardComponent({event}: CardUpcomingProps) {
 
             <a className=" group block overflow-hidden rounded-[10px]">
                 <div className="rounded-tr-[10px] z-10 rounded-tl-[10px] w-full h-[50%] overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                         src={`${event.image}`}
                         alt=""
