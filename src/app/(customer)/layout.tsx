@@ -4,7 +4,6 @@ import NavbarComponent from "@/components/customer/navbar/NavbarComponent";
 import { ThemeProvider } from "next-themes";
 import { FooterComponent } from "@/components/customer/footer/FooterComponent";
 import { Toaster } from "@/components/ui/toaster"
-import StoreProvider from "../StoreProvider";
 
 export const metadata: Metadata = {
     title: {
@@ -31,9 +30,7 @@ export default function RootLayout({
                 >
                     <NavbarComponent />
                     {/*<NavbarUserProfile/>*/}
-                    <StoreProvider>
                         {children}
-                    </StoreProvider>
                     <FooterComponent />
                     <Toaster />
                 </ThemeProvider>
