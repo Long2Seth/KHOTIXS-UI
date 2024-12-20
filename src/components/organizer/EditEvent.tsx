@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/select"
 import {Textarea} from "@/components/ui/textarea"
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover"
-import {Calendar as CalendarComponent, Calendar} from "@/components/ui/calendar"
+import {Calendar as CalendarComponent} from "@/components/ui/calendar"
 import {cn} from "@/lib/utils"
 import {format} from "date-fns"
 import Image from "next/image";

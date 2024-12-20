@@ -7,6 +7,15 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
+# Run the build process
+npm run build
+
+# Check if the build was successful
+if [ $? -ne 0 ]; then
+  echo "Error: Build failed."
+  exit 1
+fi
+
 # Add all changes
 git add .
 
