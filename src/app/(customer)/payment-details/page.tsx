@@ -2,22 +2,24 @@ import StepperComponent from "@/components/customer/StepperComponent/StepperComp
 import TitleAndDesComponent from "@/components/customer/TitleAndDesComponent/TitleAndDesComponent";
 import PaymentDetailsComponent from "@/components/customer/PaymentDetailsComponent/PaymentDetailsComponent";
 
-export default function page() {
+export default function PaymentDetail() {
     return (
-        <>
-            {/* Section Title */}
-            <section className={`container mx-auto pt-[50px]`}>
-                <TitleAndDesComponent
-                    title="Payment Details"
-                    description="Please check your Payment Details!"
-                />
-            </section>
+        <main className="  space-y-[50px] md:space-y-[80px] xl:space-y-[100px] m-[60px] md:m-[80px] xl:m-[100px]  ">
+            <section>
+                {/* Section Title */}
+                <section className={`container mx-auto mb-10 `}>
+                    <TitleAndDesComponent
+                        title="Payment Details"
+                        description="Please check your Payment Details!"
+                    />
+                </section>
 
-            {/* Section Payment Details */}
-            <section className={`container mx-auto px-[20px] lg:px-[135px] py-[50px] flex flex-col justify-center items-center gap-[40px]`}>
-                <StepperComponent />
-                <PaymentDetailsComponent />
+                {/* Section Payment Details */}
+                <section className={`container mx-auto flex flex-col justify-center items-center gap-[40px]`}>
+                    <StepperComponent />
+                    <PaymentDetailsComponent />
+                </section>
             </section>
-        </>
+        </main>
     )
 }

@@ -79,12 +79,12 @@ const NavbarComponent = () => {
                             </Link>
 
                             {/* Search form */}
-                            <section className=" lg:w-[590px] rounded-[5px] flex justify-center drop-shadow-xl">
+                            <section className="  rounded-[5px] flex justify-center drop-shadow-xl">
 
                                 <form className=" w-full rounded-[5px] bg-gray-50 flex items-center ">
 
                                     {/* Search  */}
-                                    <div className=" flex items-center w-auto lg:w-[30%] ">
+                                    <div className=" flex items-center w-auto ">
                                         <input
                                             type="text"
                                             placeholder="Search events name"
@@ -119,7 +119,7 @@ const NavbarComponent = () => {
                                     <div className=" hidden md:flex md:w-auto ">
                                         <Popover>
                                             <PopoverTrigger
-                                                className=" text-[12px] lg:text-[14px] bg-red-950 focus:outline-none ring-0 dark:text-primary-color-text "
+                                                className=" text-[12px] lg:text-[14px] bg-red-950 focus:outline-none ring-0 dark:text-primary-color-text dark:hover:bg-white "
                                                 asChild>
                                                 <Button
                                                     variant="ghost"

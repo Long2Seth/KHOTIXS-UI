@@ -7,18 +7,23 @@ export type CategoriesIcon= {
 
 export const categories: CategoriesIcon[] = [
     {
+        icon: '/icons/timetable.png',
+        name: 'Technology ',
+        link: '/'
+    },
+    {
         icon: '/icons/music.png',
         name: 'Concert',
         link: '/'
     },
     {
         icon: '/icons/soccer-field.png',
-        name: 'Sport Event',
+        name: 'Sport ',
         link: '/'
     },
     {
         icon: '/icons/audience.png',
-        name: 'Community Events',
+        name: 'Community',
         link: '/'
     },
     {
@@ -28,12 +33,8 @@ export const categories: CategoriesIcon[] = [
     },
     {
         icon: '/icons/calendar.png',
-        name: 'General Events',
+        name: 'General',
         link: '/'
     },
-    {
-        icon: '/icons/timetable.png',
-        name: 'Technology Events',
-        link: '/'
-    }
+
 ]

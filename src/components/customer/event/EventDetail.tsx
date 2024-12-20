@@ -85,9 +85,9 @@ export default function EventDetails() {
                     </Breadcrumb>
                 </section>
                 {/*Event title*/}
-                <section className="flex space-x-2">
-                    <h1 className="mb-6 lg:text-3xl font-bold tracking-tight text-xl">THE Q RISE OF THE QUEEN </h1>
-                    <div className="flex items-center rounded-[6px] px-2 text-label-premium h-6 font-bold text-xs lg:mt-2 mt-1.5 bg-blue-100 bg-opacity-70 space-x-1">
+                <section className="flex space-x-[180px]">
+                    <h1 className="mb-6 text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">THE Q RISE OF THE QUEEN </h1>
+                    <div className="flex items-center rounded-[6px] px-2 text-label-premium h-6 font-bold text-base lg:mt-2 mt-1.5 bg-blue-100 bg-opacity-70 space-x-1">
                         <RiFirefoxLine className=""/>
                         <p>Upcoming</p>
                     </div>
@@ -110,30 +110,30 @@ export default function EventDetails() {
                         {/* event date and time*/}
                         <section className="space-y-6">
                             <section className="space-y-2">
-                                <h2 className="text-md lg:text-lg font-semibold">DATE AND TIME</h2>
+                                <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text ">DATE AND TIME</h2>
                                 <div className="flex gap-2 items-center dark:text-label-text-primary text-label-description">
                                     <RiCalendarLine className="w-5"/>
-                                    <p className="text-xs lg:text-base">30 November 2024</p>
+                                    <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">30 November 2024</p>
                                 </div>
                                 <div className="flex gap-2 items-center dark:text-label-text-primary text-label-description">
                                     <RiTimerLine className="w-5"/>
-                                    <p className="text-xs lg:text-base">5:00PM-10:00PM</p>
+                                    <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">5:00PM-10:00PM</p>
                                 </div>
                             </section>
 
                             {/* event location*/}
                             <section className="space-y-2">
-                                <h2 className="text-md lg:text-lg font-semibold">LOCATION</h2>
+                                <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text  ">LOCATION</h2>
                                 <div className="flex gap-2 items-center dark:text-label-text-primary text-label-description">
                                     <RiMap2Line className="w-5"/>
-                                    <p className="text-xs lg:text-base">កីឡាដ្ឋានខេត្ត វាលបែកចាន ក្រុងបាត់ដំបង</p>
+                                    <p className="  text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">កីឡាដ្ឋានខេត្ត វាលបែកចាន ក្រុងបាត់ដំបង</p>
                                 </div>
                             </section>
 
                             {/* event description*/}
                             <section className="space-y-2">
-                                <h2 className="text-md lg:text-lg font-semibold">EVENT DESCRIPTION</h2>
-                                <p className="text-xs lg:text-base dark:text-label-text-primary text-label-description">
+                                <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text">EVENT DESCRIPTION</h2>
+                                <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color ">
                                     ក្តីស្រមៃដែលគ្រប់គ្នាៗចង់ឲកើតមានឡើង ក្តីស្រមៃនោះបានក្លាយជាការពិតហើយ! STING
                                     MUSICVERSE សូមនាំយក ការប្រគុំតន្រ្តី THE Q RISE OF THE QUEEN – AOK SOKUNKANHA SOLO
                                     TOUR CONCERT ទៅដល់ខេត្តបាត់ដំបង ( កីឡាដ្ឋានខេត្ត វាលបែកចាន ក្រុងបាត់ដំបង ) នៅថ្ងៃទី
@@ -144,7 +144,7 @@ export default function EventDetails() {
                                 </p>
                             </section>
                             {/*Note*/}
-                            <p className="text-xs lg:text-base text-label-paid">ចំណាំ: សូមបង្ហាញកូដ QR
+                            <p className="text-description-color text-base md:text-lg xl:text-xl text-red-700">ចំណាំ: សូមបង្ហាញកូដ QR
                                 ទៅកាន់ក្រុមការងារដើម្បីផ្ទៀងផ្ទាត់សំបុត្រមុនចូលទស្សនា។</p>
                         </section>
                     </div>
@@ -165,21 +165,21 @@ export default function EventDetails() {
                                     </section>
                                     <div className="grow flex justify-between items-center p-2 lg:p-4">
                                         <section className="">
-                                            <h3 className="text-sm sm:text-md lg:text-lg font-semibold uppercase">{ticket.name}</h3>
-                                            <p className="text-xs lg:text-base uppercase line-clamp-1 dark:text-label-text-primary text-label-description">{ticket.event}</p>
+                                            <h3 className="text-title-color text-base md:text-lg xl:text-xl font-bold uppercase dark:text-secondary-color-text">{ticket.name}</h3>
+                                            <p className="text-description-color text-base md:text-lg xl:text-xl uppercase line-clamp-1 dark:text-label-text-primary text-label-description">{ticket.event}</p>
                                             <div className="flex space-x-2 mt-1">
                                                 {ticket.free ? (
                                                     <>
-                                                        <p className="rounded-[6px] bg-label-free lg:px-2 lg:py-1 px-1.5 py-0.5 text-[10px] lg:text-xs font-bold text-label-text-primary uppercase">$ Free</p>
+                                                        <p className="rounded-[6px] bg-label-free lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-label-text-primary uppercase">$ Free</p>
                                                         {ticket.soldOut ? (
-                                                            <p className="rounded-[6px] dark:bg-label-text-primary bg-red-100 dark:bg-opacity-70 bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-[10px] lg:text-xs font-bold text-red-600">SOLD OUT</p>
+                                                            <p className="rounded-[6px] dark:bg-label-text-primary bg-red-100 dark:bg-opacity-70 bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-red-600">SOLD OUT</p>
                                                         ) : (<></>)}
                                                     </>
                                                 ) : (
                                                     <>
-                                                        <p className="rounded-[6px] bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-[10px] lg:text-xs font-bold text-label-premium">${ticket.price.toFixed(2)}</p>
+                                                        <p className="rounded-[6px] bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-label-premium">${ticket.price.toFixed(2)}</p>
                                                         {ticket.soldOut ? (
-                                                            <p className="rounded-[6px] dark:bg-label-text-primary bg-red-100 dark:bg-opacity-70 bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-[10px] lg:text-xs font-bold text-red-600">SOLD OUT</p>
+                                                            <p className="rounded-[6px] dark:bg-label-text-primary bg-red-100 dark:bg-opacity-70 bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-red-600">SOLD OUT</p>
                                                         ) : (<></>)}
                                                     </>)}
 
@@ -243,7 +243,7 @@ export default function EventDetails() {
                                 {/*))}*/}
                                 <div className="flex items-center justify-between border p-4 pl-6 rounded-[8px]">
                                     <span
-                                        className="font-bold text-lg lg:text-2xl text-label-paid">${total.toFixed(2)}</span>
+                                        className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">${total.toFixed(2)}</span>
                                     <Button
                                         onClick={() => router.push('/order-info-requirement')}
                                         className="bg-primary-color hover:bg-primary-color hover:bg-opacity-85 text-label-text-primary rounded-[6px] h-[45px] font-bold">
@@ -254,7 +254,7 @@ export default function EventDetails() {
                                 <div
                                     className="flex items-center space-x-2 dark:text-label-text-primary text-label-description">
                                     <RiErrorWarningLine className="w-5"/>
-                                    <p className="text-center text-xs lg:text-base text-muted-foreground">
+                                    <p className="text-centertext-description-color text-base md:text-lg xl:text-xl">
                                         We accept KHQR & Credit / Debit Card
                                     </p>
                                 </div>
