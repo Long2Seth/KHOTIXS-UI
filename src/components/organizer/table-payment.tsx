@@ -1,6 +1,6 @@
 "use client"
 
-import {useState} from "react"
+import React, {useState} from "react"
 import {Calendar} from 'lucide-react'
 import * as XLSX from "xlsx"
 import {format} from "date-fns"
@@ -20,15 +20,19 @@ import {Calendar as CalendarComponent} from "@/components/ui/calendar"
 
 // Import data
 import {payments} from "@/lib/organizer/tablePaymentData"
+import {AllEventData} from "@/lib/organizer/Event";
 
 export default function PaymentTable() {
-    const [search, setSearch] = useState("")
+    const [searchData, setSearchData] = useState("")
     const [date, setDate] = useState<Date>()
+    const [category, setCategory] = useState("all")
+    const [location, setLocation] = useState("all")
+    const [status, setStatus] = useState("all")
 
     // Filter payments based on search term
     const filteredPayments = payments.filter(payment =>
-        payment.username.toLowerCase().includes(search.toLowerCase()) ||
-        payment.id.toLowerCase().includes(search.toLowerCase())
+        payment.username.toLowerCase().includes(searchData.toLowerCase()) ||
+        payment.id.toLowerCase().includes(searchData.toLowerCase())
     )
 
     // Export to Excel function
@@ -41,65 +45,89 @@ export default function PaymentTable() {
 
     return (
         <section
-            className=" space-y-[50px] md:space-y-[80px] xl:space-y-[100px] my-[50px] md:my-[80px] xl:my-[100px]  ">
+            className=" space-y-[30px] md:space-y-[50px] xl:space-y-[80px] my-[30px] md:my-[50px] xl:my-[80px] ">
             <section className=" w-full ">
-                <CardHeader>
-                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <CardHeader className=" py-5">
+                    <section className=" w-full flex flex-row justify-between items-start sm:items-center gap-4 ">
                         <CardTitle
-                            className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text p-5">PAYMENT</CardTitle>
+                            className=" w-[80%] text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">PAYMENT
+                        </CardTitle>
                         <Button
                             onClick={exportToExcel}
-                            className=" bg-primary-color rounded-[6px] text-base text-secondary-color-text hover:bg-primary-color md:text-lg w-full sm:w-auto"
+                            className=" bg-primary-color rounded-[6px] text-base text-secondary-color-text hover:bg-primary-color md:text-lg w-auto"
                         >
                             Export Excel
                         </Button>
-                    </div>
+                    </section>
                 </CardHeader>
                 <section
                     className=" bg-white p-10 rounded-[6px] dark:bg-white dark:backdrop-blur dark:bg-opacity-5 space-y-4 ">
                     <CardContent>
-                        <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                        <section className="flex flex-col lg:flex-row gap-4 mb-6">
                             <Input
-                                placeholder="Search"
-                                value={search}
-                                onChange={(e) => setSearch(e.target.value)}
-                                className=" border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text"
+                                placeholder="Search by event name"
+                                value={searchData}
+                                onChange={(e) => setSearchData(e.target.value)}
+                                className="border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text"
                             />
-                            <div className="flex flex-col sm:flex-row gap-4">
-                                <Select>
+
+                            <div className=" grid grid-cols-2 sm:flex sm:flex-row gap-4">
+
+                                <Select onValueChange={setCategory}>
                                     <SelectTrigger
-                                        className=" min-w-[200px] max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
-                                        <SelectValue className=" placeholder:text-gray-300" placeholder="Events"/>
+                                        className={` max-w-[250px] md:min-w-[200px] md:max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text ${category === "all" ? "text-gray-400" : "text-black"}`}>
+                                        <SelectValue placeholder="Category"/>
                                     </SelectTrigger>
                                     <SelectContent
-                                        className=" min-w-[200px] max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
-                                        <SelectItem className=" dark:hover:text-primary-color-text" value="queen">The Rise Of The Queen</SelectItem>
+                                        className="max-w-[250px] md:min-w-[200px] md:max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                                        <SelectItem value="all">All</SelectItem>
+                                        {AllEventData.map(category => (
+                                            <SelectItem key={category.category.toLowerCase()}
+                                                        value={category.category.toLowerCase()}>{category.category}</SelectItem>
+                                        ))}
                                     </SelectContent>
                                 </Select>
-                                <Select>
+
+                                <Select onValueChange={setLocation}>
                                     <SelectTrigger
-                                        className=" max-w-[250px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
-                                        <SelectValue placeholder="Publish"/>
+                                        className={`max-w-[250px] md:min-w-[200px] md:max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text ${location === "all" ? "text-gray-400" : "text-black"}`}>
+                                        <SelectValue placeholder="Location"/>
                                     </SelectTrigger>
                                     <SelectContent
-                                        className=" min-w-[200px] max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
-                                        <SelectItem  className=" dark:hover:text-primary-color-text" value="published">Published</SelectItem>
-                                        <SelectItem  className=" dark:hover:text-primary-color-text" value="draft">Draft</SelectItem>
+                                        className="max-w-[250px] md:min-w-[200px] md:max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text">
+                                        <SelectItem value="all">All</SelectItem>
+                                        {AllEventData.map(location => (
+                                            <SelectItem key={location.location.toLowerCase()}
+                                                        value={location.location.toLowerCase()}>{location.location}</SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+
+                                <Select onValueChange={setStatus}>
+                                    <SelectTrigger
+                                        className={`hidden sm:block px-3 max-w-[250px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text ${status === "all" ? "text-gray-400" : "text-black"}`}>
+                                        <SelectValue placeholder="Status"/>
+                                    </SelectTrigger>
+                                    <SelectContent
+                                        className="min-w-[200px] max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                                        <SelectItem value="all">All</SelectItem>
+                                        <SelectItem value="enable">Enable</SelectItem>
+                                        <SelectItem className=" text-red-500 " value="disable">Disable</SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>
                             <Popover>
                                 <PopoverTrigger asChild>
                                     <Button
-                                        className="max-w-[400px] h-[50px] p-5 border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                                        className={`max-w-[600px] h-[40px] lg:h-[50px] p-5 border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text ${date ? "text-black" : "text-gray-400"} `}>
                                         <Calendar className="mr-2 h-4 w-4"/>
                                         {date ? format(date, "PPP") :
-                                            <span className=" text-md md:text-lg">Pick a date</span>}
+                                            <span className="text-md md:text-lg">Pick a date</span>}
                                     </Button>
                                 </PopoverTrigger>
-                                <PopoverContent className="w-auto p-0 bg-gray-100 rounded-[6px] ">
+                                <PopoverContent className="w-auto p-0 bg-gray-100 rounded-[6px]">
                                     <CalendarComponent
-                                        className="bg-white dark:bg-khotixs-background-dark dark:text-secondary-color-text rounded-[6px] "
+                                        className="bg-white dark:bg-khotixs-background-dark dark:text-secondary-color-text rounded-[6px]"
                                         mode="single"
                                         selected={date}
                                         onSelect={setDate}
@@ -107,7 +135,7 @@ export default function PaymentTable() {
                                     />
                                 </PopoverContent>
                             </Popover>
-                        </div>
+                        </section>
                         <div className="overflow-x-auto">
                             <div className="inline-block min-w-full align-middle">
                                 <div className="overflow-hidden border rounded-[6px] border-light-border-color ">
@@ -115,36 +143,36 @@ export default function PaymentTable() {
                                         <TableHeader>
                                             <TableRow>
                                                 <TableHead
-                                                    className="text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">ID</TableHead>
+                                                    className="text-center min-w-[100px] ">ID</TableHead>
                                                 <TableHead
-                                                    className="text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">USERNAME</TableHead>
+                                                    className="min-w-[100px] ">USERNAME</TableHead>
                                                 <TableHead
-                                                    className="text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">EVENT</TableHead>
+                                                    className="min-w-[200px] ">EVENT</TableHead>
                                                 <TableHead
-                                                    className="text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">PAYMENT
+                                                    className="min-w-[150px] ">PAYMENT
                                                     METHOD</TableHead>
                                                 <TableHead
-                                                    className="text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">PAYMENT
+                                                    className="min-w-[180px]  ">PAYMENT
                                                     DATE</TableHead>
                                                 <TableHead
-                                                    className="text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text p-2 sm:p-4 text-start">AMOUNT</TableHead>
+                                                    className=" min-w-[100px] ">AMOUNT</TableHead>
                                             </TableRow>
                                         </TableHeader>
                                         <TableBody>
                                             {filteredPayments.map((payment) => (
-                                                <TableRow className=" " key={payment.id}>
+                                                <TableRow className="hover:bg-gray-100 dark:hover:bg-khotixs-background-dark border-none " key={payment.id}>
                                                     <TableCell
-                                                        className=" text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color ">{payment.id}</TableCell>
+                                                        className="text-center py-3 min-w-[100px]">{payment.id}</TableCell>
                                                     <TableCell
-                                                        className=" text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color ">{payment.username}</TableCell>
+                                                        className=" min-w-[100px]">{payment.username}</TableCell>
                                                     <TableCell
-                                                        className=" text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color ">{payment.event}</TableCell>
+                                                        className=" min-w-[200px]">{payment.event}</TableCell>
                                                     <TableCell
-                                                        className=" text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color ">{payment.paymentMethod}</TableCell>
+                                                        className=" min-w-[150px]">{payment.paymentMethod}</TableCell>
                                                     <TableCell
-                                                        className=" text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color ">{payment.paymentDate}</TableCell>
+                                                        className="  min-w-[180px]">{payment.paymentDate}</TableCell>
                                                     <TableCell
-                                                        className=" px-2 text-[10px] md:text-sm xl:text-base sm:p-4 text-green-500 text-start">
+                                                        className="text-label-free dark:text-label-free font-semibold min-w-[100px] ">
                                                         + ${payment.amount.toFixed(2)}
                                                     </TableCell>
                                                 </TableRow>
@@ -158,7 +186,5 @@ export default function PaymentTable() {
                 </section>
             </section>
         </section>
-
-
     )
 }

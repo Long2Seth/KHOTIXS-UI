@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/select"
 import {Textarea} from "@/components/ui/textarea"
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover"
-import {Calendar} from "@/components/ui/calendar"
+import {Calendar as CalendarComponent} from "@/components/ui/calendar"
 import {cn} from "@/lib/utils"
 import {format} from "date-fns"
 import Image from "next/image";
@@ -42,9 +42,9 @@ export function CreateEventForm() {
         <form
             className=" bg-white rounded-[6px] p-10 dark:bg-khotixs-background-dark dark:border dark:border-dark-border-color ">
 
-            <Card className=" w-full border-0 rounded-[6px] ">
+            <Card className=" w-full rounded-[6px] ">
 
-                <CardContent className=" w-full rounded-[6px] border-0 ">
+                <CardContent className=" w-full rounded-[6px]">
 
                     <section className="space-y-6">
 
@@ -116,7 +116,8 @@ export function CreateEventForm() {
                                 className="border border-light-border-color rounded-[6px] text-base md:text-lg placeholder:text-light-border-color focus:outline-none"
                                 required/>
                         </section>
-                        <div className=" grid md:grid-cols-2 gap-4">
+
+                        <div className=" grid md:grid-cols-2 gap-4 ">
 
                             <section className="space-y-2">
                                 <Label
@@ -141,9 +142,9 @@ export function CreateEventForm() {
                                             <CalendarIcon className="h-4 w-4"/>
                                         </Button>
                                     </PopoverTrigger>
-                                    <PopoverContent className="w-auto p-0" align="start">
-                                        <Calendar
-                                            className=" bg-khotixs-background-white dark:text-primary-color-text rounded-[6px] "
+                                    <PopoverContent className="w-auto p-0 bg-gray-100 rounded-[6px]">
+                                        <CalendarComponent
+                                            className="bg-white dark:bg-khotixs-background-dark dark:text-secondary-color-text rounded-[6px]"
                                             mode="single"
                                             selected={startDate}
                                             onSelect={setStartDate}
@@ -174,14 +175,14 @@ export function CreateEventForm() {
                                             <CalendarIcon className="h-4 w-4"/>
                                         </Button>
                                     </PopoverTrigger>
-                                    <PopoverContent className="w-auto p-0" align="start">
-                                        <Calendar
-                                            className=" bg-khotixs-background-white dark:text-primary-color-text rounded-[6px] "
-                                            mode="single"
-                                            selected={endDate}
-                                            onSelect={setEndDate}
-                                            initialFocus
-                                        />
+                                        <PopoverContent className="w-auto p-0 bg-gray-100 rounded-[6px] ">
+                                            <CalendarComponent
+                                                className="bg-white dark:bg-khotixs-background-dark dark:text-secondary-color-text rounded-[6px]"
+                                                mode="single"
+                                                selected={endDate}
+                                                onSelect={setEndDate}
+                                                initialFocus
+                                            />
                                     </PopoverContent>
                                 </Popover>
                             </section>
@@ -244,7 +245,7 @@ export function CreateEventForm() {
             </Card>
 
             {/* action button */}
-            <section className="flex justify-end gap-4 p-6 ">
+            <section className="flex flex-wrap justify-end gap-4 pt-6 ">
                 <Button
                     onClick={() => router.push("/organizer/events")}
                     className="border-red-600 text-red-500 rounded-[6px] hover:text-red-600 hover:bg-red-50 "

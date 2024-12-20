@@ -188,9 +188,9 @@ const NavbarComponent = () => {
                     </div>
                     <div
                         id="mega-menu-full"
-                        className={` lg:hidden items-center justify-between px-5 font-semibold dark:bg-khotixs-background-dark ${isMenuOpen ? "block" : "hidden"} w-full `}
+                        className={` lg:hidden items-center justify-between font-semibold dark:bg-khotixs-background-dark ${isMenuOpen ? "block" : "hidden"} w-full `}
                     >
-                        <ul className="text-primary-color-text flex flex-col p-1 mt-4 border border-secondary-color rounded-[6px] bg-white dark:bg-khotixs-background-dark ">
+                        <ul className="text-primary-color-text flex flex-col p-1 mt-4 rounded-[6px] bg-white dark:bg-khotixs-background-dark ">
                             {menuItems.map((item, index) => (
                                 <li key={index}>
                                     <Link

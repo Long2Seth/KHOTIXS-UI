@@ -1,6 +1,5 @@
 "use client"
 
-import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {
     Select,
@@ -18,11 +17,8 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import {events} from "@/lib/organizer/eventData";
-import {useRouter} from "next/navigation";
 
 export function EventsTable() {
-
-    const router = useRouter();
 
     return (
         <section
@@ -30,8 +26,7 @@ export function EventsTable() {
 
             <div className=" space-y-5 ">
 
-                <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text pt-5 ">EVENTS
-                    MANAGEMENT</h1>
+                <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text pt-5 ">INFORMATION EVENT</h1>
 
                 <div
                     className=" bg-white p-10 rounded-[6px] dark:backdrop-blur dark:bg-opacity-5 space-y-4 ">
@@ -62,40 +57,33 @@ export function EventsTable() {
                                 <SelectItem value="unpublished">Unpublished</SelectItem>
                             </SelectContent>
                         </Select>
-                        <Button
-                            className=" bg-primary-color text-secondary-color-text rounded-[6px] hover:bg-primary-color"
-                            onClick={() => router.push("/organizer/events/create")}
-                        >
-                            New Event
-                        </Button>
                     </div>
 
-                    <div className=" border-[1px] border-light-border-color rounded-[6px] ">
+                    <div className=" border rounded-[6px] overflow-x-auto ">
                         <Table>
                             <TableHeader>
-                                <TableRow className=" border-light-border-color  ">
+                                <TableRow className=" dark:bg-khotixs-background-dark ">
                                     <TableHead
-                                        className=" dark:text-secondary-color-text">EVENT
+                                        className=" min-w-[200px] lg:min-w-[500px] dark:text-secondary-color-text pl-10">EVENT
                                         TITLE</TableHead>
                                     <TableHead
-                                        className=" dark:text-secondary-color-text">CATEGORY</TableHead>
+                                        className=" min-w-[100px] dark:text-secondary-color-text">CATEGORY</TableHead>
                                     <TableHead
-                                        className=" dark:text-secondary-color-text">START
+                                        className=" min-w-[150px] dark:text-secondary-color-text">START
                                         AT</TableHead>
                                     <TableHead
-                                        className=" dark:text-secondary-color-text">END
+                                        className=" min-w-[150px] dark:text-secondary-color-text">END
                                         AT</TableHead>
                                     <TableHead
                                         className=" dark:text-secondary-color-text">STATUS</TableHead>
-                                    <TableHead className="w-[50px]"></TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody className=" border-gray-300 dark:bg-khotixs-background-dark  ">
                                 {events.map((event) => (
-                                    <TableRow className="hover:bg-gray-100 dark:hover:bg-khotixs-background-dark"
+                                    <TableRow className="hover:bg-gray-100 dark:hover:bg-khotixs-background-dark  "
                                               key={event.title}>
                                         <TableCell
-                                            className=" dark:text-dark-description-color">{event.title}</TableCell>
+                                            className=" pl-10 py-3 dark:text-dark-description-color">{event.title}</TableCell>
                                         <TableCell
                                             className=" dark:text-dark-description-color">{event.category}</TableCell>
                                         <TableCell
@@ -104,7 +92,7 @@ export function EventsTable() {
                                             className=" dark:text-dark-description-color">{event.endAt}</TableCell>
                                         <TableCell>
                                     <span
-                                        className={`inline-flex items-center px-2.5 py-0.5 rounded-[6px] text-xs font-medium ${event.status === 'Publish' ? 'bg-blue-100 text-blue-800' : 'bg-red-100 text-red-800'}`}>{event.status}</span>
+                                        className={`inline-flex items-center px-2.5 py-0.5 rounded-[6px] font-medium ${event.status === 'Publish' ? 'bg-blue-100 text-blue-800' : 'bg-red-100 text-red-800'}`}>{event.status}</span>
                                         </TableCell>
                                         {/*<TableCell>*/}
                                         {/*    <Button variant="ghost" size="icon">*/}

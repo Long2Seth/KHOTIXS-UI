@@ -105,7 +105,7 @@ export default function OrderTableComponent() {
                         </PopoverContent>
                     </Popover>
                 </div>
-                <div className="min-w-[1200px] overflow-x-auto">
+                <div className=" overflow-x-auto">
                     <div className="inline-block align-middle">
                         <div className="border rounded-[6px]">
                             <Table className="">

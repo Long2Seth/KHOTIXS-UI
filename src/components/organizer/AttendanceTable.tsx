@@ -41,7 +41,7 @@ export default function AttendanceTable() {
     }
 
     return (
-        <div className=" w-full ">
+        <section className=" w-full ">
             <CardHeader>
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <CardTitle  className=" p-5 ">
@@ -180,6 +180,6 @@ export default function AttendanceTable() {
                     </div>
                 </div>
             </CardContent>
-        </div>
+        </section>
     )
 }

@@ -7,11 +7,9 @@
 @layer base {
 
     body {
-        font-family: "KoHo", serif;
+        font-family: "KoHo","Suwannaphum", serif;
     }
-    [lang="km"] {
-        font-family: 'Suwannaphum', serif;
-    }
+
 }
 
 
