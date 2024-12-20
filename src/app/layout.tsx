@@ -1,7 +1,6 @@
 import React from "react";
 import "./globals.css"
 import { Metadata } from "next";
-import StoreProvider from "./StoreProvider";
 
 export const metadata: Metadata = {
     title: {
@@ -20,9 +19,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                <StoreProvider>
                     {children}
-                </StoreProvider>
             </body>
         </html>
     )
