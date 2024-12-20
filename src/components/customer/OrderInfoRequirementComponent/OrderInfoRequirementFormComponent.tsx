@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
+import { OrderInfoRequirementFormSkeleton } from "@/components/customer/OrderInfoRequirementComponent/OrderInfoRequirementFormSkeleton";
 
 // Create schema for the form.
 const formSchema = z.object({
@@ -34,6 +35,9 @@ export default function OrderInfoRequirementFormComponent() {
 
     // Toast
     const { toast } = useToast();
+
+    // Loading
+    const [isLoading, setIsLoading] = useState(true);
 
     // Styles
     const requiredStyle = "text-red-500";
@@ -62,11 +66,11 @@ export default function OrderInfoRequirementFormComponent() {
             values,
         });
 
-    if(values.fullName && values.email && values.phoneNumber){
-      toast({
-        title: "Success!",
-        description: "Your information has been submitted successfully!",
-      })
+        if (values.fullName && values.email && values.phoneNumber) {
+            toast({
+                title: "Success!",
+                description: "Your information has been submitted successfully!",
+            })
 
             setTimeout(() => {
                 router.push("/payment-details");
@@ -87,7 +91,7 @@ export default function OrderInfoRequirementFormComponent() {
                                 name="fullName"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <Label  className=" text-base ">Full Name <span className={requiredStyle}>*</span></Label>
+                                        <Label className=" text-base ">Full Name <span className={requiredStyle}>*</span></Label>
                                         <FormControl>
                                             <Input
                                                 className="p-2 text-lg border-gray-300 rounded-[6px] dark:border placeholder:text-gray-300 dark:border-gray-400 dark:text-secondary-color-text dark:bg-khotixs-background-dark dark:placeholder:text-gray-400 "
@@ -119,7 +123,7 @@ export default function OrderInfoRequirementFormComponent() {
                                 name="phoneNumber"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <Label  className=" text-base ">Phone Number <span className={requiredStyle}>*</span></Label>
+                                        <Label className=" text-base ">Phone Number <span className={requiredStyle}>*</span></Label>
                                         <FormControl>
                                             <Input
                                                 className="p-2 text-lg border-gray-300 rounded-[6px] dark:border placeholder:text-gray-300 dark:border-gray-400 dark:text-secondary-color-text dark:bg-khotixs-background-dark dark:placeholder:text-gray-400 "
