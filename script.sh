@@ -3,7 +3,7 @@
 # Check if a commit message was provided
 if [ -z "$1" ]; then
   echo "Error: No commit message provided."
-  echo "Usage: ./git-commit-push.sh \"Your commit message\""
+  echo "Usage: ./script.sh \"Your commit message\""
   exit 1
 fi
 
@@ -13,5 +13,10 @@ git add .
 # Commit with the provided message
 git commit -m "$1"
 
-# Push to the current branch
-git push origin $(git rev-parse --abbrev-ref HEAD)
+# Get the current branch name
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+# Push to all remotes
+for remote in $(git remote); do
+  git push $remote $current_branch
+done
