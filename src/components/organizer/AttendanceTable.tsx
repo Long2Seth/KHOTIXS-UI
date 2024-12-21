@@ -1,12 +1,12 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
-import { Calendar } from 'lucide-react'
+import React, {useState} from "react"
+import {Calendar} from 'lucide-react'
 import * as XLSX from "xlsx"
-import { format } from "date-fns"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import {format} from "date-fns"
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table"
+import {Input} from "@/components/ui/input"
+import {Button} from "@/components/ui/button"
 import {
     Select,
     SelectContent,
@@ -14,153 +14,172 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { CardTitle } from "@/components/ui/card"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Calendar as CalendarComponent } from "@/components/ui/calendar"
-import { Badge } from "@/components/ui/badge"
-import { getAttendanceData } from "../actions/attendanceActions"
+import {CardContent, CardHeader, CardTitle} from "@/components/ui/card"
+import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover"
+import {Calendar as CalendarComponent} from "@/components/ui/calendar"
+
+// Import data
+import {attendanceData} from "@/lib/organizer/attendanceData";
+import {Badge} from "@/components/ui/badge";
 
 export default function AttendanceTable() {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(10);
     const [search, setSearch] = useState("")
     const [date, setDate] = useState<Date>()
-    const [eventFilter, setEventFilter] = useState("")
-    const [publishFilter, setPublishFilter] = useState("")
-    const [attendanceData, setAttendanceData] = useState([])
-    const [totalItems, setTotalItems] = useState(0)
-    const [totalPages, setTotalPages] = useState(0)
 
-    useEffect(() => {
-        fetchData();
-    }, [currentPage, itemsPerPage, search, eventFilter, publishFilter, date]);
-
-    const fetchData = async () => {
-        const dateFilter = date ? format(date, "yyyy-MM-dd") : '';
-        const result = await getAttendanceData(currentPage, itemsPerPage, search, eventFilter, publishFilter, dateFilter);
-        setAttendanceData(result.data);
-        setTotalItems(result.totalItems);
-        setTotalPages(result.totalPages);
-    };
+    // Filter payments based on search term
+    const filteredAttendance = attendanceData.filter(attendance =>
+        attendance.userName.toLowerCase().includes(search.toLowerCase()) ||
+        attendance.id.toLowerCase().includes(search.toLowerCase())
+    )
 
     // Export to Excel function
     const exportToExcel = () => {
         const ws = XLSX.utils.json_to_sheet(attendanceData)
         const wb = XLSX.utils.book_new()
-        XLSX.utils.book_append_sheet(wb, ws, "Attendance")
-        XLSX.writeFile(wb, "attendance.xlsx")
+        XLSX.utils.book_append_sheet(wb, ws, "Payments")
+        XLSX.writeFile(wb, "payments.xlsx")
     }
 
     return (
-        <section className="-mx-[27px]">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <CardTitle>
-                    <h1 className="text-2xl font-bold text-primary-color">ATTENDANCE</h1>
-                    <p className="text-base font-normal">Real-time insights for data-driven decisions</p>
-                </CardTitle>
-                <Button
-                    onClick={exportToExcel}
-                    className="bg-primary-color hover:bg-[#4c1777] w-full sm:w-auto"
-                >
-                    Export Excel
-                </Button>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                <Input
-                    placeholder="Search"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    className="w-full sm:max-w-[300px] bg-none"
-                />
-                <div className="flex flex-col sm:flex-row gap-4">
-                    <Select value={eventFilter} onValueChange={setEventFilter}>
-                        <SelectTrigger className="w-full sm:w-[180px]">
-                            <SelectValue placeholder="Events"/>
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="">All Events</SelectItem>
-                            <SelectItem value="The Rise Of The Queen">The Rise Of The Queen</SelectItem>
-                        </SelectContent>
-                    </Select>
-                    <Select value={publishFilter} onValueChange={setPublishFilter}>
-                        <SelectTrigger className="w-full sm:w-[180px]">
-                            <SelectValue placeholder="Status"/>
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="">All</SelectItem>
-                            <SelectItem value="checked-in">Checked-In</SelectItem>
-                            <SelectItem value="absent">Absent</SelectItem>
-                        </SelectContent>
-                    </Select>
+        <div className=" w-full ">
+            <CardHeader>
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <CardTitle  className=" p-5 ">
+                        <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text">ATTENDANCE</h1>
+                        <p className="text-description-color text-sm md:text-base xl:text-lg font-light dark:text-dark-description-color ">Real-time
+                            insights for data-driven decisions</p>
+                    </CardTitle>
+                    <Button
+                        onClick={exportToExcel}
+                        className=" text-secondary-color-text rounded-[6px] bg-primary-color hover:bg-primary-color/80 w-full sm:w-auto"
+                    >
+                        Export Excel
+                    </Button>
                 </div>
-                <Popover>
-                    <PopoverTrigger asChild>
-                        <Button variant="outline"
-                                className="w-full sm:w-[300px] justify-start text-left font-normal">
-                            <Calendar className="mr-2 h-4 w-4"/>
-                            {date ? format(date, "PPP") : <span>Pick a date</span>}
-                        </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0">
-                        <CalendarComponent
-                            mode="single"
-                            selected={date}
-                            onSelect={setDate}
-                            initialFocus
-                        />
-                    </PopoverContent>
-                </Popover>
-            </div>
-            <div className="overflow-x-auto">
-                <div className="inline-block min-w-full align-middle">
-                    <div className="overflow-hidden border rounded-lg">
-                        <Table>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead className="px-2 text-center">ID</TableHead>
-                                    <TableHead className="px-2">USER NAME</TableHead>
-                                    <TableHead className="px-2 lg:w-80">EVENT NAME</TableHead>
-                                    <TableHead className="px-2 text-center">LOCATION</TableHead>
-                                    <TableHead className="px-2 text-center">QTY</TableHead>
-                                    <TableHead className="px-2 text-center">TICKET TYPE</TableHead>
-                                    <TableHead className="px-2 text-center">STATUS</TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {attendanceData.map((attendance) => (
-                                    <TableRow key={attendance.id}>
-                                        <TableCell className="px-2 text-center">{attendance.id}</TableCell>
-                                        <TableCell className="px-2">{attendance.userName}</TableCell>
-                                        <TableCell
-                                            className="px-2 lg:w-80 line-clamp-2">{attendance.eventName}</TableCell>
-                                        <TableCell className="px-2 text-center">{attendance.location}</TableCell>
-                                        <TableCell className="px-2 text-center">{attendance.qty}</TableCell>
-                                        <TableCell className="px-2 text-center">{attendance.ticketType}</TableCell>
-                                        <TableCell className="px-2 text-center">
-                                            <Badge
-                                                className={`rounded-[6px] w-20 justify-center font-normal ${
-                                                    attendance.status === 'checked-in'
-                                                        ? 'bg-label-free text-label-text-primary hover:bg-label-free/90'
-                                                        : 'bg-label-paid text-label-text-primary hover:bg-label-paid/90'
-                                                }`}
-                                            >
-                                                {attendance.status === 'checked-in' ? 'Checked-In' : 'Absent'}
-                                            </Badge>
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </div>
-                    <Pagination
-                        totalItems={totalItems}
-                        itemsPerPage={itemsPerPage}
-                        currentPage={currentPage}
-                        onPageChange={setCurrentPage}
-                        onItemsPerPageChange={setItemsPerPage}
+            </CardHeader>
+
+            <CardContent className=" bg-white p-10 rounded-[6px] dark:backdrop-blur dark:bg-opacity-5 space-y-4 ">
+                <div className=" flex flex-col sm:flex-row gap-4 mb-6">
+                    <Input
+                        placeholder="Search"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className=" border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text"
                     />
+                    <div className="flex flex-col sm:flex-row gap-4">
+                        <Select>
+                            <SelectTrigger
+                                className=" min-w-[200px] max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                                <SelectValue placeholder="Events"/>
+                            </SelectTrigger>
+                            <SelectContent
+                                className=" min-w-[200px] max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                                <SelectItem value="queen">The Rise Of The Queen</SelectItem>
+                            </SelectContent>
+                        </Select>
+                        <Select>
+                            <SelectTrigger
+                                className=" max-w-[250px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                                <SelectValue placeholder="Publish"/>
+                            </SelectTrigger>
+                            <SelectContent
+                                className=" min-w-[200px] max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                                <SelectItem className=" dark:hover:text-primary-color-text"  value="published">Published</SelectItem>
+                                <SelectItem className=" dark:hover:text-primary-color-text" value="draft">Draft</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+                    <Popover>
+                        <PopoverTrigger asChild>
+                            <Button
+                                    className="max-w-[400px] h-[50px] p-5 border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                                <Calendar className="mr-2 h-4 w-4"/>
+                                {date ? format(date, "PPP") : <span className=" text-md md:text-lg">Pick a date</span>}
+                            </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0 bg-gray-100 rounded-[6px] ">
+                            <CalendarComponent
+                                className="bg-white dark:bg-khotixs-background-dark dark:text-secondary-color-text rounded-[6px] "
+                                mode="single"
+                                selected={date}
+                                onSelect={setDate}
+                                initialFocus
+                            />
+                        </PopoverContent>
+                    </Popover>
                 </div>
-            </div>
-        </section>
+                <div className="overflow-x-auto">
+                    <div className="inline-block min-w-full align-middle">
+                        <div className="overflow-hidden border rounded-[6px] ">
+                            <Table>
+                                <TableHeader className=" ">
+                                    <TableRow>
+                                        <TableHead
+                                            className="px-2 py-5 text-center text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">ID</TableHead>
+                                        <TableHead
+                                            className="px-2 py-5 text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">USER
+                                            NAME</TableHead>
+                                        <TableHead
+                                            className="px-2 py-5 lg:w-80 text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">EVENT
+                                            NAME</TableHead>
+                                        <TableHead
+                                            className="px-2 py-5 text-center text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">LOCATION</TableHead>
+                                        <TableHead
+                                            className="px-2 py-5 text-center text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">QTY</TableHead>
+                                        <TableHead
+                                            className="px-2 py-5 text-center text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">TICKET
+                                            TYPE</TableHead>
+                                        <TableHead
+                                            className="px-2 py-5 text-center text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">STATUS</TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                    {filteredAttendance.map((attendance) => (
+                                        <TableRow className=" hover:bg-gray-100 dark:hover:bg-khotixs-background-dark "
+                                                  key={attendance.id}>
+                                            <TableCell
+                                                className="px-2 text-center text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.id}</TableCell>
+                                            <TableCell
+                                                className="px-2 text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.userName}</TableCell>
+                                            <TableCell
+                                                className="px-2 h-[70px] lg:w-80 line-clamp-2 text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color overflow-hidden">{attendance.eventName}</TableCell>
+                                            <TableCell
+                                                className="px-2 text-center text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.location}</TableCell>
+                                            <TableCell
+                                                className="px-2 text-center text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.qty}</TableCell>
+                                            <TableCell className=" text-center ">
+                                                <Badge
+                                                    className={`px-2 p-1 text-secondary-color-text text-center text-[10px] justify-center md:text-sm font-light rounded-[6px] min-w-[90px] ${
+                                                        attendance.ticketType === 'VIP' ? 'bg-label-vip hover:bg-label-vip/90' :
+                                                            attendance.ticketType === 'PREMIUM' ? 'bg-label-premium hover:bg-label-premium/90' :
+                                                                attendance.ticketType === 'REGULAR' ? 'bg-label-regular hover:bg-label-regular/90' :
+                                                                    attendance.ticketType === 'FREE' ? 'bg-label-free hover:bg-label-free/90' : ''
+                                                    }`}>
+                                                    {attendance.ticketType}
+                                                </Badge>
+
+                                            </TableCell>
+
+                                            <TableCell
+                                                className="px-2 text-center text-description-color text-[10px] md:text-sm xl:text-base">
+                                                <Badge
+                                                    className={`rounded-[6px] text[10px] md:text-base  min-w-[100px] py-1 justify-center font-normal ${
+                                                        attendance.status === 'checked-in'
+                                                            ? 'bg-label-free text-label-text-primary hover:bg-label-free/90'
+                                                            : 'bg-label-paid text-label-text-primary hover:bg-label-paid/90'
+                                                    }`}
+                                                >
+                                                    {attendance.status === 'checked-in' ? 'Checked-In' : 'Absent'}
+                                                </Badge>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </div>
+                    </div>
+                </div>
+            </CardContent>
+        </div>
     )
 }

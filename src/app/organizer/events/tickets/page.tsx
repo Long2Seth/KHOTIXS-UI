@@ -1,15 +1,11 @@
 import React from 'react';
-import HeaderOrganizer from "@/components/organizer/header-organizer";
 import {TicketSettingsForm} from "@/components/organizer/TicketSettingForm";
-import CategoriesOrganizerComponent from "@/components/organizer/categoriesOrganizerComponent";
 
 const Page = () => {
     return (
-        <div className="p-6 space-y-6 max-w-[90rem] mx-auto">
-            <HeaderOrganizer name="CHHAYA DEV"/>
-            <CategoriesOrganizerComponent/>
+        <main className=" container mx-auto w-full space-y-[50px] md:space-y-[80px] xl:space-y-[100px] my-[50px] md:my-[80px] xl:my-[100px] ">
             <TicketSettingsForm/>
-        </div>
+        </main>
     );
 };
 

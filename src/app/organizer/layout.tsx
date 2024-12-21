@@ -1,9 +1,12 @@
-import type { Metadata } from "next";
+import type {Metadata} from "next";
 import "../globals.css";
 import {ThemeProvider} from "next-themes";
 import StoreProvider from "@/app/StoreProvider";
 import {Toaster} from "@/components/ui/toaster";
-import {FooterComponent} from "@/components/customer/footer/FooterComponent";
+import FooterOrganizer from "@/components/organizer/FooterOrganizer";
+import NavbarOrganizerComponent from "@/components/organizer/NavbarOrganizerComponent";
+import CategoriesOrganizerComponent from "@/components/organizer/categoriesOrganizerComponent";
+import React from "react";
 
 
 export const metadata: Metadata = {
@@ -25,13 +28,13 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
         >
-
-
+            <NavbarOrganizerComponent/>
+            <CategoriesOrganizerComponent/>
             <StoreProvider>
                 {children}
             </StoreProvider>
-            <FooterComponent />
-            <Toaster />
+            <FooterOrganizer/>
+            <Toaster/>
         </ThemeProvider>
         </body>
         </html>

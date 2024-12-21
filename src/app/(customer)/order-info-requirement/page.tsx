@@ -4,10 +4,10 @@ import TitleAndDesComponent from "@/components/customer/TitleAndDesComponent/Tit
 
 export default function OrderInfoRequirement() {
     return (
-        <main className=" space-y-[50px] md:space-y-[80px] xl:space-y-[100px] m-[60px] md:m-[80px] xl:m-[100px] ">
+        <main className=" space-y-[50px] md:space-y-[80px] xl:space-y-[100px] m-2 my-10 md:m-[80px] xl:m-[100px] ">
             <section>
                 {/* Section Title */}
-                <section className="container mx-auto mb-10 ">
+                <section className="container mx-4 mb-10 ">
                     <TitleAndDesComponent
                         title="Order Info Requirement"
                         description="Please fill in the information below to complete your order!"
@@ -15,7 +15,7 @@ export default function OrderInfoRequirement() {
                 </section>
 
                 {/* Section Order */}
-                <section className="container mx-auto flex flex-col items-center justify-center gap-[40px] ">
+                <section className="container flex flex-col items-center justify-center gap-[40px] ">
                     <StepperComponent />
                     <OrderInfoRequirementFormComponent />
                 </section>

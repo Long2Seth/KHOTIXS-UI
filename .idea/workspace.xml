@@ -6,6 +6,12 @@
   <component name="ChangeListManager">
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    <list default="true" id="caab8f64-a5b9-425d-9461-94d083424caa" name="Changes" comment="Initial commit from Create Next App" />
+=======
+>>>>>>> origin/phal-seakngim
+<<<<<<< HEAD
 <<<<<<< HEAD
     <list default="true" id="caab8f64-a5b9-425d-9461-94d083424caa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -76,6 +82,10 @@
 >>>>>>> origin/phal-sophanmai
 >>>>>>> origin/long-piseth
     </list>
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
+>>>>>>> origin/phal-seakngim
 =======
     <list default="true" id="caab8f64-a5b9-425d-9461-94d083424caa" name="Changes" comment="Initial commit from Create Next App" />
 >>>>>>> origin/vuth-sarandy
@@ -102,6 +112,10 @@
   </component>
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/phal-seakngim
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 >>>>>>> origin/phal-sophanmai
@@ -121,17 +135,31 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
 =======
 >>>>>>> origin/vuth-sarandy
+=======
+>>>>>>> origin/dev
+>>>>>>> origin/phal-seakngim
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "git-widget-placeholder": "phal-sophanmai",
 =======
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "vuth-sarandy",
+=======
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "vuth-sarandy",
+<<<<<<< HEAD
+=======
+    "git-widget-placeholder": "phal-sophanmai",
+>>>>>>> origin/dev
+=======
+>>>>>>> origin/phal-seakngim
 >>>>>>> origin/vuth-sarandy
     "last_opened_file_path": "D:/CSTAD/Final/KHOTIXS-UI/src/components/customer",
     "node.js.detected.package.eslint": "true",
@@ -140,15 +168,26 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "ts.external.directory.path": "/Users/vuthsarandy/Documents/CSTAD/NextJS-For-MS/KHOTIXS-UI/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+=======
+>>>>>>> origin/phal-seakngim
     "ts.external.directory.path": "D:\\CSTAD\\Final\\KHOTIXS-UI\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
 >>>>>>> origin/phal-sophanmai
 =======
 >>>>>>> origin/phal-sophanmai
+<<<<<<< HEAD
 =======
     "ts.external.directory.path": "/Users/vuthsarandy/Documents/CSTAD/NextJS-For-MS/KHOTIXS-UI/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
 >>>>>>> origin/vuth-sarandy
+=======
+>>>>>>> origin/dev
+>>>>>>> origin/phal-seakngim
   }
 }]]></component>
   <component name="RecentsManager">
@@ -186,6 +225,9 @@
 <<<<<<< HEAD
       <workItem from="1733447613778" duration="2433000" />
       <workItem from="1733454935563" duration="2219000" />
+<<<<<<< HEAD
+      <workItem from="1733591561857" duration="2948000" />
+=======
 =======
       <workItem from="1733447613778" duration="13370000" />
 >>>>>>> origin/phal-sophanmai
@@ -197,6 +239,7 @@
       <workItem from="1733556134207" duration="12016000" />
       <workItem from="1733585716665" duration="13484000" />
 >>>>>>> origin/phal-sophanmai
+>>>>>>> origin/dev
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'long-piseth' of https://github.com/KHOTIXS-ISTAD/KHOTIXS-UI into phal-sophanmai">
       <option name="closed" value="true" />

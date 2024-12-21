@@ -12,7 +12,7 @@ export const events = [
         category: "General",
         startAt: "Nov 29, 2024 - 2:00PM",
         endAt: "Nov 29, 2024 - 4:30PM",
-        status: "Unpublish",
+        status: "Publish",
     },
     {
         title: "HRD SHARING SESSION",
