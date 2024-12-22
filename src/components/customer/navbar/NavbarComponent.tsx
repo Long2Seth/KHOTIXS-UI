@@ -18,6 +18,7 @@ import {Calendar} from "@/components/ui/calendar";
 import {ModeToggle} from "@/components/ui/modeToggle";
 import {NavigationMenuDemo} from "@/components/customer/navbar/NavigationMenuDemo";
 import SkeletonNavbarComponent from "@/components/customer/navbar/SkeletonNavbar";
+import {useRouter} from "next/navigation";
 
 const NavbarComponent = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -25,6 +26,8 @@ const NavbarComponent = () => {
     const [activeItem, setActiveItem] = useState<string | null>(null);
     const [selectedLocation, setSelectedLocation] = React.useState<string | undefined>();
     const [date, setDate] = React.useState<Date>();
+    const router = useRouter();
+
 
 
 
@@ -167,6 +170,7 @@ const NavbarComponent = () => {
                                     {/*    Login*/}
                                     {/*</Button>*/}
                                     <Button
+                                        onClick={() => router.push("http://localhost:8000/oauth2/authorization/nextjs")}
                                         className=" bg-primary-color lg:text-md xl:text-lg border-[1px] rounded-[5px] text-secondary-color-text font-[10px] hover:bg-primary-color border-primary-color">
                                         Log In
                                     </Button>

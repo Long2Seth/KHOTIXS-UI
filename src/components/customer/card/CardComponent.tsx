@@ -4,6 +4,7 @@ import {HiOutlineLocationMarker} from "react-icons/hi";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
 
+
 type CardUpcomingProps = {
     event: {
         image: string;
@@ -21,6 +22,7 @@ export function CardComponent({event}: CardUpcomingProps) {
     const month = date.toLocaleString('default', {month: 'short'});
     const day = String(date.getDate()).padStart(2, '0');
     const router = useRouter();
+
 
     const getLabelClass = (labelType: string) => {
         switch (labelType.toLowerCase()) {

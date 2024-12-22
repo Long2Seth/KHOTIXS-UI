@@ -16,7 +16,7 @@ export default function ChangePassword() {
 
     return (
         <section className="w-full mx-auto flex justify-center items-center bg-secondary-colr">
-            <section className="w-full bg-white rounded-[6px] my-10">
+            <section className="w-full rounded-[6px] my-10">
                 <div className=" py-5">
                     <Card className="dark:bg-khotixs-background-dark px-5 space-y-4 ">
                         <CardHeader>
@@ -114,14 +114,14 @@ export default function ChangePassword() {
                         </CardContent>
                         <CardFooter className="flex flex-col sm:flex-row gap-5">
                             <Button
-                                className="w-full mx-auto sm:w-1/2 bg-white text-red-500 border-red-600 dark:bg-khotixs-background-dark hover:bg-red-100  dark:border-[1px] border-[1px]"
+                                className="w-full mx-auto sm:w-1/2 bg-white text-red-500 border-red-600 dark:bg-khotixs-background-dark hover:bg-red-100 dark:hover:bg-red-500 dark:hover:text-white  dark:border-[1px] border-[1px]"
                                 onClick={() => router.back()}
                             >
                                 Cancel
                             </Button>
                             <Button
                                 type="submit"
-                                className="w-full sm:w-1/2 text-white bg-primary-color hover:bg-primary-color dark:text-secondary-color-text"
+                                className="w-full sm:w-1/2 text-white bg-primary-color hover:bg-primary-color dark:text-secondary-color-text hover:bg-primary-color/80 "
                             >
                                 Save
                             </Button>
