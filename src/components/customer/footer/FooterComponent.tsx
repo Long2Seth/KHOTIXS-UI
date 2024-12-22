@@ -22,9 +22,9 @@ export function FooterComponent() {
 
                         {/* Main Footer Section */}
                         <section
-                            className="container mx-auto w-full ">
+                            className="container mx-auto w-full xl:px-10">
 
-                            <section className=" grid md:grid-cols-2 xl:grid-cols-4 justify-center lg:justify-between gap-5">
+                            <section className=" grid md:grid-cols-2 xl:grid-cols-4 justify-center xl:justify-between gap-5">
                                 {/* Logo and Description */}
                                 <div className=" flex flex-col w-full items-start ">
                                     <div className=" max-w-[300px]">
@@ -44,7 +44,7 @@ export function FooterComponent() {
                                 </div>
 
                                 {/* Event Category */}
-                                <div className="w-full xl:ml-20 ">
+                                <div className="w-full md:ml-[50px] lg:ml-[100px] xl:ml-[100px] ">
                                     <div className=" w-auto ">
                                         <h3 className="text-title-color text-xl font-bold dark:text-secondary-color-text  my-5">Event
                                             Category</h3>
@@ -72,7 +72,7 @@ export function FooterComponent() {
                                 </div>
 
                                 {/* Support & Information */}
-                                <div className="w-full xl:ml-20">
+                                <div className="w-full xl:ml-[100px]">
                                     <div className=" w-auto ">
                                         <h3 className="text-title-color text-xl font-bold dark:text-secondary-color-text my-5 ">Support
                                             & Information</h3>
@@ -94,7 +94,7 @@ export function FooterComponent() {
                                 </div>
 
                                 {/* Sponsors and Organizer */}
-                                <div className="w-full flex flex-col items-end my-5">
+                                <div className="w-full flex flex-col md:ml-[50px] lg:ml-[100px] xl:ml-0 xl:items-end my-5">
                                     <div className=" flex flex-col ">
                                         <h3 className="text-title-color text-xl font-bold dark:text-secondary-color-text  my-2 ">
                                             Sponsors By

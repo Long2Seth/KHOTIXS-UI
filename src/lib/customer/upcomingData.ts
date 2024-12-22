@@ -18,7 +18,7 @@ export const upcomingData: Event[] = [
         eventType: "UPCOMING"
     },
     {
-        image: "/cover.png",
+        image: "/event/home-upcoming.png",
         date: "2024-12-04",
         title: "Event Four: A Symphony of Sound and Light in the Heart of Sydney",
         location: "Sydney, Australia - Sydney Opera House, an architectural marvel hosting a breathtaking regular concert experience.",
@@ -29,9 +29,9 @@ export const upcomingData: Event[] = [
 ];
 
 export const eventData: Event[] = [
-    // CONCERTS
+    // TECHNOLOGY
     {
-        image: "/cover.png",
+        image: "/event/technology-one.png",
         date: "2024-12-01",
         title: "THE Q - RISE OF THE QUEEN AOK SOKUNKANHA SOLO CONCERT: A Night of Melodies and Memories",
         location: "New York, USA - Central Park, transforming into a magical realm of music and joy for an enchanting evening under the stars.",
@@ -40,7 +40,7 @@ export const eventData: Event[] = [
         eventType: "CONCERTS"
     },
     {
-        image: "/cover.png",
+        image: "/event/technology-two.png",
         date: "2024-12-02",
         title: "Legends Unite: A Grand Musical Reunion",
         location: "London, UK - The O2 Arena, where timeless voices come together in harmony.",
@@ -49,7 +49,7 @@ export const eventData: Event[] = [
         eventType: "CONCERTS"
     },
     {
-        image: "/cover.png",
+        image: "/event/technology-tree.png",
         date: "2024-12-03",
         title: "Asian Symphony: Traditional and Modern Fusion",
         location: "Tokyo, Japan - Shibuya Hikarie Hall, a showcase of cultural artistry.",
@@ -58,9 +58,9 @@ export const eventData: Event[] = [
         eventType: "CONCERTS"
     },
 
-    // TECHNOLOGY
+    // CONCERTS
     {
-        image: "/cover.png",
+        image: "/event/concert-one.png",
         date: "2024-12-05",
         title: "Tech Summit 2024: Innovations Shaping the Future",
         location: "San Francisco, USA - Moscone Center, the hub of technology discussions.",
@@ -69,7 +69,7 @@ export const eventData: Event[] = [
         eventType: "TECHNOLOGY"
     },
     {
-        image: "/cover.png",
+        image: "/event/concert-two.png",
         date: "2024-12-06",
         title: "AI Workshop: Practical Applications of Artificial Intelligence",
         location: "Austin, USA - Austin Convention Center, for hands-on learning.",
@@ -89,7 +89,7 @@ export const eventData: Event[] = [
 
     // SPORT
     {
-        image: "/cover.png",
+        image: "/event/sport-one.png",
         date: "2024-12-08",
         title: "Sports Gala: Celebrating Excellence in Athletics",
         location: "Paris, France - Stade de France, honoring sporting legends.",
@@ -98,7 +98,7 @@ export const eventData: Event[] = [
         eventType: "SPORT"
     },
     {
-        image: "/cover.png",
+        image: "/event/sport-two.png",
         date: "2024-12-09",
         title: "World Championship Finals",
         location: "Madrid, Spain - Santiago Bernabéu Stadium, showcasing elite athletes.",
@@ -116,9 +116,10 @@ export const eventData: Event[] = [
         eventType: "SPORT"
     },
 
+
     // COMMUNITY
     {
-        image: "/cover.png",
+        image: "/event/community-one.png",
         date: "2024-12-11",
         title: "Community Fest: Building Connections and Sharing Joy",
         location: "Berlin, Germany - Tiergarten, celebrating culture and togetherness.",
@@ -127,7 +128,7 @@ export const eventData: Event[] = [
         eventType: "COMMUNITY"
     },
     {
-        image: "/cover.png",
+        image: "/event/community-two.png",
         date: "2024-12-12",
         title: "Community Clean-Up Drive",
         location: "Cape Town, South Africa - Table Mountain, for environmental care.",
@@ -136,7 +137,7 @@ export const eventData: Event[] = [
         eventType: "COMMUNITY"
     },
     {
-        image: "/cover.png",
+        image: "/event/community-tree.png",
         date: "2024-12-13",
         title: "Culture Day: Showcasing Local Heritage and Traditions",
         location: "Bangkok, Thailand - Lumphini Park, celebrating community diversity.",
@@ -147,7 +148,7 @@ export const eventData: Event[] = [
 
     // CONFERENCES AND SEMINARS
     {
-        image: "/cover.png",
+        image: "/event/conferences-seminars01.png",
         date: "2024-12-14",
         title: "Leadership Conference 2024: Empowering Change",
         location: "Singapore - Marina Bay Sands, for innovative ideas.",
@@ -156,7 +157,7 @@ export const eventData: Event[] = [
         eventType: "CONFERENCES AND SEMINARS"
     },
     {
-        image: "/cover.png",
+        image: "/event/conferences-seminars02.png",
         date: "2024-12-15",
         title: "Healthcare Seminar: Advancing Global Wellbeing",
         location: "Toronto, Canada - Metro Toronto Convention Centre.",
@@ -165,7 +166,7 @@ export const eventData: Event[] = [
         eventType: "CONFERENCES AND SEMINARS"
     },
     {
-        image: "/cover.png",
+        image: "/event/conferences-seminars03.png",
         date: "2024-12-16",
         title: "Education Seminar: Innovating for the Future",
         location: "Melbourne, Australia - Melbourne Convention and Exhibition Centre.",
@@ -176,7 +177,7 @@ export const eventData: Event[] = [
 
     // GENERAL
     {
-        image: "/cover.png",
+        image: "/event/general01.png",
         date: "2024-12-17",
         title: "General Meetup: Exploring Opportunities and Networking",
         location: "Mumbai, India - Gateway of India.",
@@ -185,7 +186,7 @@ export const eventData: Event[] = [
         eventType: "GENERAL"
     },
     {
-        image: "/cover.png",
+        image: "/event/general02.png",
         date: "2024-12-18",
         title: "Fundraiser Gala: Making a Difference",
         location: "Rome, Italy - Villa Borghese Gardens.",
@@ -194,7 +195,7 @@ export const eventData: Event[] = [
         eventType: "GENERAL"
     },
     {
-        image: "/cover.png",
+        image: "/event/general03.png",
         date: "2024-12-19",
         title: "New Year's Gala: Welcoming 2025 with Elegance",
         location: "Dubai, UAE - Burj Khalifa, for an unforgettable celebration.",
@@ -203,4 +204,3 @@ export const eventData: Event[] = [
         eventType: "GENERAL"
     }
 ];
-
