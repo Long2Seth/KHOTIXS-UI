@@ -14,7 +14,7 @@ import {
 
 export function NavigationMenuDemo() {
     return (
-        <NavigationMenu className=" hidden lg:block dark:bg-khotixs-background-dark ">
+        <NavigationMenu className=" hidden lg:block dark:bg-khotixs-background-dark m-5 ">
             <NavigationMenuList>
                 <NavigationMenuItem>
                     <NavigationMenuTrigger className=" lg:text-md xl:text-lg font-medium dark:bg-khotixs-background-dark  ">About & Contact</NavigationMenuTrigger>

@@ -52,7 +52,7 @@ export default function EventDetailsPage() {
                                         className="flex items-center gap-2 text-muted-foreground dark:text-label-text-primary">
                                         <RiMap2Line className="h-5 w-5"/>
                                         <span
-                                            className=" khmer-text text-description-color text-sm md:text-base xl:text-lg dark:text-dark-description-color">កីឡដ្ឋានជាតិ អូឡាំពិក ក្រុងភ្នំពេញ</span>
+                                            className=" text-description-color text-sm md:text-base xl:text-lg dark:text-dark-description-color">កីឡដ្ឋានជាតិ អូឡាំពិក ក្រុងភ្នំពេញ</span>
                                     </div>
                                 </section>
                             </section>
@@ -60,7 +60,7 @@ export default function EventDetailsPage() {
                             <section className="space-y-2">
                                 <h3 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-dark-description-color">EVENT
                                     DESCRIPTION</h3>
-                                <p className="khmer-text text-description-color text-sm md:text-base xl:text-lg dark:text-dark-description-color">
+                                <p className=" text-description-color text-sm md:text-base xl:text-lg dark:text-dark-description-color">
                                     ស្វាគមន៍មកកាន់ទស្សនាការសម្តែងដ៏អស្ចារ្យ!
                                     ស្វាគមន៍មកកាន់ខ្ញុំជាតារាចម្រៀងល្បីឈ្មោះ! STING MUSICVERSE សូមនាំមក
                                     ការប្រគំតន្ត្រី THE Q RISE OF THE QUEEN - AOK SOKUNKANHA SOLO TOUR CONCERT

@@ -126,14 +126,14 @@ export default function EventDetails() {
                                 <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text  ">LOCATION</h2>
                                 <div className="flex gap-2 items-center dark:text-label-text-primary text-label-description">
                                     <RiMap2Line className="w-5"/>
-                                    <p className=" khmer-text text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">កីឡាដ្ឋានខេត្ត វាលបែកចាន ក្រុងបាត់ដំបង</p>
+                                    <p className="  text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">កីឡាដ្ឋានខេត្ត វាលបែកចាន ក្រុងបាត់ដំបង</p>
                                 </div>
                             </section>
 
                             {/* event description*/}
                             <section className="space-y-2">
                                 <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text">EVENT DESCRIPTION</h2>
-                                <p className=" khmer-text text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">
+                                <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color ">
                                     ក្តីស្រមៃដែលគ្រប់គ្នាៗចង់ឲកើតមានឡើង ក្តីស្រមៃនោះបានក្លាយជាការពិតហើយ! STING
                                     MUSICVERSE សូមនាំយក ការប្រគុំតន្រ្តី THE Q RISE OF THE QUEEN – AOK SOKUNKANHA SOLO
                                     TOUR CONCERT ទៅដល់ខេត្តបាត់ដំបង ( កីឡាដ្ឋានខេត្ត វាលបែកចាន ក្រុងបាត់ដំបង ) នៅថ្ងៃទី

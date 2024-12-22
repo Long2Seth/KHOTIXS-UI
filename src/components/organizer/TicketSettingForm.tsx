@@ -283,10 +283,11 @@ export function TicketSettingsForm() {
 
                 <div className="lg:col-span-2 flex justify-between">
                     <Button
+                        onClick={() => router.push("/organizer/events")}
                         className="w-24 text-red-500 border border-red-500 rounded-[6px] hover:text-red-500 hover:bg-red-300/10"
                         size={"lg"}>Cancel</Button>
                     <Button
-                        onClick={() => router.push("/organizer/events/detail-event")}
+                        onClick={() => router.push("/organizer/events/")}
                         className="bg-primary-color w-24 rounded-[6px] text-secondary-color-text  hover:bg-primary-color/90 dark:text-secondary-color-text"
                         size={"lg"}>Save</Button>
                 </div>

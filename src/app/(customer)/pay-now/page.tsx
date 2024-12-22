@@ -1,5 +1,6 @@
 import StepperComponent from "@/components/customer/StepperComponent/StepperComponent";
 import TitleAndDesComponent from "@/components/customer/TitleAndDesComponent/TitleAndDesComponent";
+import PayNowComponent from "@/components/customer/payNow/PayNowComponent";
 
 export default function PayNow(){
     return (
@@ -15,6 +16,7 @@ export default function PayNow(){
             {/* Section Payment Details */}
             <section className={`container mx-auto px-[20px] lg:px-[135px] py-[50px] flex flex-col justify-center items-center gap-[40px]`}>
                 <StepperComponent />
+                <PayNowComponent/>
             </section>
         </>
     )
