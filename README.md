@@ -18,15 +18,15 @@ KHOTIXS, established in 2024 by Institute of Science and Technology Advanced Dev
 
 ### 🗂️Pages
 
-| User                  | Event Organizer |
-|-----------------------|-----------------|
-| Home (...%)           |                 |       
-| About (...%)          |                 |       
-| Contact (...%)        |                 |       
-| Event Category (...%) |                 |       
-| Event Detail (...%)   |                 |       
-| Order (...%)          |                 |       
-| Confirm Order (...%)  |                 | 
-| Payment (...%)        |                 |
-| Profile (...%)        |                 |
-| Setting (...%)        |                 |
+| User                  | Event Organizer | Handle By |
+|-----------------------|-----------------|-----------|
+| Home (...%)           |                 |           |
+| About (...%)          |                 |           |
+| Contact (...%)        |                 |           |
+| Event Category (...%) |                 |           |
+| Event Detail (...%)   |                 |           |
+| Order (...%)          |                 |           |
+| Confirm Order (...%)  |                 |           |
+| Payment (...%)        |                 |           |
+| Profile (...%)        |                 |           |
+| Setting (...%)        |                 |           |
