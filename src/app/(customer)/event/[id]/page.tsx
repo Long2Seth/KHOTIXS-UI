@@ -25,8 +25,8 @@ export default function EventByCategory() {
             {
                 isLoading ? <SkeletonEventByCategory/> :
                     <section
-                        className="container mx-auto w-full bg-khotixs-background-white dark:bg-khotixs-background-dark flex flex-col justify-center items-start h-auto">
-                        <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text uppercase my-[20px] md:my-[30px] xl:my-10 ">
+                        className="container mx-auto w-full bg-khotixs-background-white dark:bg-khotixs-background-dark flex flex-col justify-center items-start h-auto space-y-[30px] md:space-y-[50px] xl:space-y-[70px] mb-[30px] md:mb-50px] xl:mb-[70px] ">
+                        <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text uppercase  ">
                             {id} Events
                         </h1>
                         <section

@@ -6,7 +6,7 @@ export function UpcomingEventComponent() {
 
     return (
         <section
-            className=" container mx-auto w-full bg-khotixs-background-white dark:bg-khotixs-background-dark flex flex-col justify-center items-center h-auto ">
+            className=" container mx-auto w-[350px] p-5 sm:w-full bg-khotixs-background-white dark:bg-khotixs-background-dark flex flex-col justify-center items-center h-auto ">
             <section className=" w-full flex flex-col justify-center items-center ">
                 <h1 className=" text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">
                     UPCOMING EVENTS
@@ -20,7 +20,7 @@ export function UpcomingEventComponent() {
                 </p>
             </section>
             <section
-                className=" grid grid-cols-2 gap-2 md:px-[85px] lg:px[90px] xl:gap-10 ">
+                className=" grid grid-cols-2 gap-2 sm:px-[100px] md:px-[0px] md:gap-5 lg:px-[190px] xl:px-[220px] ">
                 {upcomingData.map((event, index) => (
                     <CardComponent key={index} event={event}/>
                 ))}

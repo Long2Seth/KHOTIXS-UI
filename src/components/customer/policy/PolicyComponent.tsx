@@ -35,7 +35,7 @@ export default function PolicyComponent (){
                                     {/* Privacy Policy */}
                                     <div className=" bg-white dark:bg-secondary-color p-4 rounded-[6px] ">
                                         <div className="relative flex items-center gap-3 my-2 ">
-                                            <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold mb-2">
+                                            <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold mb-2 dark:text-white">
                                                 Privacy Policy
                                             </h2>
                                         </div>
@@ -50,7 +50,7 @@ export default function PolicyComponent (){
                                     {/* Responsibilities */}
                                     <div className="bg-white dark:bg-secondary-color p-4 rounded-[6px] ">
                                         <div className=" relative flex items-center gap-3 my-2 ">
-                                            <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold mb-2">
+                                            <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold mb-2 dark:text-white">
                                                 Responsibilities
                                             </h2>
                                         </div>
@@ -63,7 +63,7 @@ export default function PolicyComponent (){
                                     {/* Security Policy */}
                                     <div className="bg-white dark:bg-secondary-color p-4 rounded-[6px] ">
                                         <div className=" flex items-center gap-3 my-2 ">
-                                            <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold mb-2">
+                                            <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold mb-2 dark:text-white">
                                                 Security Policy
                                             </h2>
                                         </div>
@@ -78,7 +78,7 @@ export default function PolicyComponent (){
                                     {/* Terms of Use */}
                                     <div className="bg-white dark:bg-secondary-color p-4 rounded-[6px] ">
                                         <div className=" flex items-center gap-3 my-2 ">
-                                            <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold mb-2">
+                                            <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold mb-2 dark:text-white">
                                                 Terms of Use
                                             </h2>
                                         </div>

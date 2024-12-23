@@ -106,11 +106,11 @@ export default function EventComponent() {
 
                         <Select onValueChange={setStatus}>
                             <SelectTrigger
-                                className={`hidden sm:block px-3 max-w-[250px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text ${status === "all" ? "text-gray-400" : "text-black"}`}>
+                                className={`hidden sm:flex px-3 max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text ${status === "all" ? "text-gray-400" : "text-black"}`}>
                                 <SelectValue placeholder="Status"/>
                             </SelectTrigger>
                             <SelectContent
-                                className="min-w-[200px] max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                                className="min-w-[220px] max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
                                 <SelectItem value="all">All</SelectItem>
                                 <SelectItem value="enable">Enable</SelectItem>
                                 <SelectItem className=" text-red-500 " value="disable">Disable</SelectItem>

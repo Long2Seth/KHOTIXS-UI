@@ -105,7 +105,7 @@ export default function PaymentTable() {
 
                                 <Select onValueChange={setStatus}>
                                     <SelectTrigger
-                                        className={`hidden sm:block px-3 max-w-[250px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text ${status === "all" ? "text-gray-400" : "text-black"}`}>
+                                        className={`hidden sm:flex px-3 max-w-[250px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text ${status === "all" ? "text-gray-400" : "text-black"}`}>
                                         <SelectValue placeholder="Status"/>
                                     </SelectTrigger>
                                     <SelectContent

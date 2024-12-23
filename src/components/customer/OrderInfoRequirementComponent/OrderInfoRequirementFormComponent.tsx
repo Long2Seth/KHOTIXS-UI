@@ -150,14 +150,14 @@ export default function OrderInfoRequirementFormComponent() {
                             />
                             <div className="flex gap-[10px] pt-[10px]">
                                 <Button
-                                    className="w-full bg-white p-[12px] text-red-600 border-[1px] border-red-600 hover:bg-slate-200 dark:bg-khotixs-background-dark dark:text-red-600 dark:border-red-600 rounded-[6px] "
+                                    className="w-full bg-white p-[12px] text-red-600 border-[1px] hover:text-white border-red-600 dark:text-label-paid dark:bg-khotixs-background-dark dark:border-red-600 hover:bg-red-500 dark:hover:bg-red-500 dark:hover:text-white dar:hover:text-white rounded-[6px] "
                                     onClick={() => router.back()}
                                 >
                                     Cancel
                                 </Button>
                                 <Button
                                     type="submit"
-                                    className="w-full bg-primary-color text-secondary-color-text p-[12px] hover:bg-primary-color dark:text-secondary-color-text rounded-[6px]   "
+                                    className="w-full bg-primary-color text-secondary-color-text p-[12px] hover:bg-primary-color dark:text-secondary-color-text rounded-[6px] hover:bg-primary-color/80 "
                                 >
                                     Payment Details
                                 </Button>

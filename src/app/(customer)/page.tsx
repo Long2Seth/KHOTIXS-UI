@@ -33,7 +33,7 @@ export default function Home() {
             {
                 isLoading ? <SkeletonHomePageComponent/> :
                     <main
-                        className="flex flex-col bg-khotixs-background-white dark:bg-khotixs-background-dark space-y-[50px] md:space-y-[80px] xl:space-y-[100px] mb-[50px] md:mb-80px] xl:mb-[100px]">
+                        className="flex flex-col bg-khotixs-background-white dark:bg-khotixs-background-dark space-y-[30px] md:space-y-[50px] xl:space-y-[70px] mb-[30px] md:mb-50px] xl:mb-[70px]">
                         {/* Hero section */}
                         <Image
                             layout="responsive"
@@ -52,7 +52,7 @@ export default function Home() {
                         {/* Technology section */}
 
                         <section
-                            className="container mx-auto w-[350px] p-5  sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            className="container mx-auto w-[350px] p-5 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
                             <section
                                 className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row lg:my-[15px] w-full lg:pr-[32px] 2xl:pr-[62px] items-end">
                                 <InfoCard

@@ -100,16 +100,16 @@ export default function Profile() {
                                 {/* Profile Details Section */}
                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-y-2">
                                     <div className="flex items-start gap-2 col-span-1">
-                                        <CgProfile className="w-5 h-5 mt-1 text-gray-300" />
-                                        <div className="text-title-color text-base md:text-lg xl:text-xl dark:text-gray-300">Username</div>
+                                        <CgProfile className="w-5 h-5 mt-1 text-gray-400" />
+                                        <div className="text-gray-400 text-base md:text-lg xl:text-xl dark:text-gray-300">Username</div>
                                     </div>
                                     <div className="col-span-3">
                                         <p className="text-title-color text-base md:text-lg xl:text-xl font-medium dark:text-dark-description-color">{profiles[0].username}</p>
                                     </div>
 
                                     <div className="flex items-start gap-2 col-span-1">
-                                        <MdOutlineWorkOutline className="w-5 h-5 mt-1 text-gray-300" />
-                                        <div className="text-title-color text-base md:text-lg xl:text-xl dark:text-gray-300">Position</div>
+                                        <MdOutlineWorkOutline className="w-5 h-5 mt-1 text-gray-400" />
+                                        <div className="text-gray-400 text-base md:text-lg xl:text-xl dark:text-gray-300">Position</div>
                                     </div>
                                     <div className="col-span-3">
                                         <p className="text-title-color text-base md:text-lg xl:text-xl font-medium dark:text-dark-description-color">{profiles[0].position}</p>
@@ -117,16 +117,16 @@ export default function Profile() {
 
 
                                     <div className="flex items-start gap-2 col-span-1">
-                                        <MapPin className="w-5 h-5 mt-1 text-gray-300" />
-                                        <div className="text-title-color text-base md:text-lg xl:text-xl dark:text-gray-300">Address</div>
+                                        <MapPin className="w-5 h-5 mt-1 text-gray-400" />
+                                        <div className="text-gray-400 text-base md:text-lg xl:text-xl dark:text-gray-300">Address</div>
                                     </div>
                                     <div className="col-span-3">
                                         <p className="text-title-color text-base md:text-lg xl:text-xl font-medium dark:text-dark-description-color">{profiles[0].address}</p>
                                     </div>
 
                                     <div className="flex items-start gap-2 col-span-1">
-                                        <PiNotePencilLight className="w-5 h-5 mt-1 text-gray-300" />
-                                        <div className="text-title-color text-base md:text-lg xl:text-xl dark:text-gray-300">Description</div>
+                                        <PiNotePencilLight className="w-5 h-5 mt-1 text-gray-400" />
+                                        <div className="text-gray-400 text-base md:text-lg xl:text-xl dark:text-gray-300">Description</div>
                                     </div>
                                     <div className="font-medium text-sm col-span-3">
                                         <p className="text-title-color text-base md:text-lg xl:text-xl font-medium dark:text-dark-description-color">{profiles[0].description}</p>

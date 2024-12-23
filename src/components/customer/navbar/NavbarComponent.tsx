@@ -170,7 +170,7 @@ const NavbarComponent = () => {
                                     {/*    Login*/}
                                     {/*</Button>*/}
                                     <Button
-                                        onClick={() => router.push("http://localhost:8000/oauth2/authorization/nextjs")}
+                                        onClick={() => router.push("/oauth2/authorization/nextjs")}
                                         className=" bg-primary-color lg:text-md xl:text-lg border-[1px] rounded-[5px] text-secondary-color-text font-[10px] hover:bg-primary-color border-primary-color">
                                         Log In
                                     </Button>

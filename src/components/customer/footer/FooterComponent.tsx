@@ -44,7 +44,7 @@ export function FooterComponent() {
                                 </div>
 
                                 {/* Event Category */}
-                                <div className="w-full md:ml-[50px] lg:ml-[100px] xl:ml-[100px] ">
+                                <div className="w-full md:pl-[50px] lg:pl-[0px] xl:ml-[100px] ">
                                     <div className=" w-auto ">
                                         <h3 className="text-title-color text-xl font-bold dark:text-secondary-color-text  my-5">Event
                                             Category</h3>
@@ -94,7 +94,7 @@ export function FooterComponent() {
                                 </div>
 
                                 {/* Sponsors and Organizer */}
-                                <div className="w-full flex flex-col md:ml-[50px] lg:ml-[100px] xl:ml-0 xl:items-end my-5">
+                                <div className="w-full flex flex-col md:pl-[50px] lg:pl-[0px] xl:ml-0 xl:items-end my-5">
                                     <div className=" flex flex-col ">
                                         <h3 className="text-title-color text-xl font-bold dark:text-secondary-color-text  my-2 ">
                                             Sponsors By
@@ -114,13 +114,13 @@ export function FooterComponent() {
                                             />
                                         </div>
                                     </div>
-                                    <div>
+                                    <div className=" ">
                                         <h3 className="text-title-color text-xl font-bold dark:text-secondary-color-text my-2 ">
                                             Organize By
                                         </h3>
                                         <div>
                                             <Image
-                                                width={200}
+                                                width={215}
                                                 height={100}
                                                 src="/images/iSTAD-logo.png"
                                                 alt="Organizer Logo"
