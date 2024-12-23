@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import { Card, CardContent } from "@/components/ui/card";
 import { navMenus } from "@/lib/customer/profileMenu";
 import Link from "next/link";

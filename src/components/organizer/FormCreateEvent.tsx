@@ -87,13 +87,13 @@ export function CreateEventForm() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         const formData = {
-            title: (e.target as any).title.value,
-            category: (e.target as any).category.value,
-            location: (e.target as any).location.value,
+            title: ((e.target as HTMLFormElement).elements.namedItem('title') as HTMLInputElement).value,
+            category: ((e.target as HTMLFormElement).elements.namedItem('category') as HTMLSelectElement).value,
+            location: ((e.target as HTMLFormElement).elements.namedItem('location') as HTMLInputElement).value,
             startDate,
             endDate,
-            capacity: parseInt((e.target as any).capacity.value),
-            description: (e.target as any).description.value,
+            capacity: parseInt(((e.target as HTMLFormElement).elements.namedItem('capacity') as HTMLInputElement).value),
+            description: ((e.target as HTMLFormElement).elements.namedItem('description') as HTMLTextAreaElement).value,
             imageUrl,
         };
 
@@ -116,7 +116,6 @@ export function CreateEventForm() {
             }
         }
     };
-
     return (
         <form
             onSubmit={handleSubmit}
