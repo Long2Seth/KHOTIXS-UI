@@ -159,8 +159,6 @@ export default function EventDetails() {
                                         style={{backgroundImage: `url('/event/ticket.png')`}}
                                     >
                                         <div className="absolute inset-0 flex flex-col justify-center items-center">
-                                            <h3 className="text-sm sm:text-md lg:text-lg font-semibold text-white">{ticket.dd} {ticket.mmm}</h3>
-                                            <p className="text-xs text-muted-foreground text-white">{ticket.date} {ticket.yyyy}</p>
                                         </div>
                                     </section>
                                     <div className="grow flex justify-between items-center p-2 lg:p-4">
@@ -243,7 +241,7 @@ export default function EventDetails() {
                                 {/*))}*/}
                                 <div className="flex items-center justify-between border p-4 pl-6 rounded-[8px]">
                                     <span
-                                        className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">${total.toFixed(2)}</span>
+                                        className="text-label-paid text-lg md:text-2xl xl:text-4xl font-bold ">${total.toFixed(2)}</span>
                                     <Button
                                         onClick={() => router.push('/order-info-requirement')}
                                         className="bg-primary-color hover:bg-primary-color hover:bg-opacity-85 text-label-text-primary rounded-[6px] h-[45px] font-bold">

@@ -129,12 +129,12 @@ export default function AboutUsComponent() {
 
 
                         <section
-                            className="container mx-auto w-full h-auto text-secondary-color dark:text-secondary-color-text">
+                            className="container overflow-x-hidden mx-auto w-full h-auto text-secondary-color dark:text-secondary-color-text">
                             <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold uppercase text-center dark:text-secondary-color-text ">
                                 OUR MENTORS
                             </h1>
                             <section
-                                className="grid grid-cols-1 sm:grid-cols-2 justify-center items-center w-full gap-5 px-5 my-[20px]">
+                                className="grid grid-cols-1 sm:grid-cols-2 justify-center items-center w-fullz gap-5 px-5 my-[20px]">
                                 {MentorData.map((mentor) => (
                                     <div className="flex flex-col justify-center items-center" key={mentor.name}>
                                         <p className="text-[12px] text-title-color md:text-lg xl:text-2xl font-semibold uppercase my-[8px] dark:text-dark-description-color">
@@ -142,11 +142,11 @@ export default function AboutUsComponent() {
                                         </p>
                                         <div className="flex gap-[15px] justify-center items-center">
                                             <div
-                                                className="w-[120px] h-[120px] rounded-[5px] md:w-[140px] md:h-[140px] bg-cover bg-center"
+                                                className="w-[100px] h-[100px] rounded-[5px] lg:w-[130px] lg:h-[130px] bg-cover bg-center"
                                                 style={{backgroundImage: `url(${mentor.image})`}}
                                             />
 
-                                            <div className="max-w-[80%] flex flex-col text-center ">
+                                            <div className=" w-[190px] sm:w-[180px] lg:w-[260px] flex flex-col text-center ">
 
                                                 <ul className="flex flex-col gap-2 ">
 
@@ -158,9 +158,9 @@ export default function AboutUsComponent() {
                                                             key={index}>
                                                             <li className="flex items-center ">
                                                                 {React.createElement(iconMap[link.icon], {
-                                                                    className: "text-title-color w-[22px] h-[22px] md:w-[30px] md:h-[30px] dark:text-dark-description-color",
+                                                                    className: "text-title-color w-[20px] h-[20px] md:w-[26px] md:h-[26px] dark:text-dark-description-color",
                                                                 })}
-                                                                <p className="bg-white text-start text-description-color  mx-[2px] px-[2px] w-full rounded-[5px] text-[10px] line-clamp-1 md:text-sm dark:bg-secondary-color dark:text-gray-200">
+                                                                <p className=" text-start text-description-color  mx-[2px] px-[2px] w-full rounded-[5px] text-[10px] line-clamp-1 md:text-sm  dark:text-gray-200">
                                                                     {link.name}
                                                                 </p>
                                                             </li>
@@ -179,7 +179,7 @@ export default function AboutUsComponent() {
 
 
                         <section
-                            className="container mx-auto w-full h-auto text-secondary-color dark:text-secondary-color-text">
+                            className="container overflow-x-hidden mx-auto w-full h-auto text-secondary-color dark:text-secondary-color-text">
                         <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold uppercase text-center my-[20px] dark:text-secondary-color-text ">
                                 OUR MEMBERS
                             </h1>
@@ -194,12 +194,12 @@ export default function AboutUsComponent() {
                                         </p>
                                         <div className="flex gap-[15px] justify-center items-center">
                                             <div
-                                                className=" w-[100px] h-[100px] rounded-[5px] md:w-[140px] md:h-[140px] bg-cover bg-center"
+                                                className=" w-[100px] h-[100px] rounded-[5px] bg-cover bg-center"
                                                 style={{backgroundImage: `url(${mentor.image})`}}
                                             />
 
                                             <div
-                                                className="max-w-[80%] flex flex-col text-center">
+                                                className="w-[200px] sm:w-[160px] md:w-[210px] flex flex-col text-center">
 
                                                 <ul className="flex flex-col gap-2">
 
@@ -208,9 +208,9 @@ export default function AboutUsComponent() {
                                                            key={index}>
                                                             <li className="flex items-center">
                                                                 {React.createElement(iconMap[link.icon], {
-                                                                    className: "text-title-color w-[22px] h-[22px] md:w-[30px] md:h-[30px] dark:text-dark-description-color",
+                                                                    className: "text-title-color w-[20px] h-[20px]  dark:text-dark-description-color",
                                                                 })}
-                                                                <p className="bg-white text-start text-description-color  mx-[2px] px-[2px] max-w-full rounded-[5px] text-[10px] line-clamp-1 md:text-sm dark:bg-secondary-color dark:text-gray-200">
+                                                                <p className=" text-start text-description-color  mx-[2px] px-[2px] max-w-full rounded-[5px] text-[10px] line-clamp-1 md:text-sm  dark:text-gray-200">
                                                                     {link.name}
                                                                 </p>
                                                             </li>

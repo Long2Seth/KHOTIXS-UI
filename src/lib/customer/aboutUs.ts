@@ -27,8 +27,8 @@ export const MentorData: PersonType[] = [
         info: [
             { icon: "IoLogoGithub", link: "https://github.com/sokpheng001" ,name:"sokpheng001   "},
             { icon: "FaFacebook", link: "https://web.facebook.com/profile.php?id=100085375058298" ,name:"Kim Chansokpheng"},
-            { icon: "AiFillGoogleCircle", link: "https://github.com/it-chhaya" , name:""},
-            { icon: "FaTelegram", link: "" ,name:"Telegram"},
+            { icon: "AiFillGoogleCircle", link: "kimchansokpheng123@gmail.com" , name:"kimchansokpheng123@gmail.com"},
+            { icon: "FaTelegram", link: "@sokpheng001" ,name:"@sokpheng001"},
         ],
     },
 ];
