@@ -5,7 +5,7 @@ import ConcertEventComponent from "@/components/customer/home/ConcertEventCompon
 import SportEventComponent from "@/components/customer/home/SportEventComponent";
 import CommunityEventComponent from "@/components/customer/home/CommunityEventComponent";
 import ConferenceEventComponent from "@/components/customer/home/ConferenceEventComponent";
-import Image from "next/image";
+// import Image from "next/image";
 import TechnologyComponent from "@/components/customer/technology/TechnologyComponent";
 
 
@@ -17,13 +17,13 @@ export default function Home() {
 
 
             {/* Hero section*/}
-            <Image
+            {/* <Image
                 layout="responsive"
                 width={100}
                 height={100}
                 src="/icons/hero-section.gif"
                 alt="hero-section"
-            />
+            /> */}
 
             <CardCategory/>
 
