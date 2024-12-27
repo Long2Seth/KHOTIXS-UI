@@ -28,10 +28,6 @@ const NavbarComponent = () => {
     const [date, setDate] = React.useState<Date>();
     const router = useRouter();
 
-
-
-
-
     useEffect(() => {
         // Simulate a network request delay
         const timer = setTimeout(() => {
@@ -63,7 +59,7 @@ const NavbarComponent = () => {
     return (
         <>
             {isLoading ? <SkeletonNavbarComponent /> :
-                <nav className=" w-full top-[-60px] sticky z-50 bg-white flex flex-col dark:bg-khotixs-background-dark ">
+                <nav className="w-full top-[0px] sticky z-50 bg-white flex flex-col dark:bg-khotixs-background-dark">
                     <section
                         className=" container mx-auto w-full h-[60px] bg-white py-[10px]  flex px-5 lg:px-10 justify-center gap-5 dark:bg-khotixs-background-dark ">
                         <CiBullhorn className="  w-[40px] p-[8px] rounded-[50%] text-gray-400 bg-gray-200  h-full "/>
@@ -179,8 +175,6 @@ const NavbarComponent = () => {
                         </div>
                     </section>
 
-
-
                     <div
                         onClick={toggleMenu}
                         className=" absolute top-[85px] pr-5 lg:pr-10 right-0 inline-flex items-center w-10 h-10 justify-center text-3xl text-primary-color lg:hidden focus:outline-none dark:text-primary-color "
@@ -190,6 +184,7 @@ const NavbarComponent = () => {
                         <span className="sr-only">{isMenuOpen ? "Close main menu" : "Open main menu"}</span>
                         {isMenuOpen ? <IoMdCloseCircle /> : <IoMenu/>}
                     </div>
+
                     <div
                         id="mega-menu-full"
                         className={` lg:hidden items-center justify-between font-semibold dark:bg-khotixs-background-dark ${isMenuOpen ? "block" : "hidden"} w-full `}
@@ -213,6 +208,5 @@ const NavbarComponent = () => {
         </>
     );
 };
-
 
 export default NavbarComponent;

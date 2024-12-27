@@ -1,9 +1,10 @@
 'use client';
+
 import * as React from "react";
 import {HiOutlineLocationMarker} from "react-icons/hi";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
-
+import { Badge } from "@/components/ui/badge";
 
 type CardUpcomingProps = {
     event: {
@@ -74,10 +75,10 @@ export function CardComponent({event}: CardUpcomingProps) {
                         </div>
                     </div>
                 </section>
-                <button
-                    className={`absolute bottom-0 right-0 min-w-[60px] text-white text-sm md:text-base xl:text-lg md:text-md lg:text-lg md:p-[2px] lg:p-1 xl:px-3 xl:py-2 rounded-br-[5px] rounded-l-[5px] ${getLabelClass(event.labelType)}`}>
+                <Badge
+                    className={`absolute bottom-2 right-2 dark:text-black text-white rounded-[6px] ${getLabelClass(event.labelType)}`}>
                     {event.labelType.toLowerCase() === 'free' ? 'FREE' : `$${event.price}`}
-                </button>
+                </Badge>
             </a>
         </section>
     );

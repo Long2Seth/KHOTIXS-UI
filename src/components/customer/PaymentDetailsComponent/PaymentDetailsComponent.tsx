@@ -1,11 +1,10 @@
 'use client'
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
 import {MinusIcon, PlusIcon} from "lucide-react";
-import {useEffect, useState} from "react";
 import {PaymentDetailsSkeleton} from "@/components/customer/PaymentDetailsComponent/PaymentDetailsSkeleton";
 
 
@@ -14,19 +13,21 @@ export default function PaymentDetailsComponent() {
     // Router
     const router = useRouter();
 
+    const [isLoading] = useState(true);
+
     // Ticket Type
-    enum TicketType {
-        VIP = "VIP",
-        Premium = "Premium",
-        Regular = "Regular",
-        Free = "Free"
-    }
+    // enum TicketType {
+    //     VIP = "VIP",
+    //     Premium = "Premium",
+    //     Regular = "Regular",
+    //     Free = "Free"
+    // }
 
     // Style
     const detailStyle = "text-[16px] font-medium";
 
     // Total Price
-    const totalPrice = `45.00`;
+    // const totalPrice = `45.00`;
 
     // Pay Now 
     function payNow() {
@@ -50,7 +51,7 @@ export default function PaymentDetailsComponent() {
                                     </div>
                                     <div
                                         className="flex gap-2.5 flex-col lg:flex-row items-start lg:items-center lg:justify-between">
-                                        <p className={detailStyle}>Ticket Type: {TicketType.Regular}</p>
+                                        <p className={detailStyle}>Ticket Type:</p>
                                         {/*Count Button*/}
                                         <section className="w-fit flex items-center justify-end gap-1 lg:gap-2">
                                             <Button
@@ -78,15 +79,15 @@ export default function PaymentDetailsComponent() {
                                 <div className="flex flex-col gap-2.5">
                                     <div className="grid grid-cols-2">
                                         <p className={detailStyle}>Name</p>
-                                        <p className={detailStyle}>{preOrder.fullName ?? `Empty`}</p>
+                                        <p className={detailStyle}></p>
                                     </div>
                                     <div className="grid grid-cols-2">
                                         <p className={detailStyle}>Email</p>
-                                        <p className={detailStyle}>{preOrder.email ?? `Empty`}</p>
+                                        <p className={detailStyle}></p>
                                     </div>
                                     <div className="grid grid-cols-2">
                                         <p className={detailStyle}>Phone Number</p>
-                                        <p className={detailStyle}>{preOrder.phoneNumber ?? `Empty`}</p>
+                                        <p className={detailStyle}></p>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +97,7 @@ export default function PaymentDetailsComponent() {
                             <div
                                 className="flex flex-col gap-5 w-full lg:w-[670px] border border-[#E5E7EB] rounded-[8px] p-[20px]">
                                 <h2 className="text-[18px] uppercase font-bold">total</h2>
-                                <p className="text-[#B32615] font-bold text-[32px]">$ {totalPrice}</p>
+                                <p className="text-[#B32615] font-bold text-[32px]">$</p>
                             </div>
                         </section>
                         {/* Payment Method */}
