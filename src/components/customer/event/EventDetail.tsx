@@ -61,7 +61,7 @@ export default function EventDetails() {
 
     return (
         <main className="min-h-screen">
-            <div className="container mx-auto px-2 py-8 ">
+            <div className="container mx-auto px-2 py-8">
                 {/* Breadcrumb */}
                 <section className="mb-6 flex items-center gap-2 text-sm text-muted-foreground">
                     <Breadcrumb>
@@ -154,7 +154,13 @@ export default function EventDetails() {
                             {tickets.map((ticket) => (
                                 <div key={ticket.id}
                                      className="flex rounded-xl border">
-                                    <Image className=" h-24 w-24 md:h-24 md:w-28 lg:h-32 lg:w-36 object-cover" src="/event/ticket.png" height={400} width={400} alt="ticket"/>
+                                    <section
+                                        className="flex-none relative h-24 w-24 md:h-20 md:w-28 lg:h-28 lg:w-32 rounded-xl overflow-hidden bg-cover bg-center"
+                                        style={{backgroundImage: `url('/event/ticket.png')`}}
+                                    >
+                                        <div className="absolute inset-0 flex flex-col justify-center items-center">
+                                        </div>
+                                    </section>
                                     <div className="grow flex justify-between items-center p-2 lg:p-4">
                                         <section className="">
                                             <h3 className="text-title-color text-base md:text-lg xl:text-xl font-bold uppercase dark:text-secondary-color-text">{ticket.name}</h3>
@@ -235,7 +241,7 @@ export default function EventDetails() {
                                 {/*))}*/}
                                 <div className="flex items-center justify-between border p-4 pl-6 rounded-[8px]">
                                     <span
-                                        className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">${total.toFixed(2)}</span>
+                                        className="text-label-paid text-lg md:text-2xl xl:text-4xl font-bold ">${total.toFixed(2)}</span>
                                     <Button
                                         onClick={() => router.push('/order-info-requirement')}
                                         className="bg-primary-color hover:bg-primary-color hover:bg-opacity-85 text-label-text-primary rounded-[6px] h-[45px] font-bold">

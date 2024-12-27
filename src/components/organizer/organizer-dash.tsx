@@ -2,51 +2,101 @@
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer} from 'recharts';
 import {eventData} from '@/lib/organizer/barchartData';
+import { LuNotebookPen } from "react-icons/lu";
+
 
 export default function OrganizerDashboard() {
     return (
         <section
-            className=" space-y-[50px] md:space-y-[80px] xl:space-y-[100px] my-[50px] md:my-[80px] xl:my-[100px] ">
+            className=" space-y-[50px] md:space-y-[80px] xl:space-y-[100px] my-[50px] md:my-[80px] xl:my-[80px] ">
 
             <section className=" w-full ">
-                <h1 className="w-full text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text my-10">TOTAL
-                    EVENTS</h1>
+                <section className=" flex flex-row items-center gap-3 pl-1">
+                    <LuNotebookPen className=" h-8 w-8 "/>
+                    <h1 className="w-full text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text my-10">  SUMMARY</h1>
+                </section>
 
-                <div className="grid gap-6 md:grid-cols-2">
+                <div className="grid gap-6 lg:grid-cols-2">
                     {/* Metrics Section */}
-                    <div className="grid gap-4">
+                    <div className="grid gap-4 grid-cols-2 lg:grid-cols-2">
                         <Card
-                            className="dark:bg-khotixs-background-dark dark:border-[1px] rounded-[6px] bg-white border-secondary-color-text dark:border-gray-50">
-                            <CardHeader className="space-y-0 p-2">
+                            className="dark:bg-khotixs-background-dark dark:border-[1px] rounded-[6px] bg-white border-secondary-color-text dark:border-gray-50 p-[20px] md:p-[30px] hover:bg-gray-50/80">
+                            <CardHeader className="space-y-1 m-1">
                                 <CardTitle
-                                    className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-dark-description-color">
-                                    Event Publish
+                                    className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text">
+
+                                    Total Events
                                 </CardTitle>
+                                <CardContent>
+                                    <div className="text-2xl font-bold dark:text-secondary-color-text pl-2">10</div>
+                                </CardContent>
                             </CardHeader>
-                            <CardContent>
-                                <div className="text-2xl font-bold dark:text-secondary-color-text pl-[30px] ">0</div>
-                            </CardContent>
+
                         </Card>
 
                         <Card
-                            className="dark:bg-khotixs-background-dark dark:border-[1px] rounded-[6px] bg-white border-secondary-color-text dark:border-gray-50">
-                            <CardHeader className="space-y-0 p-2">
+                            className="dark:bg-khotixs-background-dark dark:border-[1px] rounded-[6px] bg-white border-secondary-color-text dark:border-gray-50 p-[20px] md:p-[30px] ">
+                            <CardHeader className="space-y-1 m-1">
+                                <CardTitle
+                                    className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-dark-description-color">
+                                    Total Tickets
+                                </CardTitle>
+                                <CardContent>
+                                <div className="text-2xl font-bold dark:text-secondary-color-text pl-2 ">50</div>
+                            </CardContent>
+                            </CardHeader>
+
+                        </Card>
+
+                        <Card
+                            className="dark:bg-khotixs-background-dark dark:border-[1px] rounded-[6px] bg-white border-secondary-color-text dark:border-gray-50 p-[20px] md:p-[30px] ">
+                            <CardHeader className="space-y-1 m-1">
                                 <CardTitle
                                     className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text">
                                     Event Unpublish
                                 </CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="text-2xl font-bold dark:text-secondary-color-text pl-[30px]">2</div>
+                                <CardContent>
+                                <div className="text-2xl font-bold dark:text-secondary-color-text pl-2">5</div>
                             </CardContent>
+                            </CardHeader>
+
                         </Card>
+                        <Card
+                            className="dark:bg-khotixs-background-dark dark:border-[1px] rounded-[6px] bg-white border-secondary-color-text dark:border-gray-50 p-[20px] md:p-[30px] ">
+                            <CardHeader className="space-y-1 m-1">
+                                <CardTitle
+                                    className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-dark-description-color">
+                                    Event Publish
+                                </CardTitle>
+                                <CardContent>
+                                    <div className="text-2xl font-bold dark:text-secondary-color-text pl-2 ">5</div>
+                                </CardContent>
+                            </CardHeader>
+
+                        </Card>
+
+                        <Card
+                            className=" col-span-2 dark:bg-khotixs-background-dark dark:border-[1px] rounded-[6px] bg-white border-secondary-color-text dark:border-gray-50  p-[20px] md:p-[30px] ">
+                            <CardHeader className="space-y-1 m-1">
+                                <CardTitle
+                                    className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text">
+                                    Total Payment
+                                </CardTitle>
+                                <CardContent>
+                                    <div className="text-2xl font-bold dark:text-secondary-color-text pl-2">$1020</div>
+                                </CardContent>
+                            </CardHeader>
+
+                        </Card>
+
+
                     </div>
 
                     {/* Chart Section */}
                     <Card
-                        className="dark:bg-khotixs-background-dark dark:border-[1px] rounded-[6px] bg-white border-secondary-color-text dark:border-gray-50">
+                        className="dark:bg-khotixs-background-dark dark:border-[1px] p-[20px] md:p-[30px] rounded-[6px] bg-white border-secondary-color-text dark:border-gray-50">
 
-                        <CardHeader className="dark:text-secondary-color-text p-2">
+                        <CardHeader className="dark:text-secondary-color-text ">
 
                             <CardTitle
                                 className=" text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text ">Bar
@@ -55,8 +105,8 @@ export default function OrganizerDashboard() {
                                 January - June 2024
                             </p>
                         </CardHeader>
-                        <CardContent>
-                            <div className="h-[300px]">
+                        <CardContent className=" w-full h-auto ">
+                            <div className="h-[300px] ">
                                 <ResponsiveContainer width="100%" height="100%">
                                     <BarChart data={eventData} margin={{top: 20, right: 20, left: 20, bottom: 20}}>
                                         <CartesianGrid strokeDasharray="3 3" vertical={false}/>

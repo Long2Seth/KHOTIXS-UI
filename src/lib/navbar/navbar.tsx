@@ -13,10 +13,6 @@ export const menuItems: MenuType[] = [
         name: 'Contact Us'
     },
     {
-        link: '/events',
-        name: 'Sing Up'
-    },
-    {
         link: '/login',
         name: 'Log In'
     }
