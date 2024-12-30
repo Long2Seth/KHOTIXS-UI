@@ -7,9 +7,9 @@ export default function CardCategory() {
         <section
             className="container mx-auto w-full bg-khotixs-background-white dark:bg-khotixs-background-dark font-bold flex flex-col justify-center items-center h-auto">
 
-            <h1 className="text-title-color text-lg my-[15px] md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text">EVENT
-                CATEGORIES</h1>
-
+            <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text">
+                EVENT CATEGORIES
+            </h1>
 
             <section
                 className=" justify-center gap-2 flex flex-wrap rounded-[6px] max-w-[400px] md:max-w-[500px] lg:max-w-[700px] xl:max-w-[900px] 2xl:max-w-[1200px] sm:w-full sm:grid sm:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 md:gap-5 ">

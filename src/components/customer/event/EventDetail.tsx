@@ -1,7 +1,7 @@
 'use client'
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import Image from "next/image"
-import { MinusIcon, PlusIcon } from 'lucide-react'
+import {MinusIcon, PlusIcon} from 'lucide-react'
 import Link from "next/link"
 import {useRouter} from "next/navigation";
 import {
@@ -21,14 +21,14 @@ import {
     RiMap2Line,
     RiTimerLine
 } from "react-icons/ri"
-import { Button } from "@/components/ui/button"
+import {Button} from "@/components/ui/button"
 
 type TicketType = {
     id: string
     name: string
     event: string
     price: number
-    free?: boolean
+    type: string
     soldOut?: boolean
     quantity: number
     date: string
@@ -42,16 +42,52 @@ export default function EventDetails() {
 
     const router = useRouter()
     const [tickets, setTickets] = useState<TicketType[]>([
-        { id: 'vip', event:'THE Q RISE OF THE QUEEN', name: 'VIP - TICKETS', price: 0, free: true, soldOut: true, quantity: 0, date: 'Friday',dd: '30', mmm: 'NOV',  yyyy: '2024'},
-        { id: 'premium', event:'THE Q RISE OF THE QUEEN', name: 'PREMIUM - TICKETS', price: 30.00, soldOut: true, quantity: 0, date: 'Friday',dd: '30', mmm: 'NOV',  yyyy: '2024'},
-        { id: 'standing', event:'THE Q RISE OF THE QUEEN', name: 'STANDING - TICKETS', price: 15.00, soldOut: false, quantity: 3, date: 'Friday',dd: '30', mmm: 'NOV',  yyyy: '2024'}
+        {
+            id: 'vip',
+            event: 'THE Q RISE OF THE QUEEN',
+            name: 'VIP - TICKETS',
+            price: 0,
+            type: "vip",
+            soldOut: true,
+            quantity: 0,
+            date: 'Friday',
+            dd: '30',
+            mmm: 'NOV',
+            yyyy: '2024'
+        },
+        {
+            id: 'premium',
+            event: 'THE Q RISE OF THE QUEEN',
+            name: 'PREMIUM - TICKETS',
+            type: "premium",
+            price: 30.00,
+            soldOut: true,
+            quantity: 0,
+            date: 'Friday',
+            dd: '30',
+            mmm: 'NOV',
+            yyyy: '2024'
+        },
+        {
+            id: 'Regular',
+            event: 'THE Q RISE OF THE QUEEN',
+            name: 'STANDING - TICKETS',
+            type: "Regular",
+            price: 15.00,
+            soldOut: false,
+            quantity: 3,
+            date: 'Friday',
+            dd: '30',
+            mmm: 'NOV',
+            yyyy: '2024'
+        }
     ])
 
     const updateQuantity = (id: string, increment: boolean) => {
         setTickets(tickets.map(ticket => {
             if (ticket.id === id) {
                 const newQuantity = increment ? ticket.quantity + 1 : Math.max(0, ticket.quantity - 1)
-                return { ...ticket, quantity: newQuantity }
+                return {...ticket, quantity: newQuantity}
             }
             return ticket
         }))
@@ -60,8 +96,8 @@ export default function EventDetails() {
     const total = tickets.reduce((sum: number, ticket: TicketType) => sum + (ticket.price * ticket.quantity), 0)
 
     return (
-        <main className="min-h-screen">
-            <div className="container mx-auto px-2 py-8">
+        <main className={`w-full container mx-auto px-5 lg:px-10 `}>
+            <div className="py-7">
                 {/* Breadcrumb */}
                 <section className="mb-6 flex items-center gap-2 text-sm text-muted-foreground">
                     <Breadcrumb>
@@ -74,20 +110,23 @@ export default function EventDetails() {
                             <BreadcrumbSeparator/>
                             <BreadcrumbItem>
                                 <BreadcrumbLink>
-                                    <Link href="/event">Events</Link>
+                                    <Link href="/">Events</Link>
                                 </BreadcrumbLink>
                             </BreadcrumbItem>
                             <BreadcrumbSeparator/>
                             <BreadcrumbItem>
-                                <BreadcrumbPage className="text-primary-color dark:text-primary-color">Event Details</BreadcrumbPage>
+                                <BreadcrumbPage className="text-primary-color dark:text-primary-color">Event
+                                    Details</BreadcrumbPage>
                             </BreadcrumbItem>
                         </BreadcrumbList>
                     </Breadcrumb>
                 </section>
                 {/*Event title*/}
-                <section className="flex space-x-[180px]">
-                    <h1 className="mb-6 text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">THE Q RISE OF THE QUEEN </h1>
-                    <div className="flex items-center rounded-[6px] px-2 text-label-premium h-6 font-bold text-base lg:mt-2 mt-1.5 bg-blue-100 bg-opacity-70 space-x-1">
+                <section className="flex gap-5 mb-7">
+                    <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">THE
+                        Q RISE OF THE QUEEN xfghgfdshdsghhhhhhhhhhhhhhhhhhrtuyrhfghhhhhhhhh        tedgdfsgdfg </h1>
+                    <div
+                        className="flex items-center rounded-[6px] px-2 text-label-premium h-6 mt-1.5 font-bold text-base bg-blue-100 bg-opacity-70 space-x-1">
                         <RiFirefoxLine className=""/>
                         <p>Upcoming</p>
                     </div>
@@ -110,12 +149,16 @@ export default function EventDetails() {
                         {/* event date and time*/}
                         <section className="space-y-6">
                             <section className="space-y-2">
-                                <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text ">DATE AND TIME</h2>
-                                <div className="flex gap-2 items-center dark:text-label-text-primary text-label-description">
+                                <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text ">DATE
+                                    AND TIME</h2>
+                                <div
+                                    className="flex gap-2 items-center dark:text-label-text-primary text-label-description">
                                     <RiCalendarLine className="w-5"/>
-                                    <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">30 November 2024</p>
+                                    <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">30
+                                        November 2024</p>
                                 </div>
-                                <div className="flex gap-2 items-center dark:text-label-text-primary text-label-description">
+                                <div
+                                    className="flex gap-2 items-center dark:text-label-text-primary text-label-description">
                                     <RiTimerLine className="w-5"/>
                                     <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">5:00PM-10:00PM</p>
                                 </div>
@@ -124,15 +167,18 @@ export default function EventDetails() {
                             {/* event location*/}
                             <section className="space-y-2">
                                 <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text  ">LOCATION</h2>
-                                <div className="flex gap-2 items-center dark:text-label-text-primary text-label-description">
+                                <div
+                                    className="flex gap-2 items-center dark:text-label-text-primary text-label-description">
                                     <RiMap2Line className="w-5"/>
-                                    <p className="  text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">កីឡាដ្ឋានខេត្ត វាលបែកចាន ក្រុងបាត់ដំបង</p>
+                                    <p className="  text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">កីឡាដ្ឋានខេត្ត
+                                        វាលបែកចាន ក្រុងបាត់ដំបង</p>
                                 </div>
                             </section>
 
                             {/* event description*/}
                             <section className="space-y-2">
-                                <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text">EVENT DESCRIPTION</h2>
+                                <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text">EVENT
+                                    DESCRIPTION</h2>
                                 <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color ">
                                     ក្តីស្រមៃដែលគ្រប់គ្នាៗចង់ឲកើតមានឡើង ក្តីស្រមៃនោះបានក្លាយជាការពិតហើយ! STING
                                     MUSICVERSE សូមនាំយក ការប្រគុំតន្រ្តី THE Q RISE OF THE QUEEN – AOK SOKUNKANHA SOLO
@@ -144,7 +190,8 @@ export default function EventDetails() {
                                 </p>
                             </section>
                             {/*Note*/}
-                            <p className="text-description-color text-base md:text-lg xl:text-xl text-red-700">ចំណាំ: សូមបង្ហាញកូដ QR
+                            <p className="text-description-color text-base md:text-lg xl:text-xl text-red-700">ចំណាំ:
+                                សូមបង្ហាញកូដ QR
                                 ទៅកាន់ក្រុមការងារដើម្បីផ្ទៀងផ្ទាត់សំបុត្រមុនចូលទស្សនា។</p>
                         </section>
                     </div>
@@ -154,30 +201,60 @@ export default function EventDetails() {
                             {tickets.map((ticket) => (
                                 <div key={ticket.id}
                                      className="flex rounded-xl border">
-                                    <section
-                                        className="flex-none relative h-24 w-24 md:h-20 md:w-28 lg:h-28 lg:w-32 rounded-xl overflow-hidden bg-cover bg-center"
-                                        style={{backgroundImage: `url('/event/ticket.png')`}}
-                                    >
-                                        <div className="absolute inset-0 flex flex-col justify-center items-center">
-                                        </div>
-                                    </section>
+                                    {ticket.type === "vip" ? (
+                                        <section
+                                            className="flex-none relative h-24 w-24 md:h-20 md:w-28 lg:h-28 lg:w-32 rounded-xl overflow-hidden bg-cover bg-center"
+                                            style={{backgroundImage: `url('/event/vip-ticket.png')`}}
+                                        >
+                                            <div className="absolute inset-0 flex flex-col justify-center items-center">
+                                            </div>
+                                        </section>
+                                    ) : ticket.type === "premium" ? (
+                                        <section
+                                            className="flex-none relative h-24 w-24 md:h-20 md:w-28 lg:h-28 lg:w-32 rounded-xl overflow-hidden bg-cover bg-center"
+                                            style={{backgroundImage: `url('/event/premium-ticket.png')`}}
+                                        >
+                                            <div className="absolute inset-0 flex flex-col justify-center items-center">
+                                            </div>
+                                        </section>
+                                    ) : ticket.type === "regular" ? (
+                                        <section
+                                            className="flex-none relative h-24 w-24 md:h-20 md:w-28 lg:h-28 lg:w-32 rounded-xl overflow-hidden bg-cover bg-center"
+                                            style={{backgroundImage: `url('/event/regular-ticket.png')`}}
+                                        >
+                                            <div className="absolute inset-0 flex flex-col justify-center items-center">
+                                            </div>
+                                        </section>
+                                    ) : (
+                                        <section
+                                            className="flex-none relative h-24 w-24 md:h-20 md:w-28 lg:h-28 lg:w-32 rounded-xl overflow-hidden bg-cover bg-center"
+                                            style={{backgroundImage: `url('/event/free-ticket.png')`}}
+                                        >
+                                            <div className="absolute inset-0 flex flex-col justify-center items-center">
+                                            </div>
+                                        </section>
+                                    )}
+
                                     <div className="grow flex justify-between items-center p-2 lg:p-4">
                                         <section className="">
                                             <h3 className="text-title-color text-base md:text-lg xl:text-xl font-bold uppercase dark:text-secondary-color-text">{ticket.name}</h3>
                                             <p className="text-description-color text-base md:text-lg xl:text-xl uppercase line-clamp-1 dark:text-label-text-primary text-label-description">{ticket.event}</p>
                                             <div className="flex space-x-2 mt-1">
-                                                {ticket.free ? (
+                                                {ticket.price === 0 ? (
                                                     <>
-                                                        <p className="rounded-[6px] bg-label-free lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-label-text-primary uppercase">$ Free</p>
+                                                        <p className="rounded-[6px] bg-label-free lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-label-text-primary uppercase">$
+                                                            Free</p>
                                                         {ticket.soldOut ? (
-                                                            <p className="rounded-[6px] dark:bg-label-text-primary bg-red-100 dark:bg-opacity-70 bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-red-600">SOLD OUT</p>
+                                                            <p className="rounded-[6px] dark:bg-label-text-primary bg-red-100 dark:bg-opacity-70 bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-red-600">SOLD
+                                                                OUT</p>
                                                         ) : (<></>)}
                                                     </>
                                                 ) : (
                                                     <>
                                                         <p className="rounded-[6px] bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-label-premium">${ticket.price.toFixed(2)}</p>
                                                         {ticket.soldOut ? (
-                                                            <p className="rounded-[6px] dark:bg-label-text-primary bg-red-100 dark:bg-opacity-70 bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-red-600">SOLD OUT</p>
+                                                            <p className="rounded-[6px] dark:bg-label-text-primary bg-red-100 dark:bg-opacity-70 bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-red-600">SOLD
+                                                                OUT</p>
                                                         ) : (<></>)}
                                                     </>)}
 
@@ -207,7 +284,8 @@ export default function EventDetails() {
                             {/*Sub Total*/}
                             <section className="flex justify-between items-center py-4">
                                 <hr className="border w-full"/>
-                                <span className="font-bold w-60 text-center dark:text-label-text-primary text-label-description dark:text-label-primary">Sub Total</span>
+                                <span
+                                    className="font-bold w-60 text-center dark:text-label-text-primary text-label-description dark:text-label-primary">Sub Total</span>
                                 <hr className="border w-full"/>
                             </section>
                             {/*Total*/}

@@ -11,7 +11,6 @@ import {useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
 import {SkeletonHomePageComponent} from "@/components/customer/card/SkeletonHomePageComponent";
 
-
 export default function Home() {
     const route = useRouter();
     const [isLoading, setIsLoading] = useState(true);
@@ -33,24 +32,14 @@ export default function Home() {
             {
                 isLoading ? <SkeletonHomePageComponent/> :
                     <main
-                        className="flex flex-col bg-khotixs-background-white dark:bg-khotixs-background-dark space-y-[30px] md:space-y-[50px] xl:space-y-[70px] mb-[30px] md:mb-50px] xl:mb-[70px]">
-                        {/* Hero section */}
-                        <Image
-                            layout="responsive"
-                            width={100}
-                            height={100}
-                            src="/icons/hero-section.gif"
-                            alt="hero-section"
-                        />
+                        className="flex flex-col bg-khotixs-background-white dark:bg-khotixs-background-dark">
 
                         <CardCategory/>
 
                         {/* Upcoming section */}
                         <UpcomingEventComponent/>
 
-
                         {/* Technology section */}
-
                         <section
                             className="container mx-auto w-[350px] p-5 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
                             <section
@@ -65,11 +54,10 @@ export default function Home() {
                                         className=" w-auto lg:h-[50px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
                                         View All
                                         <span>
-                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 "/>
-                        </span>
+                                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 "/>
+                                        </span>
                                     </Button>
                                 </div>
-
                             </section>
                             <section
                                 className="h-auto grid gap-2 grid-cols-2 sm:w-full sm:grid-cols-3 md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">

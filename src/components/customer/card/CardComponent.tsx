@@ -3,7 +3,7 @@ import * as React from "react";
 import {HiOutlineLocationMarker} from "react-icons/hi";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
-
+import {Badge} from "@/components/ui/badge";
 
 type CardUpcomingProps = {
     event: {
@@ -22,7 +22,6 @@ export function CardComponent({event}: CardUpcomingProps) {
     const month = date.toLocaleString('default', {month: 'short'});
     const day = String(date.getDate()).padStart(2, '0');
     const router = useRouter();
-
 
     const getLabelClass = (labelType: string) => {
         switch (labelType.toLowerCase()) {
@@ -74,10 +73,15 @@ export function CardComponent({event}: CardUpcomingProps) {
                         </div>
                     </div>
                 </section>
-                <button
-                    className={`absolute bottom-0 right-0 min-w-[60px] text-white text-sm md:text-base xl:text-lg md:text-md lg:text-lg md:p-[2px] lg:p-1 xl:px-3 xl:py-2 rounded-br-[5px] rounded-l-[5px] ${getLabelClass(event.labelType)}`}>
+                {/*<button*/}
+                {/*    className={`absolute bottom-0 right-0 min-w-[60px] text-white text-sm md:text-base xl:text-lg md:text-md lg:text-lg md:p-[2px] lg:p-1 xl:px-3 xl:py-2 rounded-br-[5px] rounded-l-[5px] ${getLabelClass(event.labelType)}`}>*/}
+                {/*    {event.labelType.toLowerCase() === 'free' ? 'FREE' : `$${event.price}`}*/}
+                {/*</button>*/}
+                <Badge
+                    className={`absolute bottom-1 right-1 bg-green-400 text-white ${getLabelClass(event.labelType)}`}
+                >
                     {event.labelType.toLowerCase() === 'free' ? 'FREE' : `$${event.price}`}
-                </button>
+                </Badge>
             </a>
         </section>
     );
