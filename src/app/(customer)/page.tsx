@@ -4,7 +4,6 @@ import {UpcomingEventComponent} from "@/components/customer/home/UpcomingEventCo
 import InfoCard from "@/components/customer/card/InfoCard";
 import {eventData} from "@/lib/customer/upcomingData";
 import {CardComponent} from "@/components/customer/card/CardComponent";
-import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import {IoMdArrowRoundForward} from "react-icons/io";
 import {useRouter} from "next/navigation";

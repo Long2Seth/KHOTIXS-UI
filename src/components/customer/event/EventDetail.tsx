@@ -124,7 +124,7 @@ export default function EventDetails() {
                 {/*Event title*/}
                 <section className="flex gap-5 mb-7">
                     <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">THE
-                        Q RISE OF THE QUEEN xfghgfdshdsghhhhhhhhhhhhhhhhhhrtuyrhfghhhhhhhhh        tedgdfsgdfg </h1>
+                        Q RISE OF THE QUEEN</h1>
                     <div
                         className="flex items-center rounded-[6px] px-2 text-label-premium h-6 mt-1.5 font-bold text-base bg-blue-100 bg-opacity-70 space-x-1">
                         <RiFirefoxLine className=""/>
@@ -290,36 +290,9 @@ export default function EventDetails() {
                             </section>
                             {/*Total*/}
                             <section className="mt-6 space-y-4">
-                                {/*{tickets.map((ticket) => (*/}
-                                {/*    <>*/}
-                                {/*        {ticket.price === 0 && ticket.free ? (*/}
-                                {/*            <div*/}
-                                {/*                className="flex items-center justify-between border p-4 pl-6 rounded-[8px]">*/}
-                                {/*                <span*/}
-                                {/*                    className="font-bold text-lg lg:text-2xl text-label-free uppercase">$ free</span>*/}
-                                {/*                <Button*/}
-                                {/*                    className="bg-primary-color hover:bg-primary-color hover:bg-opacity-85 text-label-text-primary rounded-[6px] h-[45px] font-bold">*/}
-                                {/*                    Place Order <RiArrowRightLine/>*/}
-                                {/*                </Button>*/}
-                                {/*            </div>*/}
-                                {/*        ) : (*/}
-                                {/*            <>*/}
-                                {/*                <div*/}
-                                {/*                    className="flex items-center justify-between border p-4 pl-6 rounded-[8px]">*/}
-                                {/*                    <span*/}
-                                {/*                        className="font-bold text-lg lg:text-2xl text-label-paid">${total.toFixed(2)}</span>*/}
-                                {/*                    <Button*/}
-                                {/*                        className="bg-primary-color hover:bg-primary-color hover:bg-opacity-85 text-label-text-primary rounded-[6px] h-[45px] font-bold">*/}
-                                {/*                        Place Order <RiArrowRightLine/>*/}
-                                {/*                    </Button>*/}
-                                {/*                </div>*/}
-                                {/*            </>*/}
-                                {/*        )}*/}
-                                {/*    </>*/}
-                                {/*))}*/}
                                 <div className="flex items-center justify-between border p-4 pl-6 rounded-[8px]">
-                                    <span
-                                        className="text-label-paid text-lg md:text-2xl xl:text-4xl font-bold ">${total.toFixed(2)}</span>
+                                <span
+                                    className="text-label-paid text-lg md:text-2xl xl:text-4xl font-bold ">${total.toFixed(2)}</span>
                                     <Button
                                         onClick={() => router.push('/order-info-requirement')}
                                         className="bg-primary-color hover:bg-primary-color hover:bg-opacity-85 text-label-text-primary rounded-[6px] h-[45px] font-bold">

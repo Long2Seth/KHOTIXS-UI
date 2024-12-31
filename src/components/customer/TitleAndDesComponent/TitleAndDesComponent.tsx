@@ -1,23 +1,12 @@
 'use client';
 import React from "react";
-import {useEffect,useState} from "react";
 import { RiErrorWarningLine } from "react-icons/ri";
-import TitleAndDesComponentSkeleton from "@/components/customer/TitleAndDesComponent/TitleAndDesComponentSkeleton";
-
 type TitleAndDesComponentProps = {
     title: string;
     description: string;
 }
 
 export default function TitleAndDesComponent({ title, description }: TitleAndDesComponentProps) {
-    const [isLoading, setIsLoading] = useState(true);
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 2000);
-        return () => clearTimeout(timer);
-    }, []);
-
 
     return (
         <>
