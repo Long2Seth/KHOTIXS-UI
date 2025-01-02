@@ -9,7 +9,7 @@ type Event = {
 };
 export const upcomingData: Event[] = [
     {
-        image: "/cover.png",
+        image: "/event/the q.jpg",
         date: "2024-12-01",
         title: "THE Q - RISE OF THE QUEEN AOK SOKUNKANHA SOLO CONCERT: A Night of Melodies and Memories",
         location: "New York, USA - Central Park, transforming into a magical realm of music and joy for an enchanting evening under the stars.",

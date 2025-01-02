@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SkeletonHomePageComponent } from "@/components/customer/card/SkeletonHomePageComponent";
 
-
 export default function Home() {
     const route = useRouter();
     const [isLoading, setIsLoading] = useState(true);
@@ -32,7 +31,7 @@ export default function Home() {
             {
                 isLoading ? <SkeletonHomePageComponent /> :
                     <main
-                        className="flex flex-col bg-khotixs-background-white dark:bg-khotixs-background-dark">
+                        className="flex flex-col gap-20 bg-khotixs-background-white dark:bg-khotixs-background-dark">
 
                         <CardCategory />
 
@@ -41,12 +40,13 @@ export default function Home() {
 
                         {/* Technology section */}
                         <section
-                            className="container mx-auto w-[350px] p-5 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            id="technology"
+                            className="container mx-auto w-[350px] sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
                             <section
-                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row lg:my-[15px] w-full lg:pr-[32px] 2xl:pr-[62px] items-end">
+                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row w-full lg:pr-[32px] 2xl:pr-[62px] items-center mb-5">
                                 <InfoCard
                                     title="TECHNOLOGY"
-                                    description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets."
+                                // description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets."
                                 />
                                 <div className=" sm:w-auto my-[10px] lg:my-0 ">
                                     <Button
@@ -72,12 +72,13 @@ export default function Home() {
 
                         {/* Concert section */}
                         <section
-                            className="container mx-auto w-[350px] p-5  sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            id="concert"
+                            className="container mx-auto w-[350px] sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
                             <section
-                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row lg:my-[15px] w-full lg:pr-[32px] 2xl:pr-[62px] items-end">
+                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row w-full lg:pr-[32px] 2xl:pr-[62px] items-center mb-5">
                                 <InfoCard
                                     title="CONCERTS"
-                                    description="The Concerts feature provides users with detailed information about live music events, tailored for music enthusiasts. It enhances the user experience by offering curated content and tools to explore, book, and engage with concert events."
+                                // description="The Concerts feature provides users with detailed information about live music events, tailored for music enthusiasts. It enhances the user experience by offering curated content and tools to explore, book, and engage with concert events."
                                 />
                                 <div className=" sm:w-auto my-[10px] lg:my-0 ">
                                     <Button
@@ -101,14 +102,15 @@ export default function Home() {
 
                         {/* Sport section */}
                         <section
-                            className="container mx-auto w-[350px] p-5  sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            id="sport"
+                            className="container mx-auto w-[350px] sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
                             <section
-                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row lg:my-[15px] w-full lg:pr-[32px] 2xl:pr-[62px] items-end">
+                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row w-full lg:pr-[32px] 2xl:pr-[62px] items-center mb-5">
                                 <InfoCard
                                     title="SPORT"
-                                    description="The Sports Events feature provides users with comprehensive information about live sports
-                        matches, tournaments, and activities. It caters to sports enthusiasts, offering an engaging and
-                        interactive platform to explore, book, and participate in sports events."
+                                //             description="The Sports Events feature provides users with comprehensive information about live sports
+                                // matches, tournaments, and activities. It caters to sports enthusiasts, offering an engaging and
+                                // interactive platform to explore, book, and participate in sports events."
                                 />
                                 <div className=" sm:w-auto my-[10px] lg:my-0 ">
                                     <Button
@@ -132,15 +134,16 @@ export default function Home() {
 
                         {/* Community section */}
                         <section
-                            className="container mx-auto w-[350px] p-5  sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            id="community"
+                            className="container mx-auto w-[350px] sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
                             <section
-                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row lg:my-[15px] w-full lg:pr-[32px] 2xl:pr-[62px] items-end">
+                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row w-full lg:pr-[32px] 2xl:pr-[62px] items-center mb-5">
                                 <InfoCard
                                     title="COMMUNITY"
-                                    description="The Community Events feature connects users with local gatherings, social activities, and events
-                        that foster engagement within a community. It provides detailed information and tools to
-                        explore, register, and participate in a variety of events focused on building connections and
-                        supporting shared interests."
+                                //             description="The Community Events feature connects users with local gatherings, social activities, and events
+                                // that foster engagement within a community. It provides detailed information and tools to
+                                // explore, register, and participate in a variety of events focused on building connections and
+                                // supporting shared interests."
                                 />
                                 <div className=" sm:w-auto my-[10px] lg:my-0 ">
                                     <Button
@@ -164,12 +167,13 @@ export default function Home() {
 
                         {/* Conference section */}
                         <section
-                            className="container mx-auto w-[350px] p-5  sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            id="conference"
+                            className="container mx-auto w-[350px]  sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
                             <section
-                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row lg:my-[15px] w-full lg:pr-[32px] 2xl:pr-[62px] items-end">
+                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row w-full lg:pr-[32px] 2xl:pr-[62px] items-center mb-5">
                                 <InfoCard
                                     title="CONFERENCES AND SEMINARS"
-                                    description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets."
+                                // description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets."
                                 />
                                 <div className=" sm:w-auto my-[10px] lg:my-0 ">
                                     <Button
@@ -193,12 +197,14 @@ export default function Home() {
 
                         {/* General section */}
                         <section
-                            className="container mx-auto w-[350px] p-5  sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            id="general"
+                            className=" scroll-smooth container mx-auto w-[350px]  sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
                             <section
-                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row lg:my-[15px] w-full lg:pr-[32px] 2xl:pr-[62px] items-end">
+                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row w-full lg:pr-[32px] 2xl:pr-[62px] items-center mb-5">
                                 <InfoCard
                                     title="GENERAL"
-                                    description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets." />
+                                // description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets." 
+                                />
                                 <div className=" sm:w-auto my-[10px] lg:my-0 ">
                                     <Button
                                         onClick={() => handleButtonClick("general")}

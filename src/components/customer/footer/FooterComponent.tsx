@@ -17,7 +17,7 @@ export function FooterComponent() {
         <>
             {
                 isLoading ? <FooterSkeletonComponent/> :
-                    <footer className=" w-full bg-white dark:bg-khotixs-background-dark p-10 ">
+                    <footer className=" w-full bg-white dark:bg-khotixs-background-dark p-10 mt-20">
 
 
                         {/* Main Footer Section */}
@@ -96,7 +96,7 @@ export function FooterComponent() {
                                 {/* Sponsors and Organizer */}
                                 <div className="w-full flex flex-col md:pl-[50px] lg:pl-[0px] xl:ml-0 xl:items-end my-5">
                                     <div className=" flex flex-col ">
-                                        <h3 className="text-title-color text-xl font-bold dark:text-secondary-color-text  my-2 ">
+                                        <h3 className="text-title-color text-xl font-bold dark:text-secondary-color-text">
                                             Sponsors By
                                         </h3>
                                         <div className="flex space-x-4 mb-4">

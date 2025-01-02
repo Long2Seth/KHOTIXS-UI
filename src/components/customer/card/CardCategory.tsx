@@ -5,7 +5,7 @@ export default function CardCategory() {
 
     return (
         <section
-            className="container mx-auto w-full bg-khotixs-background-white dark:bg-khotixs-background-dark font-bold flex flex-col justify-center items-center h-auto">
+            className="container mx-auto w-full bg-khotixs-background-white dark:bg-khotixs-background-dark font-bold flex flex-col gap-5 justify-center items-center h-auto mt-20">
 
             <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text">
                 EVENT CATEGORIES

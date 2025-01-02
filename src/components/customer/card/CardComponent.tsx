@@ -43,7 +43,7 @@ export function CardComponent({event}: CardUpcomingProps) {
     return (
         <section
             onClick={() => router.push(`/event`)}
-            className="relative cursor-pointer bg-white rounded-[10px] flex flex-col justify-start items-start h-[215px] max-w-[200px] sm:h-[215px] md:max-w-[330px] md:h-[340px] xl:max-w-[400px] xl:h-[450px] 2xl:max-w-[450px] dark:bg-secondary-color md:p-0">
+            className="relative cursor-pointer bg-white rounded-[10px] flex flex-col justify-start items-start h-[215px] sm:h-[215px] md:max-w-[330px] md:h-[340px] xl:max-w-[400px] xl:h-[450px] 2xl:max-w-[450px] dark:bg-secondary-color md:p-0">
 
             <a className="group block overflow-hidden rounded-[10px]">
                 <div className="rounded-tr-[10px] z-10 rounded-tl-[10px] w-full h-[50%] overflow-hidden">

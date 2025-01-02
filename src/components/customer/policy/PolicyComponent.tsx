@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import React from "react";
 import {useEffect , useState} from "react";
@@ -13,15 +14,14 @@ export default function PolicyComponent (){
         return () => clearTimeout(timer);
     }, []);
 
-
     return(
         <>
             {
                 isLoading ? <PolicySkeletonComponent/> :
-                    <section className="w-full space-y-[50px] md:space-y-[80px] xl:space-y-[100px] my-[50px] my:mb-[80px] xl:my-[100px] bg-khotixs-background-white dark:bg-khotixs-background-dark">
+                    <section className="">
                         <section className=" flex flex-col gap-5 ">
                             <div className="w-full ">
-                                <h1 className="w-full text-center text-title-color text-lg md:text-2xl xl:text-4xl font-bold uppercase p-5 dark:text-secondary-color-text ">
+                                <h1 className="w-full text-center text-title-color text-lg md:text-2xl xl:text-4xl font-bold uppercase dark:text-secondary-color-text ">
                                     How Can We Assist You With Khotixs?
                                 </h1>
                                 <p className="text-center text-description-color text-base md:text-lg xl:text-xl dark:text-gray-200  px-[25px]  ">
@@ -98,16 +98,12 @@ export default function PolicyComponent (){
                                         </ul>
                                     </div>
                                 </div>
-
                                 <img
                                     className=" rounded-[6px] hidden lg:block "
                                     src="Privacy-policy.png"
                                     alt="Khotixs"/>
                             </div>
-
                         </section>
-
-
                     </section>
             }
         </>

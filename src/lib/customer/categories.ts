@@ -9,32 +9,32 @@ export const categories: CategoriesIcon[] = [
     {
         icon: '/icons/timetable.png',
         name: 'Technology ',
-        link: '/'
+        link: '#technology'
     },
     {
         icon: '/icons/music.png',
         name: 'Concert',
-        link: '/'
+        link: '#concert'
     },
     {
         icon: '/icons/soccer-field.png',
         name: 'Sport ',
-        link: '/'
+        link: '#sport'
     },
     {
         icon: '/icons/audience.png',
         name: 'Community',
-        link: '/'
+        link: '#community'
     },
     {
         icon: '/icons/conference-room.png',
         name: 'Conferences',
-        link: '/'
+        link: '#conferences'
     },
     {
         icon: '/icons/calendar.png',
         name: 'General',
-        link: '/'
+        link: '#general'
     },
 
 ]

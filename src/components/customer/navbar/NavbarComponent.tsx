@@ -59,7 +59,7 @@ const NavbarComponent = () => {
     return (
         <>
             {isLoading ? <SkeletonNavbarComponent /> :
-                <nav className="w-full top-[0px] sticky z-50 bg-white flex flex-col dark:bg-khotixs-background-dark">
+                <nav className="w-full top-[0px] sticky z-50 bg-white flex flex-col dark:bg-khotixs-background-dark border-b-[1px] border-gray-100 dark:border-red-950">
                     <section
                         className=" container mx-auto w-full h-[60px] bg-white py-[10px]  flex px-5 lg:px-10 justify-center gap-5 dark:bg-khotixs-background-dark ">
                         <CiBullhorn className="  w-[40px] p-[8px] rounded-[50%] text-gray-400 bg-gray-200  h-full "/>

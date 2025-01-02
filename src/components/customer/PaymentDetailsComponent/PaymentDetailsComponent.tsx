@@ -13,7 +13,7 @@ export default function PaymentDetailsComponent() {
     // Router
     const router = useRouter();
 
-    const [isLoading] = useState(true);
+    const [isLoading] = useState(false);
 
     // Ticket Type
     // enum TicketType {
