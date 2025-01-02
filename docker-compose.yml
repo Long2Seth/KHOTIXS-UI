@@ -13,7 +13,8 @@ services:
       - PORT=3001
       - GENERATE_SOURCEMAP=false
     networks:
-      - khotixs_network
+      - khotixs-network
 
 networks:
-  khotixs_network:
+  khotixs-network:
+    external: true
