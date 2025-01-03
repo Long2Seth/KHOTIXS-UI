@@ -1,20 +1,25 @@
 'use client'
 import CardCategory from "@/components/customer/card/CardCategory";
-import {UpcomingEventComponent} from "@/components/customer/home/UpcomingEventComponent";
+import { UpcomingEventComponent } from "@/components/customer/home/UpcomingEventComponent";
 import InfoCard from "@/components/customer/card/InfoCard";
 import {eventData} from "@/lib/customer/upcomingData";
 import {CardComponent} from "@/components/customer/card/CardComponent";
-import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import {IoMdArrowRoundForward} from "react-icons/io";
 import {useRouter} from "next/navigation";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {SkeletonHomePageComponent} from "@/components/customer/card/SkeletonHomePageComponent";
-
 
 export default function Home() {
     const route = useRouter();
     const [isLoading, setIsLoading] = useState(true);
+
+    const technologyRef = useRef(null);
+    const concertRef = useRef(null);
+    const sportRef = useRef(null);
+    const communityRef = useRef(null);
+    const conferenceRef = useRef(null);
+    const generalRef = useRef(null);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -31,207 +36,201 @@ export default function Home() {
     return (
         <>
             {
-                isLoading ? <SkeletonHomePageComponent/> :
+                isLoading ? <SkeletonHomePageComponent /> :
                     <main
-                        className="flex flex-col bg-khotixs-background-white dark:bg-khotixs-background-dark space-y-[30px] md:space-y-[50px] xl:space-y-[70px] mb-[30px] md:mb-50px] xl:mb-[70px]">
-                        {/* Hero section */}
-                        <Image
-                            layout="responsive"
-                            width={100}
-                            height={100}
-                            src="/icons/hero-section.gif"
-                            alt="hero-section"
-                        />
+                        className="flex flex-col space-y-10 bg-khotixs-background-white dark:bg-khotixs-background-dark">
 
-                        <CardCategory/>
+                        <CardCategory
+                            technologyRef={technologyRef}
+                            concertRef={concertRef}
+                            sportRef={sportRef}
+                            communityRef={communityRef}
+                            conferenceRef={conferenceRef}
+                            generalRef={generalRef}
+                        />
 
                         {/* Upcoming section */}
                         <UpcomingEventComponent/>
 
-
                         {/* Technology section */}
-
                         <section
-                            className="container mx-auto w-[350px] p-5 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            ref={technologyRef}
+                            className="space-y-4 container mx-auto p-5 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            <InfoCard
+                                title="TECHNOLOGY"
+                                description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets."
+                            />
                             <section
-                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row lg:my-[15px] w-full lg:pr-[32px] 2xl:pr-[62px] items-end">
-                                <InfoCard
-                                    title="TECHNOLOGY"
-                                    description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets."
-                                />
-                                <div className=" sm:w-auto my-[10px] lg:my-0 ">
-                                    <Button
-                                        onClick={() => handleButtonClick("technology")}
-                                        className=" w-auto lg:h-[50px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
-                                        View All
-                                        <span>
-                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 "/>
-                        </span>
-                                    </Button>
-                                </div>
-
+                                className="relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row w-full lg:px-[48px] items-end">
+                                <Button
+                                    onClick={() => handleButtonClick("technology")}
+                                    className=" w-auto lg:h-[45px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
+                                    View All
+                                    <span>
+                                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 "/>
+                                        </span>
+                                </Button>
                             </section>
                             <section
-                                className="h-auto grid gap-2 grid-cols-2 sm:w-full sm:grid-cols-3 md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
+                                className="h-auto grid gap-2 grid-cols-1 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
                                 {eventData.filter(event => event.eventType === "TECHNOLOGY").slice(0, 6).map((event, index) => (
                                     <CardComponent
                                         key={index}
-                                        event={event}/>
+                                        event={event} />
                                 ))}
                             </section>
                         </section>
 
-
                         {/* Concert section */}
-
                         <section
-                            className="container mx-auto w-[350px] p-5  sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            ref={concertRef}
+                            className="container mx-auto p-5 space-y-4 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            <InfoCard
+                                title="CONCERTS"
+                                description="The Concerts feature provides users with detailed information about live music events, tailored for music enthusiasts. It enhances the user experience by offering curated content and tools to explore, book, and engage with concert events."
+                            />
                             <section
-                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row lg:my-[15px] w-full lg:pr-[32px] 2xl:pr-[62px] items-end">
-                                <InfoCard
-                                    title="CONCERTS"
-                                    description="The Concerts feature provides users with detailed information about live music events, tailored for music enthusiasts. It enhances the user experience by offering curated content and tools to explore, book, and engage with concert events."
-                                />
+                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row w-full lg:px-[48px] items-end">
                                 <div className=" sm:w-auto my-[10px] lg:my-0 ">
                                     <Button
                                         onClick={() => handleButtonClick("concert")}
-                                        className=" w-auto lg:h-[50px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
+                                        className=" w-auto lg:h-[45px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
                                         View All
                                         <span>
-                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 "/>
-                        </span>
+                                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 " />
+                                        </span>
                                     </Button>
                                 </div>
 
                             </section>
                             <section
-                                className="h-auto grid gap-2 grid-cols-2 sm:w-full sm:grid-cols-3 md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
+                                className="h-auto grid gap-2 grid-cols-1 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
                                 {eventData.filter(event => event.eventType === "CONCERT").slice(0, 6).map((event, index) => (
-                                    <CardComponent key={index} event={event}/>
+                                    <CardComponent key={index} event={event} />
                                 ))}
                             </section>
                         </section>
-
 
                         {/* Sport section */}
                         <section
-                            className="container mx-auto w-[350px] p-5  sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
-                            <section
-                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row lg:my-[15px] w-full lg:pr-[32px] 2xl:pr-[62px] items-end">
-                                <InfoCard
-                                    title="SPORT"
-                                    description="The Sports Events feature provides users with comprehensive information about live sports
+                            ref={sportRef}
+                            className="container mx-auto p-5 space-y-4 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            <InfoCard
+                                title="SPORT"
+                                description="The Sports Events feature provides users with comprehensive information about live sports
                         matches, tournaments, and activities. It caters to sports enthusiasts, offering an engaging and
                         interactive platform to explore, book, and participate in sports events."
-                                />
+                            />
+                            <section
+                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row w-full lg:px-[48px] items-end">
+
                                 <div className=" sm:w-auto my-[10px] lg:my-0 ">
                                     <Button
                                         onClick={() => handleButtonClick("sport")}
-                                        className=" w-auto lg:h-[50px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
+                                        className=" w-auto lg:h-[45px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
                                         View All
                                         <span>
-                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 "/>
-                        </span>
+                                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 " />
+                                        </span>
                                     </Button>
                                 </div>
 
                             </section>
                             <section
-                                className="h-auto grid gap-2 grid-cols-2 sm:w-full sm:grid-cols-3 md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
+                                className="h-auto grid gap-2 grid-cols-1 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
                                 {eventData.filter(event => event.eventType === "SPORT").slice(0, 6).map((event, index) => (
-                                    <CardComponent key={index} event={event}/>
+                                    <CardComponent key={index} event={event} />
                                 ))}
                             </section>
                         </section>
-
 
                         {/* Community section */}
                         <section
-                            className="container mx-auto w-[350px] p-5  sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
-                            <section
-                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row lg:my-[15px] w-full lg:pr-[32px] 2xl:pr-[62px] items-end">
-                                <InfoCard
-                                    title="COMMUNITY"
-                                    description="The Community Events feature connects users with local gatherings, social activities, and events
+                            ref={communityRef}
+                            className="container mx-auto p-5 space-y-4 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            <InfoCard
+                                title="COMMUNITY"
+                                description="The Community Events feature connects users with local gatherings, social activities, and events
                         that foster engagement within a community. It provides detailed information and tools to
                         explore, register, and participate in a variety of events focused on building connections and
                         supporting shared interests."
-                                />
+                            />
+                            <section
+                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row w-full lg:px-[48px] items-end">
+
                                 <div className=" sm:w-auto my-[10px] lg:my-0 ">
                                     <Button
                                         onClick={() => handleButtonClick("community")}
-                                        className=" w-auto lg:h-[50px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
+                                        className=" w-auto lg:h-[45px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
                                         View All
                                         <span>
-                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 "/>
-                        </span>
+                                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 " />
+                                        </span>
                                     </Button>
                                 </div>
 
                             </section>
                             <section
-                                className="h-auto grid gap-2 grid-cols-2 sm:w-full sm:grid-cols-3 md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
+                                className="h-auto grid gap-2 grid-cols-1 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
                                 {eventData.filter(event => event.eventType === "COMMUNITY").slice(0, 6).map((event, index) => (
-                                    <CardComponent key={index} event={event}/>
+                                    <CardComponent key={index} event={event} />
                                 ))}
                             </section>
                         </section>
-
 
                         {/* Conference section */}
                         <section
-                            className="container mx-auto w-[350px] p-5  sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            ref={conferenceRef}
+                            className="container mx-auto p-5 space-y-4 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            <InfoCard
+                                title="CONFERENCES AND SEMINARS"
+                                description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets."
+                            />
                             <section
-                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row lg:my-[15px] w-full lg:pr-[32px] 2xl:pr-[62px] items-end">
-                                <InfoCard
-                                    title="CONFERENCES AND SEMINARS"
-                                    description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets."
-                                />
+                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row w-full lg:px-[48px] items-end">
                                 <div className=" sm:w-auto my-[10px] lg:my-0 ">
                                     <Button
                                         onClick={() => handleButtonClick("conference")}
-                                        className=" w-auto lg:h-[50px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
+                                        className=" w-auto lg:h-[45px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
                                         View All
                                         <span>
-                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 "/>
-                        </span>
+                                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 " />
+                                        </span>
                                     </Button>
                                 </div>
 
                             </section>
                             <section
-                                className="h-auto grid gap-2 grid-cols-2 sm:w-full sm:grid-cols-3 md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
+                                className="h-auto grid gap-2 grid-cols-1 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
                                 {eventData.filter(event => event.eventType === "CONFERENCES AND SEMINARS").slice(0, 6).map((event, index) => (
-                                    <CardComponent key={index} event={event}/>
+                                    <CardComponent key={index} event={event} />
                                 ))}
                             </section>
                         </section>
 
-
                         {/* General section */}
                         <section
-                            className="container mx-auto w-[350px] p-5  sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            ref={generalRef}
+                            className="container mx-auto p-5 space-y-4 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            <InfoCard
+                                title="GENERAL"
+                                description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets."
+                            />
                             <section
-                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row lg:my-[15px] w-full lg:pr-[32px] 2xl:pr-[62px] items-end">
-                                <InfoCard
-                                    title="GENERAL"
-                                    description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets."/>
+                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row w-full lg:px-[48px] items-end">
                                 <div className=" sm:w-auto my-[10px] lg:my-0 ">
                                     <Button
                                         onClick={() => handleButtonClick("general")}
-                                        className=" w-auto lg:h-[50px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
+                                        className=" w-auto lg:h-[45px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
                                         View All
-                                        <span>
-                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 "/>
-                        </span>
+                                        <span><IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 "/></span>
                                     </Button>
                                 </div>
-
                             </section>
                             <section
-                                className="h-auto grid gap-2 grid-cols-2 sm:w-full sm:grid-cols-3 md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
+                                className="h-auto grid gap-2 grid-cols-1 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
                                 {eventData.filter(event => event.eventType === "GENERAL").slice(0, 6).map((event, index) => (
-                                    <CardComponent key={index} event={event}/>
+                                    <CardComponent key={index} event={event} />
                                 ))}
                             </section>
                         </section>

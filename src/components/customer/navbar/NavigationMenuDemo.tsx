@@ -23,21 +23,21 @@ export function NavigationMenuDemo() {
                             className="relative flex lg:w-[400px] xl:w-[450px] h-auto rounded-[5px] hover:rounded-[5px] outline-none border-5 border-none ring-0  bg-khotixs-background-white dark:bg-khotixs-background-dark ">
 
                             <a className=" w-[50%] cursor-pointer p-[20px] rounded-[5px] hover:bg-secondary-color hover:text-secondary-color-text"
-                               href="/about">
+                                href="/about">
                                 <div>
                                     <h1 className="  text-2xl font-semibold ">About</h1>
                                     <p>
-                                        Re-usable components built using Radix UI and Tailwind CSS
+                                        About the project, and what you can do with it.
                                     </p>
                                 </div>
                             </a>
 
                             <a className=" w-[50%] cursor-pointer p-[20px] rounded-[5px] hover:rounded-[5px] hover:bg-secondary-color hover:text-secondary-color-text "
-                               href="/contact-us">
+                                href="/contact-us">
                                 <div>
                                     <h1 className=" text-2xl font-semibold ">Contact</h1>
                                     <p>
-                                        How to install dependencies and structure your app.
+                                        Contact us for any questions or feedback.
                                     </p>
                                 </div>
                             </a>
