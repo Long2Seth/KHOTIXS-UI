@@ -6,8 +6,8 @@ export function UpcomingEventComponent() {
 
     return (
         <section
-            className=" container mx-auto w-[350px] sm:w-full bg-khotixs-background-white dark:bg-khotixs-background-dark flex flex-col justify-center items-center h-auto ">
-            <section className=" w-full flex flex-col justify-center items-center ">
+            className="space-y-10 container mx-auto sm:w-full bg-khotixs-background-white dark:bg-khotixs-background-dark flex flex-col justify-center items-center h-auto ">
+            <section className="space-y-4 w-full flex flex-col justify-center items-center ">
                 <h1 className=" text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">
                     UPCOMING EVENTS
                 </h1>

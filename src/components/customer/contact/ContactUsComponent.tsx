@@ -110,10 +110,10 @@ export default function ContactUsComponent() {
                                     <div className="flex flex-col gap-5 text-lg">
                                         <Link href="https://maps.app.goo.gl/V9rV5hL13QNK3ZJg9"
                                               className="grid grid-cols-12 hover:opacity-80 items-center bg-white px-5 py-2 rounded-[5px] dark:bg-background-blur dark:bg-opacity-5">
-                                            <div className="col-span-2">
+                                            <div className="col-span-2 xl:col-span-1">
                                                 <GrLocation className="w-[30px] h-[30px] text-primary-color"/>
                                             </div>
-                                            <div className="text-start col-span-10">
+                                            <div className="text-start col-span-10 xl:col-span-11">
                                                 <h3 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text">
                                                     Location
                                                 </h3>
@@ -124,10 +124,10 @@ export default function ContactUsComponent() {
                                         </Link>
                                         <Link href="tel:+85595990910"
                                               className="grid grid-cols-12 hover:opacity-80 items-center bg-white px-5 py-2 rounded-[5px] dark:bg-background-blur dark:bg-opacity-5">
-                                            <div className="col-span-2">
+                                            <div className="col-span-2 xl:col-span-1">
                                                 <FiPhone className="w-[30px] h-[30px] text-primary-color"/>
                                             </div>
-                                            <div className="text-start col-span-10">
+                                            <div className="text-start col-span-10 xl:col-span-11">
                                                 <h3 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text">
                                                     Phone
                                                 </h3>
@@ -137,10 +137,10 @@ export default function ContactUsComponent() {
                                         </Link>
                                         <Link href="https://mail.google.com/mail/u/0/#sent?compose=new"
                                               className="grid grid-cols-12 hover:opacity-80 items-center bg-white px-5 py-2 rounded-[5px] dark:bg-background-blur dark:bg-opacity-5">
-                                            <div className="col-span-2">
+                                            <div className="col-span-2 xl:col-span-1">
                                                 <HiOutlineMail className="w-[30px] h-[30px] text-primary-color"/>
                                             </div>
-                                            <div className="text-start col-span-10">
+                                            <div className="text-start col-span-10 xl:col-span-11">
                                                 <h3 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text">
                                                     Email
                                                 </h3>

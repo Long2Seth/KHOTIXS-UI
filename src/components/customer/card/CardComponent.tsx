@@ -5,17 +5,38 @@ import {useRouter} from "next/navigation";
 import Image from "next/image";
 import {Badge} from "@/components/ui/badge";
 
-type CardUpcomingProps = {
-    event: {
-        image: string;
-        date: string;
-        title: string;
-        location: string;
-        price: number;
-        labelType: string;
-        eventType: string;
-    };
+enum TicketType {
+    VIP = 'VIP',
+    REGULAR = 'REGULAR',
+    PREMIUM = 'PREMIUM',
+    FREE = 'FREE'
 }
+
+const ticketTypes = [TicketType.VIP, TicketType.REGULAR, TicketType.PREMIUM, TicketType.FREE];
+
+type Ticket = {
+    id: string;
+    ticketTitle: string;
+    type: TicketType;
+    price: string;
+    capacity: number;
+    isPublish: boolean;
+    isDisplay: boolean;
+    isSoldOut: boolean;
+};
+
+type Event = {
+    image: string;
+    date: string;
+    title: string;
+    location: string;
+    tickets: Ticket[];
+    eventType: string;
+};
+
+type CardUpcomingProps = {
+    event: Event;
+};
 
 export function CardComponent({event}: CardUpcomingProps) {
     const date = new Date(event.date);
@@ -23,16 +44,16 @@ export function CardComponent({event}: CardUpcomingProps) {
     const day = String(date.getDate()).padStart(2, '0');
     const router = useRouter();
 
-    const getLabelClass = (labelType: string) => {
-        switch (labelType.toLowerCase()) {
-            case 'free':
-                return 'bg-label-free';
-            case 'vip':
+    const getLabelClass = (tickets: TicketType) => {
+        switch (tickets) {
+            case TicketType.VIP:
                 return 'bg-label-vip';
-            case 'regular':
-                return 'bg-label-regular';
-            case 'premium':
+            case TicketType.PREMIUM:
                 return 'bg-label-premium';
+            case TicketType.REGULAR:
+                return 'bg-label-regular';
+            case TicketType.FREE:
+                return 'bg-label-free';
             default:
                 return '';
         }
@@ -41,7 +62,7 @@ export function CardComponent({event}: CardUpcomingProps) {
     return (
         <section
             onClick={() => router.push(`/event`)}
-            className="relative cursor-pointer bg-white rounded-[10px] flex flex-col justify-start items-start h-[215px] max-w-[200px] sm:h-[215px] md:max-w-[330px] md:h-[340px] xl:max-w-[400px] xl:h-[450px] 2xl:max-w-[450px] dark:bg-secondary-color md:p-0">
+            className="relative cursor-pointer bg-white dark:bg-backdrop-blur dark:bg-opacity-5 rounded-[10px] flex flex-col justify-start items-start h-[215px] max-w-[200px] sm:h-[215px] md:max-w-[330px] md:h-[340px] xl:max-w-[400px] xl:h-[450px] 2xl:max-w-[450px] md:p-0">
 
             <a className="group block overflow-hidden rounded-[10px]">
                 <div className="rounded-tr-[10px] z-10 rounded-tl-[10px] w-full h-[50%] overflow-hidden">
@@ -73,15 +94,20 @@ export function CardComponent({event}: CardUpcomingProps) {
                         </div>
                     </div>
                 </section>
-                {/*<button*/}
-                {/*    className={`absolute bottom-0 right-0 min-w-[60px] text-white text-sm md:text-base xl:text-lg md:text-md lg:text-lg md:p-[2px] lg:p-1 xl:px-3 xl:py-2 rounded-br-[5px] rounded-l-[5px] ${getLabelClass(event.labelType)}`}>*/}
-                {/*    {event.labelType.toLowerCase() === 'free' ? 'FREE' : `$${event.price}`}*/}
-                {/*</button>*/}
-                <Badge
-                    className={`absolute bottom-1 right-1 bg-green-400 text-white ${getLabelClass(event.labelType)}`}
-                >
-                    {event.labelType.toLowerCase() === 'free' ? 'FREE' : `$${event.price}`}
-                </Badge>
+                {ticketTypes.map((type, typeIndex) => (
+                    event.tickets
+                        .filter(ticket => ticket.type === type)
+                        .map((ticket, index) => (
+                            <Badge
+                                key={index}
+                                className={`absolute bottom-2 w-14 justify-center right-${typeIndex * 16} dark:text-black text-white rounded-[6px] mx-2 ${getLabelClass(ticket.type)}`}>
+
+                                {ticket.type}
+                                price: {ticket.price}
+
+                            </Badge>
+                        ))
+                ))}
             </a>
         </section>
     );
