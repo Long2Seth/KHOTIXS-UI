@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import Link from 'next/link';
 import Image from 'next/image';
 import {useState, useEffect} from 'react';
@@ -19,6 +19,21 @@ import {ModeToggle} from "@/components/ui/modeToggle";
 import {NavigationMenuDemo} from "@/components/customer/navbar/NavigationMenuDemo";
 import SkeletonNavbarComponent from "@/components/customer/navbar/SkeletonNavbar";
 import {useRouter} from "next/navigation";
+import {Avatar, AvatarImage} from "@/components/ui/avatar";
+
+type UserProfile = {
+    id: string;
+    fullName: string;
+    gender: string;
+    dob: string;
+    phoneNumber: string;
+    address: string;
+    avatar: string;
+    status: number;
+    position: string;
+    email: string;
+    businessName: string;
+}
 
 const NavbarComponent = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -27,6 +42,29 @@ const NavbarComponent = () => {
     const [selectedLocation, setSelectedLocation] = React.useState<string | undefined>();
     const [date, setDate] = React.useState<Date>();
     const router = useRouter();
+    const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+
+    useEffect(() => {
+        // Fetch the user profile from the API
+        const fetchUserProfile = async () => {
+            try {
+                const response = await fetch("http://localhost:8000/user-profile/api/v1/user-profiles/me", {
+                    credentials: "include", // Include credentials for authentication
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setUserProfile(data); // Update the state with the user profile
+                } else {
+                    setUserProfile(null); // If API fails, set userProfile to null
+                }
+            } catch (error) {
+                console.error("Error fetching user profile:", error);
+                setUserProfile(null);
+            }
+        };
+        fetchUserProfile();
+    }, []);
 
     useEffect(() => {
         // Simulate a network request delay
@@ -56,10 +94,11 @@ const NavbarComponent = () => {
         setMenuOpen(!isMenuOpen);
     };
 
+
     return (
         <>
             {isLoading ? <SkeletonNavbarComponent /> :
-                <nav className="w-full top-[0px] sticky z-50 bg-white flex flex-col dark:bg-khotixs-background-dark border-b-[1px] border-gray-100 dark:border-red-950">
+                <nav className=" w-full top-[-60px] sticky z-50 bg-white flex flex-col dark:bg-khotixs-background-dark ">
                     <section
                         className=" container mx-auto w-full h-[60px] bg-white py-[10px]  flex px-5 lg:px-10 justify-center gap-5 dark:bg-khotixs-background-dark ">
                         <CiBullhorn className="  w-[40px] p-[8px] rounded-[50%] text-gray-400 bg-gray-200  h-full "/>
@@ -92,6 +131,7 @@ const NavbarComponent = () => {
                                         />
                                         <hr className=" hidden md:block w-[20px] bg-gray-400 rotate-90"/>
                                     </div>
+
 
                                     {/* Select Location */}
                                     <div className=" hidden lg:flex lg:w-auto items-center ">
@@ -129,7 +169,7 @@ const NavbarComponent = () => {
                                                 >
                                                     <CalendarIcon className="mr-2 text-gray-400"/>
                                                     {date ? format(date, "PPP") :
-                                                        <span className="text-gray-400">Enter date</span>}
+                                                        <span className="text-gray-400">Pick a date</span>}
                                                 </Button>
                                             </PopoverTrigger>
                                             <PopoverContent className="w-auto p-0 text-black outline-none border-0">
@@ -143,6 +183,7 @@ const NavbarComponent = () => {
                                             </PopoverContent>
                                         </Popover>
                                     </div>
+
 
                                     <button
                                         className="flex flex-row items-center justify-center rounded-tr-[5px] rounded-br-[5px]">
@@ -161,15 +202,21 @@ const NavbarComponent = () => {
                                 <NavigationMenuDemo/>
 
                                 <div className="hidden lg:flex items-center gap-2">
-                                    {/*<Button*/}
-                                    {/*    className="rounded-[5px] lg:text-md xl:text-lg border-[1px] border-primary-color text-primary-color font-medium dark:text-secondary-color-text dark:border-label-text-primary ">*/}
-                                    {/*    Login*/}
-                                    {/*</Button>*/}
-                                    <Button
-                                        onClick={() => router.push("/oauth2/authorization/nextjs")}
-                                        className=" bg-primary-color lg:text-md xl:text-lg border-[1px] rounded-[5px] text-secondary-color-text font-[10px] hover:bg-primary-color border-primary-color">
-                                        Log In
-                                    </Button>
+                                    {userProfile ? (
+                                        <Button variant="ghost" className="p-0 rounded-full">
+                                            <div className="flex flex-col items-center gap-4">
+                                                <Avatar className="w-[45px] h-[50px] rounded-[5px]">
+                                                    <AvatarImage src={userProfile.avatar} />
+                                                </Avatar>
+                                            </div>
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            onClick={() => router.push("http://localhost:8000/oauth2/authorization/nextjs")}
+                                            className=" bg-primary-color lg:text-md xl:text-lg border-[1px] rounded-[5px] text-secondary-color-text font-[10px] hover:bg-primary-color border-primary-color">
+                                            Log In
+                                        </Button>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -184,7 +231,6 @@ const NavbarComponent = () => {
                         <span className="sr-only">{isMenuOpen ? "Close main menu" : "Open main menu"}</span>
                         {isMenuOpen ? <IoMdCloseCircle /> : <IoMenu/>}
                     </div>
-
                     <div
                         id="mega-menu-full"
                         className={` lg:hidden items-center justify-between font-semibold dark:bg-khotixs-background-dark ${isMenuOpen ? "block" : "hidden"} w-full `}
@@ -208,5 +254,6 @@ const NavbarComponent = () => {
         </>
     );
 };
+
 
 export default NavbarComponent;
