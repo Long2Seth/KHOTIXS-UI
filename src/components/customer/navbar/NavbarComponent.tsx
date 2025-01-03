@@ -95,6 +95,17 @@ const NavbarComponent = () => {
         setMenuOpen(!isMenuOpen);
     };
 
+    // const handleSearch = async (e: React.FormEvent) => {
+    //     e.preventDefault();
+    //     const query = `eventTitle:${searchQuery} OR location:"${selectedLocation}" OR startedDate:${date ? format(date, 'yyyy-MM-dd') : ''}`;
+    //     const response = await fetch(`http://34.69.50.191:9200/events/_search?q=${query}`);
+    //     const data = await response.json();
+    //     setSearchResults(data.hits.hits);
+    //     const params = new URLSearchParams({ results: JSON.stringify(data.hits.hits) });
+    //     router.push(`/search?${params.toString()}`);
+    // };
+
+
 
     return (
         <>
@@ -150,7 +161,7 @@ const NavbarComponent = () => {
                                             </SelectTrigger>
                                             <SelectContent className="text-gray-800 bg-gray-100">
                                                 <SelectGroup>
-                                                    <SelectItem value="Phnome Phenh">Phnome Phenh</SelectItem>
+                                                    <SelectItem value="Phnome Phenh">Phnom Penh</SelectItem>
                                                 </SelectGroup>
                                             </SelectContent>
                                         </Select>

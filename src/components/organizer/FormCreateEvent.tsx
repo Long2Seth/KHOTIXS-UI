@@ -21,6 +21,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 // Define the zod schema
 const eventSchema = z.object({
@@ -424,7 +425,8 @@ export function CreateEventForm() {
                                 <section className=" w-full h-[640px] border-gray-400 border border-dashed rounded-[6px]" onClick={handleSectionClick}>
                                     <div className=" w-full h-full flex flex-col justify-center items-center ">
                                         {imageUrl ? (
-                                            <img src={imageUrl} alt="Uploaded" className="h-full w-full object-cover rounded-none" />
+                                            <Image
+                                                unoptimized width={100} height={100} src={imageUrl} alt="Uploaded" className="h-full w-full object-cover rounded-none" />
                                         ) : (
                                             <>
                                                 <LuUpload className=" h-[50px] w-[50px] text-gray-400"/>

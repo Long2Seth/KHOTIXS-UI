@@ -13,8 +13,6 @@ enum TicketType {
     FREE = 'FREE'
 }
 
-const ticketTypes = [TicketType.VIP, TicketType.REGULAR, TicketType.PREMIUM, TicketType.FREE];
-
 type Ticket = {
     id: string;
     ticketTitle: string;
@@ -56,14 +54,21 @@ export function CardComponent({event}: CardUpcomingProps) {
             case TicketType.FREE:
                 return 'bg-label-free';
             default:
-                return '';
+                return 'bg-label-free';
         }
     };
+
+    // The code in question
+    const [ticket] = event.tickets.map((ticket) => ticket.type);
+    console.log(ticket);
+
+// Let's also log the full result of the map operation for comparison
+    console.log("Full map result:", event.tickets.map((ticket) => ticket.type));
 
     return (
         <section
             onClick={() => router.push(`/event`)}
-            className="relative cursor-pointer bg-white dark:bg-backdrop-blur dark:bg-opacity-5 rounded-[10px] flex flex-col justify-start items-start h-[215px] max-w-[200px] sm:h-[215px] md:max-w-[330px] md:h-[340px] xl:max-w-[400px] xl:h-[450px] 2xl:max-w-[450px] md:p-0">
+            className="relative cursor-pointer bg-white dark:bg-backdrop-blur dark:bg-opacity-5 rounded-[10px] flex flex-col justify-start items-start max-w-[300px] sm:max-w-[300px] md:max-w-[330px] md:h-[340px] xl:max-w-[400px] xl:h-[450px] h-[240px] sm:h-[250px] 2xl:max-w-[450px] md:p-0">
 
             <a className="group block overflow-hidden rounded-[10px]">
                 <div className="rounded-tr-[10px] z-10 rounded-tl-[10px] w-full h-[50%] overflow-hidden">
@@ -95,20 +100,18 @@ export function CardComponent({event}: CardUpcomingProps) {
                         </div>
                     </div>
                 </section>
-                {ticketTypes.map((type, typeIndex) => (
-                    event.tickets
-                        .filter(ticket => ticket.type === type)
-                        .map((ticket, index) => (
-                            <Badge
-                                key={index}
-                                className={`absolute bottom-2 w-14 justify-center right-${typeIndex * 16} dark:text-black text-white rounded-[6px] mx-2 ${getLabelClass(ticket.type)}`}>
-
-                                {ticket.type}
-                                price: {ticket.price}
-
-                            </Badge>
-                        ))
-                ))}
+                <div className="absolute bottom-2 right-0">
+                    {
+                        event.tickets
+                            .map((ticket, index) => (
+                                <Badge
+                                    key={index}
+                                    className={`dark:text-black text-white rounded-[6px] mx-2 ${getLabelClass(ticket.type)}`}>
+                                    <span> {ticket.type === TicketType.FREE ? "FREE" : `$${ticket.price}`}</span>
+                                </Badge>
+                            ))
+                    }
+                </div>
             </a>
         </section>
     );

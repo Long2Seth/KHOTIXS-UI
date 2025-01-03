@@ -61,7 +61,7 @@ export default function Home() {
                                 description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets."
                             />
                             <section
-                                className="relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row w-full lg:px-[48px] items-end">
+                                className="flex flex-col w-[300px] sm:w-[100%] justify-end md:pr-[25px] lg:px-[30px] lg:flex-row xl:px-[48px] items-end">
                                 <Button
                                     onClick={() => handleButtonClick("technology")}
                                     className=" w-auto lg:h-[45px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
@@ -72,7 +72,7 @@ export default function Home() {
                                 </Button>
                             </section>
                             <section
-                                className="h-auto grid gap-2 grid-cols-1 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
+                                className="h-auto grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
                                 {eventData.filter(event => event.eventType === "TECHNOLOGY").slice(0, 6).map((event, index) => (
                                     <CardComponent
                                         key={index}
@@ -90,7 +90,7 @@ export default function Home() {
                                 description="The Concerts feature provides users with detailed information about live music events, tailored for music enthusiasts. It enhances the user experience by offering curated content and tools to explore, book, and engage with concert events."
                             />
                             <section
-                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row w-full lg:px-[48px] items-end">
+                                className="flex flex-col w-[300px] sm:w-[100%] justify-end md:pr-[25px] lg:px-[30px] lg:flex-row xl:px-[48px] items-end">
                                 <div className=" sm:w-auto my-[10px] lg:my-0 ">
                                     <Button
                                         onClick={() => handleButtonClick("concert")}
@@ -104,7 +104,7 @@ export default function Home() {
 
                             </section>
                             <section
-                                className="h-auto grid gap-2 grid-cols-1 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
+                                className="h-auto grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
                                 {eventData.filter(event => event.eventType === "CONCERT").slice(0, 6).map((event, index) => (
                                     <CardComponent key={index} event={event} />
                                 ))}
@@ -122,7 +122,7 @@ export default function Home() {
                         interactive platform to explore, book, and participate in sports events."
                             />
                             <section
-                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row w-full lg:px-[48px] items-end">
+                                className="flex flex-col w-[300px] sm:w-[100%] justify-end md:pr-[25px] lg:px-[30px] lg:flex-row xl:px-[48px] items-end">
 
                                 <div className=" sm:w-auto my-[10px] lg:my-0 ">
                                     <Button
@@ -137,7 +137,7 @@ export default function Home() {
 
                             </section>
                             <section
-                                className="h-auto grid gap-2 grid-cols-1 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
+                                className="h-auto grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
                                 {eventData.filter(event => event.eventType === "SPORT").slice(0, 6).map((event, index) => (
                                     <CardComponent key={index} event={event} />
                                 ))}
@@ -156,7 +156,7 @@ export default function Home() {
                         supporting shared interests."
                             />
                             <section
-                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row w-full lg:px-[48px] items-end">
+                                className="flex flex-col w-[300px] sm:w-[100%] justify-end md:pr-[25px] lg:px-[30px] lg:flex-row xl:px-[48px] items-end">
 
                                 <div className=" sm:w-auto my-[10px] lg:my-0 ">
                                     <Button
@@ -171,7 +171,7 @@ export default function Home() {
 
                             </section>
                             <section
-                                className="h-auto grid gap-2 grid-cols-1 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
+                                className="h-auto grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
                                 {eventData.filter(event => event.eventType === "COMMUNITY").slice(0, 6).map((event, index) => (
                                     <CardComponent key={index} event={event} />
                                 ))}
@@ -187,7 +187,7 @@ export default function Home() {
                                 description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets."
                             />
                             <section
-                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row w-full lg:px-[48px] items-end">
+                                className="flex flex-col w-[300px] sm:w-[100%] justify-end md:pr-[25px] lg:px-[30px] lg:flex-row xl:px-[48px] items-end">
                                 <div className=" sm:w-auto my-[10px] lg:my-0 ">
                                     <Button
                                         onClick={() => handleButtonClick("conference")}
@@ -201,7 +201,7 @@ export default function Home() {
 
                             </section>
                             <section
-                                className="h-auto grid gap-2 grid-cols-1 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
+                                className="h-auto grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
                                 {eventData.filter(event => event.eventType === "CONFERENCES AND SEMINARS").slice(0, 6).map((event, index) => (
                                     <CardComponent key={index} event={event} />
                                 ))}
@@ -217,7 +217,7 @@ export default function Home() {
                                 description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets."
                             />
                             <section
-                                className=" relative flex flex-col justify-end sm:pr-[0px] md:pr-[25px] lg:flex-row w-full lg:px-[48px] items-end">
+                                className="flex flex-col w-[300px] sm:w-[100%] justify-end md:pr-[25px] lg:px-[30px] lg:flex-row xl:px-[48px] items-end">
                                 <div className=" sm:w-auto my-[10px] lg:my-0 ">
                                     <Button
                                         onClick={() => handleButtonClick("general")}
@@ -228,7 +228,7 @@ export default function Home() {
                                 </div>
                             </section>
                             <section
-                                className="h-auto grid gap-2 grid-cols-1 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
+                                className="h-auto grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px]">
                                 {eventData.filter(event => event.eventType === "GENERAL").slice(0, 6).map((event, index) => (
                                     <CardComponent key={index} event={event} />
                                 ))}
