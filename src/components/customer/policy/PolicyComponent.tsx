@@ -18,7 +18,7 @@ export default function PolicyComponent (){
         <>
             {
                 isLoading ? <PolicySkeletonComponent/> :
-                    <section className="">
+                    <section className="w-full space-y-[50px] md:space-y-[80px] xl:space-y-[100px] my-10 my:mb-[80px] bg-khotixs-background-white dark:bg-khotixs-background-dark">
                         <section className=" flex flex-col gap-5 ">
                             <div className="w-full ">
                                 <h1 className="w-full text-center text-title-color text-lg md:text-2xl xl:text-4xl font-bold uppercase dark:text-secondary-color-text ">

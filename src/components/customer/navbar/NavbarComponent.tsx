@@ -97,13 +97,15 @@ const NavbarComponent = () => {
 
     return (
         <>
-            {isLoading ? <SkeletonNavbarComponent /> :
-                <nav className=" w-full top-[-60px] sticky z-50 bg-white flex flex-col dark:bg-khotixs-background-dark ">
+            {isLoading ? <SkeletonNavbarComponent/> :
+                <nav className=" w-full top-[0px] sticky z-50 bg-white flex flex-col dark:bg-khotixs-background-dark ">
                     <section
                         className=" container mx-auto w-full h-[60px] bg-white py-[10px]  flex px-5 lg:px-10 justify-center gap-5 dark:bg-khotixs-background-dark ">
                         <CiBullhorn className="  w-[40px] p-[8px] rounded-[50%] text-gray-400 bg-gray-200  h-full "/>
-                        <p className="  text-[10px] sm:text-sm lg:text-lg font-semibold flex items-center">Do you organize events? </p>
-                        <Button className="   text-[10px] sm:text-sm lg:text-lg font-semibold text-white hover:bg-primary-color bg-primary-color rounded-[5px] ">
+                        <p className="  text-[10px] sm:text-sm lg:text-lg font-semibold flex items-center">Do you
+                            organize events? </p>
+                        <Button
+                            className="   text-[10px] sm:text-sm lg:text-lg font-semibold text-white hover:bg-primary-color bg-primary-color rounded-[5px] ">
                             Become a Partner <span><FaArrowRightLong/></span>
                         </Button>
                     </section>
@@ -113,7 +115,8 @@ const NavbarComponent = () => {
                         <div className=" flex  justify-between h-14 items-center ">
                             {/* KHOTIXS LOGO */}
                             <Link href="/" className="flex items-center">
-                                <Image className=" w-[40px] h-40px] lg:w-[50px] lg:h-[50px] xl:w-[60px] xl:h-[60px] " width={80} height={80} src="/khotixs_logo.png" alt="Khotixs Logo"/>
+                                <Image className=" w-[40px] h-40px] lg:w-[50px] lg:h-[50px] xl:w-[60px] xl:h-[60px] "
+                                       width={80} height={80} src="/khotixs_logo.png" alt="Khotixs Logo"/>
                             </Link>
 
                             {/* Search form */}
@@ -229,7 +232,7 @@ const NavbarComponent = () => {
                         aria-expanded={isMenuOpen ? "true" : "false"}
                     >
                         <span className="sr-only">{isMenuOpen ? "Close main menu" : "Open main menu"}</span>
-                        {isMenuOpen ? <IoMdCloseCircle /> : <IoMenu/>}
+                        {isMenuOpen ? <IoMdCloseCircle/> : <IoMenu/>}
                     </div>
                     <div
                         id="mega-menu-full"

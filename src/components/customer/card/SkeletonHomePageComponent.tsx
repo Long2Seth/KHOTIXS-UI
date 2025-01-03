@@ -5,28 +5,9 @@ export function SkeletonHomePageComponent() {
     return (
         <section className=" space-y-10">
 
-            {/* Category Event*/}
-            <section
-                className="container mx-auto w-full py-12 font-bold flex flex-col justify-center items-center h-auto">
-                {/* Title Skeleton */}
-                <Skeleton className="my-5 w-2/3 h-8 rounded"/>
-
-                {/* Cards Skeleton */}
-                <section
-                    className="px-5 mt-2 justify-center gap-3 flex flex-wrap sm:w-full sm:grid sm:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6">
-                    {Array.from({length: 6}).map((_, index) => (
-                        <div
-                            key={index}
-                            className=" bg-khotixs-background-white rounded-[6px] border  dark:bg-khotixs-background-dark w-[145px] h-[65px] sm:w-full sm:h-[85px] md:h-[100px] lg:h-[140px] flex flex-col justify-center items-center shadow-lg "
-                        >
-                            {/* Icon Skeleton */}
-                            <Skeleton
-                                className="w-[50px] h-[50px] md:w-[70px] md:h-[70px] lg:w-[100px] lg:h-[100px] rounded-full mb-3"/>
-                            {/* Text Skeleton */}
-                            <Skeleton className="w-2/3 h-4 rounded"/>
-                        </div>
-                    ))}
-                </section>
+            {/* Banner Skeleton */}
+            <section className=" w-full h-[500px] ">
+                <Skeleton className="h-[500px] w-full"/>
             </section>
 
             {/* Card Event */}
