@@ -1,7 +1,8 @@
 enum TicketType {
     REGULAR = 'REGULAR',
     VIP = 'VIP',
-    PREMIUM = 'PREMIUM'
+    PREMIUM = 'PREMIUM',
+    FREE = 'FREE'
 }
 
 type Ticket = {
@@ -35,11 +36,11 @@ export const upcomingData: Event[] = [
             {
                 id: "92a4ed92-5f07-4f28-a5d0-ff02c0f8467b",
                 ticketTitle: "free",
-                type: TicketType.REGULAR,
+                type: TicketType.FREE,
                 price: "0.00",
                 capacity: 0,
-                isPublish: false,
-                isDisplay: false,
+                isPublish: true,
+                isDisplay: true,
                 isSoldOut: false
             },
             {
@@ -74,11 +75,11 @@ export const upcomingData: Event[] = [
             {
                 id: "d4a4ed92-5f07-4f28-a5d0-ff02c0f8467e",
                 ticketTitle: "free",
-                type: TicketType.REGULAR,
+                type: TicketType.FREE,
                 price: "0.00",
                 capacity: 0,
-                isPublish: false,
-                isDisplay: false,
+                isPublish: true,
+                isDisplay: true,
                 isSoldOut: false
             },
             {
@@ -276,8 +277,8 @@ export const eventData: Event[] = [
                 type: TicketType.REGULAR,
                 price: "0.00",
                 capacity: 0,
-                isPublish: false,
-                isDisplay: false,
+                isPublish: true,
+                isDisplay: true,
                 isSoldOut: false
             },
             {
