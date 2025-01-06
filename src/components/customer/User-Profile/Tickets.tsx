@@ -10,7 +10,9 @@ export default function Tickets() {
     return (
         <main className="container mx-auto mt-7 px-4 sm:px-6 lg:px-8">
 
-            <NavbarMenuComponent/>
+            {/*<NavbarMenuComponent/>*/}
+
+
             <section className="w-full max-w-[1200px] mx-auto py-4">
                 <div className="max-w-[1200px] mx-auto flex justify-center items-center">
                     <Tabs defaultValue="account" className="mb-5 w-full" onValueChange={setActiveTab}>

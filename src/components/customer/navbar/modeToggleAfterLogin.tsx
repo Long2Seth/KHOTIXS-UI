@@ -4,7 +4,7 @@ import * as React from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 
-export function ModeToggle() {
+export function ModeToggleAfterLogin() {
     const { theme, setTheme } = useTheme()
     const [isDark, setIsDark] = React.useState(false)
 
@@ -19,13 +19,22 @@ export function ModeToggle() {
 
     return (
         <div
-            className=" cursor-pointer hover:bg-gray-100 border-0 rounded-[6px] min-h-10 min-w-10 flex justify-center items-center mr-[35px] sm:mr-20 md:mr-0  text-primary-color hover:text-primary-color "
+            className=" cursor-pointer border-0 rounded-[6px] flex justify-center items-center mr-[35px] sm:mr-20 md:mr-0 gap-2 "
             onClick={toggleTheme}
         >
             {isDark ? (
-                <Moon width={25} height={25} />
+                <>
+                    <Sun />
+                    <span className=" text-white">Light Mode</span>
+                </>
             ) : (
-                <Sun className=" text-primary-color hover:text-primary-color h-50 w-50" width={25} height={25}/>
+                <>
+
+                    <Moon />
+                    <span className="text-black ">Dark Mode</span>
+
+
+                </>
             )}
         </div>
     )

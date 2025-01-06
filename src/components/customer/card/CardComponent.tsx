@@ -13,8 +13,6 @@ enum TicketType {
     FREE = 'FREE'
 }
 
-const ticketTypes = [TicketType.VIP, TicketType.REGULAR, TicketType.PREMIUM, TicketType.FREE];
-
 type Ticket = {
     id: string;
     ticketTitle: string;
@@ -56,24 +54,25 @@ export function CardComponent({event}: CardUpcomingProps) {
             case TicketType.FREE:
                 return 'bg-label-free';
             default:
-                return '';
+                return 'bg-label-free';
         }
     };
+
 
     return (
         <section
             onClick={() => router.push(`/event`)}
-            className="relative cursor-pointer bg-white dark:bg-backdrop-blur dark:bg-opacity-5 rounded-[10px] flex flex-col justify-start items-start h-[215px] max-w-[200px] sm:h-[215px] md:max-w-[330px] md:h-[340px] xl:max-w-[400px] xl:h-[450px] 2xl:max-w-[450px] md:p-0">
+            className="relative cursor-pointer bg-white dark:bg-backdrop-blur dark:bg-opacity-5 rounded-[6px] flex flex-col justify-start items-start max-w-[300px] sm:max-w-[300px] md:max-w-[330px] md:h-[340px] xl:max-w-[400px] xl:h-[450px] h-[240px] sm:h-[250px] 2xl:max-w-[450px] md:p-0">
 
-            <a className="group block overflow-hidden rounded-[10px]">
-                <div className="rounded-tr-[10px] z-10 rounded-tl-[10px] w-full h-[50%] overflow-hidden">
+            <a className="group block overflow-hidden rounded-[6px]">
+                <div className=" z-10 rounded-t-[6px] w-full h-[50%] overflow-hidden">
                     <Image
                         width={100}
                         height={100}
                         unoptimized
                         src={`${event.image}`}
                         alt=""
-                        className="z-10 rounded-tr-[10px] rounded-tl-[10px] w-full bg-cover bg-center transform transition-transform duration-300 group-hover:scale-110"
+                        className="z-10 rounded-l-[6px] w-full bg-cover bg-center transform transition-transform duration-300 group-hover:scale-110"
                     />
                 </div>
                 <section
@@ -95,20 +94,18 @@ export function CardComponent({event}: CardUpcomingProps) {
                         </div>
                     </div>
                 </section>
-                {ticketTypes.map((type, typeIndex) => (
-                    event.tickets
-                        .filter(ticket => ticket.type === type)
-                        .map((ticket, index) => (
-                            <Badge
-                                key={index}
-                                className={`absolute bottom-2 w-14 justify-center right-${typeIndex * 16} dark:text-black text-white rounded-[6px] mx-2 ${getLabelClass(ticket.type)}`}>
-
-                                {ticket.type}
-                                price: {ticket.price}
-
-                            </Badge>
-                        ))
-                ))}
+                <div className="absolute bottom-2 right-0">
+                    {
+                        event.tickets
+                            .map((ticket, index) => (
+                                <Badge
+                                    key={index}
+                                    className={`dark:text-black text-white rounded-[6px] mx-2 ${getLabelClass(ticket.type)}`}>
+                                    <span> {ticket.type === TicketType.FREE ? "FREE" : `$${ticket.price}`}</span>
+                                </Badge>
+                            ))
+                    }
+                </div>
             </a>
         </section>
     );

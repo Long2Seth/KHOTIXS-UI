@@ -50,7 +50,7 @@ export default function Setting () {
         <div className="w-full mx-auto h-auto flex justify-center items-center mb-5">
             <div className="rounded-lg w-full max-w-[1200px] flex flex-wrap justify-center gap-y-4">
                 <Link
-                    href="/user-profile/ticket"
+                    href="/(customer)/profile/ticket"
                     className="flex justify-center items-center w-[48%] sm:w-[45%] md:w-[22%] lg:w-[22%] h-[60px] rounded-lg shadow-sm"
                 >
                     <div
@@ -63,7 +63,7 @@ export default function Setting () {
                 </Link>
 
                 <Link
-                    href="/user-profile/payment"
+                    href="/(customer)/profile/payment"
                     className="flex justify-center items-center w-[48%] sm:w-[45%] md:w-[22%] lg:w-[22%] h-[60px] rounded-lg shadow-sm"
                 >
                     <div
@@ -76,7 +76,7 @@ export default function Setting () {
                 </Link>
 
                 <Link
-                    href="/user-profile/profile"
+                    href="/(customer)/profile/profile"
                     className="flex justify-center items-center w-[48%] sm:w-[45%] md:w-[22%] lg:w-[22%] h-[60px] rounded-lg shadow-sm"
                 >
                     <div
@@ -89,7 +89,7 @@ export default function Setting () {
                 </Link>
 
                 <Link
-                    href="/user-profile/setting"
+                    href="/(customer)/profile/setting"
                     className="flex justify-center items-center w-[48%] sm:w-[45%] md:w-[22%] lg:w-[22%] h-[60px] rounded-lg shadow-sm"
                 >
                     <div

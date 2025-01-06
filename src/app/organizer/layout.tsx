@@ -1,7 +1,6 @@
 import type {Metadata} from "next";
 import "../globals.css";
 import {ThemeProvider} from "next-themes";
-import StoreProvider from "@/app/StoreProvider";
 import {Toaster} from "@/components/ui/toaster";
 import FooterOrganizer from "@/components/organizer/FooterOrganizer";
 import NavbarOrganizerComponent from "@/components/organizer/NavbarOrganizerComponent";
@@ -30,9 +29,7 @@ export default function RootLayout({
         >
             <NavbarOrganizerComponent/>
             <CategoriesOrganizerComponent/>
-            <StoreProvider>
                 {children}
-            </StoreProvider>
             <FooterOrganizer/>
             <Toaster/>
         </ThemeProvider>
