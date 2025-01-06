@@ -102,7 +102,7 @@ export default function Payment() {
         <section className="container mx-auto mt-7 px-4 sm:px-6 lg:px-8">
 
             {/*List all tab have 4*/}
-            <NavbarMenuComponent/>
+            {/*<NavbarMenuComponent/>*/}
 
             {/*List all history payment*/}
 

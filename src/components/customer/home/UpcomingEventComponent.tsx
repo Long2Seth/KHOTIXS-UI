@@ -16,7 +16,7 @@ export function UpcomingEventComponent() {
                 </p>
             </section>
             <section
-                className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-2 md:px-[0px] md:gap-5 lg:px-[190px] xl:px-[220px] ">
+                className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-2 md:px-[0px] md:gap-5 lg:px-[190px] xl:px-[220px] xl:gap-10">
                 {upcomingData.map((event, index) => (
                     <CardComponent key={index} event={event} />
                 ))}

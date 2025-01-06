@@ -14,13 +14,13 @@ import {
 
 export function NavigationMenuDemo() {
     return (
-        <NavigationMenu className=" hidden lg:block dark:bg-khotixs-background-dark m-5 ">
+        <NavigationMenu className=" hidden md:block dark:bg-khotixs-background-dark ">
             <NavigationMenuList>
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger className=" lg:text-md xl:text-lg font-medium dark:bg-khotixs-background-dark  ">About & Contact</NavigationMenuTrigger>
+                    <NavigationMenuTrigger className=" lg:w-auto lg:text-md xl:text-lg font-medium dark:bg-khotixs-background-dark lg:px-4 ">About & Contact</NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <section
-                            className="relative flex lg:w-[400px] xl:w-[450px] h-auto rounded-[5px] hover:rounded-[5px] outline-none border-5 border-none ring-0  bg-khotixs-background-white dark:bg-khotixs-background-dark ">
+                            className="relative flex md:w-[400px] xl:w-[450px] h-auto rounded-[5px] hover:rounded-[5px] outline-none border-5 border-none ring-0  bg-khotixs-background-white dark:bg-khotixs-background-dark ">
 
                             <a className=" w-[50%] cursor-pointer p-[20px] rounded-[5px] hover:bg-secondary-color hover:text-secondary-color-text"
                                 href="/about">
