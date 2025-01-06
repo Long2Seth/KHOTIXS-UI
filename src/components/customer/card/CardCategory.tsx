@@ -25,18 +25,38 @@ export default function CardCategory({technologyRef, concertRef, sportRef, commu
         <section
             className="relative lg:pt-10 md:pb-20 pb-10 md:space-y-10 space-y-6 mx-auto w-full bg-khotixs-background-white dark:bg-khotixs-background-dark font-bold flex flex-col justify-center items-center h-auto overflow-hidden">
             {/* SVG Wave Background */}
+
             <div className="absolute bottom-0 left-0 w-full z-10">
-                <svg
+                <motion.svg
                     viewBox="0 0 1440 320"
                     className="w-full h-full"
                     xmlns="http://www.w3.org/2000/svg"
+                    initial={{y: 10}}
+                    animate={{y: [0, 10, 0]}}
+                    transition={{duration: 4, repeat: Infinity, ease: "easeInOut"}}
                 >
                     <path
                         fill="#AC1ED2"
                         fillOpacity="0.1"
                         d="M0,96L48,128C96,160,192,224,288,234.7C384,245,480,203,576,186.7C672,171,768,181,864,176C960,171,1056,149,1152,154.7C1248,160,1344,192,1392,208L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
                     />
-                </svg>
+                </motion.svg>
+            </div>
+            <div className="absolute bottom-0 left-0 w-full z-10">
+                <motion.svg
+                    viewBox="0 0 1440 320"
+                    className="w-full h-full"
+                    xmlns="http://www.w3.org/2000/svg"
+                    initial={{y: 10}}
+                    animate={{y: [0, 10, 0]}}
+                    transition={{duration: 4, repeat: Infinity, ease: "easeInOut"}}
+                >
+                    <path
+                        fill="#AC1ED2"
+                        fillOpacity="0.1"
+                        d="M0,96L48,128C96,160,192,224,288,234.7C384,245,480,203,576,186.7C672,171,768,181,864,176C960,171,1056,149,1152,154.7C1248,160,1344,192,1392,208L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+                    />
+                </motion.svg>
             </div>
             <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text z-10">
                 EVENT CATEGORIES
