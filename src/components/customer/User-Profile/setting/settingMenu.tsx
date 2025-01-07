@@ -3,7 +3,7 @@
 import {cn} from "@/lib/utils"
 import {MdOutlineLockPerson} from "react-icons/md";
 import {IoMdNotificationsOutline} from "react-icons/io";
-import {IoLogOutOutline} from "react-icons/io5";
+// import {IoLogOutOutline} from "react-icons/io5";
 
 interface SettingMenuProps {
     onTabChange: (tab: 'password' | 'notifications') => void
