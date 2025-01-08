@@ -20,7 +20,7 @@ export const menuItems: MenuType[] = [
         name: 'Contact Us'
     },
     {
-        link: 'http://localhost:8000/oauth2/authorization/nextjs',
+        link: '/oauth2/authorization/nextjs',
         icon: <TbLogin2 />,
         name: 'Log In'
     }

@@ -48,7 +48,7 @@ const NavbarComponent = () => {
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_KHOTIXS_URL}/user-profile/api/v1/user-profiles/me`, {
+                const response = await fetch(`/user-profile/api/v1/user-profiles/me`, {
                     credentials: "include",
                 });
 
@@ -68,7 +68,7 @@ const NavbarComponent = () => {
 
     useEffect(() => {
         if (userProfile) {
-            setDynamicMenuItems(menuItems.filter(item => item.link !== 'http://localhost:8000/oauth2/authorization/nextjs'));
+            setDynamicMenuItems(menuItems.filter(item => item.link !== '/oauth2/authorization/nextjs'));
         } else {
             setDynamicMenuItems(menuItems);
         }
@@ -203,7 +203,7 @@ const NavbarComponent = () => {
                                         <UserProfileComponent data={userProfile} />
                                     ) : (
                                         <Button
-                                            onClick={() => router.push("http://localhost:8000/oauth2/authorization/nextjs")}
+                                            onClick={() => router.push("/oauth2/authorization/nextjs")}
                                             className=" hidden md:flex bg-primary-color lg:text-md xl:text-lg border-[1px] rounded-[5px] text-secondary-color-text font-[10px] hover:bg-primary-color border-primary-color hover:bg-primary-color/80">
                                             Log In
                                         </Button>

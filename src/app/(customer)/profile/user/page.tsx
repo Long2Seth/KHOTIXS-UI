@@ -16,6 +16,7 @@ type UserProfile = {
     email: string;
     businessName: string;
     description: string;
+    username: string;
 };
 
 export default function ProfilePage() {

@@ -17,6 +17,8 @@ type ProfileType = {
     email: string;
     businessName: string;
     avatar: string;
+    username: string;
+    phoneNumber: string;
 };
 
 type EditProfileProps = {
@@ -32,8 +34,34 @@ export default function EditProfile({ profile }: EditProfileProps) {
         setFormData((prevData) => ({ ...prevData, [id]: value }));
     };
 
-    const handleSave = () => {
-        // Save logic here
+    const handleSave = async () => {
+        try {
+            const response = await fetch(`user-profile/api/v1/user-profiles/${formData.username}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    fullName: formData.fullName,
+                    gender: formData.gender,
+                    dob: formData.dob,
+                    phoneNumber: formData.phoneNumber,
+                    address: formData.address,
+                    avatar: formData.avatar,
+                    position: formData.position,
+                    businessName: formData.businessName,
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update profile');
+            }
+
+            // Handle successful update (e.g., show a success message)
+        } catch (error) {
+            console.error('Error updating profile:', error);
+            // Handle error (e.g., show an error message)
+        }
     };
 
     const handleCancel = () => {

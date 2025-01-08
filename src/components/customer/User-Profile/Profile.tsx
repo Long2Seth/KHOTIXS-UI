@@ -24,6 +24,7 @@ type Profile = {
     email: string;
     businessName: string;
     avatar: string;
+    username: string;
 };
 
 type ProfileComponentProps = {
@@ -36,7 +37,7 @@ export default function ProfileComponent({userProfile}: ProfileComponentProps) {
     useEffect(() => {
         const fetchAdminProfile = async () => {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_KHOTIXS_URL}/user-profile/api/v1/user-profiles/${userProfile.email}`);
+                const response = await fetch(`${process.env.NEXT_PUBLIC_KHOTIXS_URL}/user-profile/api/v1/user-profiles/${userProfile.username}`);
                 if (response.ok) {
                     const data: Profile = await response.json();
                     setProfile(data);
