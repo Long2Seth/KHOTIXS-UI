@@ -1,5 +1,5 @@
 import React from 'react';
-import Profile from "@/components/organizer/Profile";
+import Profile from "@/components/organizer/profile/Profile";
 
 export default function DetailProfile (){
     return (

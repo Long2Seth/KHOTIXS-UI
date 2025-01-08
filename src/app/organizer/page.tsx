@@ -1,5 +1,5 @@
 import React from 'react';
-import OrganizerDashboard from "@/components/organizer/organizer-dash";
+import OrganizerDashboard from "@/components/organizer/home/organizer-dash";
 import {EventsTable} from "@/components/organizer/event-table";
 
 const MyComponent = () => {

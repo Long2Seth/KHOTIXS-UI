@@ -6,7 +6,7 @@ import Link from "next/link";
 import * as React from "react";
 import {navItems} from "@/lib/organizer/navData";
 import {useRouter, usePathname} from "next/navigation";
-import {OrganizerProfileComponent} from "@/components/organizer/UserProfileComponent";
+import {OrganizerProfileComponent} from "@/components/organizer/profile/UserProfileComponent";
 
 export default function NavbarOrganizerComponent() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
