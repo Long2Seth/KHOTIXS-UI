@@ -4,7 +4,6 @@ import { useState } from "react"
 import SettingMenu from "@/components/customer/User-Profile/setting/settingMenu"
 import ChangePassword from "@/components/customer/User-Profile/setting/changePassword"
 import UserNotifications from "@/components/customer/User-Profile/setting/user-notifications"
-// import NavbarMenuComponent from "@/components/customer/User-Profile/navbarMenuComponent"
 
 export default function SettingComponent() {
     const [activeTab, setActiveTab] = useState<'password' | 'notifications'>('password')
@@ -24,5 +23,3 @@ export default function SettingComponent() {
         </section>
     )
 }
-
-

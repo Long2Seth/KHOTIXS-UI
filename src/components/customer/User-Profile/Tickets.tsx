@@ -2,7 +2,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Upcoming from "@/components/customer/User-Profile/Upcomming";
 import React, {useState} from "react";
-// import NavbarMenuComponent from "@/components/customer/User-Profile/navbarMenuComponent";
 
 export default function Tickets() {
     const [activeTab, setActiveTab] = useState("account");

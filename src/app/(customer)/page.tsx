@@ -1,6 +1,6 @@
 'use client'
 import CardCategory from "@/components/customer/card/CardCategory";
-import { UpcomingEventComponent } from "@/components/customer/home/UpcomingEventComponent";
+import {UpcomingEventComponent} from "@/components/customer/home/UpcomingEventComponent";
 import InfoCard from "@/components/customer/card/InfoCard";
 import {eventData} from "@/lib/customer/upcomingData";
 import {CardComponent} from "@/components/customer/card/CardComponent";
@@ -36,7 +36,7 @@ export default function Home() {
     return (
         <>
             {
-                isLoading ? <SkeletonHomePageComponent /> :
+                isLoading ? <SkeletonHomePageComponent/> :
                     <main
                         className="flex flex-col space-y-10 bg-khotixs-background-white dark:bg-khotixs-background-dark">
 
@@ -67,7 +67,7 @@ export default function Home() {
                                     className=" w-auto lg:h-[45px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
                                     View All
                                     <span>
-                                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 "/>
+                                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w-10 "/>
                                         </span>
                                 </Button>
                             </section>
@@ -76,7 +76,7 @@ export default function Home() {
                                 {eventData.filter(event => event.eventType === "TECHNOLOGY").slice(0, 6).map((event, index) => (
                                     <CardComponent
                                         key={index}
-                                        event={event} />
+                                        event={event}/>
                                 ))}
                             </section>
                         </section>
@@ -97,7 +97,7 @@ export default function Home() {
                                         className=" w-auto lg:h-[45px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
                                         View All
                                         <span>
-                                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 " />
+                                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 "/>
                                         </span>
                                     </Button>
                                 </div>
@@ -106,7 +106,7 @@ export default function Home() {
                             <section
                                 className="h-auto grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
                                 {eventData.filter(event => event.eventType === "CONCERT").slice(0, 6).map((event, index) => (
-                                    <CardComponent key={index} event={event} />
+                                    <CardComponent key={index} event={event}/>
                                 ))}
                             </section>
                         </section>
@@ -130,7 +130,7 @@ export default function Home() {
                                         className=" w-auto lg:h-[45px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
                                         View All
                                         <span>
-                                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 " />
+                                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 "/>
                                         </span>
                                     </Button>
                                 </div>
@@ -139,7 +139,7 @@ export default function Home() {
                             <section
                                 className="h-auto grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
                                 {eventData.filter(event => event.eventType === "SPORT").slice(0, 6).map((event, index) => (
-                                    <CardComponent key={index} event={event} />
+                                    <CardComponent key={index} event={event}/>
                                 ))}
                             </section>
                         </section>
@@ -164,7 +164,7 @@ export default function Home() {
                                         className=" w-auto lg:h-[45px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
                                         View All
                                         <span>
-                                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 " />
+                                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 "/>
                                         </span>
                                     </Button>
                                 </div>
@@ -173,7 +173,7 @@ export default function Home() {
                             <section
                                 className="h-auto grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
                                 {eventData.filter(event => event.eventType === "COMMUNITY").slice(0, 6).map((event, index) => (
-                                    <CardComponent key={index} event={event} />
+                                    <CardComponent key={index} event={event}/>
                                 ))}
                             </section>
                         </section>
@@ -194,7 +194,7 @@ export default function Home() {
                                         className=" w-auto lg:h-[45px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
                                         View All
                                         <span>
-                                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 " />
+                                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 "/>
                                         </span>
                                     </Button>
                                 </div>
@@ -203,7 +203,7 @@ export default function Home() {
                             <section
                                 className="h-auto grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
                                 {eventData.filter(event => event.eventType === "CONFERENCES AND SEMINARS").slice(0, 6).map((event, index) => (
-                                    <CardComponent key={index} event={event} />
+                                    <CardComponent key={index} event={event}/>
                                 ))}
                             </section>
                         </section>
@@ -230,7 +230,7 @@ export default function Home() {
                             <section
                                 className="h-auto grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
                                 {eventData.filter(event => event.eventType === "GENERAL").slice(0, 6).map((event, index) => (
-                                    <CardComponent key={index} event={event} />
+                                    <CardComponent key={index} event={event}/>
                                 ))}
                             </section>
                         </section>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {EditEvent} from "@/components/organizer/EditEvent";
+import {EditEvent} from "@/components/organizer/event/EditEvent";
 
 const Page = () => {
     return (

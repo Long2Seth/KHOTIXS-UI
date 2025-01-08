@@ -1,6 +1,6 @@
 import React from 'react';
-import EventDetailsPage from "@/components/organizer/DetailEvent";
-import TicketTable from "@/components/organizer/TicketTable";
+import EventDetailsPage from "@/components/organizer/event/DetailEvent";
+import TicketTable from "@/components/organizer/event/TicketTable";
 
 const Page = () => {
     return (

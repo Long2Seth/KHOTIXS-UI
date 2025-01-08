@@ -1,5 +1,5 @@
 import React from 'react';
-import {TicketSettingsForm} from "@/components/organizer/TicketSettingForm";
+import {TicketSettingsForm} from "@/components/organizer/event/TicketSettingForm";
 
 const Page = () => {
     return (

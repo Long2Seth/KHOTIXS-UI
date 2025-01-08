@@ -1,5 +1,4 @@
 'use client';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {ModeToggle} from "@/components/ui/modeToggle";
 import {IoMdCloseCircle} from "react-icons/io";
 import {IoMenu} from "react-icons/io5";
@@ -7,6 +6,7 @@ import Link from "next/link";
 import * as React from "react";
 import {navItems} from "@/lib/organizer/navData";
 import {useRouter, usePathname} from "next/navigation";
+import {OrganizerProfileComponent} from "@/components/organizer/UserProfileComponent";
 
 export default function NavbarOrganizerComponent() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -34,14 +34,11 @@ export default function NavbarOrganizerComponent() {
         <header className=" bg-white dark:bg-khotixs-background-dark dark:border-b-[1px] dark:border-gray-700 mb-5">
             <section className=" container mx-auto w-full z-20 top-0 sticky py-[10px] dark:bg-khotixs-background-dark bg-white  ">
                 <section className="flex items-center gap-2 md:gap-4 justify-between pr-[10px]">
-                    <div className="flex gap-2 md:gap-5 p-2">
-                        <Avatar className="h-16 w-16 cursor-pointer">
-                            <AvatarImage src="/cher-chhaya.png" alt="cher image"/>
-                            <AvatarFallback>OG</AvatarFallback>
-                        </Avatar>
+                    <div className="flex flex-row justify-center items-center gap-2 md:gap-5 p-2  ">
+                        <OrganizerProfileComponent/>
                         <div>
                             <p className="text-[10px] md:text-lg text-gray-500">WELCOME BACK, ORGANIZER</p>
-                            <h1 className="text-lg md:text-2xl font-bold">CHAN CHhAYA</h1>
+                            <h1 className="text-lg md:text-2xl font-bold uppercase">CHAN CHhAYA</h1>
                         </div>
                     </div>
                     <ModeToggle/>

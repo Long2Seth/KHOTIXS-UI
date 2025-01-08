@@ -8,7 +8,7 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/c
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {Calendar as CalendarComponent} from "@/components/ui/calendar";
-import {Pagination} from "@/components/Pagination";
+import {Pagination} from "@/components/ui/Pagination";
 import {NotificationData} from "@/lib/organizer/NotificationData";
 import {Badge} from "@/components/ui/badge";
 
@@ -55,7 +55,7 @@ export default function EventComponent() {
         <section className="w-full border-primary-color ">
             <CardHeader>
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 ">
-                    <CardTitle className=" p-5 " >
+                    <CardTitle className="py-5" >
                         <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">NOTIFICATION
                         </h1>
                     </CardTitle>
