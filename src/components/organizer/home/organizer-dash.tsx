@@ -28,7 +28,7 @@ export default function OrganizerDashboard() {
                                     Total Events
                                 </CardTitle>
                                 <CardContent>
-                                    <div className="text-2xl font-bold dark:text-secondary-color-text pl-2">10</div>
+                                    <div className="text-2xl xl:text-4xl font-bold dark:text-primary-color text-primary-color pl-2">10</div>
                                 </CardContent>
                             </CardHeader>
 
@@ -42,8 +42,8 @@ export default function OrganizerDashboard() {
                                     Total Tickets
                                 </CardTitle>
                                 <CardContent>
-                                <div className="text-2xl font-bold dark:text-secondary-color-text pl-2 ">50</div>
-                            </CardContent>
+                                    <div className="text-2xl xl:text-4xl font-bold dark:text-primary-color text-primary-color pl-2">50</div>
+                                </CardContent>
                             </CardHeader>
 
                         </Card>
@@ -56,9 +56,10 @@ export default function OrganizerDashboard() {
                                     Event Unpublish
                                 </CardTitle>
                                 <CardContent>
-                                <div className="text-2xl font-bold dark:text-secondary-color-text pl-2">5</div>
-                            </CardContent>
+                                    <div className="text-2xl xl:text-4xl font-bold dark:text-primary-color text-primary-color pl-2">5</div>
+                                </CardContent>
                             </CardHeader>
+
 
                         </Card>
                         <Card
@@ -69,7 +70,7 @@ export default function OrganizerDashboard() {
                                     Event Publish
                                 </CardTitle>
                                 <CardContent>
-                                    <div className="text-2xl font-bold dark:text-secondary-color-text pl-2 ">5</div>
+                                    <div className="text-2xl xl:text-4xl font-bold dark:text-primary-color text-primary-color pl-2">5</div>
                                 </CardContent>
                             </CardHeader>
 
@@ -83,7 +84,7 @@ export default function OrganizerDashboard() {
                                     Total Payment
                                 </CardTitle>
                                 <CardContent>
-                                    <div className="text-2xl font-bold dark:text-secondary-color-text pl-2">$1020</div>
+                                    <div className="text-2xl xl:text-4xl font-bold dark:text-primary-color text-primary-color pl-2">$ 1020</div>
                                 </CardContent>
                             </CardHeader>
 
@@ -97,6 +98,7 @@ export default function OrganizerDashboard() {
                         className="dark:bg-khotixs-background-dark dark:border-[1px] p-[20px] md:p-[30px] rounded-[6px] bg-white border-secondary-color-text dark:border-gray-50">
 
                         <CardHeader className="dark:text-secondary-color-text ">
+
 
                             <CardTitle
                                 className=" text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text ">Bar

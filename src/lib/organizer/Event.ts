@@ -7,7 +7,7 @@ type TicketType = {
     status: string;
 }
 
-type EventType = {
+export type EventType = {
     id: string;
     createBy: string;
     eventName: string;

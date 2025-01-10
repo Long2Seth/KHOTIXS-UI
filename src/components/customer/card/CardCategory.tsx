@@ -65,24 +65,26 @@ export default function CardCategory({technologyRef, concertRef, sportRef, commu
                 className="justify-center gap-4 lg:gap-6 max-w-[400px] md:max-w-[500px] lg:max-w-[700px] sm:w-full grid grid-cols-2 lg:grid-cols-3 md:gap-5 z-10"
             >
                 {categories.map((category: CategoriesIcon) => (
-                    <motion.div
-                        key={category.name}
-                        onClick={() => handleScroll(category.ref)}
-                        className="bg-primary-color dark:border dark:bg-backdrop-blur dark:bg-opacity-5 cursor-pointer rounded-[10px] md:rounded-[15px] md:py-6 md:px-6 py-4 px-4 flex flex-col gap-0.5 md:gap-0 justify-center items-center shadow-lg"
-                        whileHover={{scale: 1.1}}
-                        whileTap={{scale: 0.5}}
+                    <div key={category.name} onClick={() => handleScroll(category.ref)}
                     >
-                        <div className="text-white text-xl sm:m-2">
-                            <Image
-                                className="w-[28px] md:min-w-[40px] lg:min-w-[60px]"
-                                src={category.icon}
-                                alt={category.name}
-                                width={50}
-                                height={50}
-                            />
-                        </div>
-                        <p className="text-white text-sm md:text-base lg:text-lg xl:text-xl">{category.name}</p>
-                    </motion.div>
+                        <motion.div
+                            className="bg-primary-color hover:bg-primary-color/80 dark:border dark:bg-backdrop-blur dark:bg-opacity-5 cursor-pointer rounded-[10px] md:rounded-[15px] md:py-6 md:px-6 py-4 px-4 flex flex-col gap-0.5 md:gap-0 justify-center items-center shadow-lg"
+                            whileHover={{scale: 1.1}}
+                            whileTap={{scale: 0.5}}
+                        >
+                            <div className="text-white text-xl sm:m-2">
+                                <Image
+                                    className="w-[28px] md:min-w-[40px] lg:min-w-[60px]"
+                                    src={category.icon}
+                                    alt={category.name}
+                                    width={50}
+                                    height={50}
+                                />
+                            </div>
+                            <p className="text-white text-sm md:text-base lg:text-lg xl:text-xl">{category.name}</p>
+                        </motion.div>
+                    </div>
+
                 ))}
             </div>
         </section>

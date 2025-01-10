@@ -1,6 +1,7 @@
 'use client';
 import ProfileComponent from "@/components/customer/User-Profile/Profile";
 import { useEffect, useState } from "react";
+import {ProfileComponentSkeleton} from "@/components/customer/User-Profile/user/ProfileComponentSkeleton";
 
 type UserProfile = {
     id: string;
@@ -15,6 +16,7 @@ type UserProfile = {
     email: string;
     businessName: string;
     description: string;
+    username: string;
 };
 
 export default function ProfilePage() {
@@ -52,7 +54,7 @@ export default function ProfilePage() {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div><ProfileComponentSkeleton/></div>;
     }
 
     if (error) {

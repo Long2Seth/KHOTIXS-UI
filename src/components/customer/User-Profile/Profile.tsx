@@ -11,6 +11,7 @@ import {MapPin} from "lucide-react";
 import Image from "next/image";
 import React, {useState, useEffect} from "react";
 import EditProfile from "@/components/customer/User-Profile/EditProfile";
+import {ProfileComponentSkeleton} from "@/components/customer/User-Profile/user/ProfileComponentSkeleton";
 
 type Profile = {
     fullName: string;
@@ -23,6 +24,7 @@ type Profile = {
     email: string;
     businessName: string;
     avatar: string;
+    username: string;
 };
 
 type ProfileComponentProps = {
@@ -35,7 +37,7 @@ export default function ProfileComponent({userProfile}: ProfileComponentProps) {
     useEffect(() => {
         const fetchAdminProfile = async () => {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_KHOTIXS_URL}/user-profile/api/v1/user-profiles/${userProfile.email}`);
+                const response = await fetch(`${process.env.NEXT_PUBLIC_KHOTIXS_URL}/user-profile/api/v1/user-profiles/${userProfile.username}`);
                 if (response.ok) {
                     const data: Profile = await response.json();
                     setProfile(data);
@@ -49,7 +51,7 @@ export default function ProfileComponent({userProfile}: ProfileComponentProps) {
     }, [userProfile.email]);
 
     if (!profile) {
-        return <div>LOADING.......</div>;
+        return <div><ProfileComponentSkeleton/></div>;
     }
 
     const fields = [
@@ -93,6 +95,7 @@ export default function ProfileComponent({userProfile}: ProfileComponentProps) {
                                                 <div className="flex items-start gap-2 min-w-[170px]">
                                                     <field.icon className="w-5 h-5 mt-1 text-gray-400"/>
                                                     <div
+
                                                         className="text-gray-400 text-base md:text-lg xl:text-xl dark:text-gray-300">{field.label}</div>
                                                 </div>
                                                 <p className="text-gray-400 text-base md:text-lg xl:text-xl dark:text-gray-300 min-w-[50px]">:</p>
@@ -104,7 +107,9 @@ export default function ProfileComponent({userProfile}: ProfileComponentProps) {
                             </section>
                         </section>
                         <section className="items-center justify-center">
-                            <EditProfile profile={profile}/>
+                            <EditProfile
+                                profile={profile}
+                            />
                         </section>
                     </CardContent>
                 </Card>

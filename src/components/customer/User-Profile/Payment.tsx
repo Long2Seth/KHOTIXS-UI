@@ -10,15 +10,6 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 import {
-    Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from "@/components/ui/pagination";
-import {
     Table,
     TableBody,
     TableCell,
@@ -176,12 +167,12 @@ export default function Payment() {
                                                                         onClick={() => setIsOpen(true)}/>
                                                                     <ActionItem
                                                                         className=" text-label-free rounded hover:bg-gray-200 pr-5" icon={<MdOutlineFileDownload/>}
-                                                                                label="Download"
-                                                                                onClick={() => setIsOpen(true)}/>
+                                                                        label="Download"
+                                                                        onClick={() => setIsOpen(true)}/>
                                                                     <ActionItem
                                                                         className=" text-red-500 rounded-[6px] hover:bg-gray-200 pr-5" icon={<HiOutlineUserRemove/>}
-                                                                                label="Remove"
-                                                                                onClick={() => setIsOpen(true)}/>
+                                                                        label="Remove"
+                                                                        onClick={() => setIsOpen(true)}/>
                                                                 </div>
                                                             </div>
                                                         </PopoverContent>
@@ -200,29 +191,7 @@ export default function Payment() {
 
 
             <div className="mt-6 flex justify-center ">
-                <Pagination>
-                    <PaginationContent>
-                        <PaginationItem>
-                            <PaginationPrevious href="#"/>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink href="#">1</PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink href="#" isActive
-                                            className="dark:bg-khotixs-background-dark">2</PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink href="#">3</PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationEllipsis/>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationNext href="#"/>
-                        </PaginationItem>
-                    </PaginationContent>
-                </Pagination>
+
             </div>
 
             {/*List more actions here*/}

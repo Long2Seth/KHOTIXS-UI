@@ -67,7 +67,7 @@ export default function Home() {
                                     className=" w-auto lg:h-[45px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 ">
                                     View All
                                     <span>
-                                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w10 "/>
+                                            <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w-10 "/>
                                         </span>
                                 </Button>
                             </section>

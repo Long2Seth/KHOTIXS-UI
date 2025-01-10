@@ -40,31 +40,35 @@ export default function AttendanceTable() {
         XLSX.writeFile(wb, "payments.xlsx")
     }
 
+    // Function to capitalize the first character of a string
+    const capitalizeFirstChar = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+
+    const totalFemale = filteredAttendance.filter(attendance => attendance.gender === 'female').length;
+
+    const totalAttendees = filteredAttendance.reduce((acc, attendance) => acc + attendance.qty, 0);
     return (
-        <section className=" w-full ">
+        <section className="w-full ">
             <CardHeader>
-                <div className="flex flex-row justify-between items-start sm:items-center gap-4 p-5">
-                    <CardTitle  className="  w-[80%]">
+                <div className="flex flex-row justify-between items-start sm:items-center gap-4 py-5">
+                    <CardTitle className="w-[80%]">
                         <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text">ATTENDANCE</h1>
-                        <p className="text-description-color text-sm md:text-base xl:text-lg font-light dark:text-dark-description-color ">Real-time
-                            insights for data-driven decisions</p>
                     </CardTitle>
                     <Button
                         onClick={exportToExcel}
-                        className=" text-secondary-color-text rounded-[6px] bg-primary-color hover:bg-primary-color/80 w-auto"
+                        className="text-secondary-color-text rounded-[6px] bg-primary-color hover:bg-primary-color/80 w-auto"
                     >
                         Export Excel
                     </Button>
                 </div>
             </CardHeader>
 
-            <CardContent className=" bg-white p-10 rounded-[6px] dark:backdrop-blur dark:bg-opacity-5 space-y-4 ">
-                <div className=" flex flex-col md:flex-row gap-4 mb-6">
+            <CardContent className="bg-white p-10 rounded-[6px] dark:backdrop-blur dark:bg-opacity-5 space-y-4 ">
+                <div className="flex flex-col md:flex-row gap-4 mb-6">
                     <Input
                         placeholder="Search"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className=" border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text"
+                        className="border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text"
                     />
                     <div className="flex flex-col sm:flex-row  gap-4">
                         <Select>
@@ -116,44 +120,50 @@ export default function AttendanceTable() {
                     <div className="inline-block min-w-full align-middle">
                         <div className="overflow-hidden border rounded-[6px] ">
                             <Table>
-                                <TableHeader className=" ">
+                                <TableHeader className="">
                                     <TableRow>
                                         <TableHead
-                                            className=" min-w-[100px] md:min-w-[130px] xl:min-w-[150px] text-center text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">ID</TableHead>
+                                            className="min-w-[100px] md:min-w-[130px] xl:min-w-[150px] text-center text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">ID</TableHead>
                                         <TableHead
-                                            className="min-w-[130px] md:min-w-[150px] xl:min-w-[170px] text-center text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">USER
+                                            className="min-w-[150px] md:min-w-[200px] xl:min-w-[230px] text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">USER
                                             NAME</TableHead>
                                         <TableHead
-                                            className=" min-w-[300px] md:min-w-[400px] xl:min-w-[500px] pl-20 text-start text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">EVENT
+                                            className="min-w-[100px] text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">GENDER</TableHead>
+                                        <TableHead
+                                            className="min-w-[300px] md:min-w-[400px] xl:min-w-[500px] text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">EVENT
                                             NAME</TableHead>
                                         <TableHead
-                                            className=" min-w-[150px] md:min-w-[200px] xl:min-w-[300px] text-start text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">LOCATION</TableHead>
+                                            className="min-w-[150px] md:min-w-[200px] xl:min-w-[300px] text-start text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">LOCATION</TableHead>
                                         <TableHead
-                                            className=" min-w-[70px] md:min-w-[100px] text-center text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">QTY</TableHead>
+                                            className="min-w-[70px] md:min-w-[100px] text-center text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">QTY</TableHead>
                                         <TableHead
-                                            className=" min-w-[150px] lg:min-w-[200px] text-start text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">TICKET
+                                            className="min-w-[150px] lg:min-w-[200px] text-start text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">TICKET
                                             TYPE</TableHead>
                                         <TableHead
-                                            className=" min-w-[150px] lg:min-w-[200px] text-start text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">STATUS</TableHead>
+                                            className="min-w-[150px] lg:min-w-[200px] text-start text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">STATUS</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
                                     {filteredAttendance.map((attendance) => (
-                                        <TableRow className=" hover:bg-gray-100 dark:hover:bg-khotixs-background-dark "
+                                        <TableRow className="hover:bg-gray-100 dark:hover:bg-khotixs-background-dark "
                                                   key={attendance.id}>
                                             <TableCell
-                                                className=" py-3 text-center text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.id}</TableCell>
+                                                className="py-3 text-center text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.id}</TableCell>
                                             <TableCell
-                                                className=" text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.userName}</TableCell>
+                                                className="text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.userName}</TableCell>
                                             <TableCell
-                                                className=" text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.eventName}</TableCell>
+                                                className="text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">
+                                                {capitalizeFirstChar(attendance.gender)}
+                                            </TableCell>
                                             <TableCell
-                                                className=" text-center text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.location}</TableCell>
+                                                className="text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.eventName}</TableCell>
                                             <TableCell
-                                                className=" text-center text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.qty}</TableCell>
-                                            <TableCell className=" text-start ">
+                                                className="text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.location}</TableCell>
+                                            <TableCell
+                                                className="text-center text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.qty}</TableCell>
+                                            <TableCell className="text-start ">
                                                 <Badge
-                                                    className={` text-secondary-color-text text-center text-[10px] justify-center md:text-sm font-light rounded-[6px] min-w-[50px] ${
+                                                    className={`w-[90px] text-secondary-color-text text-center text-[10px] justify-center md:text-sm font-light rounded-[6px] min-w-[50px] ${
                                                         attendance.ticketType === 'VIP' ? 'bg-label-vip hover:bg-label-vip/90' :
                                                             attendance.ticketType === 'PREMIUM' ? 'bg-label-premium hover:bg-label-premium/90' :
                                                                 attendance.ticketType === 'REGULAR' ? 'bg-label-regular hover:bg-label-regular/90' :
@@ -165,9 +175,9 @@ export default function AttendanceTable() {
                                             </TableCell>
 
                                             <TableCell
-                                                className=" text-start text-description-color text-[10px] md:text-sm xl:text-base">
+                                                className="text-start text-description-color text-[10px] md:text-sm xl:text-base">
                                                 <Badge
-                                                    className={`rounded-[6px] text[10px] md:text-base  min-w-[60px] justify-center font-normal ${
+                                                    className={`rounded-[6px] text[10px] md:text-base w-[110px] justify-center font-normal ${
                                                         attendance.status === 'checked-in'
                                                             ? 'bg-label-free text-label-text-primary hover:bg-label-free/90'
                                                             : 'bg-label-paid text-label-text-primary hover:bg-label-paid/90'
@@ -182,6 +192,11 @@ export default function AttendanceTable() {
                             </Table>
                         </div>
                     </div>
+                </div>
+                <div className="flex items-end justify-end flex-col">
+                    <p>Total Attendees: <span className="text-lg font-bold">{totalAttendees}</span></p>
+                    <p>Total Female:  <span className="text-lg font-bold">{totalFemale}</span>
+                    </p>
                 </div>
             </CardContent>
         </section>

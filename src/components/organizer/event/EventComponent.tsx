@@ -11,8 +11,8 @@ import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {Calendar as CalendarComponent} from "@/components/ui/calendar";
 import {Badge} from "@/components/ui/badge";
 import Image from "next/image";
-import {Pagination} from "@/components/Pagination";
-import {ActionEventComponent} from "@/components/event/ActionEventComponent";
+import {Pagination} from "@/components/ui/Pagination";
+import {ActionEventComponent} from "@/components/organizer/event/ActionEventComponent";
 import {AllEventData} from "@/lib/organizer/Event";
 import {useRouter} from "next/navigation";
 
@@ -114,6 +114,8 @@ export default function EventComponent() {
                                 <SelectItem value="all">All</SelectItem>
                                 <SelectItem value="enable">Enable</SelectItem>
                                 <SelectItem className=" text-red-500 " value="disable">Disable</SelectItem>
+                                <SelectItem value="upcoming">Upcoming</SelectItem>
+                                <SelectItem className=" text-red-500 " value="finished">Finished</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
@@ -149,7 +151,7 @@ export default function EventComponent() {
                                         <TableHead className="min-w-[100px] md:min-w-[150px] lg:min-w-[200px] ">START DATE</TableHead>
                                         <TableHead className="min-w-[100px] md:min-w-[150px] lg:min-w-[200px] ">END DATE</TableHead>
                                         <TableHead className="min-w-[100px] md:min-w-[200px] lg:min-w-[300px] text-start ">LOCATION</TableHead>
-                                        <TableHead className="min-w-[100px] md:min-w-[150px] lg:min-w-[200px] text-start ">STATUS</TableHead>
+                                        <TableHead className="min-w-[100px] md:min-w-[150px] lg:min-w-[200px] text-center ">STATUS</TableHead>
                                         <TableHead className=" min-w-20"></TableHead>
                                     </TableRow>
                                 </TableHeader>
@@ -165,8 +167,24 @@ export default function EventComponent() {
                                             <TableCell className="min-w-[100px] md:min-w-[150px] lg:min-w-[200px] text-start ">{orderData.startDate}</TableCell>
                                             <TableCell className="min-w-[100px] md:min-w-[150px] lg:min-w-[200px] text-start ">{orderData.endDate}</TableCell>
                                             <TableCell className="min-w-[100px] md:min-w-[200px] lg:min-w-[300px] text-start ">{orderData.location}</TableCell>
-                                            <TableCell className=" z-50 min-w-[100px] md:min-w-[150px] lg:min-w-[200px] text-start text-description-color text-[10px] md:text-sm xl:text-base">
-                                                <Badge className={`rounded-[6px] text[10px] md:text-base justify-center font-normal ${orderData.status === 'enable' ? 'bg-label-free text-label-text-primary hover:bg-label-free/90' : 'bg-label-paid text-label-text-primary hover:bg-label-paid/90'}`}>{orderData.status === 'enable' ? 'Enable' : 'Disable'}</Badge>
+                                            <TableCell className=" z-50 min-w-[100px] md:min-w-[150px] lg:min-w-[200px] text-center text-description-color text-[10px] md:text-sm xl:text-base">
+                                                <Badge className={`rounded-[6px] w-[100px] text[10px] md:text-base justify-center font-normal ${
+                                                    orderData.status === 'enable'
+                                                        ? 'bg-label-regular text-label-text-primary hover:bg-label-regular/80'
+                                                        : orderData.status === 'disable'
+                                                            ? 'bg-label-description text-label-text-primary hover:bg-label-description/80'
+                                                            : orderData.status === 'upcoming'
+                                                                ? 'bg-label-free text-label-text-primary hover:bg-label-free/80'
+                                                                : 'bg-label-paid text-label-text-primary hover:bg-label-finished/80'
+                                                }`}>
+                                                    {orderData.status === 'enable'
+                                                        ? 'Enable'
+                                                        : orderData.status === 'disable'
+                                                            ? 'Disable'
+                                                            : orderData.status === 'upcoming'
+                                                                ? 'Upcoming'
+                                                                : 'Finished'}
+                                                </Badge>
                                             </TableCell>
                                             <TableCell className=" min-w-20">
                                                 <ActionEventComponent/>
