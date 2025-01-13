@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useState } from "react";
+//import React, { createContext, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -28,18 +28,18 @@ const formSchema = z.object({
 });
 
 // Define the shape of the context
-const OrderInfoRequirementContext = createContext<{
-    orderInfoRequirement: Record<string, any>;
-    setOrderInfoRequirement: React.Dispatch<React.SetStateAction<Record<string, any>>>;
-}>({
-    orderInfoRequirement: {},
-    setOrderInfoRequirement: () => { },
-});
+// const OrderInfoRequirementContext = createContext<{
+//     orderInfoRequirement: Record<string, any>;
+//     setOrderInfoRequirement: React.Dispatch<React.SetStateAction<Record<string, any>>>;
+// }>({
+//     orderInfoRequirement: {},
+//     setOrderInfoRequirement: () => { },
+// });
 
 export default function OrderInfoRequirementFormComponent() {
 
     // State
-    const [orderInfoRequirement, setOrderInfoRequirement] = useState({});
+    //const [orderInfoRequirement, setOrderInfoRequirement] = useState({});
 
     // Router
     const router = useRouter();
@@ -66,7 +66,7 @@ export default function OrderInfoRequirementFormComponent() {
 
         console.log({values})
 
-        setOrderInfoRequirement(values)
+        //setOrderInfoRequirement(values)
 
         if (values.fullName && values.email && values.phoneNumber) {
             toast({
