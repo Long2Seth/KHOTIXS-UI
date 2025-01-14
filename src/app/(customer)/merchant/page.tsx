@@ -1,5 +1,7 @@
+import MerchantComponent from "@/components/customer/merchant/MerchantComponent" 
+
 export default function Merchant() {
     return (
-        <h1>Hello</h1>
+        <MerchantComponent />
     )
 }
