@@ -8,9 +8,9 @@ type Props = {
     params: Promise<{
         id: string
     }>;
-    searchParams: {
+    searchParams: Promise<{
         [key: string]: string | string[] | undefined
-    };
+    }>;
 };
 
 const getData = async (id: string) => {

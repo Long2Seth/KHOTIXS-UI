@@ -1,6 +1,6 @@
 'use client'
 
-import {useState, useEffect} from "react"
+import {useState} from "react"
 import {Button} from "@/components/ui/button"
 import {Input} from "@/components/ui/input"
 import {Label} from "@/components/ui/label"
@@ -35,7 +35,7 @@ export function TicketSettingsForm() {
     const router = useRouter();
     const [isFree, setIsFree] = useState(false)
     const [tickets, setTickets] = useState<Ticket[]>([])
-    const [dataEvent, setDataEvent] = useState<any>([])
+    // const [dataEvent, setDataEvent] = useState<any>([])
 
     const createTicket = async () => {
         try {
