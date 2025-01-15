@@ -5,6 +5,8 @@ import {HiOutlineLocationMarker} from "react-icons/hi";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
 import {Badge} from "@/components/ui/badge";
+import {EventType} from "@/lib/customer/event";
+
 
 enum TicketType {
     VIP = 'VIP',
@@ -12,36 +14,16 @@ enum TicketType {
     PREMIUM = 'PREMIUM',
     FREE = 'FREE'
 }
+type EventTypes = {
+    event:EventType
+}
 
-type Ticket = {
-    id: string;
-    ticketTitle: string;
-    type: TicketType;
-    price: string;
-    capacity: number;
-    isPublish: boolean;
-    isDisplay: boolean;
-    isSoldOut: boolean;
-};
-
-type Event = {
-    image: string;
-    date: string;
-    title: string;
-    location: string;
-    tickets: Ticket[];
-    eventType: string;
-};
-
-type CardUpcomingProps = {
-    event: Event;
-};
-
-export function CardComponent({event}: CardUpcomingProps) {
-    const date = new Date(event.date);
+export function CardComponent({event}: EventTypes) {
+    const date = new Date(event.startedDate);
     const month = date.toLocaleString('default', {month: 'short'});
     const day = String(date.getDate()).padStart(2, '0');
     const router = useRouter();
+
 
     const getLabelClass = (tickets: TicketType) => {
         switch (tickets) {
@@ -61,7 +43,7 @@ export function CardComponent({event}: CardUpcomingProps) {
 
     return (
         <section
-            onClick={() => router.push(`/event`)}
+            onClick={() => router.push(`event/${event.id}`)}
             className="relative cursor-pointer bg-white dark:bg-backdrop-blur dark:bg-opacity-5 rounded-[6px] flex flex-col justify-start items-start max-w-[300px] sm:max-w-[300px] md:max-w-[330px] md:h-[340px] xl:max-w-[400px] xl:h-[450px] h-[240px] sm:h-[250px] 2xl:max-w-[450px] md:p-0">
 
             <a className="group block overflow-hidden rounded-[6px]">
@@ -70,7 +52,7 @@ export function CardComponent({event}: CardUpcomingProps) {
                         width={100}
                         height={100}
                         unoptimized
-                        src={`${event.image}`}
+                        src={`${event.thumbnail}`}
                         alt=""
                         className="z-10 rounded-l-[6px] w-full bg-cover bg-center transform transition-transform duration-300 group-hover:scale-110"
                     />
@@ -86,7 +68,7 @@ export function CardComponent({event}: CardUpcomingProps) {
                         <hr className="w-[40px] md:w-[70px] lg:w-[70px] xl:w-[70px] rotate-90 bg-black"/>
                     </div>
                     <div className="h-auto w-full my-2">
-                        <p className="text-title-color text-[10px] md:text-lg xl:text-xl font-bold line-clamp-3 uppercase dark:text-secondary-color-text">{event.title}</p>
+                        <p className="text-title-color text-[10px] md:text-lg xl:text-xl font-bold line-clamp-3 uppercase dark:text-secondary-color-text">{event.eventTitle}</p>
                         <div className="flex relative xl:my-[10px]">
                             <HiOutlineLocationMarker
                                 className="absolute top-[-5px] text-description-color my-2 w-[10px] h-[10px] md:w-[18px] md:h-[18px] lg:top-[-8px] lg:w-[20px] lg:h-[20px] xl:top-[-9px] xl:w-[25px] xl:h-[25px] dark:text-dark-description-color"/>
@@ -100,7 +82,7 @@ export function CardComponent({event}: CardUpcomingProps) {
                             .map((ticket, index) => (
                                 <Badge
                                     key={index}
-                                    className={`dark:text-black text-white rounded-[6px] mx-2 ${getLabelClass(ticket.type)}`}>
+                                    className={`dark:text-black text-white rounded-[6px] mx-2 ${getLabelClass(ticket.type as TicketType)}`}>
                                     <span> {ticket.type === TicketType.FREE ? "FREE" : `$${ticket.price}`}</span>
                                 </Badge>
                             ))

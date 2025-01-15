@@ -1,12 +1,12 @@
 'use client';
-import React, { useState, useRef } from "react";
-import { CalendarIcon } from 'lucide-react';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { LuUpload } from "react-icons/lu";
-import { Label } from "@/components/ui/label";
-import { z } from 'zod';
+import React, {useState, useRef} from "react";
+import {CalendarIcon} from 'lucide-react';
+import {Button} from "@/components/ui/button";
+import {Card, CardContent} from "@/components/ui/card";
+import {Input} from "@/components/ui/input";
+import {LuUpload} from "react-icons/lu";
+import {Label} from "@/components/ui/label";
+import {z} from 'zod';
 import {
     Select,
     SelectContent,
@@ -14,13 +14,13 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Calendar as CalendarComponent } from "@/components/ui/calendar";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/utils";
-import { format } from "date-fns";
-import { useRouter } from "next/navigation";
+import {Textarea} from "@/components/ui/textarea";
+import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
+import {Calendar as CalendarComponent} from "@/components/ui/calendar";
+import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area";
+import {cn} from "@/lib/utils";
+import {format} from "date-fns";
+import {useRouter} from "next/navigation";
 import Image from "next/image";
 
 // Define the zod schema
@@ -28,18 +28,18 @@ const eventSchema = z.object({
     title: z.string().min(1, "Event title is required"),
     category: z.string().min(1, "Category is required"),
     location: z.string().min(1, "Location is required"),
-    startDate: z.date().nullable().refine(date => date !== null, "Start date is required"),
-    endDate: z.date().nullable().refine(date => date !== null, "End date is required"),
+    startedDate: z.date().nullable().refine(date => date !== null, "Start date is required"),
+    endedDate: z.date().nullable().refine(date => date !== null, "End date is required"),
     capacity: z.number().min(1, "Day capacity must be at least 1"),
     description: z.string().optional(),
-    imageUrl: z.string().nullable(),
+    thumbnail: z.string().nullable(),
 });
 
 export function CreateEventForm() {
     const router = useRouter();
-    const [startDate, setStartDate] = useState<Date | undefined>();
-    const [endDate, setEndDate] = useState<Date | undefined>();
-    const [imageUrl, setImageUrl] = useState<string | null>(null);
+    const [startedDate, setStartedDate] = useState<Date | undefined>();
+    const [endedDate, setEndedDate] = useState<Date | undefined>();
+    const [thumbnail, setThumbnail] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [action, setAction] = useState<string>("");
@@ -79,24 +79,26 @@ export function CreateEventForm() {
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                setImageUrl(reader.result as string);
+                setThumbnail(reader.result as string);
             };
             reader.readAsDataURL(file);
         }
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const formData = {
-            title: ((e.target as HTMLFormElement).elements.namedItem('title') as HTMLInputElement).value,
-            category: ((e.target as HTMLFormElement).elements.namedItem('category') as HTMLSelectElement).value,
+            eventTitle: ((e.target as HTMLFormElement).elements.namedItem('eventTitle') as HTMLInputElement).value,
+            eventCategoryName: ((e.target as HTMLFormElement).elements.namedItem('eventCategoryName') as HTMLSelectElement).value,
             location: ((e.target as HTMLFormElement).elements.namedItem('location') as HTMLInputElement).value,
-            startDate,
-            endDate,
+            startedDate,
+            endedDate,
             capacity: parseInt(((e.target as HTMLFormElement).elements.namedItem('capacity') as HTMLInputElement).value),
             description: ((e.target as HTMLFormElement).elements.namedItem('description') as HTMLTextAreaElement).value,
-            imageUrl,
+            thumbnail,
         };
+
+        console.log("Form Data:", formData);
 
         const result = eventSchema.safeParse(formData);
         if (!result.success) {
@@ -107,13 +109,32 @@ export function CreateEventForm() {
                 }
             });
             setErrors(newErrors);
+            console.log("Validation Errors:", newErrors);
         } else {
             setErrors({});
             // Handle form submission
-            if (action === "save") {
-                router.push("/organizer/events");
-            } else if (action === "saveAndContinue") {
-                router.push("/organizer/events/tickets");
+            try {
+                const response = await fetch("http://localhost:8000/event-ticket/api/v1/events", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                console.log("Form submitted successfully");
+
+                if (action === "save") {
+                    router.push("/organizer/events");
+                } else if (action === "saveAndContinue") {
+                    router.push("/organizer/events/tickets");
+                }
+            } catch (error) {
+                console.error("Error submitting form:", error);
             }
         }
     };
@@ -142,21 +163,21 @@ export function CreateEventForm() {
                                         <span className="text-red-500">*</span>
                                     </Label>
                                     <Input
-                                        id="title"
-                                        name="title"
+                                        id="eventTitle"
+                                        name="eventTitle"
                                         placeholder="Enter event title"
                                         className="p-2 text-lg border-light-border-color rounded-[6px] dark:border placeholder:text-gray-300 dark:border-white dark:text-secondary-color-text dark:bg-khotixs-background-dark"
-                                        />
-                                    {errors.title && <p className="text-red-500">{errors.title}</p>}
+                                    />
+                                    {errors.eventTitle && <p className="text-red-500">{errors.eventTitle}</p>}
                                 </section>
 
                                 <section className="space-y-2">
                                     <Label
                                         className="text-base font-medium text-primary-color-text dark:text-secondary-color-text"
-                                        htmlFor="category">
+                                        htmlFor="eventCategoryName">
                                         Category
                                     </Label>
-                                    <Select name="category">
+                                    <Select name="eventCategoryName">
                                         <SelectTrigger
                                             className=" border border-light-border-color rounded-[6px] text-base md:text-lg ">
                                             <SelectValue placeholder="Select category"/>
@@ -170,7 +191,8 @@ export function CreateEventForm() {
                                             <SelectItem value="exhibition">General</SelectItem>
                                         </SelectContent>
                                     </Select>
-                                    {errors.category && <p className="text-red-500">{errors.category}</p>}
+                                    {errors.eventCategoryName &&
+                                        <p className="text-red-500">{errors.eventCategoryName}</p>}
                                 </section>
 
                                 <section className="space-y-2">
@@ -185,7 +207,7 @@ export function CreateEventForm() {
                                         name="location"
                                         placeholder="Enter location"
                                         className="border border-light-border-color rounded-[6px] text-base md:text-lg placeholder:text-light-border-color focus:outline-none"
-                                        />
+                                    />
                                     {errors.location && <p className="text-red-500">{errors.location}</p>}
                                 </section>
 
@@ -201,10 +223,10 @@ export function CreateEventForm() {
                                                 variant={"outline"}
                                                 className={cn(
                                                     "w-full border border-light-border-color rounded-[6px] text-base md:text-lg py-[22px] justify-between text-left font-normal",
-                                                    !startDate && "text-muted-foreground"
+                                                    !startedDate && "text-muted-foreground"
                                                 )}
                                             >
-                                                {startDate ? format(startDate, "PPP hh:mm aa") :
+                                                {startedDate ? format(startedDate, "PPP hh:mm aa") :
                                                     <span className=" text-light-border-color">Pick a start date</span>
                                                 }
                                                 <CalendarIcon className="h-4 w-4"/>
@@ -215,8 +237,8 @@ export function CreateEventForm() {
                                                 <CalendarComponent
                                                     className="bg-white dark:bg-khotixs-background-dark dark:text-secondary-color-text rounded-[6px]"
                                                     mode="single"
-                                                    selected={startDate}
-                                                    onSelect={setStartDate}
+                                                    selected={startedDate}
+                                                    onSelect={setStartedDate}
                                                     initialFocus
                                                 />
                                                 <div
@@ -228,12 +250,12 @@ export function CreateEventForm() {
                                                                     key={hour}
                                                                     size="icon"
                                                                     variant={
-                                                                        startDate && startDate.getHours() % 12 === hour % 12
+                                                                        startedDate && startedDate.getHours() % 12 === hour % 12
                                                                             ? "default"
                                                                             : "ghost"
                                                                     }
                                                                     className="sm:w-full shrink-0 aspect-square"
-                                                                    onClick={() => handleTimeChange("hour", hour.toString(), setStartDate, startDate)}
+                                                                    onClick={() => handleTimeChange("hour", hour.toString(), setStartedDate, startedDate)}
                                                                 >
                                                                     {hour}
                                                                 </Button>
@@ -248,12 +270,12 @@ export function CreateEventForm() {
                                                                     key={minute}
                                                                     size="icon"
                                                                     variant={
-                                                                        startDate && startDate.getMinutes() === minute
+                                                                        startedDate && startedDate.getMinutes() === minute
                                                                             ? "default"
                                                                             : "ghost"
                                                                     }
                                                                     className="sm:w-full shrink-0 aspect-square"
-                                                                    onClick={() => handleTimeChange("minute", minute.toString(), setStartDate, startDate)}
+                                                                    onClick={() => handleTimeChange("minute", minute.toString(), setStartedDate, startedDate)}
                                                                 >
                                                                     {minute}
                                                                 </Button>
@@ -268,14 +290,14 @@ export function CreateEventForm() {
                                                                     key={ampm}
                                                                     size="icon"
                                                                     variant={
-                                                                        startDate &&
-                                                                        ((ampm === "AM" && startDate.getHours() < 12) ||
-                                                                            (ampm === "PM" && startDate.getHours() >= 12))
+                                                                        startedDate &&
+                                                                        ((ampm === "AM" && startedDate.getHours() < 12) ||
+                                                                            (ampm === "PM" && startedDate.getHours() >= 12))
                                                                             ? "default"
                                                                             : "ghost"
                                                                     }
                                                                     className="sm:w-full shrink-0 aspect-square"
-                                                                    onClick={() => handleTimeChange("ampm", ampm, setStartDate, startDate)}
+                                                                    onClick={() => handleTimeChange("ampm", ampm, setStartedDate, startedDate)}
                                                                 >
                                                                     {ampm}
                                                                 </Button>
@@ -286,7 +308,7 @@ export function CreateEventForm() {
                                             </div>
                                         </PopoverContent>
                                     </Popover>
-                                    {errors.startDate && <p className="text-red-500">{errors.startDate}</p>}
+                                    {errors.startedDate && <p className="text-red-500">{errors.startedDate}</p>}
                                 </section>
 
                                 <section className="space-y-2">
@@ -301,10 +323,10 @@ export function CreateEventForm() {
                                                 variant={"outline"}
                                                 className={cn(
                                                     "w-full border border-light-border-color placeholder:text-light-border-color rounded-[6px] text-base md:text-lg py-[22px] justify-between text-left font-normal",
-                                                    !endDate && "text-muted-foreground"
+                                                    !endedDate && "text-muted-foreground"
                                                 )}
                                             >
-                                                {endDate ? format(endDate, "PPP hh:mm aa") :
+                                                {endedDate ? format(endedDate, "PPP hh:mm aa") :
                                                     <span className=" text-light-border-color">Pick an end date</span>}
                                                 <CalendarIcon className="h-4 w-4"/>
                                             </Button>
@@ -314,8 +336,8 @@ export function CreateEventForm() {
                                                 <CalendarComponent
                                                     className="bg-white dark:bg-khotixs-background-dark dark:text-secondary-color-text rounded-[6px]"
                                                     mode="single"
-                                                    selected={endDate}
-                                                    onSelect={setEndDate}
+                                                    selected={endedDate}
+                                                    onSelect={setEndedDate}
                                                     initialFocus
                                                 />
                                                 <div
@@ -327,12 +349,12 @@ export function CreateEventForm() {
                                                                     key={hour}
                                                                     size="icon"
                                                                     variant={
-                                                                        endDate && endDate.getHours() % 12 === hour % 12
+                                                                        endedDate && endedDate.getHours() % 12 === hour % 12
                                                                             ? "default"
                                                                             : "ghost"
                                                                     }
                                                                     className="sm:w-full shrink-0 aspect-square"
-                                                                    onClick={() => handleTimeChange("hour", hour.toString(), setEndDate, endDate)}
+                                                                    onClick={() => handleTimeChange("hour", hour.toString(), setEndedDate, endedDate)}
                                                                 >
                                                                     {hour}
                                                                 </Button>
@@ -347,12 +369,12 @@ export function CreateEventForm() {
                                                                     key={minute}
                                                                     size="icon"
                                                                     variant={
-                                                                        endDate && endDate.getMinutes() === minute
+                                                                        endedDate && endedDate.getMinutes() === minute
                                                                             ? "default"
                                                                             : "ghost"
                                                                     }
                                                                     className="sm:w-full shrink-0 aspect-square"
-                                                                    onClick={() => handleTimeChange("minute", minute.toString(), setEndDate, endDate)}
+                                                                    onClick={() => handleTimeChange("minute", minute.toString(), setEndedDate, endedDate)}
                                                                 >
                                                                     {minute}
                                                                 </Button>
@@ -367,14 +389,14 @@ export function CreateEventForm() {
                                                                     key={ampm}
                                                                     size="icon"
                                                                     variant={
-                                                                        endDate &&
-                                                                        ((ampm === "AM" && endDate.getHours() < 12) ||
-                                                                            (ampm === "PM" && endDate.getHours() >= 12))
+                                                                        endedDate &&
+                                                                        ((ampm === "AM" && endedDate.getHours() < 12) ||
+                                                                            (ampm === "PM" && endedDate.getHours() >= 12))
                                                                             ? "default"
                                                                             : "ghost"
                                                                     }
                                                                     className="sm:w-full shrink-0 aspect-square"
-                                                                    onClick={() => handleTimeChange("ampm", ampm, setEndDate, endDate)}
+                                                                    onClick={() => handleTimeChange("ampm", ampm, setEndedDate, endedDate)}
                                                                 >
                                                                     {ampm}
                                                                 </Button>
@@ -385,7 +407,7 @@ export function CreateEventForm() {
                                             </div>
                                         </PopoverContent>
                                     </Popover>
-                                    {errors.endDate && <p className="text-red-500">{errors.endDate}</p>}
+                                    {errors.endedDate && <p className="text-red-500">{errors.endedDate}</p>}
                                 </section>
 
                                 <section className="space-y-2">
@@ -422,22 +444,26 @@ export function CreateEventForm() {
                             </section>
 
                             <section className=" w-full pt-[30px]">
-                                <section className=" w-full h-[640px] border-gray-400 border border-dashed rounded-[6px]" onClick={handleSectionClick}>
+                                <section
+                                    className=" w-full h-[640px] border-gray-400 border border-dashed rounded-[6px]"
+                                    onClick={handleSectionClick}>
                                     <div className=" w-full h-full flex flex-col justify-center items-center ">
-                                        {imageUrl ? (
+                                        {thumbnail ? (
                                             <Image
-                                                unoptimized width={100} height={100} src={imageUrl} alt="Uploaded" className="h-full w-full object-cover rounded-none" />
+                                                unoptimized width={100} height={100} src={thumbnail} alt="Uploaded"
+                                                className="h-full w-full object-cover rounded-none"/>
                                         ) : (
                                             <>
                                                 <LuUpload className=" h-[50px] w-[50px] text-gray-400"/>
-                                                <p className=" text-gray-400">Drop file here or click to upload here </p>
+                                                <p className=" text-gray-400">Drop file here or click to upload
+                                                    here </p>
                                             </>
                                         )}
                                     </div>
                                     <input
                                         type="file"
                                         ref={fileInputRef}
-                                        style={{ display: 'none' }}
+                                        style={{display: 'none'}}
                                         onChange={handleFileChange}
                                     />
                                 </section>
@@ -449,7 +475,6 @@ export function CreateEventForm() {
 
                 </CardContent>
             </Card>
-
             {/* action button */}
             <section className="flex flex-wrap justify-end gap-4 pt-6 ">
                 <Button

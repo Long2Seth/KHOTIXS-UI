@@ -1,5 +1,5 @@
 import React from 'react';
-import AttendanceTable from "@/components/organizer/attendance/AttendanceTable";
+import {AttendanceTable} from "@/components/organizer/attendance/data-table";
 
 const Page = () => {
     return (

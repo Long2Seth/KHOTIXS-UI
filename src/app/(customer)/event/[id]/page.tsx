@@ -2,26 +2,47 @@
 import React, { useState, useEffect } from 'react';
 import EventDetailsSkeleton from "@/components/customer/event/EventDetailsSkeleton";
 import EventDetails from "@/components/customer/event/EventDetail";
+import { EventType } from "@/lib/customer/event";
 
-type EventPageParams = {
-    params: Promise<{ id: string }>;
-}
+type Props = {
+    params: Promise<{
+        id: string
+    }>;
+    searchParams: {
+        [key: string]: string | string[] | undefined
+    };
+};
 
-export default function EventPage({ params }: EventPageParams) {
+const getData = async (id: string) => {
+    const res = await fetch(`/event-ticket/api/v1/events/${id}`);
+    const data = await res.json();
+    console.log(data);
+    return data;
+};
+
+export default function EventPage(props: Props) {
     const [isLoading, setIsLoading] = useState(true);
+    const [event, setEvent] = useState<EventType | null>(null);
+    const [params, setParams] = useState<{ id: string } | null>(null);
 
     useEffect(() => {
-        const fetchEventData = async () => {
-            await params;
-            await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate network delay
-            setIsLoading(false);
+        const unwrapParams = async () => {
+            const resolvedParams = await props.params;
+            setParams(resolvedParams);
         };
-        fetchEventData();
+        unwrapParams();
+    }, [props.params]);
+
+    useEffect(() => {
+        if (params) {
+            const fetchData = async () => {
+                const data = await getData(params.id);
+                setEvent(data);
+                setIsLoading(false);
+            };
+            fetchData();
+        }
     }, [params]);
 
-    if (isLoading) {
-        return <EventDetailsSkeleton />;
-    }
-
-    return <EventDetails />;
+    return isLoading ? <EventDetailsSkeleton /> : <EventDetails event={event} />;
 }

@@ -36,14 +36,13 @@ import {Calendar as CalendarComponent} from "@/components/ui/calendar";
 import {useMemo, useState} from "react";
 import Image from "next/image";
 import {Pagination} from "@/components/ui/Pagination";
-import {orderData} from "@/lib/organizer/orderData";
-import {columnOrder} from "@/components/organizer/order/columns";
+import {attendanceData} from "@/lib/organizer/attendanceData";
 import * as XLSX from "xlsx";
-import {payments} from "@/lib/organizer/tablePaymentData";
+import {columnAttendance} from "@/components/organizer/attendance/columns";
 
-const locations = Array.from(new Set(orderData.map(order => order.location)));
+const locations = Array.from(new Set(attendanceData.map(attendance => attendance.location)));
 
-export function OrderDataComponent() {
+export function AttendanceTable() {
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -53,36 +52,35 @@ export function OrderDataComponent() {
     const [selectedLocation, setSelectedLocation] = useState("all");
     const [selectedStatus, setSelectedStatus] = useState("all");
     const [date, setDate] = useState<Date | undefined>(undefined);
-    const [eventName, setEventName] = useState("");
+    const [search, setSearch] = useState("");
 
     const filteredData = useMemo(() => {
-        return orderData.filter((item) => {
+        return attendanceData.filter((item) => {
             const matchesLocation = selectedLocation === "all" || item.location === selectedLocation;
-            const matchesDate = !date || new Date(item.startDate).toDateString() === date.toDateString();
-            const matchesEventName = item.eventName.toLowerCase().includes(eventName.toLowerCase());
+            const matchesSearch = item.userName.toLowerCase().includes(search.toLowerCase()) || item.id.toLowerCase().includes(search.toLowerCase());
             const matchesStatus = selectedStatus === "all" || item.status === selectedStatus;
-            return matchesLocation && matchesDate && matchesEventName && matchesStatus;
+            return matchesLocation && matchesSearch && matchesStatus;
         });
-    }, [selectedLocation, selectedStatus, date, eventName]);
+    }, [selectedLocation, selectedStatus, date, search]);
 
     const paginatedData = useMemo(
         () => filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage),
         [filteredData, currentPage, itemsPerPage]
     );
 
-    // Export to Excel function
+    const totalFemale = filteredData.filter(attendance => attendance.gender === 'female').length;
+    const totalAttendees = filteredData.reduce((acc, attendance) => acc + attendance.qty, 0);
+
     const exportToExcel = () => {
-        const ws = XLSX.utils.json_to_sheet(payments);
+        const ws = XLSX.utils.json_to_sheet(attendanceData);
         const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, "Payments");
-        XLSX.writeFile(wb, "payments.xlsx");
+        XLSX.utils.book_append_sheet(wb, ws, "Attendance");
+        XLSX.writeFile(wb, "attendance.xlsx");
     };
-
-
 
     const table = useReactTable({
         data: paginatedData,
-        columns: columnOrder,
+        columns: columnAttendance,
         onSortingChange: setSorting,
         onColumnFiltersChange: setColumnFilters,
         getCoreRowModel: getCoreRowModel(),
@@ -102,12 +100,10 @@ export function OrderDataComponent() {
     return (
         <section className="w-full flex flex-col">
             <section>
-                <div className=" my-5">
-                    <div className="flex flex-row justify-between items-start sm:items-center gap-4 ">
-                        <div className=" w-[80%]">
-                            <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">INFORMATION
-                                ORDER DATA
-                            </h1>
+                <div className="my-5">
+                    <div className="flex flex-row justify-between items-start sm:items-center gap-4">
+                        <div className="w-[80%]">
+                            <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text">ATTENDANCE</h1>
                         </div>
                         <Button
                             onClick={exportToExcel}
@@ -121,9 +117,9 @@ export function OrderDataComponent() {
             <section className="w-full bg-white p-10 rounded-[6px] dark:backdrop-blur dark:bg-opacity-5 space-y-4">
                 <section className="w-full flex flex-col items-center gap-2 lg:flex-row">
                     <Input
-                        placeholder="Search by event name"
-                        value={eventName}
-                        onChange={(event) => setEventName(event.target.value)}
+                        placeholder="Search by user name or ID"
+                        value={search}
+                        onChange={(event) => setSearch(event.target.value)}
                         className="w-full border-[1px] h-[50px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text"
                     />
                     <section className="w-full lg:w-auto flex flex-col sm:flex-row gap-2">
@@ -149,11 +145,10 @@ export function OrderDataComponent() {
                             <SelectContent
                                 className="w-full lg:max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text">
                                 <SelectItem value="all">All</SelectItem>
-                                <SelectItem value="publish">Publish</SelectItem>
-                                <SelectItem value="unpublish">Unpublish</SelectItem>
+                                <SelectItem value="checked-in">Checked-In</SelectItem>
+                                <SelectItem value="absent">Absent</SelectItem>
                             </SelectContent>
                         </Select>
-
                     </section>
 
                     <section className="w-full lg:w-auto flex flex-col sm:flex-row gap-2">
@@ -162,7 +157,7 @@ export function OrderDataComponent() {
                                 <Button
                                     className={`w-full lg:max-w-[220px] h-[50px] p-5 border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 ${date ? "text-black" : "text-gray-400"} dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text`}>
                                     <Calendar className="mr-2 h-4 w-4"/>
-                                    {date ? format(date, "PPP") : <span className="text-md md:text-lg">Pick a start date</span>}
+                                    {date ? format(date, "PPP") : <span className="text-md md:text-lg">Pick a date</span>}
                                 </Button>
                             </PopoverTrigger>
                             <PopoverContent className="w-auto p-0 bg-gray-100 rounded-[6px]">
@@ -251,7 +246,7 @@ export function OrderDataComponent() {
                             ) : (
                                 <TableRow>
                                     <TableCell
-                                        colSpan={columnOrder.length}
+                                        colSpan={columnAttendance.length}
                                         className="h-20 text-center text-lg md:text-2xl xl:text-4xl"
                                     >
                                         <div className="flex w-full justify-center items-center">
@@ -263,6 +258,15 @@ export function OrderDataComponent() {
                             )}
                         </TableBody>
                     </Table>
+                </div>
+                <div className="uppercase font-bold flex justify-end w-full h-16 items-center">
+                    <p className="px-10">Total Attendees:<span className="ml-2 text-lg">{totalAttendees}</span>
+                    </p>
+                    <p className="text-right uppercase">
+                        Total Female:
+                        <span className="text-lg ml-5">
+                            {totalFemale}</span>
+                    </p>
                 </div>
                 <Pagination
                     totalItems={filteredData.length}
