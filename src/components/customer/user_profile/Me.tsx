@@ -1,6 +1,6 @@
 "use client";
 
-import ProfileComponent from "@/components/customer/user_profile/Profile";
+import ProfileComponent from "@/components/customer/User-Profile/Profile";
 import { useEffect, useState } from "react";
 import {ProfileComponentSkeleton} from "@/components/customer/user_profile/user/ProfileComponentSkeleton";
 

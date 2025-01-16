@@ -4,9 +4,9 @@ export type Ticket = {
     type: string;
     price: string;
     capacity: number;
-    isPublish: boolean;
-    isDisplay: boolean;
-    isSoldOut: boolean;
+    isPublish: string;
+    isDisplay: string;
+    isSoldOut: string;
 };
 
 export type EventType = {
@@ -19,6 +19,6 @@ export type EventType = {
     endedDate: string;
     capacity: number;
     thumbnail: string;
-    isPublish: boolean;
+    isPublish: string;
     tickets: Ticket[];
-}
+};

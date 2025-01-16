@@ -67,21 +67,21 @@ export const columnEvent: ColumnDef<EventType>[] = [
     {
         accessorKey: "isPublish",
         header: ({ column }) => (
-            <DataTableColumnHeader className="min-w-[100px] md:min-w-[150px] lg:min-w-[200px] text-start" column={column} title="STATUS" />
+            <DataTableColumnHeader className="min-w-[100px] text-start" column={column} title="STATUS" />
         ),
         cell: ({ row }) => (
             <Badge
                 className={`rounded-[6px] text[10px] md:text-base justify-center font-normal ${
-                    String(row.original.isPublish) === 'enable' ? 'bg-label-free text-label-text-primary hover:bg-label-free/90' : 'bg-label-paid text-label-text-primary hover:bg-label-paid/90'
+                    row.original.isPublish ? 'bg-label-free text-label-text-primary hover:bg-label-free/90' : 'bg-label-paid text-label-text-primary hover:bg-label-paid/90'
                 }`}
             >
-                {String(row.original.isPublish) === 'enable' ? 'Enable' : 'Disable'}
+                {row.original.isPublish ? 'Published' : 'Unpublished'}
             </Badge>
         ),
     },
     {
         accessorKey: "action",
         header: () => <div className="text-start"></div>,
-        cell: () => <ActionEventComponent />,
+        cell: ({row}) => <ActionEventComponent isPublish={row.original.isPublish} id={row.original.id}/>,
     },
 ];
