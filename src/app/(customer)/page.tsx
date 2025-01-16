@@ -24,7 +24,7 @@ export default function Home() {
 
     const eventData = async () => {
         try {
-            const response = await fetch(`event-ticket/api/v1/events/all`, {
+            const response = await fetch(`event-ticket/api/v1/events/published`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

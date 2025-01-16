@@ -28,7 +28,7 @@ export default function ProfilePage() {
         const fetchUserProfile = async () => {
             try {
                 const response = await fetch(
-                    `${process.env.NEXT_PUBLIC_KHOTIXS_URL}/user-profile/api/v1/user-profiles/me`,
+                    `http://localhost:8000/user-profile/api/v1/user-profiles/me`,
                     {
                         credentials: "include",
                     }

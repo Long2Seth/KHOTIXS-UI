@@ -158,7 +158,7 @@ export default function EventDetails({event}: EventDetailsProps) {
                                 </p>
                             </section>
                             {/*Note*/}
-                            <p className="text-description-color text-base md:text-lg xl:text-xl text-red-700">ចំណាំ:
+                            <p className="text-description-color text-base md:text-lg xl:text-xl">ចំណាំ:
                                 សូមបង្ហាញកូដ QR
                                 ទៅកាន់ក្រុមការងារដើម្បីផ្ទៀងផ្ទាត់សំបុត្រមុនចូលទស្សនា។</p>
                         </section>
@@ -207,7 +207,7 @@ export default function EventDetails({event}: EventDetailsProps) {
                                         <div className="grow flex justify-between items-center p-2 lg:p-4">
                                             <section className="">
                                                 <h3 className="text-title-color text-base md:text-lg xl:text-xl font-bold uppercase dark:text-secondary-color-text">{event?.eventTitle}</h3>
-                                                <p className="text-description-color text-base md:text-lg xl:text-xl uppercase line-clamp-1 dark:text-label-text-primary text-label-description">{ticket.name}</p>
+                                                <p className="text-base md:text-lg xl:text-xl uppercase line-clamp-1 dark:text-label-text-primary text-label-description">{ticket.name}</p>
                                                 <div className="flex space-x-2 mt-1">
                                                     {ticket.price === 0 ? (
                                                         <>
