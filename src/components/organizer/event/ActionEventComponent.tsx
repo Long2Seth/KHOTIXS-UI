@@ -10,34 +10,12 @@ import {AiOutlineDelete} from "react-icons/ai";
 import {IoIosPower} from "react-icons/io";
 import {Badge} from "@/components/ui/badge";
 
-type RouteType = {
-    url: string;
-    name: string;
-    icon: JSX.Element;
+type Props = {
+    id: string;
+    isPublish: string;
 }
 
-const routes: RouteType[] = [
-    {url: "/organizer/events/detail-event", name: "Detail Event", icon: <BiDetail className="h-5 w-5"/>},
-    {url: "/organizer/events/edit-event", name: "Edit Event", icon: <LiaEdit className="h-5 w-5"/>},
-    {url: "", name: "Disable", icon: <IoIosPower className="h-5 w-5"/>},
-    {url: "", name: "Delete Event", icon: <AiOutlineDelete className="h-5 w-5"/>},
-];
-
-// type ActionEventComponentProps = {
-//     event: {
-//         id: string;
-//         eventName: string;
-//         createBy: string;
-//         startDate: string;
-//         endDate: string;
-//         location: string;
-//         status: string;
-//         image: string;
-//         description: string;
-//     }
-// }
-
-export function ActionEventComponent() {
+export function ActionEventComponent({ id, isPublish }: Props) {
     const router = useRouter();
 
     return (
@@ -45,28 +23,30 @@ export function ActionEventComponent() {
             <PopoverTrigger asChild>
                 <Button><IoMdMore className="w-5 h-5 text-gray-500 cursor-pointer"/></Button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto">
-                <div className="flex flex-col p-2 w-full">
-                    {routes.map((route) => (
-                        <Badge
-                            key={route.name}
-                            onClick={() => router.push(route.url)}
-                            className="text-sm text-label-free text-start hover:bg-gray-100 rounded-[6px] flex cursor-pointer items-center dark:text-dark-description-color  p-1"
-                        >
-                            <span className={
-                                route.name === "Detail Event" ? "text-primary-color-text dark:text-secondary-color-text dark:hover:text-primary-color-text" :
-                                    route.name === "Edit Event" || route.name === "Disable" ? "text-primary-color-text dark:hover:text-primary-color-text dark:text-secondary-color-text" :
-                                        route.name === "Delete Event" ? "text-red-500" : ""
-                            }>
-                                <div className=" flex">
-                                    {route.icon}
-                                    <p className="w-[100px] px-1">{route.name}</p>
-                                </div>
+            <PopoverContent className="w-[200px]">
+                <div className="flex flex-col p-1 w-full ">
+                    <Badge
+                        onClick={() => router.push(`/organizer/events/${id}`)}
+                        className={`cursor-pointer hover:bg-gray-100 rounded-[6px] dark:hover:bg-white dark:hover:backdrop-blur dark:hover:bg-opacity-10`}>
+                        <BiDetail className="h-5 w-5"/>
+                        <span className={`ml-2 text-sm md:text-base`}>Event Detail</span>
+                    </Badge>
+                    <Badge className={`cursor-pointer hover:bg-gray-100 rounded-[6px] dark:hover:bg-white dark:hover:backdrop-blur dark:hover:bg-opacity-10`}>
+                        <IoIosPower className="h-5 w-5"/>
+                        <span className={`ml-2 text-sm md:text-base`}>
+                            {isPublish ? 'Unpublished Event' : 'Published Event'}
+                        </span>
+                    </Badge>
+                    <Badge className={`cursor-pointer hover:bg-gray-100 rounded-[6px] dark:hover:bg-white dark:hover:backdrop-blur dark:hover:bg-opacity-10`}>
+                        <LiaEdit className="h-5 w-5"/>
+                        <span className={`ml-2 text-sm md:text-base`}>Edit Event</span>
+                    </Badge>
 
-                            </span>
+                    <Badge className={`cursor-pointer text-red-600 hover:bg-gray-100 rounded-[6px] dark:hover:bg-white dark:hover:backdrop-blur dark:hover:bg-opacity-10`}>
+                        <AiOutlineDelete className="h-5 w-5"/>
+                        <span className={`ml-2 text-sm md:text-base`}>Delete Event</span>
+                    </Badge>
 
-                        </Badge>
-                    ))}
                 </div>
             </PopoverContent>
         </Popover>

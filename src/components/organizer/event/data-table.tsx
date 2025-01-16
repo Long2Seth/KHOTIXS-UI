@@ -47,7 +47,7 @@ export function EventComponent() {
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
     const [rowSelection, setRowSelection] = useState({});
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [itemsPerPage, setItemsPerPage] = useState(20);
     const [selectedLocation, setSelectedLocation] = useState("all");
     const [selectedStatus, setSelectedStatus] = useState("all");
     const [selectedCategory, setSelectedCategory] = useState("all");
@@ -56,7 +56,6 @@ export function EventComponent() {
     const route = useRouter();
     const [events, setEvents] = useState<EventType[]>([]);
     const [loading, setLoading] = useState(true);
-
 
     const eventData = async () => {
         try {
@@ -73,11 +72,8 @@ export function EventComponent() {
             console.error("Failed to fetch events:", error);
             setLoading(false);
             setEvents([]);
-        } finally {
-            // setIsLoading(false);
         }
     };
-
 
     useEffect(() => {
         eventData();

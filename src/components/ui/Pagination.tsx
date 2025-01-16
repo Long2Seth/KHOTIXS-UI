@@ -37,7 +37,7 @@ export function Pagination({
                         <SelectTrigger className=" border border-gray-300 rounded-[6px] w-[70px]  ">
                             <SelectValue>{itemsPerPage}</SelectValue>
                         </SelectTrigger>
-                        <SelectContent className=" border border-gray-300 rounded-[6px] ">
+                        <SelectContent className="bg-khotixs-background-white dark:bg-khotixs-background-dark border border-gray-300 rounded-[6px] ">
                             <SelectItem value="5">5</SelectItem>
                             <SelectItem value="10">10</SelectItem>
                             <SelectItem value="20">20</SelectItem>

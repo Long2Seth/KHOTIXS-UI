@@ -1,74 +1,96 @@
 'use client'
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
-import {Button} from "@/components/ui/button";
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {Badge} from "@/components/ui/badge";
-import {RiEyeLine, RiEyeOffLine, RiMore2Line, RiStarFill} from "react-icons/ri";
-import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
+import { useState, useMemo } from 'react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { RiStarFill } from "react-icons/ri";
+import { PiEye } from "react-icons/pi";
+import { PiEyeSlash } from "react-icons/pi";
+import { useRouter } from "next/navigation";
+import { Input } from "@/components/ui/input";
+import { EventType, Ticket } from "@/lib/customer/event";
+import TicketActionComponent from "@/components/organizer/event/TicketActionComponent";
+import Image from "next/image";
+import {Pagination} from "@/components/ui/Pagination";
 
-import {useRouter} from "next/navigation";
-import {Input} from "@/components/ui/input";
+type PropType = {
+    event: EventType | null;
+}
 
-export default function TicketTable() {
+export default function TicketTable({ event }: PropType) {
     const router = useRouter();
+    const tickets: Ticket[] = event?.tickets || [];
+
+    const [search, setSearch] = useState('');
+    const [ticketType, setTicketType] = useState('all');
+    const [publishStatus, setPublishStatus] = useState('all');
+    const [displayStatus, setDisplayStatus] = useState('all');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+
+    const filteredTickets = tickets.filter(ticket => {
+        return (
+            (ticketType === 'all' || ticket.type.toLowerCase() === ticketType) &&
+            (publishStatus === 'all' || (publishStatus === 'published' && ticket.isPublish) || (publishStatus === 'unpublished' && !ticket.isPublish)) &&
+            (displayStatus === 'all' || (displayStatus === 'visible' && ticket.isDisplay) || (displayStatus === 'hidden' && !ticket.isDisplay)) &&
+            (ticket.ticketTitle.toLowerCase().includes(search.toLowerCase()))
+        );
+    });
+
+    const paginatedTickets = useMemo(() => {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        return filteredTickets.slice(startIndex, endIndex);
+    }, [filteredTickets, currentPage, itemsPerPage]);
+
     return (
         <section className="space-y-4">
             <h2 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text">TICKETS</h2>
 
-            <section className=" bg-white p-10 rounded-[6px] dark:bg-white dark:backdrop-blur dark:bg-opacity-5 space-y-4">
-                <div className="lg:flex items-center grid grid-cols-2 gap-4 ">
+            <section className="bg-white p-10 rounded-[6px] dark:bg-white dark:backdrop-blur dark:bg-opacity-5 space-y-4">
+                <div className="lg:flex items-center grid grid-cols-2 gap-4">
                     <Input
                         className="w-full border border-light-border-color rounded-[6px] placeholder:text-light-border-color dark:border-label-text-primary max-w-full bg-transparent"
-                        placeholder="Search..."/>
+                        placeholder="Search..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
 
-                    <Select>
-                        <SelectTrigger
-                            className="w-[200px] border border-light-border-color rounded-[6px] dark:border-label-text-primary">
-                            <SelectValue placeholder="Ticket Type"/>
+                    <Select value={ticketType} onValueChange={setTicketType}>
+                        <SelectTrigger className="w-[200px] border border-light-border-color rounded-[6px] dark:border-label-text-primary">
+                            <SelectValue placeholder="Ticket Type" />
                         </SelectTrigger>
-                        <SelectContent
-                            className=" bg-khotixs-background-white rounded-[6px] border border-light-border-color dark:text-secondary-color-text dark:bg-khotixs-background-dark">
-                            <SelectItem className=" dark:hover:text-primary-color-text" value="all">All
-                                Types</SelectItem>
-                            <SelectItem className=" dark:hover:text-primary-color-text" value="vip">VIP</SelectItem>
-                            <SelectItem className=" dark:hover:text-primary-color-text"
-                                        value="premium">Premium</SelectItem>
-                            <SelectItem className=" dark:hover:text-primary-color-text"
-                                        value="regular">Regular</SelectItem>
+                        <SelectContent className="bg-khotixs-background-white rounded-[6px] border border-light-border-color dark:text-secondary-color-text dark:bg-khotixs-background-dark">
+                            <SelectItem className="dark:hover:text-primary-color-text" value="all">All Types</SelectItem>
+                            <SelectItem className="dark:hover:text-primary-color-text" value="vip">VIP</SelectItem>
+                            <SelectItem className="dark:hover:text-primary-color-text" value="premium">Premium</SelectItem>
+                            <SelectItem className="dark:hover:text-primary-color-text" value="regular">Regular</SelectItem>
+                            <SelectItem value="free" className="dark:hover:text-primary-color-text">Free</SelectItem>
                         </SelectContent>
                     </Select>
-                    <Select>
-                        <SelectTrigger
-                            className="w-[200px] border border-light-border-color rounded-[6px] dark:border-label-text-primary">
-                            <SelectValue placeholder="Publish"/>
+                    <Select value={publishStatus} onValueChange={setPublishStatus}>
+                        <SelectTrigger className="w-[200px] border border-light-border-color rounded-[6px] dark:border-label-text-primary">
+                            <SelectValue placeholder="Publish" />
                         </SelectTrigger>
-                        <SelectContent
-                            className=" bg-khotixs-background-white rounded-[6px] border border-light-border-color dark:text-secondary-color-text dark:bg-khotixs-background-dark">
-                            <SelectItem className=" dark:hover:text-primary-color-text" value="all">All
-                                Status</SelectItem>
-                            <SelectItem className=" dark:hover:text-primary-color-text"
-                                        value="published">Published</SelectItem>
-                            <SelectItem className=" dark:hover:text-primary-color-text"
-                                        value="unpublished">Unpublished</SelectItem>
+                        <SelectContent className="bg-khotixs-background-white rounded-[6px] border border-light-border-color dark:text-secondary-color-text dark:bg-khotixs-background-dark">
+                            <SelectItem className="dark:hover:text-primary-color-text" value="all">All Status</SelectItem>
+                            <SelectItem className="dark:hover:text-primary-color-text" value="published">Published</SelectItem>
+                            <SelectItem className="dark:hover:text-primary-color-text" value="unpublished">Unpublished</SelectItem>
                         </SelectContent>
                     </Select>
-                    <Select>
-                        <SelectTrigger
-                            className="w-[200px] border border-light-border-color rounded-[6px] dark:border-label-text-primary">
-                            <SelectValue placeholder="Display"/>
+                    <Select value={displayStatus} onValueChange={setDisplayStatus}>
+                        <SelectTrigger className="w-[200px] border border-light-border-color rounded-[6px] dark:border-label-text-primary">
+                            <SelectValue placeholder="Display" />
                         </SelectTrigger>
-                        <SelectContent
-                            className=" bg-khotixs-background-white rounded-[6px] border border-light-border-color dark:text-secondary-color-text dark:bg-khotixs-background-dark">
-                            <SelectItem className=" dark:hover:text-primary-color-text" value="all">All
-                                Display</SelectItem>
-                            <SelectItem className=" dark:hover:text-primary-color-text"
-                                        value="visible">Visible</SelectItem>
-                            <SelectItem className=" dark:hover:text-primary-color-text"
-                                        value="hidden">Hidden</SelectItem>
+                        <SelectContent className="bg-khotixs-background-white rounded-[6px] border border-light-border-color dark:text-secondary-color-text dark:bg-khotixs-background-dark">
+                            <SelectItem className="dark:hover:text-primary-color-text" value="all">All Display</SelectItem>
+                            <SelectItem className="dark:hover:text-primary-color-text" value="visible">Visible</SelectItem>
+                            <SelectItem className="dark:hover:text-primary-color-text" value="hidden">Hidden</SelectItem>
                         </SelectContent>
                     </Select>
                     <Button
-                        onClick={() => router.push("/organizer/events/tickets")}
+                        onClick={() => router.push(`/organizer/events/tickets/${event?.id}`)}
                         className="bg-primary-color text-secondary-color-text rounded-[6px] hover:bg-primary-color/90 dark:text-secondary-color-text">
                         New Ticket
                     </Button>
@@ -78,110 +100,65 @@ export default function TicketTable() {
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead className="text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">TICKET NAME</TableHead>
-                                <TableHead className="text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">TICKET TYPE</TableHead>
-                                <TableHead className="text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">PUBLISH</TableHead>
-                                <TableHead className="text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">DISPLAY</TableHead>
-                                <TableHead className="text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">SOLD</TableHead>
-                                <TableHead className="text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">REVENUE</TableHead>
-                                <TableHead className="text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text"></TableHead>
+                                <TableHead>TICKET NAME</TableHead>
+                                <TableHead>TICKET TYPE</TableHead>
+                                <TableHead>PUBLISH</TableHead>
+                                <TableHead>DISPLAY</TableHead>
+                                <TableHead>SOLD</TableHead>
+                                <TableHead>REVENUE</TableHead>
+                                <TableHead></TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            <TableRow>
-                                <TableCell>VIP</TableCell>
-                                <TableCell>
-                                    <Badge
-                                        className="bg-label-vip hover:bg-label-vip/90 rounded-[6px] text-secondary-color-text font-normal flex w-14 items-center gap-x-1.5">
-                                        VIP
-                                        <RiStarFill className="h-2.5 w-2.5"/>
-                                    </Badge>
-                                </TableCell>
-                                <TableCell>
-                                    <Badge
-                                        className="bg-label-published hover:bg-label-published/90 rounded-[6px] text-label-text-primary font-normal">Published</Badge>
-                                </TableCell>
-                                <TableCell><RiEyeLine className="h-5 w-5 text-muted-foreground"/></TableCell>
-                                <TableCell>10/12</TableCell>
-                                <TableCell className="text-green-600 font-bold text-lg">$100.00</TableCell>
-                                <TableCell>
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button variant="ghost" className="h-8 w-8 p-0">
-                                                <RiMore2Line className="h-5 w-5"/>
-                                            </Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent
-                                            className=" bg-khotixs-background-white rounded-[6px] border border-light-border-color dark:text-secondary-color-text dark:bg-khotixs-background-dark"
-                                            align="end">
-                                            <DropdownMenuItem>Edit</DropdownMenuItem>
-                                            <DropdownMenuItem>Delete</DropdownMenuItem>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                </TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell>PREMIUM</TableCell>
-                                <TableCell>
-                                    <Badge
-                                        className="bg-label-premium hover:bg-label-premium/90 rounded-[6px] text-label-text-primary font-normal">Premium</Badge>
-                                </TableCell>
-                                <TableCell>
-                                    <Badge
-                                        className="bg-label-published hover:bg-label-published/90 rounded-[6px] text-label-text-primary font-normal">Published</Badge>
-                                </TableCell>
-                                <TableCell><RiEyeLine className="h-5 w-5 text-muted-foreground"/></TableCell>
-                                <TableCell>0/12</TableCell>
-                                <TableCell className="text-green-600 font-bold text-lg">$0.00</TableCell>
-                                <TableCell>
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button variant="ghost" className="h-8 w-8 p-0">
-                                                <RiMore2Line className="h-5 w-5"/>
-                                            </Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent
-                                            className=" bg-khotixs-background-white rounded-[6px] border border-light-border-color dark:text-secondary-color-text dark:bg-khotixs-background-dark"
-                                            align="end">
-                                            <DropdownMenuItem>Edit</DropdownMenuItem>
-                                            <DropdownMenuItem>Delete</DropdownMenuItem>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                </TableCell>
-                            </TableRow>
-                            <TableRow className="border border-light-border-color   ">
-                                <TableCell>REGULAR</TableCell>
-                                <TableCell>
-                                    <Badge
-                                        className="bg-label-regular hover:bg-label-regular/90 rounded-[6px] text-label-text-primary font-normal">Regular</Badge>
-                                </TableCell>
-                                <TableCell>
-                                    <Badge
-                                        className="bg-label-paid hover:bg-label-paid/90 rounded-[6px] text-label-text-primary font-normal">Unpublish</Badge>
-                                </TableCell>
-                                <TableCell><RiEyeOffLine className="h-5 w-5 text-muted-foreground"/></TableCell>
-                                <TableCell>0/10</TableCell>
-                                <TableCell className="text-green-600 font-bold text-lg">$0.00</TableCell>
-                                <TableCell>
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button variant="ghost" className="h-8 w-8 p-0">
-                                                <RiMore2Line className="h-5 w-5"/>
-                                            </Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent
-                                            className=" bg-khotixs-background-white rounded-[6px] border border-light-border-color dark:text-secondary-color-text dark:bg-khotixs-background-dark"
-                                            align="end">
-                                            <DropdownMenuItem>Edit</DropdownMenuItem>
-                                            <DropdownMenuItem>Delete</DropdownMenuItem>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                </TableCell>
-                            </TableRow>
+                            {paginatedTickets.length > 0 ? (
+                                paginatedTickets.map((ticket) => (
+                                    <TableRow key={ticket.id}>
+                                        <TableCell>{ticket.ticketTitle}</TableCell>
+                                        <TableCell className={`text-sm md:text-md xl:text-lg`}>
+                                            <Badge className={`text-[10px] md:text-sm xl:text-base bg-label-${ticket.type.toLowerCase()} hover:bg-label-${ticket.type.toLowerCase()}/90 rounded-[6px] text-white`}>
+                                                {ticket.type}
+                                                {ticket.type === 'VIP' && <RiStarFill className="h-2.5 w-2.5" />}
+                                            </Badge>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Badge className={`text-[10px] md:text-sm xl:text-base ${ticket.isPublish ? 'bg-blue-500' : 'bg-red-500'} rounded-[6px] text-white`}>
+                                                {ticket.isPublish ? 'Published' : 'Unpublished'}
+                                            </Badge>
+                                        </TableCell>
+                                        <TableCell>
+                                            {ticket.isDisplay ? <PiEye className="h-5 w-5 text-muted-foreground" /> : <PiEyeSlash className="h-5 w-5 text-muted-foreground" />}
+                                        </TableCell>
+                                        <TableCell>{ticket.capacity}</TableCell>
+                                        <TableCell className="text-green-600 font-bold text-lg">${ticket.price}</TableCell>
+                                        <TableCell>
+                                            <TicketActionComponent id={ticket.id} isPublish={ticket.isPublish} isDisplay={ticket.isDisplay}/>
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+                            ) : (
+                                <TableRow>
+                                    <TableCell
+                                        colSpan={7}
+                                        className="h-20 text-center text-lg md:text-2xl xl:text-4xl"
+                                    >
+                                        <div className="flex w-full justify-center items-center">
+                                            <Image src="/no-data.png" alt="noData" width={50} height={50}/>
+                                            <span>No results.</span>
+                                        </div>
+                                    </TableCell>
+                                </TableRow>
+                            )}
                         </TableBody>
                     </Table>
                 </div>
+                <Pagination
+                    totalItems={filteredTickets.length}
+                    itemsPerPage={itemsPerPage}
+                    currentPage={currentPage}
+                    onPageChange={setCurrentPage}
+                    onItemsPerPageChange={setItemsPerPage}
+                />
             </section>
         </section>
-    )
+    );
 }

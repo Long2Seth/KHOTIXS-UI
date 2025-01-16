@@ -27,7 +27,7 @@ import {
 import {router} from "next/client";
 import {CgProfile} from "react-icons/cg";
 import React, { useState,useEffect } from "react";
-import {ProfileSkeleton} from "@/components/customer/User-Profile/ProfileSkeleton";
+import {ProfileComponentSkeleton} from "@/components/customer/User-Profile/ProfileComponentSkeleton";
 
 export default function Setting () {
     const [activeTab, setActiveTab] = useState("account");
@@ -43,7 +43,7 @@ export default function Setting () {
     return (
         <>
         {
-            isLoading ? <ProfileSkeleton/> :
+            isLoading ? <ProfileComponentSkeleton/> :
             <section className="container mx-auto mt-7 px-4 sm:px-6 lg:px-8">
 
         {/*List all tab have 4*/}

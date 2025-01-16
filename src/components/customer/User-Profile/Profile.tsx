@@ -37,7 +37,7 @@ export default function ProfileComponent({userProfile}: ProfileComponentProps) {
     useEffect(() => {
         const fetchAdminProfile = async () => {
             try {
-                const response = await fetch(`user-profile/api/v1/user-profiles/${userProfile.username}`);
+                const response = await fetch(`http://localhost:8000/user-profile/api/v1/user-profiles/${userProfile.username}`);
                 if (response.ok) {
                     const data: Profile = await response.json();
                     setProfile(data);
