@@ -1,6 +1,6 @@
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Upcoming from "@/components/customer/User-Profile/Upcomming";
+import Upcoming from "@/components/customer/user_profile/Upcomming";
 import React, {useState} from "react";
 
 export default function Tickets() {

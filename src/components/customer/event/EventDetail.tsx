@@ -169,7 +169,7 @@ export default function EventDetails({event}: EventDetailsProps) {
                             <div className="space-y-4 mt-4 md:mt-0">
                                 {tickets.map((ticket) => (
                                     <div key={ticket.id}
-                                         className="flex rounded-xl border">
+                                        className="flex rounded-xl border">
                                         {ticket.type === "VIP" ? (
                                             <section
                                                 className="flex-none relative h-24 w-24 md:h-20 md:w-28 lg:h-28 lg:w-32 rounded-xl overflow-hidden bg-cover bg-center"

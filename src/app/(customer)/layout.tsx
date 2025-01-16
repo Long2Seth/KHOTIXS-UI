@@ -5,7 +5,6 @@ import { ThemeProvider } from "next-themes";
 import { FooterComponent } from "@/components/customer/footer/FooterComponent";
 import { Toaster } from "@/components/ui/toaster"
 import ScrollToTopButton from "@/components/customer/home/ScrollToTopButton";
-import { OrderContextProvider } from "./OrderContextProvider";
 
 export const metadata: Metadata = {
     title: {
@@ -31,9 +30,7 @@ export default function RootLayout({
                     disableTransitionOnChange
                 >
                     <NavbarComponent />
-                    <OrderContextProvider>
-                        {children}
-                    </OrderContextProvider>
+                    {children}
                     <FooterComponent />
                     <Toaster />
                     <ScrollToTopButton />

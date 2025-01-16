@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -15,49 +15,24 @@ import {
 } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
-import { createContext, useContext, useState, useEffect } from "react";
 
-// Create schema for the form
+// Form schema
 export const formSchema = z.object({
     fullName: z.string().min(2, { message: "Full Name is required" }),
     email: z.string().email({ message: "Email is required" }),
     phoneNumber: z
         .string()
-        .regex(/^\d+$/, { message: "Phone Number must contain only numbers" })
+        .regex(/^\+?\d+$/, { message: "Phone Number must contain only numbers" })
         .min(8, { message: "Phone Number must be at least 8 digits long" }),
 });
 
-interface OrderInfoContextType {
-    orderInfo: z.infer<typeof formSchema> | null;
-    setOrderInfo: React.Dispatch<React.SetStateAction<z.infer<typeof formSchema> | null>>;
-}
-
-export const OrderInfoContext = createContext<OrderInfoContextType>({
-    orderInfo: null,
-    setOrderInfo: () => {},
-});
-
-export const useOrderInfo = () => useContext(OrderInfoContext);
-
 export default function OrderInfoRequirementFormComponent() {
-
-    const [orderInfo, setOrderInfo] = useState<z.infer<typeof formSchema> | null>(null);
-
-    // Router
     const router = useRouter();
-
-    // Toast
     const { toast } = useToast();
 
-    useEffect(() => {
-        console.log("Updated orderInfo:", orderInfo);
-    }, [orderInfo]);
-
-    // Styles
     const requiredStyle = "text-red-500";
     const msgStyle = "italic";
 
-    // Initialize form values
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -67,19 +42,16 @@ export default function OrderInfoRequirementFormComponent() {
         },
     });
 
-    // Handle form submission
     const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log("Form Submitted with values:", values);
-        setOrderInfo(values);
-
         if (values.fullName && values.email && values.phoneNumber) {
-            toast({
+            toast?.({
                 title: "Success!",
                 description: "Your information has been submitted successfully!",
             });
 
-            // Navigate to the next page without delay
-            router.push("/payment-details");
+            setTimeout(() => {
+                router.push("/payment-details");
+            }, 1500); // 1.5-second delay
         }
     };
 
@@ -149,6 +121,7 @@ export default function OrderInfoRequirementFormComponent() {
                     />
                     <div className="flex gap-[10px] pt-[10px]">
                         <Button
+                            type="button"
                             className="w-full hover:bg-label-paid hover:bg-opacity-20 p-[12px] text-red-600 border-[1px] border-red-600 dark:bg-backdrop-blur dark:bg-opacity-5 dark:text-red-600 dark:border-red-600 rounded-[6px]"
                             onClick={() => router.back()}
                         >
@@ -156,9 +129,9 @@ export default function OrderInfoRequirementFormComponent() {
                         </Button>
                         <Button
                             type="submit"
-                            className="w-full text-secondary-color-text bg-primary-color hover:bg-primary-color/90 rounded-[6px] border border-primary-color"
+                            className="w-full text-secondary-color-text bg-primary-color hover:bg-primary-color/90 rounded-[6px]"
                         >
-                            Payment Details
+                            Continue
                         </Button>
                     </div>
                 </form>

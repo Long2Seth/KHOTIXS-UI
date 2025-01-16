@@ -36,7 +36,7 @@ export default function EditProfile({ profile }: EditProfileProps) {
 
     const handleSave = async () => {
         try {
-            const response = await fetch(`user-profile/api/v1/user-profiles/${formData.username}`, {
+            const response = await fetch(`http://localhost:8000/user-profile/api/v1/user-profiles/${formData.username}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -76,6 +76,10 @@ export default function EditProfile({ profile }: EditProfileProps) {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
             const reader = new FileReader();
+
+            console.log(file);
+
+
             reader.onloadend = () => {
                 setFormData((prevData) => ({ ...prevData, avatar: reader.result as string }));
             };
