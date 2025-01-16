@@ -70,6 +70,10 @@ export function OrderDataComponent() {
         [filteredData, currentPage, itemsPerPage]
     );
 
+    // Calculate total tickets and total revenue
+    const totalTickets = filteredData.reduce((sum, item) => sum + item.qty, 0);
+    const totalRevenue = filteredData.reduce((sum, item) => sum + item.price * item.qty, 0);
+
     // Export to Excel function
     const exportToExcel = () => {
         const ws = XLSX.utils.json_to_sheet(payments);
@@ -77,8 +81,6 @@ export function OrderDataComponent() {
         XLSX.utils.book_append_sheet(wb, ws, "Payments");
         XLSX.writeFile(wb, "payments.xlsx");
     };
-
-
 
     const table = useReactTable({
         data: paginatedData,
@@ -263,6 +265,15 @@ export function OrderDataComponent() {
                             )}
                         </TableBody>
                     </Table>
+                </div>
+                <div className="uppercase font-bold flex justify-end w-full h-16 items-center">
+                    <p className="px-10">Total Tickets:<span className="ml-2 text-lg">{totalTickets}</span>
+                    </p>
+                    <p className="text-right uppercase">
+                        Total Revenue:
+                        <span className="text-label-free dark:text-label-free text-lg ml-5">
+                            ${totalRevenue.toFixed(2)}</span>
+                    </p>
                 </div>
                 <Pagination
                     totalItems={filteredData.length}

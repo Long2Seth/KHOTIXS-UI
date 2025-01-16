@@ -1,14 +1,13 @@
 import React from 'react';
 import OrganizerDashboard from "@/components/organizer/home/organizer-dash";
-import {EventsTable} from "@/components/organizer/event-table";
+import InformationEventComponent from "@/components/organizer/home/InformationEventComponent";
 
 const MyComponent = () => {
     return (
 
         <main className="  container mx-auto w-full px-5 md:px-10 ">
             <OrganizerDashboard/>
-            <EventsTable/>
-
+            <InformationEventComponent/>
         </main>
     );
 };

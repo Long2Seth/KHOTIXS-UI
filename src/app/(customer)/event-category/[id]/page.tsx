@@ -16,7 +16,7 @@ export default function EventByCategory() {
     const data =
         async () => {
         try {
-            const response = await fetch(`api/v1/events`, {
+            const response = await fetch(`event-ticket/api/v1/events`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

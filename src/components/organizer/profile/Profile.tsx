@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
-import {EventsTable} from "@/components/organizer/event-table";
+// import {EventsTable} from "@/components/organizer/home/event-table";
 import {router} from "next/client";
 
 interface ProfileData {
@@ -257,9 +257,9 @@ export default function Profile() {
                     </div>
                 </Card>
 
-                <div>
-                    <EventsTable/>
-                </div>
+                {/*<div>*/}
+                {/*    <EventsTable/>*/}
+                {/*</div>*/}
             </div>
         </div>
     )

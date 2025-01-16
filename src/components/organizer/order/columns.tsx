@@ -83,7 +83,7 @@ export const columnOrder: ColumnDef<OrderData>[] = [
         ),
         cell: ({ row }) =>
             <Badge
-                className={`text-secondary-color-text w-auto justify-center md:text-sm font-light rounded-[6px] px-3 ${row.original.ticketType === 'VIP' ? 'bg-label-vip hover:bg-label-vip/90' : row.original.ticketType === 'PREMIUM' ? 'bg-label-premium hover:bg-label-premium/90' : row.original.ticketType === 'REGULAR' ? 'bg-label-regular hover:bg-label-regular/90' : row.original.ticketType === 'FREE' ? 'bg-label-free hover:bg-label-free/90' : ''}`}>{row.original.ticketType}
+                className={`text-secondary-color-text justify-center md:text-sm font-light rounded-[6px] px-3 w-[90px] ${row.original.ticketType === 'VIP' ? 'bg-label-vip hover:bg-label-vip/90' : row.original.ticketType === 'PREMIUM' ? 'bg-label-premium hover:bg-label-premium/90' : row.original.ticketType === 'REGULAR' ? 'bg-label-regular hover:bg-label-regular/90' : row.original.ticketType === 'FREE' ? 'bg-label-free hover:bg-label-free/90' : ''}`}>{row.original.ticketType}
             </Badge>
     },
     {
@@ -93,7 +93,7 @@ export const columnOrder: ColumnDef<OrderData>[] = [
         ),
         cell: ({ row }) => (
             <Badge
-                className={`rounded-[6px] w-auto justify-center md:text-sm font-light uppercase ${
+                className={`rounded-[6px] justify-center md:text-sm font-light uppercase w-[100px] ${
                     row.original.status === 'publish' ? 'bg-label-free text-label-text-primary hover:bg-label-free/90' : 'bg-label-paid text-label-text-primary hover:bg-label-paid/90'
                 }`}
             >

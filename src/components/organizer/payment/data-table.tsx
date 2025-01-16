@@ -74,6 +74,11 @@ export function PaymentComponent() {
         [filteredPayments, currentPage, itemsPerPage]
     );
 
+    // Calculate total males, females, and revenue
+    const totalMales = filteredPayments.filter(payment => payment.gender.toLowerCase() === "male").length;
+    const totalFemales = filteredPayments.filter(payment => payment.gender.toLowerCase() === "female").length;
+    const totalRevenue = filteredPayments.reduce((sum, payment) => sum + payment.amount, 0);
+
     // Export to Excel function
     const exportToExcel = () => {
         const ws = XLSX.utils.json_to_sheet(payments);
@@ -132,12 +137,14 @@ export function PaymentComponent() {
                             <SelectTrigger
                                 className={`max-w-[250px] md:min-w-[200px] md:max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text ${category === "all" ? "text-gray-400" : "text-black"}`}
                             >
-                                <SelectValue placeholder="Category" />
+                                <SelectValue placeholder="Category"/>
                             </SelectTrigger>
-                            <SelectContent className="max-w-[250px] md:min-w-[200px] md:max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                            <SelectContent
+                                className="max-w-[250px] md:min-w-[200px] md:max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
                                 <SelectItem value="all">All</SelectItem>
                                 {categories.map(category => (
-                                    <SelectItem key={category.toLowerCase()} value={category.toLowerCase()}>{category}</SelectItem>
+                                    <SelectItem key={category.toLowerCase()}
+                                                value={category.toLowerCase()}>{category}</SelectItem>
                                 ))}
                             </SelectContent>
                         </Select>
@@ -146,12 +153,14 @@ export function PaymentComponent() {
                             <SelectTrigger
                                 className={`max-w-[250px] md:min-w-[200px] md:max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text ${paymentMethod === "all" ? "text-gray-400" : "text-black"}`}
                             >
-                                <SelectValue placeholder="Payment Method" />
+                                <SelectValue placeholder="Payment Method"/>
                             </SelectTrigger>
-                            <SelectContent className="max-w-[250px] md:min-w-[200px] md:max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text">
+                            <SelectContent
+                                className="max-w-[250px] md:min-w-[200px] md:max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text">
                                 <SelectItem value="all">All</SelectItem>
                                 {paymentMethods.map(method => (
-                                    <SelectItem key={method.toLowerCase()} value={method.toLowerCase()}>{method}</SelectItem>
+                                    <SelectItem key={method.toLowerCase()}
+                                                value={method.toLowerCase()}>{method}</SelectItem>
                                 ))}
                             </SelectContent>
                         </Select>
@@ -160,9 +169,10 @@ export function PaymentComponent() {
                             <SelectTrigger
                                 className={`hidden sm:flex px-3 max-w-[250px] min-w-[120px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text ${gender === "all" ? "text-gray-400" : "text-black"}`}
                             >
-                                <SelectValue placeholder="Gender" />
+                                <SelectValue placeholder="Gender"/>
                             </SelectTrigger>
-                            <SelectContent className="min-w-[200px] max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                            <SelectContent
+                                className="min-w-[200px] max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
                                 <SelectItem value="all">All</SelectItem>
                                 <SelectItem value="male">Male</SelectItem>
                                 <SelectItem value="female">Female</SelectItem>
@@ -174,7 +184,7 @@ export function PaymentComponent() {
                             <Button
                                 className={`max-w-[600px] h-[40px] lg:h-[50px] p-5 border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-0 dark:text-secondary-color-text ${date ? "text-black" : "text-gray-400"}`}
                             >
-                                <Calendar className="mr-2 h-4 w-4" />
+                                <Calendar className="mr-2 h-4 w-4"/>
                                 {date ? format(date, "PPP") : <span className="text-md md:text-lg">Pick a date</span>}
                             </Button>
                         </PopoverTrigger>
@@ -191,11 +201,14 @@ export function PaymentComponent() {
 
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="outline" className="h-[50px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
-                                Columns <ChevronDown />
+                            <Button variant="outline"
+                                    className="h-[50px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                                Columns <ChevronDown/>
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text" align="end">
+                        <DropdownMenuContent
+                            className="border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text"
+                            align="end">
                             {table.getAllColumns().filter((column) => column.getCanHide()).map((column) => {
                                 return (
                                     <DropdownMenuCheckboxItem
@@ -244,9 +257,10 @@ export function PaymentComponent() {
                                 ))
                             ) : (
                                 <TableRow>
-                                    <TableCell colSpan={columnPayment.length} className="h-20 text-center text-lg md:text-2xl xl:text-4xl">
+                                    <TableCell colSpan={columnPayment.length}
+                                               className="h-20 text-center text-lg md:text-2xl xl:text-4xl">
                                         <div className="flex w-full justify-center items-center">
-                                            <Image src="/no-data.png" alt="noData" width={50} height={50} />
+                                            <Image src="/no-data.png" alt="noData" width={50} height={50}/>
                                             <span>No results.</span>
                                         </div>
                                     </TableCell>
@@ -254,6 +268,12 @@ export function PaymentComponent() {
                             )}
                         </TableBody>
                     </Table>
+                </div>
+                <div className="flex justify-between mt-4 text-right uppercase font-bold">
+                    <p>Total Males: <span className="text-lg">{totalMales}</span></p>
+                    <p>Total Females: <span className="text-lg">{totalFemales}</span></p>
+                    <p>Total Revenue: <span className="text-label-free dark:text-label-free text-lg ml-5">
+                            ${totalRevenue.toFixed(2)}</span></p>
                 </div>
                 <Pagination
                     totalItems={filteredPayments.length}
