@@ -116,7 +116,7 @@ export function TicketSettingsForm({id}: Props) {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
         const newTicket = {
-            id: null,
+            id: undefined,
             ticketTitle: formData.get('ticketTitle') as string,
             type: isFree ? "free" : (formData.get('type') as string),
             price: isFree ? 0 : Number(formData.get('price')),
@@ -138,7 +138,6 @@ export function TicketSettingsForm({id}: Props) {
             e.currentTarget.reset()
         }
     }
-
     const combinedTickets = [...(dataEvent?.tickets || []), ...tickets];
 
     return (

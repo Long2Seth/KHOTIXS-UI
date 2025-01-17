@@ -1,14 +1,14 @@
 import React from 'react';
 import {TicketSettingsForm} from "@/components/organizer/event/TicketSettingForm";
 
-type PropsType = {
-    params: {
-        id: string;
-    };
-}
+type PropTypes = {
+    params: Promise<{
+        id: string
+    }>;
+};
 
-const Page = ( prop : PropsType) => {
-    const id = prop.params.id;
+const Page = async ( prop : PropTypes) => {
+    const {id} = await prop.params;
     console.log(" ID : ", id);
 
     return (
