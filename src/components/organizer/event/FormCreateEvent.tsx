@@ -30,7 +30,6 @@ const eventSchema = z.object({
     location: z.string().min(1, "Location is required"),
     startedDate: z.date().nullable().refine(date => date !== null, "Start date is required"),
     endedDate: z.date().nullable().refine(date => date !== null, "End date is required"),
-    capacity: z.number().min(1, "Day capacity must be at least 1"),
     description: z.string().optional(),
     thumbnail: z.string().nullable(),
 });
@@ -45,7 +44,7 @@ export function CreateEventForm() {
     const [action, setAction] = useState<string>("");
 
     const handleTimeChange = (
-        type: "hour" | "minute" | "ampm",
+        type: "hour" | "minute",
         value: string,
         dateSetter: React.Dispatch<React.SetStateAction<Date | undefined>>,
         date: Date | undefined
@@ -53,16 +52,9 @@ export function CreateEventForm() {
         if (date) {
             const newDate = new Date(date);
             if (type === "hour") {
-                newDate.setHours(
-                    (parseInt(value) % 12) + (newDate.getHours() >= 12 ? 12 : 0)
-                );
+                newDate.setHours(parseInt(value));
             } else if (type === "minute") {
                 newDate.setMinutes(parseInt(value));
-            } else if (type === "ampm") {
-                const currentHours = newDate.getHours();
-                newDate.setHours(
-                    value === "PM" ? currentHours + 12 : currentHours - 12
-                );
             }
             dateSetter(newDate);
         }
@@ -93,7 +85,6 @@ export function CreateEventForm() {
             location: ((e.target as HTMLFormElement).elements.namedItem('location') as HTMLInputElement).value,
             startedDate,
             endedDate,
-            capacity: parseInt(((e.target as HTMLFormElement).elements.namedItem('capacity') as HTMLInputElement).value),
             description: ((e.target as HTMLFormElement).elements.namedItem('description') as HTMLTextAreaElement).value,
             thumbnail,
         };
@@ -114,7 +105,7 @@ export function CreateEventForm() {
             setErrors({});
             // Handle form submission
             try {
-                const response = await fetch("http://localhost:8000/event-ticket/api/v1/events", {
+                const response = await fetch("event-ticket/api/v1/events", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -138,6 +129,7 @@ export function CreateEventForm() {
             }
         }
     };
+
     return (
         <form
             onSubmit={handleSubmit}
@@ -226,7 +218,7 @@ export function CreateEventForm() {
                                                     !startedDate && "text-muted-foreground"
                                                 )}
                                             >
-                                                {startedDate ? format(startedDate, "PPP hh:mm aa") :
+                                                {startedDate ? format(startedDate, "PPP HH:mm") :
                                                     <span className=" text-light-border-color">Pick a start date</span>
                                                 }
                                                 <CalendarIcon className="h-4 w-4"/>
@@ -245,12 +237,12 @@ export function CreateEventForm() {
                                                     className="flex flex-col sm:flex-row sm:h-[300px] divide-y sm:divide-y-0 sm:divide-x">
                                                     <ScrollArea className="w-64 sm:w-auto">
                                                         <div className="flex sm:flex-col p-2">
-                                                            {Array.from({length: 12}, (_, i) => i + 1).reverse().map((hour) => (
+                                                            {Array.from({length: 24}, (_, i) => i).reverse().map((hour) => (
                                                                 <Button
                                                                     key={hour}
                                                                     size="icon"
                                                                     variant={
-                                                                        startedDate && startedDate.getHours() % 12 === hour % 12
+                                                                        startedDate && startedDate.getHours() === hour
                                                                             ? "default"
                                                                             : "ghost"
                                                                     }
@@ -283,27 +275,6 @@ export function CreateEventForm() {
                                                         </div>
                                                         <ScrollBar orientation="horizontal" className="sm:hidden"/>
                                                     </ScrollArea>
-                                                    <ScrollArea className="">
-                                                        <div className="flex sm:flex-col p-2">
-                                                            {["AM", "PM"].map((ampm) => (
-                                                                <Button
-                                                                    key={ampm}
-                                                                    size="icon"
-                                                                    variant={
-                                                                        startedDate &&
-                                                                        ((ampm === "AM" && startedDate.getHours() < 12) ||
-                                                                            (ampm === "PM" && startedDate.getHours() >= 12))
-                                                                            ? "default"
-                                                                            : "ghost"
-                                                                    }
-                                                                    className="sm:w-full shrink-0 aspect-square"
-                                                                    onClick={() => handleTimeChange("ampm", ampm, setStartedDate, startedDate)}
-                                                                >
-                                                                    {ampm}
-                                                                </Button>
-                                                            ))}
-                                                        </div>
-                                                    </ScrollArea>
                                                 </div>
                                             </div>
                                         </PopoverContent>
@@ -326,7 +297,7 @@ export function CreateEventForm() {
                                                     !endedDate && "text-muted-foreground"
                                                 )}
                                             >
-                                                {endedDate ? format(endedDate, "PPP hh:mm aa") :
+                                                {endedDate ? format(endedDate, "PPP HH:mm") :
                                                     <span className=" text-light-border-color">Pick an end date</span>}
                                                 <CalendarIcon className="h-4 w-4"/>
                                             </Button>
@@ -344,12 +315,12 @@ export function CreateEventForm() {
                                                     className="flex flex-col sm:flex-row sm:h-[300px] divide-y sm:divide-y-0 sm:divide-x">
                                                     <ScrollArea className="w-64 sm:w-auto">
                                                         <div className="flex sm:flex-col p-2">
-                                                            {Array.from({length: 12}, (_, i) => i + 1).reverse().map((hour) => (
+                                                            {Array.from({length: 24}, (_, i) => i).reverse().map((hour) => (
                                                                 <Button
                                                                     key={hour}
                                                                     size="icon"
                                                                     variant={
-                                                                        endedDate && endedDate.getHours() % 12 === hour % 12
+                                                                        endedDate && endedDate.getHours() === hour
                                                                             ? "default"
                                                                             : "ghost"
                                                                     }
@@ -382,49 +353,11 @@ export function CreateEventForm() {
                                                         </div>
                                                         <ScrollBar orientation="horizontal" className="sm:hidden"/>
                                                     </ScrollArea>
-                                                    <ScrollArea className="">
-                                                        <div className="flex sm:flex-col p-2">
-                                                            {["AM", "PM"].map((ampm) => (
-                                                                <Button
-                                                                    key={ampm}
-                                                                    size="icon"
-                                                                    variant={
-                                                                        endedDate &&
-                                                                        ((ampm === "AM" && endedDate.getHours() < 12) ||
-                                                                            (ampm === "PM" && endedDate.getHours() >= 12))
-                                                                            ? "default"
-                                                                            : "ghost"
-                                                                    }
-                                                                    className="sm:w-full shrink-0 aspect-square"
-                                                                    onClick={() => handleTimeChange("ampm", ampm, setEndedDate, endedDate)}
-                                                                >
-                                                                    {ampm}
-                                                                </Button>
-                                                            ))}
-                                                        </div>
-                                                    </ScrollArea>
                                                 </div>
                                             </div>
                                         </PopoverContent>
                                     </Popover>
                                     {errors.endedDate && <p className="text-red-500">{errors.endedDate}</p>}
-                                </section>
-
-                                <section className="space-y-2">
-                                    <Label
-                                        className="text-base font-medium text-primary-color-text dark:text-secondary-color-text"
-                                        htmlFor="capacity">
-                                        Day Capacity
-                                    </Label>
-                                    <Input
-                                        id="capacity"
-                                        name="capacity"
-                                        type="number"
-                                        placeholder="0"
-                                        className=" border border-light-border-color rounded-[6px] placeholder:text-light-border-color text-base md:text-lg focus:outline-none"
-                                        min="1"/>
-                                    {errors.capacity && <p className="text-red-500">{errors.capacity}</p>}
-
                                 </section>
 
                                 <section className="space-y-2">
@@ -445,13 +378,13 @@ export function CreateEventForm() {
 
                             <section className=" w-full pt-[30px]">
                                 <section
-                                    className=" w-full h-[640px] border-gray-400 border border-dashed rounded-[6px]"
+                                    className=" w-full h-full border-gray-400 border border-dashed rounded-[6px]"
                                     onClick={handleSectionClick}>
                                     <div className=" w-full h-full flex flex-col justify-center items-center ">
                                         {thumbnail ? (
                                             <Image
                                                 unoptimized width={100} height={100} src={thumbnail} alt="Uploaded"
-                                                className="h-full w-full object-cover rounded-none"/>
+                                                className="h-full w-full object-cover rounded-[6px]"/>
                                         ) : (
                                             <>
                                                 <LuUpload className=" h-[50px] w-[50px] text-gray-400"/>

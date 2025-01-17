@@ -75,7 +75,7 @@ export function TicketSettingsForm({id}: Props) {
 
             console.log("Data to be submitted:", formattedTickets);
 
-            const response = await fetch(`http://localhost:8000/event-ticket/api/v1/tickets/${id}`, {
+            const response = await fetch(`event-ticket/api/v1/tickets/${id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -100,7 +100,7 @@ export function TicketSettingsForm({id}: Props) {
 
     const getTickets = async () => {
         try {
-            const response = await fetch('http://localhost:8000/event-ticket/api/v1/events/${id}');
+            const response = await fetch('event-ticket/api/v1/events/${id}');
             const data = await response.json();
             setDataEvent(data);
         } catch (error) {

@@ -59,7 +59,7 @@ export function EventComponent() {
 
     const eventData = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/event-ticket/api/v1/events?page=${currentPage-1}&size=${itemsPerPage}`, {
+            const response = await fetch(`event-ticket/api/v1/events?page=${currentPage-1}&size=${itemsPerPage}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

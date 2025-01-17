@@ -20,8 +20,8 @@ export function ActionEventComponent({ id, isPublish }: Props) {
 
     const handlePublishToggle = async () => {
         const endpoint = isPublish
-            ? `http://localhost:8000/event-ticket/api/v1/events/${id}/unpublish`
-            : `http://localhost:8000/event-ticket/api/v1/events/${id}/publish`;
+            ? `event-ticket/api/v1/events/${id}/unpublish`
+            : `event-ticket/api/v1/events/${id}/publish`;
 
         try {
             const response = await fetch(endpoint, {
@@ -37,7 +37,7 @@ export function ActionEventComponent({ id, isPublish }: Props) {
     };
 
     const handleDelete = async () => {
-        const endpoint = `http://localhost:8000/event-ticket/api/v1/events/${id}`;
+        const endpoint = `event-ticket/api/v1/events/${id}`;
 
         try {
             const response = await fetch(endpoint, {
@@ -62,7 +62,7 @@ export function ActionEventComponent({ id, isPublish }: Props) {
             <PopoverContent className="w-[200px]">
                 <div className="flex flex-col p-1 w-full ">
                     <Badge
-                        onClick={() => router.push(`http://localhost:8000/organizer/events/${id}`)}
+                        onClick={() => router.push(`organizer/events/${id}`)}
                         className={`cursor-pointer hover:bg-gray-100 rounded-[6px] dark:hover:bg-white dark:hover:backdrop-blur dark:hover:bg-opacity-10`}>
                         <BiDetail className="h-5 w-5"/>
                         <span className={`ml-2 text-sm md:text-base`}>Event Detail</span>
