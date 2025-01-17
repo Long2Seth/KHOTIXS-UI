@@ -23,8 +23,10 @@ import { UserProfileComponent } from "@/components/customer/navbar/UserProfileCo
 
 type UserProfile = {
     id: string;
+    username: string;
     fullName: string;
     gender: string;
+    bio: string;
     dob: string;
     phoneNumber: string;
     address: string;

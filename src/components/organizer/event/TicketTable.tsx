@@ -22,6 +22,8 @@ export default function TicketTable({ event }: PropType) {
     const router = useRouter();
     const tickets: Ticket[] = event?.tickets || [];
 
+    console.log(" TICKET TABLE  " , event);
+
     const [search, setSearch] = useState('');
     const [ticketType, setTicketType] = useState('all');
     const [publishStatus, setPublishStatus] = useState('all');

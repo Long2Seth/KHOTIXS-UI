@@ -10,13 +10,14 @@ type Props = {
 };
 
 const TicketPage = ({ params }: Props) => {
-    const { id } = params;
+    const id  = params.id;
     const [eventData, setEventData] = useState(null);
     const [ticketData, setTicketData] = useState(null);
 
+    console.log("  GET ID   " , id);
     const getData = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/event-ticket/api/v1/events/${id}`, {
+            const response = await fetch(`http://localhost:8000/event-ticket/api/v1/events/organizer/${id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,7 +30,6 @@ const TicketPage = ({ params }: Props) => {
             console.error('Error:', error);
         }
     };
-
     useEffect(() => {
         getData();
     }, [id]);

@@ -11,3 +11,6 @@ export const navMenus = [
     { icon: Settings, label: "SETTINGS" ,href: "/profile/setting"},
 ]
 
+
+// Compare this snippet from src/components/customer/User-Profile/EditProfile.tsx:
+

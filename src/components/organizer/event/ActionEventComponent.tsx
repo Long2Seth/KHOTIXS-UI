@@ -18,6 +18,42 @@ type Props = {
 export function ActionEventComponent({ id, isPublish }: Props) {
     const router = useRouter();
 
+    const handlePublishToggle = async () => {
+        const endpoint = isPublish
+            ? `http://localhost:8000/event-ticket/api/v1/events/${id}/unpublish`
+            : `http://localhost:8000/event-ticket/api/v1/events/${id}/publish`;
+
+        try {
+            const response = await fetch(endpoint, {
+                method: 'PUT',
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+        } catch (error) {
+            console.error('Failed to toggle publish state:', error);
+        }
+    };
+
+    const handleDelete = async () => {
+        const endpoint = `http://localhost:8000/event-ticket/api/v1/events/${id}`;
+
+        try {
+            const response = await fetch(endpoint, {
+                method: 'DELETE',
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            // Optionally, you can handle the response or update the state here
+        } catch (error) {
+            console.error('Failed to delete event:', error);
+        }
+    };
+
     return (
         <Popover>
             <PopoverTrigger asChild>
@@ -26,12 +62,14 @@ export function ActionEventComponent({ id, isPublish }: Props) {
             <PopoverContent className="w-[200px]">
                 <div className="flex flex-col p-1 w-full ">
                     <Badge
-                        onClick={() => router.push(`/organizer/events/${id}`)}
+                        onClick={() => router.push(`http://localhost:8000/organizer/events/${id}`)}
                         className={`cursor-pointer hover:bg-gray-100 rounded-[6px] dark:hover:bg-white dark:hover:backdrop-blur dark:hover:bg-opacity-10`}>
                         <BiDetail className="h-5 w-5"/>
                         <span className={`ml-2 text-sm md:text-base`}>Event Detail</span>
                     </Badge>
-                    <Badge className={`cursor-pointer hover:bg-gray-100 rounded-[6px] dark:hover:bg-white dark:hover:backdrop-blur dark:hover:bg-opacity-10`}>
+                    <Badge
+                        onClick={handlePublishToggle}
+                        className={`cursor-pointer hover:bg-gray-100 rounded-[6px] dark:hover:bg-white dark:hover:backdrop-blur dark:hover:bg-opacity-10`}>
                         <IoIosPower className="h-5 w-5"/>
                         <span className={`ml-2 text-sm md:text-base`}>
                             {isPublish ? 'Unpublished Event' : 'Published Event'}
@@ -42,7 +80,9 @@ export function ActionEventComponent({ id, isPublish }: Props) {
                         <span className={`ml-2 text-sm md:text-base`}>Edit Event</span>
                     </Badge>
 
-                    <Badge className={`cursor-pointer text-red-600 hover:bg-gray-100 rounded-[6px] dark:hover:bg-white dark:hover:backdrop-blur dark:hover:bg-opacity-10`}>
+                    <Badge
+                        onClick={handleDelete}
+                        className={`cursor-pointer text-red-600 hover:bg-gray-100 rounded-[6px] dark:hover:bg-white dark:hover:backdrop-blur dark:hover:bg-opacity-10`}>
                         <AiOutlineDelete className="h-5 w-5"/>
                         <span className={`ml-2 text-sm md:text-base`}>Delete Event</span>
                     </Badge>

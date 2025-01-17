@@ -32,6 +32,7 @@ type TicketType = {
     type: string
     soldOut?: boolean
     quantity: number
+    capacity: number
     date: string
     mmm: string
     dd: string
@@ -52,7 +53,7 @@ export default function EventDetails({event}: EventDetailsProps) {
         price: Number(ticket.price),
         name: ticket.ticketTitle,
         event: event?.eventTitle || '',
-        quantity: ticket.capacity,
+        quantity: 0,
         date: event?.startedDate || '',
         mmm: '',
         dd: '',
@@ -62,12 +63,12 @@ export default function EventDetails({event}: EventDetailsProps) {
     const updateQuantity = (id: string, increment: boolean) => {
         setTickets(tickets.map(ticket => {
             if (ticket.id === id) {
-                const newQuantity = increment ? ticket.quantity + 1 : Math.max(0, ticket.quantity - 1)
-                return {...ticket, quantity: newQuantity}
+                const newQuantity = increment ? Math.min(ticket.quantity + 1, ticket.capacity) : Math.max(0, ticket.quantity - 1);
+                return {...ticket, quantity: newQuantity};
             }
-            return ticket
-        }))
-    }
+            return ticket;
+        }));
+    };
 
     const total = tickets.reduce((sum: number, ticket: TicketType) => sum + (ticket.price * ticket.quantity), 0)
 
@@ -175,7 +176,8 @@ export default function EventDetails({event}: EventDetailsProps) {
                                                 className="flex-none relative h-24 w-24 md:h-20 md:w-28 lg:h-28 lg:w-32 rounded-xl overflow-hidden bg-cover bg-center"
                                                 style={{backgroundImage: `url('/event/vip-ticket.png')`}}
                                             >
-                                                <div className="absolute inset-0 flex flex-col justify-center items-center">
+                                                <div
+                                                    className="absolute inset-0 flex flex-col justify-center items-center">
                                                 </div>
                                             </section>
                                         ) : ticket.type === "PREMIUM" ? (
@@ -183,7 +185,8 @@ export default function EventDetails({event}: EventDetailsProps) {
                                                 className="flex-none relative h-24 w-24 md:h-20 md:w-28 lg:h-28 lg:w-32 rounded-xl overflow-hidden bg-cover bg-center"
                                                 style={{backgroundImage: `url('/event/premium-ticket.png')`}}
                                             >
-                                                <div className="absolute inset-0 flex flex-col justify-center items-center">
+                                                <div
+                                                    className="absolute inset-0 flex flex-col justify-center items-center">
                                                 </div>
                                             </section>
                                         ) : ticket.type === "REGULAR" ? (
@@ -191,7 +194,8 @@ export default function EventDetails({event}: EventDetailsProps) {
                                                 className="flex-none relative h-24 w-24 md:h-20 md:w-28 lg:h-28 lg:w-32 rounded-xl overflow-hidden bg-cover bg-center"
                                                 style={{backgroundImage: `url('/event/regular-ticket.png')`}}
                                             >
-                                                <div className="absolute inset-0 flex flex-col justify-center items-center">
+                                                <div
+                                                    className="absolute inset-0 flex flex-col justify-center items-center">
                                                 </div>
                                             </section>
                                         ) : (
@@ -199,7 +203,8 @@ export default function EventDetails({event}: EventDetailsProps) {
                                                 className="flex-none relative h-24 w-24 md:h-20 md:w-28 lg:h-28 lg:w-32 rounded-xl overflow-hidden bg-cover bg-center"
                                                 style={{backgroundImage: `url('/event/free-ticket.png')`}}
                                             >
-                                                <div className="absolute inset-0 flex flex-col justify-center items-center">
+                                                <div
+                                                    className="absolute inset-0 flex flex-col justify-center items-center">
                                                 </div>
                                             </section>
                                         )}
@@ -207,7 +212,7 @@ export default function EventDetails({event}: EventDetailsProps) {
                                         <div className="grow flex justify-between items-center p-2 lg:p-4">
                                             <section className="">
                                                 <h3 className="text-title-color text-base md:text-lg xl:text-xl font-bold uppercase dark:text-secondary-color-text">{event?.eventTitle}</h3>
-                                                <p className="text-description-color text-base md:text-lg xl:text-xl uppercase line-clamp-1 dark:text-label-text-primary text-label-description">{ticket.name}</p>
+                                                <p className="text-description-color text-base md:text-lg xl:text-xl uppercase line-clamp-1 dark:text-label-text-primary ">{ticket.name}</p>
                                                 <div className="flex space-x-2 mt-1">
                                                     {ticket.price === 0 ? (
                                                         <>
@@ -229,6 +234,8 @@ export default function EventDetails({event}: EventDetailsProps) {
 
                                                 </div>
                                             </section>
+
+
                                             {/*Count Button*/}
                                             <section className="flex items-center gap-1 lg:gap-2">
                                                 <Button

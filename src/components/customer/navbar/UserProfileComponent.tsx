@@ -18,28 +18,19 @@ import {Avatar, AvatarImage} from "@/components/ui/avatar";
 import * as React from "react";
 import {useRouter} from "next/navigation";
 import {ModeToggleAfterLogin} from "@/components/customer/navbar/modeToggleAfterLogin";
+import {Profile} from "@/lib/customer/userProfile";
 
-type UserProfile = {
-    id: string;
-    fullName: string;
-    gender: string;
-    dob: string;
-    phoneNumber: string;
-    address: string;
-    avatar: string;
-    status: number;
-    position: string;
-    email: string;
-    businessName: string;
-};
 
 type UserProfileProps = {
-    data: UserProfile;
+    data: Profile
 };
+
+
 
 
 export function UserProfileComponent({data}: UserProfileProps) {
-
+    console.log(data)
+    console.log(( " ID : " + data.id))
     const router = useRouter();
     return (
         <DropdownMenu>
@@ -60,7 +51,7 @@ export function UserProfileComponent({data}: UserProfileProps) {
                     <DropdownMenuItem>
                         <ModeToggleAfterLogin/>
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => router.push(`/profile/user`)}>
+                    <DropdownMenuItem onClick={() => router.push(`/profile/user/${data.id}`)}>
                         <User/>
                         <span>Profile</span>
                     </DropdownMenuItem>

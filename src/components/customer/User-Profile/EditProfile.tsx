@@ -8,17 +8,19 @@ import { Camera } from "lucide-react";
 import Image from "next/image";
 
 type ProfileType = {
+    id: string;
+    username: string;
     fullName: string;
-    position: string;
-    address: string;
-    description: string;
     gender: string;
+    bio: string;
     dob: string;
+    phoneNumber: string;
+    address: string;
+    avatar: string;
+    status: number;
+    position: string;
     email: string;
     businessName: string;
-    avatar: string;
-    username: string;
-    phoneNumber: string;
 };
 
 type EditProfileProps = {
@@ -217,7 +219,7 @@ export default function EditProfile({ profile }: EditProfileProps) {
                                 </Label>
                                 <textarea
                                     id="description"
-                                    value={formData.description}
+                                    value={formData.bio}
                                     onChange={handleInputChange}
                                     className="p-2 text-lg border border-gray-300 rounded-[6px] dark:border placeholder:text-gray-300 dark:border-white dark:text-secondary-color-text dark:bg-khotixs-background-dark"
                                 ></textarea>
