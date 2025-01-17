@@ -1,81 +1,19 @@
 services:
-
-  oauth2_postgres_container:
-    container_name: oauth2_postgres_container
-    image: postgres:17
+  khotixs_webplatform_ui:
+    image: khotixs_webplatform_ui:1.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: khotixs_webplatform_ui
+    ports:
+      - "3001:3001"
     restart: always
     environment:
-      POSTGRES_DB: oauth2_db
-      POSTGRES_USER: oauth2
-      POSTGRES_PASSWORD: oauth2
-    ports:
-      - "5432:5432"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d oauth2_db -U oauth2"]
-      interval: 1s
-      timeout: 5s
-      retries: 10
-    volumes:
-      - ./data/oauth2:/var/lib/postgresql/data
+      - NODE_ENV=dev
+      - PORT=3001
+      - GENERATE_SOURCEMAP=false
     networks:
-      - khotixs-net
-
-  services_postgres_container:
-    container_name: services_postgres_container
-    image: postgres:17
-    restart: always
-    environment:
-      POSTGRES_DB: services_db
-      POSTGRES_USER: services
-      POSTGRES_PASSWORD: services
-    command: >
-      postgres -c wal_level=replica -c hot_standby=on
-    ports:
-      - "5433:5432"
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -d services_db -U services" ]
-      interval: 1s
-      timeout: 5s
-      retries: 10
-    volumes:
-      - ./data/services:/var/lib/postgresql/data
-    networks:
-      - khotixs-net
-
-  services_mongo_container:
-    container_name: services_mongo_container
-    image: mongo:7.0.16-rc1-jammy
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: services
-      MONGO_INITDB_ROOT_PASSWORD: services
-      MONGO_INITDB_DATABASE: services_db
-    ports:
-      - "27017:27017"
-    command:
-      - '--auth'  # Enable authentication
-    healthcheck:
-      test: ["CMD-SHELL", "mongosh -u services -p services --authenticationDatabase services_db --eval 'db.runCommand({ping:1})'"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    volumes:
-      - services_mongodb_data_vol:/data/db/
-      - services_mongodb_log_vol:/var/log/mongodb/
-      - ./init.js:/docker-entrypoint-initdb.d/init.js
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-    networks:
-      - khotixs-net
-
-volumes:
-  oauth2_postgres_data:
-  services_postgres_data:
-  services_mongodb_data_vol:
-  services_mongodb_log_vol:
+      - khotixs_network
 
 networks:
-  khotixs-net:
-    external: true
+  khotixs_network:
