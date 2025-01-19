@@ -26,7 +26,7 @@ export default function TicketTable({ id }: PropType) {
     console.log("  GET ID   ", id);
     const getData = async () => {
         try {
-            const response = await fetch(`event-ticket/api/v1/events/organizer/${id}`, {
+            const response = await fetch(`/event-ticket/api/v1/events/organizer/${id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -113,7 +113,7 @@ export default function TicketTable({ id }: PropType) {
                         </SelectContent>
                     </Select>
                     <Button
-                        onClick={() => router.push(`/organizer/events/tickets/new`)}
+                        onClick={() => router.push(`/organizer/events/tickets/${id}`)}
                         className="bg-primary-color text-secondary-color-text rounded-[6px] hover:bg-primary-color/90 dark:text-secondary-color-text">
                         New Ticket
                     </Button>

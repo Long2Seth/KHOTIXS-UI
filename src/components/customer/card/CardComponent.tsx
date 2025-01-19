@@ -54,7 +54,7 @@ export function CardComponent({event}: EventTypes) {
                         unoptimized
                         src={`${event.thumbnail}`}
                         alt=""
-                        className="z-10 rounded-l-[6px] w-full bg-cover bg-center transform transition-transform duration-300 group-hover:scale-110"
+                        className="z-10 rounded-t-[6px] w-full h-full bg-cover bg-center transform transition-transform duration-300 group-hover:scale-110"
                     />
                 </div>
                 <section

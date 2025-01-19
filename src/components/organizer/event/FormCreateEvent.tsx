@@ -23,13 +23,14 @@ import {format} from "date-fns";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
 
+
 // Define the zod schema
 const eventSchema = z.object({
-    title: z.string().min(1, "Event title is required"),
-    category: z.string().min(1, "Category is required"),
+    eventTitle: z.string().min(1, "Event title is required"),
+    eventCategoryName: z.string().min(1, "Category is required"),
     location: z.string().min(1, "Location is required"),
-    startedDate: z.date().nullable().refine(date => date !== null, "Start date is required"),
-    endedDate: z.date().nullable().refine(date => date !== null, "End date is required"),
+    startedDate: z.string().min(1, "Start date is required"),
+    endedDate: z.string().min(1, "End date is required"),
     description: z.string().optional(),
     thumbnail: z.string().nullable(),
 });
@@ -42,6 +43,7 @@ export function CreateEventForm() {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [action, setAction] = useState<string>("");
+
 
     const handleTimeChange = (
         type: "hour" | "minute",
@@ -66,30 +68,53 @@ export function CreateEventForm() {
         }
     };
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setThumbnail(reader.result as string);
-            };
-            reader.readAsDataURL(file);
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch('http://localhost:8000/asset/api/v1/files', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                setThumbnail(data.uri);
+            } catch (error) {
+                console.error("Error uploading file:", error);
+            }
         }
+    };
+
+    const calculateCapacity = (start: Date | undefined, end: Date | undefined): number => {
+        if (!start || !end) return 0;
+        const diffTime = Math.abs(end.getTime() - start.getTime());
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return diffDays;
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        const formatStartedDate = startedDate ? format(startedDate, "yyyy-MM-dd'T'HH:mm") : "";
+        const formatEndedDate = endedDate ? format(endedDate, "yyyy-MM-dd'T'HH:mm") : "";
+
         const formData = {
             eventTitle: ((e.target as HTMLFormElement).elements.namedItem('eventTitle') as HTMLInputElement).value,
             eventCategoryName: ((e.target as HTMLFormElement).elements.namedItem('eventCategoryName') as HTMLSelectElement).value,
             location: ((e.target as HTMLFormElement).elements.namedItem('location') as HTMLInputElement).value,
-            startedDate,
-            endedDate,
+            startedDate: formatStartedDate,
+            endedDate: formatEndedDate,
             description: ((e.target as HTMLFormElement).elements.namedItem('description') as HTMLTextAreaElement).value,
             thumbnail,
+            capacity: calculateCapacity(startedDate, endedDate),
         };
-
-        console.log("Form Data:", formData);
 
         const result = eventSchema.safeParse(formData);
         if (!result.success) {
@@ -105,7 +130,7 @@ export function CreateEventForm() {
             setErrors({});
             // Handle form submission
             try {
-                const response = await fetch("event-ticket/api/v1/events", {
+                const response = await fetch("/event-ticket/api/v1/events", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -117,18 +142,21 @@ export function CreateEventForm() {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
+                const data = await response.json();
                 console.log("Form submitted successfully");
 
                 if (action === "save") {
                     router.push("/organizer/events");
                 } else if (action === "saveAndContinue") {
-                    router.push("/organizer/events/tickets");
+                    router.push(`/organizer/events/tickets/${data.uuid}`);
                 }
             } catch (error) {
                 console.error("Error submitting form:", error);
             }
         }
     };
+
+
 
     return (
         <form
@@ -150,7 +178,7 @@ export function CreateEventForm() {
                                 <section className="space-y-2">
                                     <Label
                                         className="text-base font-medium text-primary-color-text dark:text-secondary-color-text"
-                                        htmlFor="title">
+                                        htmlFor="eventTitle">
                                         Event title
                                         <span className="text-red-500">*</span>
                                     </Label>
@@ -176,11 +204,11 @@ export function CreateEventForm() {
                                         </SelectTrigger>
                                         <SelectContent className=" bg-khotixs-background-white rounded-[6px] ">
                                             <SelectItem value="concert">Concert</SelectItem>
-                                            <SelectItem value="conference">Technology</SelectItem>
-                                            <SelectItem value="exhibition">Conferences</SelectItem>
-                                            <SelectItem value="exhibition">Sports</SelectItem>
-                                            <SelectItem value="exhibition">Community</SelectItem>
-                                            <SelectItem value="exhibition">General</SelectItem>
+                                            <SelectItem value="technology">Technology</SelectItem>
+                                            <SelectItem value="conference">Conference</SelectItem>
+                                            <SelectItem value="sport">Sport</SelectItem>
+                                            <SelectItem value="community">Community</SelectItem>
+                                            <SelectItem value="general">General</SelectItem>
                                         </SelectContent>
                                     </Select>
                                     {errors.eventCategoryName &&

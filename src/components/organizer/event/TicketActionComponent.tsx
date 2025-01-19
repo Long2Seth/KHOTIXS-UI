@@ -17,20 +17,20 @@ export default function TicketActionComponent({ id, isPublish, isDisplay }: Prop
 
     const handlePublish = async () => {
         const endpoint = isPublish ? `unpublish` : `publish`;
-        await fetch(`event-ticket/api/v1/tickets/${id}/${endpoint}`, {
+        await fetch(`/event-ticket/api/v1/tickets/${id}/${endpoint}`, {
             method: 'PUT'
         });
     };
 
     const handleDisplay = async () => {
         const endpoint = isDisplay ? `hide` : `display`;
-        await fetch(`event-ticket/api/v1/tickets/${id}/${endpoint}`, {
+        await fetch(`/event-ticket/api/v1/tickets/${id}/${endpoint}`, {
             method: 'PUT'
         });
     };
 
     const handleDelete = async () => {
-        await fetch(`event-ticket/api/v1/tickets/${id}`, {
+        await fetch(`/event-ticket/api/v1/tickets/${id}`, {
             method: 'DELETE'
         });
     }

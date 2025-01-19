@@ -18,7 +18,7 @@ export default function EventDetailsPage({ id }: PropType) {
     console.log("  GET ID   ", id);
     const getData = async () => {
         try {
-            const response = await fetch(`event-ticket/api/v1/events/organizer/${id}`, {
+            const response = await fetch(`/event-ticket/api/v1/events/organizer/${id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

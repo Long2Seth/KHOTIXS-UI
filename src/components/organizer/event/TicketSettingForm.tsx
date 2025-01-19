@@ -67,15 +67,17 @@ export function TicketSettingsForm({id}: Props) {
         setLoading(true);
         try {
             const combinedTickets = [...(dataEvent?.tickets || []), ...tickets];
-            const filteredTickets = combinedTickets.filter(ticket => ticket.id === null);
+            const filteredTickets = combinedTickets.filter(ticket => ticket.id === "ADD");
             const formattedTickets: TicketSubmitType[] = filteredTickets.map(({id, ...rest}) => ({
                 ...rest,
                 price: Number(rest.price)
             }));
 
+            console.log("  Filter Ticket ", filteredTickets);
+
             console.log("Data to be submitted:", formattedTickets);
 
-            const response = await fetch(`event-ticket/api/v1/tickets/${id}`, {
+            const response = await fetch(`/event-ticket/api/v1/tickets/${id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -100,7 +102,7 @@ export function TicketSettingsForm({id}: Props) {
 
     const getTickets = async () => {
         try {
-            const response = await fetch('event-ticket/api/v1/events/${id}');
+            const response = await fetch(`/event-ticket/api/v1/events/organizer/${id}`);
             const data = await response.json();
             setDataEvent(data);
         } catch (error) {
@@ -116,7 +118,7 @@ export function TicketSettingsForm({id}: Props) {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
         const newTicket = {
-            id: undefined,
+            id: "ADD",
             ticketTitle: formData.get('ticketTitle') as string,
             type: isFree ? "free" : (formData.get('type') as string),
             price: isFree ? 0 : Number(formData.get('price')),

@@ -38,7 +38,7 @@ export default function EditProfile({ profile }: EditProfileProps) {
 
     const handleSave = async () => {
         try {
-            const response = await fetch(`user-profile/api/v1/user-profiles/${formData.username}`, {
+            const response = await fetch(`/user-profile/api/v1/user-profiles/${formData.id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
