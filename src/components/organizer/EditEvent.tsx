@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/select"
 import {Textarea} from "@/components/ui/textarea"
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover"
-import {Calendar} from "@/components/ui/calendar"
+import {Calendar as CalendarComponent} from "@/components/ui/calendar"
 import {cn} from "@/lib/utils"
 import {format} from "date-fns"
 import Image from "next/image";
@@ -126,7 +126,7 @@ export function EditEvent() {
                             <section className="grid md:grid-cols-2 gap-4">
                                 <section className="space-y-2">
                                     <Label
-                                        className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">
+                                        className="text-base font-medium text-primary-color-text dark:text-secondary-color-text">
                                         Start Date
                                         <span className="text-red-500">*</span>
                                     </Label>
@@ -135,17 +135,21 @@ export function EditEvent() {
                                             <Button
                                                 variant={"outline"}
                                                 className={cn(
-                                                    "w-full justify-between text-left font-normal h-[50px] p-5 border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text",
+                                                    "w-full border border-light-border-color rounded-[6px] text-base md:text-lg py-[22px] justify-between text-left font-normal",
                                                     !startDate && "text-muted-foreground"
                                                 )}
                                             >
-                                                {startDate ? format(startDate, "PPP") : <span>Pick a start date</span>}
+                                                {startDate ? format(startDate, "PPP") :
+                                                    <span className=" text-light-border-color">
+                                                    Pick a start date
+                                                </span>
+                                                }
                                                 <CalendarIcon className="h-4 w-4"/>
                                             </Button>
                                         </PopoverTrigger>
-                                        <PopoverContent className="w-auto p-0" align="start">
-                                            <Calendar
-                                                className="bg-white dark:bg-khotixs-background-dark dark:text-secondary-color-text rounded-[6px] "
+                                        <PopoverContent className="w-auto p-0 bg-gray-100 rounded-[6px]">
+                                            <CalendarComponent
+                                                className="bg-white dark:bg-khotixs-background-dark dark:text-secondary-color-text rounded-[6px]"
                                                 mode="single"
                                                 selected={startDate}
                                                 onSelect={setStartDate}
@@ -154,9 +158,11 @@ export function EditEvent() {
                                         </PopoverContent>
                                     </Popover>
                                 </section>
+
+
                                 <section className="space-y-2">
                                     <Label
-                                        className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">
+                                        className="text-base font-medium text-primary-color-text dark:text-secondary-color-text">
                                         End Date
                                         <span className="text-red-500">*</span>
                                     </Label>
@@ -165,17 +171,18 @@ export function EditEvent() {
                                             <Button
                                                 variant={"outline"}
                                                 className={cn(
-                                                    "w-full justify-between text-left font-normal h-[50px] p-5 border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text",
+                                                    "w-full border border-light-border-color placeholder:text-light-border-color rounded-[6px] text-base md:text-lg py-[22px] justify-between text-left font-normal",
                                                     !endDate && "text-muted-foreground"
                                                 )}
                                             >
-                                                {endDate ? format(endDate, "PPP") : <span>Pick an end date</span>}
+                                                {endDate ? format(endDate, "PPP") :
+                                                    <span className=" text-light-border-color">Pick an end date</span>}
                                                 <CalendarIcon className="h-4 w-4"/>
                                             </Button>
                                         </PopoverTrigger>
-                                        <PopoverContent className="w-auto p-0" align="start">
-                                            <Calendar
-                                                className="bg-white dark:bg-khotixs-background-dark dark:text-secondary-color-text rounded-[6px] "
+                                        <PopoverContent className="w-auto p-0 bg-gray-100 rounded-[6px] ">
+                                            <CalendarComponent
+                                                className="bg-white dark:bg-khotixs-background-dark dark:text-secondary-color-text rounded-[6px]"
                                                 mode="single"
                                                 selected={endDate}
                                                 onSelect={setEndDate}
@@ -239,7 +246,7 @@ export function EditEvent() {
 
                             {/* action button */}
                             <section className="flex justify-end gap-4 rounded-[6px] text-secondary-color-text">
-                                <Button onClick={() => router.push("/events/detail-event")}
+                                <Button onClick={() => router.push("/organizer/events/")}
                                         className="bg-primary-color rounded-[6px] my-5 hover:bg-primary-color/90 px-8">Save</Button>
                             </section>
 

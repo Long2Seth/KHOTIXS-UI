@@ -18,6 +18,7 @@ import {Calendar} from "@/components/ui/calendar";
 import {ModeToggle} from "@/components/ui/modeToggle";
 import {NavigationMenuDemo} from "@/components/customer/navbar/NavigationMenuDemo";
 import SkeletonNavbarComponent from "@/components/customer/navbar/SkeletonNavbar";
+import {useRouter} from "next/navigation";
 
 const NavbarComponent = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -25,6 +26,8 @@ const NavbarComponent = () => {
     const [activeItem, setActiveItem] = useState<string | null>(null);
     const [selectedLocation, setSelectedLocation] = React.useState<string | undefined>();
     const [date, setDate] = React.useState<Date>();
+    const router = useRouter();
+
 
 
 
@@ -62,7 +65,7 @@ const NavbarComponent = () => {
             {isLoading ? <SkeletonNavbarComponent /> :
                 <nav className=" w-full top-[-60px] sticky z-50 bg-white flex flex-col dark:bg-khotixs-background-dark ">
                     <section
-                        className=" container mx-auto w-full h-[60px] bg-white py-[10px]  flex  justify-center gap-5 dark:bg-khotixs-background-dark ">
+                        className=" container mx-auto w-full h-[60px] bg-white py-[10px]  flex px-5 lg:px-10 justify-center gap-5 dark:bg-khotixs-background-dark ">
                         <CiBullhorn className="  w-[40px] p-[8px] rounded-[50%] text-gray-400 bg-gray-200  h-full "/>
                         <p className="  text-[10px] sm:text-sm lg:text-lg font-semibold flex items-center">Do you organize events? </p>
                         <Button className="   text-[10px] sm:text-sm lg:text-lg font-semibold text-white hover:bg-primary-color bg-primary-color rounded-[5px] ">
@@ -71,7 +74,7 @@ const NavbarComponent = () => {
                     </section>
 
                     <section
-                        className=" container  mx-auto w-full py-[15px] ">
+                        className=" container  mx-auto w-full py-[15px] px-5 lg:px-10">
                         <div className=" flex  justify-between h-14 items-center ">
                             {/* KHOTIXS LOGO */}
                             <Link href="/" className="flex items-center">
@@ -84,11 +87,11 @@ const NavbarComponent = () => {
                                 <form className=" w-full rounded-[5px] bg-gray-50 flex items-center ">
 
                                     {/* Search  */}
-                                    <div className=" flex items-center w-auto ">
+                                    <div className=" flex items-center w-auto lg:max-w-[220px] xl:w-auto">
                                         <input
                                             type="text"
                                             placeholder="Search events name"
-                                            className=" w-auto bg-transparent h-full rounded-tl-[5px] text-[12px] lg:text-[14px] focus:text-gray-500 rounded-bl-[5px] pl-5  focus:outline-none pr-4 border-0 focus:ring-0 px-0 py-2 dark:text-primary-color-text "
+                                            className=" w-auto bg-transparent h-full rounded-tl-[5px] text-[12px] lg:text-[14px] focus:text-gray-500 rounded-bl-[5px] pl-5 lg:pl-2 xl:pl-5 focus:outline-none pr-4 border-0 focus:ring-0 px-0 py-2 dark:text-primary-color-text "
                                             name="topic"
                                         />
                                         <hr className=" hidden md:block w-[20px] bg-gray-400 rotate-90"/>
@@ -99,7 +102,7 @@ const NavbarComponent = () => {
                                         <Select onValueChange={setSelectedLocation}>
                                             <SelectTrigger
                                                 className={cn(
-                                                    "w-[180px] text-[12px] lg:text-[14px] focus:outline-none ring-0 bg-transparent border-0",
+                                                    "w-[180px] lg:w-[130px] xl:w-[180px] text-[12px] lg:text-[14px] focus:outline-none ring-0 bg-transparent border-0",
                                                     selectedLocation ? "text-black" : "text-gray-400"
                                                 )}
                                             >
@@ -124,7 +127,7 @@ const NavbarComponent = () => {
                                                 <Button
                                                     variant="ghost"
                                                     className={cn(
-                                                        "w-[200px] justify-start text-left bg-transparent border-0 focus:ring-0 focus:outline-none",
+                                                        "w-[200px] lg:w-[190px] justify-start text-left bg-transparent border-0 focus:ring-0 focus:outline-none",
                                                         !date && "text-muted-foreground"
                                                     )}
                                                 >
@@ -167,6 +170,7 @@ const NavbarComponent = () => {
                                     {/*    Login*/}
                                     {/*</Button>*/}
                                     <Button
+                                        onClick={() => router.push("/oauth2/authorization/nextjs")}
                                         className=" bg-primary-color lg:text-md xl:text-lg border-[1px] rounded-[5px] text-secondary-color-text font-[10px] hover:bg-primary-color border-primary-color">
                                         Log In
                                     </Button>
@@ -179,7 +183,7 @@ const NavbarComponent = () => {
 
                     <div
                         onClick={toggleMenu}
-                        className=" absolute top-[85px] right-0 inline-flex items-center w-10 h-10 justify-center text-3xl text-primary-color lg:hidden focus:outline-none dark:text-primary-color "
+                        className=" absolute top-[85px] pr-5 lg:pr-10 right-0 inline-flex items-center w-10 h-10 justify-center text-3xl text-primary-color lg:hidden focus:outline-none dark:text-primary-color "
                         aria-controls="mega-menu-full"
                         aria-expanded={isMenuOpen ? "true" : "false"}
                     >
@@ -188,9 +192,9 @@ const NavbarComponent = () => {
                     </div>
                     <div
                         id="mega-menu-full"
-                        className={` lg:hidden items-center justify-between px-5 font-semibold dark:bg-khotixs-background-dark ${isMenuOpen ? "block" : "hidden"} w-full `}
+                        className={` lg:hidden items-center justify-between font-semibold dark:bg-khotixs-background-dark ${isMenuOpen ? "block" : "hidden"} w-full `}
                     >
-                        <ul className="text-primary-color-text flex flex-col p-1 mt-4 border border-secondary-color rounded-[6px] bg-white dark:bg-khotixs-background-dark ">
+                        <ul className="text-primary-color-text flex flex-col p-1 mt-4 rounded-[6px] bg-white dark:bg-khotixs-background-dark ">
                             {menuItems.map((item, index) => (
                                 <li key={index}>
                                     <Link

@@ -129,14 +129,14 @@ export default function PaymentDetailsComponent() {
                         <section>
                             <div className="flex gap-[10px] pt-[10px]">
                                 <Button
-                                    className="w-full bg-white p-[12px] text-red-600 border-[1px] border-red-600 hover:bg-slate-200 dark:bg-khotixs-background-dark dark:text-red-600 dark:border-red-600 rounded-[6px] "
+                                    className="w-full bg-white p-[12px] text-red-600 border-[1px]  hover:text-white border-red-600 dark:text-label-paid dark:bg-khotixs-background-dark dark:border-red-600 hover:bg-red-500 dark:hover:bg-red-500 dark:hover:text-white dar:hover:text-white rounded-[6px] "
                                     onClick={() => router.back()}
                                 >
                                     Back
                                 </Button>
                                 <Button
                                     onClick={payNow}
-                                    className="w-full text-secondary-color-text bg-primary-color hover:bg-primary-color rounded-[6px] border border-primary-color "
+                                    className="w-full text-secondary-color-text bg-primary-color hover:bg-primary-color rounded-[6px] border border-primary-color hover:bg-primary-color/80 "
                                 >
                                     Pay Now
                                 </Button>

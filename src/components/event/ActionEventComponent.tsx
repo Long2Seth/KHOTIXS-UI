@@ -8,6 +8,7 @@ import {BiDetail} from "react-icons/bi";
 import {LiaEdit} from "react-icons/lia";
 import {AiOutlineDelete} from "react-icons/ai";
 import {IoIosPower} from "react-icons/io";
+import {Badge} from "@/components/ui/badge";
 
 type RouteType = {
     url: string;
@@ -47,14 +48,14 @@ export function ActionEventComponent() {
             <PopoverContent className="w-auto">
                 <div className="flex flex-col p-2 w-full">
                     {routes.map((route) => (
-                        <div
+                        <Badge
                             key={route.name}
                             onClick={() => router.push(route.url)}
-                            className="text-sm text-label-free text-start hover:bg-gray-100 rounded-[6px] flex cursor-pointer items-center dark:text-dark-description-color dark:hover:text-primary-color-text p-1"
+                            className="text-sm text-label-free text-start hover:bg-gray-100 rounded-[6px] flex cursor-pointer items-center dark:text-dark-description-color  p-1"
                         >
                             <span className={
-                                route.name === "Detail Event" ? "text-label-free" :
-                                    route.name === "Edit Event" || route.name === "Disable" ? "text-yellow-500" :
+                                route.name === "Detail Event" ? "text-primary-color-text dark:text-secondary-color-text dark:hover:text-primary-color-text" :
+                                    route.name === "Edit Event" || route.name === "Disable" ? "text-primary-color-text dark:hover:text-primary-color-text dark:text-secondary-color-text" :
                                         route.name === "Delete Event" ? "text-red-500" : ""
                             }>
                                 <div className=" flex">
@@ -64,7 +65,7 @@ export function ActionEventComponent() {
 
                             </span>
 
-                        </div>
+                        </Badge>
                     ))}
                 </div>
             </PopoverContent>

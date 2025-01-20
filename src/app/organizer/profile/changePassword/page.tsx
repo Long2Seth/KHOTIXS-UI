@@ -1,7 +1,7 @@
 
 export default function ChangePassword (){
     return (
-        <main className="p-6 space-y-6 max-w-[90rem] mx-auto">
+        <main className="container mx-auto space-y-[30px] md:space-y-[50px] xl:space-y-[80px] my-[30px] md:my-[50px] xl:my-[80px] ">
             {/*<ChangePassword/>*/}
         </main>
     );

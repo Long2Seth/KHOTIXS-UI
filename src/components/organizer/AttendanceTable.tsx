@@ -41,17 +41,17 @@ export default function AttendanceTable() {
     }
 
     return (
-        <div className=" w-full ">
+        <section className=" w-full ">
             <CardHeader>
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <CardTitle  className=" p-5 ">
+                <div className="flex flex-row justify-between items-start sm:items-center gap-4 p-5">
+                    <CardTitle  className="  w-[80%]">
                         <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text">ATTENDANCE</h1>
                         <p className="text-description-color text-sm md:text-base xl:text-lg font-light dark:text-dark-description-color ">Real-time
                             insights for data-driven decisions</p>
                     </CardTitle>
                     <Button
                         onClick={exportToExcel}
-                        className=" text-secondary-color-text rounded-[6px] bg-primary-color hover:bg-primary-color/80 w-full sm:w-auto"
+                        className=" text-secondary-color-text rounded-[6px] bg-primary-color hover:bg-primary-color/80 w-auto"
                     >
                         Export Excel
                     </Button>
@@ -59,54 +59,58 @@ export default function AttendanceTable() {
             </CardHeader>
 
             <CardContent className=" bg-white p-10 rounded-[6px] dark:backdrop-blur dark:bg-opacity-5 space-y-4 ">
-                <div className=" flex flex-col sm:flex-row gap-4 mb-6">
+                <div className=" flex flex-col md:flex-row gap-4 mb-6">
                     <Input
                         placeholder="Search"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         className=" border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text"
                     />
-                    <div className="flex flex-col sm:flex-row gap-4">
+                    <div className="flex flex-col sm:flex-row  gap-4">
                         <Select>
                             <SelectTrigger
-                                className=" min-w-[200px] max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                                className="w-full sm:max-w-[350px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
                                 <SelectValue placeholder="Events"/>
                             </SelectTrigger>
                             <SelectContent
-                                className=" min-w-[200px] max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                                className="w-full sm:w-[350px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
                                 <SelectItem value="queen">The Rise Of The Queen</SelectItem>
                             </SelectContent>
                         </Select>
                         <Select>
                             <SelectTrigger
-                                className=" max-w-[250px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                                className="w-full sm:w-[250px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
                                 <SelectValue placeholder="Publish"/>
                             </SelectTrigger>
                             <SelectContent
-                                className=" min-w-[200px] max-w-[300px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
-                                <SelectItem className=" dark:hover:text-primary-color-text"  value="published">Published</SelectItem>
-                                <SelectItem className=" dark:hover:text-primary-color-text" value="draft">Draft</SelectItem>
+                                className="w-full sm:w-[250px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                                <SelectItem className="dark:hover:text-primary-color-text"
+                                            value="published">Published</SelectItem>
+                                <SelectItem className="dark:hover:text-primary-color-text"
+                                            value="draft">Draft</SelectItem>
                             </SelectContent>
                         </Select>
+
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <Button
+                                    className="w-full md:max-w-[400px] h-[50px] p-5 border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
+                                    <Calendar className="mr-2 h-4 w-4"/>
+                                    {date ? format(date, "PPP") :
+                                        <span className="text-md md:text-lg">Pick a date</span>}
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0 bg-gray-100 rounded-[6px]">
+                                <CalendarComponent
+                                    className="bg-white dark:bg-khotixs-background-dark dark:text-secondary-color-text rounded-[6px]"
+                                    mode="single"
+                                    selected={date}
+                                    onSelect={setDate}
+                                    initialFocus
+                                />
+                            </PopoverContent>
+                        </Popover>
                     </div>
-                    <Popover>
-                        <PopoverTrigger asChild>
-                            <Button
-                                    className="max-w-[400px] h-[50px] p-5 border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
-                                <Calendar className="mr-2 h-4 w-4"/>
-                                {date ? format(date, "PPP") : <span className=" text-md md:text-lg">Pick a date</span>}
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0 bg-gray-100 rounded-[6px] ">
-                            <CalendarComponent
-                                className="bg-white dark:bg-khotixs-background-dark dark:text-secondary-color-text rounded-[6px] "
-                                mode="single"
-                                selected={date}
-                                onSelect={setDate}
-                                initialFocus
-                            />
-                        </PopoverContent>
-                    </Popover>
                 </div>
                 <div className="overflow-x-auto">
                     <div className="inline-block min-w-full align-middle">
@@ -115,22 +119,22 @@ export default function AttendanceTable() {
                                 <TableHeader className=" ">
                                     <TableRow>
                                         <TableHead
-                                            className="px-2 py-5 text-center text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">ID</TableHead>
+                                            className=" min-w-[100px] md:min-w-[130px] xl:min-w-[150px] text-center text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">ID</TableHead>
                                         <TableHead
-                                            className="px-2 py-5 text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">USER
+                                            className="min-w-[130px] md:min-w-[150px] xl:min-w-[170px] text-center text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">USER
                                             NAME</TableHead>
                                         <TableHead
-                                            className="px-2 py-5 lg:w-80 text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">EVENT
+                                            className=" min-w-[300px] md:min-w-[400px] xl:min-w-[500px] pl-20 text-start text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">EVENT
                                             NAME</TableHead>
                                         <TableHead
-                                            className="px-2 py-5 text-center text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">LOCATION</TableHead>
+                                            className=" min-w-[150px] md:min-w-[200px] xl:min-w-[300px] text-start text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">LOCATION</TableHead>
                                         <TableHead
-                                            className="px-2 py-5 text-center text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">QTY</TableHead>
+                                            className=" min-w-[70px] md:min-w-[100px] text-center text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">QTY</TableHead>
                                         <TableHead
-                                            className="px-2 py-5 text-center text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">TICKET
+                                            className=" min-w-[150px] lg:min-w-[200px] text-start text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">TICKET
                                             TYPE</TableHead>
                                         <TableHead
-                                            className="px-2 py-5 text-center text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text">STATUS</TableHead>
+                                            className=" min-w-[150px] lg:min-w-[200px] text-start text-title-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">STATUS</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
@@ -138,18 +142,18 @@ export default function AttendanceTable() {
                                         <TableRow className=" hover:bg-gray-100 dark:hover:bg-khotixs-background-dark "
                                                   key={attendance.id}>
                                             <TableCell
-                                                className="px-2 text-center text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.id}</TableCell>
+                                                className=" py-3 text-center text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.id}</TableCell>
                                             <TableCell
-                                                className="px-2 text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.userName}</TableCell>
+                                                className=" text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.userName}</TableCell>
                                             <TableCell
-                                                className="px-2 h-[70px] lg:w-80 line-clamp-2 text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color overflow-hidden">{attendance.eventName}</TableCell>
+                                                className=" text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.eventName}</TableCell>
                                             <TableCell
-                                                className="px-2 text-center text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.location}</TableCell>
+                                                className=" text-center text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.location}</TableCell>
                                             <TableCell
-                                                className="px-2 text-center text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.qty}</TableCell>
-                                            <TableCell className=" text-center ">
+                                                className=" text-center text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{attendance.qty}</TableCell>
+                                            <TableCell className=" text-start ">
                                                 <Badge
-                                                    className={`px-2 p-1 text-secondary-color-text text-center text-[10px] justify-center md:text-sm font-light rounded-[6px] min-w-[90px] ${
+                                                    className={` text-secondary-color-text text-center text-[10px] justify-center md:text-sm font-light rounded-[6px] min-w-[50px] ${
                                                         attendance.ticketType === 'VIP' ? 'bg-label-vip hover:bg-label-vip/90' :
                                                             attendance.ticketType === 'PREMIUM' ? 'bg-label-premium hover:bg-label-premium/90' :
                                                                 attendance.ticketType === 'REGULAR' ? 'bg-label-regular hover:bg-label-regular/90' :
@@ -161,9 +165,9 @@ export default function AttendanceTable() {
                                             </TableCell>
 
                                             <TableCell
-                                                className="px-2 text-center text-description-color text-[10px] md:text-sm xl:text-base">
+                                                className=" text-start text-description-color text-[10px] md:text-sm xl:text-base">
                                                 <Badge
-                                                    className={`rounded-[6px] text[10px] md:text-base  min-w-[100px] py-1 justify-center font-normal ${
+                                                    className={`rounded-[6px] text[10px] md:text-base  min-w-[60px] justify-center font-normal ${
                                                         attendance.status === 'checked-in'
                                                             ? 'bg-label-free text-label-text-primary hover:bg-label-free/90'
                                                             : 'bg-label-paid text-label-text-primary hover:bg-label-paid/90'
@@ -180,6 +184,6 @@ export default function AttendanceTable() {
                     </div>
                 </div>
             </CardContent>
-        </div>
+        </section>
     )
 }
