@@ -151,7 +151,8 @@ export default function NotificationsPage() {
     //
 
     useEffect(() => {
-        const currentUserId = "event-00003";
+        const currentUserId = "USER";
+
             setUserId(currentUserId);
 
         const wsService = new WebSocketService(

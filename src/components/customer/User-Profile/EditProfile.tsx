@@ -6,29 +6,15 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Camera } from "lucide-react";
 import Image from "next/image";
+import {Profile} from "@/lib/customer/userProfile";
 
-type ProfileType = {
-    id: string;
-    username: string;
-    fullName: string;
-    gender: string;
-    bio: string;
-    dob: string;
-    phoneNumber: string;
-    address: string;
-    avatar: string;
-    status: number;
-    position: string;
-    email: string;
-    businessName: string;
-};
 
 type EditProfileProps = {
-    profile: ProfileType;
+    profile: Profile;
 };
 
 export default function EditProfile({ profile }: EditProfileProps) {
-    const [formData, setFormData] = useState<ProfileType>(profile);
+    const [formData, setFormData] = useState<Profile>(profile);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

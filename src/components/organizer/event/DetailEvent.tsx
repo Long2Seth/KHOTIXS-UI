@@ -13,9 +13,7 @@ type PropType = {
 export default function EventDetailsPage({ id }: PropType) {
     const router = useRouter();
     const [eventData, setEventData] = useState<EventType | null>(null);
-    const [ticketData, setTicketData] = useState<EventType['tickets'] | null>(null);
 
-    console.log("  GET ID   ", id);
     const getData = async () => {
         try {
             const response = await fetch(`/event-ticket/api/v1/events/organizer/${id}`, {
@@ -26,7 +24,6 @@ export default function EventDetailsPage({ id }: PropType) {
             });
             const data: EventType = await response.json();
             setEventData(data);
-            setTicketData(data.tickets);
         } catch (error) {
             console.error('Error:', error);
         }

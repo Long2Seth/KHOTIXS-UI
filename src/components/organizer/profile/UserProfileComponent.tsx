@@ -15,10 +15,13 @@ import {
 import {Avatar, AvatarImage} from "@/components/ui/avatar";
 import * as React from "react";
 import {useRouter} from "next/navigation";
+import {Profile} from "@/lib/customer/userProfile";
 
+type PropTypes = {
+    data : Profile | null;
+}
 
-
-export function OrganizerProfileComponent() {
+export function OrganizerProfileComponent({data}: PropTypes) {
 
     const router = useRouter();
     return (
@@ -29,7 +32,7 @@ export function OrganizerProfileComponent() {
                     <div className="flex ">
                         <Avatar
                             className="h-auto w-12 cursor-pointer">
-                            <AvatarImage src="/cher-chhaya.png" alt="cher image"/>
+                            <AvatarImage src={data?.avatar} alt="cher image"/>
                         </Avatar>
                     </div>
                 </Button>
@@ -38,7 +41,7 @@ export function OrganizerProfileComponent() {
                 className="w-auto rounded-[6px] bg-white dark:border dark:border-gray-400 dark:bg-khotixs-background-dark border-0">
                 {/*<DropdownMenuSeparator/>*/}
                 <DropdownMenuGroup>
-                    <DropdownMenuItem onClick={() => router.push(`/organizer/profile/detail-profile`)}>
+                    <DropdownMenuItem onClick={() => router.push(`/organizer/profile/user/${data?.id}`)}>
                         <User/>
                         <span>Organizer Profile</span>
                     </DropdownMenuItem>

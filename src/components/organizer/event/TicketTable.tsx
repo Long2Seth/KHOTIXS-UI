@@ -23,7 +23,7 @@ export default function TicketTable({ id }: PropType) {
     const [eventData, setEventData] = useState<EventType | null>(null);
     const [ticketData, setTicketData] = useState<Ticket[] | null>(null);
 
-    console.log("  GET ID   ", id);
+
     const getData = async () => {
         try {
             const response = await fetch(`/event-ticket/api/v1/events/organizer/${id}`, {
@@ -42,8 +42,6 @@ export default function TicketTable({ id }: PropType) {
     useEffect(() => {
         getData();
     }, [id]);
-
-    console.log(" EVENT DATA ", eventData);
 
     const [search, setSearch] = useState('');
     const [ticketType, setTicketType] = useState('all');
