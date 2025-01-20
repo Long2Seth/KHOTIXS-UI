@@ -73,8 +73,8 @@ async function EventContent({ id }: { id: string }) {
     } catch (error) {
         return (
             <div className="p-4 text-center">
-                <h1 className="text-xl font-bold text-red-600">Error Loading Event</h1>
-                <p className="text-gray-600">Unable to load event details. Please try again later.</p>
+                <h1 className="text-xl font-bold text-red-600 uppercase">Error Loading Event</h1>
+                <p className="dark:text-white text-gray-600">Unable to load event details. Please try again later.</p>
             </div>
         );
     }

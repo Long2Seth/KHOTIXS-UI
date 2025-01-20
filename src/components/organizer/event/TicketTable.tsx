@@ -1,5 +1,5 @@
 'use client'
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -12,15 +12,36 @@ import { Input } from "@/components/ui/input";
 import { EventType, Ticket } from "@/lib/customer/event";
 import TicketActionComponent from "@/components/organizer/event/TicketActionComponent";
 import Image from "next/image";
-import {Pagination} from "@/components/ui/Pagination";
+import { Pagination } from "@/components/ui/Pagination";
 
 type PropType = {
-    event: EventType | null;
+    id: string;
 }
 
-export default function TicketTable({ event }: PropType) {
+export default function TicketTable({ id }: PropType) {
     const router = useRouter();
-    const tickets: Ticket[] = event?.tickets || [];
+    const [eventData, setEventData] = useState<EventType | null>(null);
+    const [ticketData, setTicketData] = useState<Ticket[] | null>(null);
+
+
+    const getData = async () => {
+        try {
+            const response = await fetch(`/event-ticket/api/v1/events/organizer/${id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data: EventType = await response.json();
+            setEventData(data);
+            setTicketData(data.tickets);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+    useEffect(() => {
+        getData();
+    }, [id]);
 
     const [search, setSearch] = useState('');
     const [ticketType, setTicketType] = useState('all');
@@ -29,14 +50,14 @@ export default function TicketTable({ event }: PropType) {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
 
-    const filteredTickets = tickets.filter(ticket => {
+    const filteredTickets = ticketData?.filter((ticket: Ticket) => {
         return (
             (ticketType === 'all' || ticket.type.toLowerCase() === ticketType) &&
             (publishStatus === 'all' || (publishStatus === 'published' && ticket.isPublish) || (publishStatus === 'unpublished' && !ticket.isPublish)) &&
             (displayStatus === 'all' || (displayStatus === 'visible' && ticket.isDisplay) || (displayStatus === 'hidden' && !ticket.isDisplay)) &&
             (ticket.ticketTitle.toLowerCase().includes(search.toLowerCase()))
         );
-    });
+    }) || [];
 
     const paginatedTickets = useMemo(() => {
         const startIndex = (currentPage - 1) * itemsPerPage;
@@ -90,7 +111,7 @@ export default function TicketTable({ event }: PropType) {
                         </SelectContent>
                     </Select>
                     <Button
-                        onClick={() => router.push(`/organizer/events/tickets/${event?.id}`)}
+                        onClick={() => router.push(`/organizer/events/tickets/${id}`)}
                         className="bg-primary-color text-secondary-color-text rounded-[6px] hover:bg-primary-color/90 dark:text-secondary-color-text">
                         New Ticket
                     </Button>
@@ -111,7 +132,7 @@ export default function TicketTable({ event }: PropType) {
                         </TableHeader>
                         <TableBody>
                             {paginatedTickets.length > 0 ? (
-                                paginatedTickets.map((ticket) => (
+                                paginatedTickets.map((ticket: Ticket) => (
                                     <TableRow key={ticket.id}>
                                         <TableCell>{ticket.ticketTitle}</TableCell>
                                         <TableCell className={`text-sm md:text-md xl:text-lg`}>
@@ -131,7 +152,7 @@ export default function TicketTable({ event }: PropType) {
                                         <TableCell>{ticket.capacity}</TableCell>
                                         <TableCell className="text-green-600 font-bold text-lg">${ticket.price}</TableCell>
                                         <TableCell>
-                                            <TicketActionComponent id={ticket.id} isPublish={ticket.isPublish} isDisplay={ticket.isDisplay}/>
+                                            <TicketActionComponent id={ticket.id} isPublish={ticket.isPublish} isDisplay={ticket.isDisplay} />
                                         </TableCell>
                                     </TableRow>
                                 ))
@@ -142,7 +163,7 @@ export default function TicketTable({ event }: PropType) {
                                         className="h-20 text-center text-lg md:text-2xl xl:text-4xl"
                                     >
                                         <div className="flex w-full justify-center items-center">
-                                            <Image src="/no-data.png" alt="noData" width={50} height={50}/>
+                                            <Image src="/no-data.png" alt="noData" width={50} height={50} />
                                             <span>No results.</span>
                                         </div>
                                     </TableCell>

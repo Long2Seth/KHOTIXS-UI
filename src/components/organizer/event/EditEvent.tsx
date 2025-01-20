@@ -1,264 +1,268 @@
 'use client'
-
-import React, {useState} from "react"
-import {CalendarIcon} from 'lucide-react'
-import {Button} from "@/components/ui/button"
-import {Card, CardContent} from "@/components/ui/card"
-import {Input} from "@/components/ui/input"
-import {Label} from "@/components/ui/label"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-import {Textarea} from "@/components/ui/textarea"
-import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover"
-import {Calendar as CalendarComponent} from "@/components/ui/calendar"
-import {cn} from "@/lib/utils"
-import {format} from "date-fns"
+import React, { useState, useRef, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { LuUpload } from "react-icons/lu";
+import { z } from 'zod';
+import { useRouter } from "next/navigation";
 import Image from "next/image";
-import {useRouter} from "next/navigation";
+import { FormSectionComponent } from "@/components/organizer/event/component/FormSectionComponent";
+import { DatePickerComponent } from "@/components/organizer/event/component/DatePickerComponent";
+import { format } from "date-fns";
+import { EventType } from "@/lib/customer/event";
 
-export function EditEvent() {
-    const router = useRouter();
-    const [startDate, setStartDate] = useState<Date | undefined>()
-    const [endDate, setEndDate] = useState<Date | undefined>()
-    const [thumbnail, setThumbnail] = useState<string | null>(null)
-
-    const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0]
-        if (file) {
-            const reader = new FileReader()
-            reader.onloadend = () => {
-                setThumbnail(reader.result as string)
-            }
-            reader.readAsDataURL(file)
-        }
-    }
-
-    return (
-        <form className="space-y-8">
-            <Card>
-                <CardContent className=" w-full pt-6">
-                    <section className="w-full ">
-                        <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text uppercase m-5">
-                            Edit Event
-                        </h1>
-
-                        <section
-                            className=" w-full space-y-6 bg-white p-10 rounded-[6px] dark:backdrop-blur dark:bg-opacity-5 ">
-
-                            <section className="grid md:grid-cols-2 gap-4">
-
-                                <section className="space-y-2">
-                                    <Label
-                                        className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text"
-                                        htmlFor="title">
-                                        Event title
-                                        <span className="text-red-500">*</span>
-                                    </Label>
-                                    <Input
-                                        id="title"
-                                        placeholder="Enter event title"
-                                        className=" bg-white border-[1px] text-md md:text-lg border-light-border-color rounded-[6px] placeholder:text-gray-400  text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text"
-                                        required/>
-                                </section>
-
-                                <section className="space-y-2">
-                                    <Label
-                                        htmlFor="category"
-                                        className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">
-                                        Category
-                                    </Label>
-                                    <Select>
-                                        <SelectTrigger
-                                            className=" bg-white border-[1px] text-md md:text-lg border-light-border-color rounded-[6px] placeholder:text-gray-400  text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
-                                            <SelectValue placeholder="Select category"/>
-                                        </SelectTrigger>
-                                        <SelectContent
-                                            className=" bg-white border-[1px] text-md md:text-lg border-light-border-color rounded-[6px] placeholder:text-gray-400  text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
-                                            <SelectItem className=" dark:hover:text-primary-color-text"
-                                                        value="concert">Concert</SelectItem>
-                                            <SelectItem className=" dark:hover:text-primary-color-text"
-                                                        value="conference">Technology</SelectItem>
-                                            <SelectItem className=" dark:hover:text-primary-color-text"
-                                                        value="exhibition">Conferences</SelectItem>
-                                            <SelectItem className=" dark:hover:text-primary-color-text"
-                                                        value="exhibition">Sports</SelectItem>
-                                            <SelectItem className=" dark:hover:text-primary-color-text"
-                                                        value="exhibition">Community</SelectItem>
-                                            <SelectItem className=" dark:hover:text-primary-color-text"
-                                                        value="exhibition">General</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </section>
-                            </section>
-
-                            <section className="space-y-2">
-                                <Label
-                                    htmlFor="description"
-                                    className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">
-                                    Event Description
-                                </Label>
-                                <Textarea
-                                    id="description"
-                                    placeholder="Enter event description"
-                                    className=" bg-white border-[1px] focus:outline-none text-md md:text-lg border-light-border-color rounded-[6px] placeholder:text-gray-400  text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text"
-                                />
-                            </section>
-
-                            <section className="space-y-2">
-                                <Label
-                                    htmlFor="location"
-                                    className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">
-                                    Location
-                                    <span className="text-red-500">*</span>
-                                </Label>
-                                <Input
-                                    id="location"
-                                    placeholder="Enter location"
-                                    className=" bg-white border-[1px] text-md md:text-lg border-light-border-color rounded-[6px] placeholder:text-gray-400  text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text"
-                                    required/>
-                            </section>
-
-                            <section className="grid md:grid-cols-2 gap-4">
-                                <section className="space-y-2">
-                                    <Label
-                                        className="text-base font-medium text-primary-color-text dark:text-secondary-color-text">
-                                        Start Date
-                                        <span className="text-red-500">*</span>
-                                    </Label>
-                                    <Popover>
-                                        <PopoverTrigger asChild>
-                                            <Button
-                                                variant={"outline"}
-                                                className={cn(
-                                                    "w-full border border-light-border-color rounded-[6px] text-base md:text-lg py-[22px] justify-between text-left font-normal",
-                                                    !startDate && "text-muted-foreground"
-                                                )}
-                                            >
-                                                {startDate ? format(startDate, "PPP") :
-                                                    <span className=" text-light-border-color">
-                                                    Pick a start date
-                                                </span>
-                                                }
-                                                <CalendarIcon className="h-4 w-4"/>
-                                            </Button>
-                                        </PopoverTrigger>
-                                        <PopoverContent className="w-auto p-0 bg-gray-100 rounded-[6px]">
-                                            <CalendarComponent
-                                                className="bg-white dark:bg-khotixs-background-dark dark:text-secondary-color-text rounded-[6px]"
-                                                mode="single"
-                                                selected={startDate}
-                                                onSelect={setStartDate}
-                                                initialFocus
-                                            />
-                                        </PopoverContent>
-                                    </Popover>
-                                </section>
-
-
-                                <section className="space-y-2">
-                                    <Label
-                                        className="text-base font-medium text-primary-color-text dark:text-secondary-color-text">
-                                        End Date
-                                        <span className="text-red-500">*</span>
-                                    </Label>
-                                    <Popover>
-                                        <PopoverTrigger asChild>
-                                            <Button
-                                                variant={"outline"}
-                                                className={cn(
-                                                    "w-full border border-light-border-color placeholder:text-light-border-color rounded-[6px] text-base md:text-lg py-[22px] justify-between text-left font-normal",
-                                                    !endDate && "text-muted-foreground"
-                                                )}
-                                            >
-                                                {endDate ? format(endDate, "PPP") :
-                                                    <span className=" text-light-border-color">Pick an end date</span>}
-                                                <CalendarIcon className="h-4 w-4"/>
-                                            </Button>
-                                        </PopoverTrigger>
-                                        <PopoverContent className="w-auto p-0 bg-gray-100 rounded-[6px] ">
-                                            <CalendarComponent
-                                                className="bg-white dark:bg-khotixs-background-dark dark:text-secondary-color-text rounded-[6px]"
-                                                mode="single"
-                                                selected={endDate}
-                                                onSelect={setEndDate}
-                                                initialFocus
-                                            />
-                                        </PopoverContent>
-                                    </Popover>
-                                </section>
-                            </section>
-
-                            <section className="grid md:grid-cols-2 gap-4">
-                                <section className="space-y-2">
-                                    <Label
-                                        htmlFor="capacity"
-                                        className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">
-                                        Day Capacity
-                                    </Label>
-                                    <Input
-                                        id="capacity"
-                                        type="number"
-                                        className=" bg-white border-[1px] text-md md:text-lg border-light-border-color rounded-[6px] placeholder:text-gray-400  text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text"
-                                        min="1"/>
-                                    <p className="text-sm text-red-500">Day Capacity is 1 if you not set.</p>
-                                </section>
-
-                                <div className="space-y-4">
-                                    <section className="space-y-2">
-                                        <Label
-                                            htmlFor="thumbnail"
-                                            className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">
-                                            Upload Thumbnail
-                                        </Label>
-                                        <Input
-                                            className=" bg-white border-[1px] text-md md:text-lg border-light-border-color rounded-[6px] placeholder:text-gray-400  text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text"
-                                            id="thumbnail"
-                                            type="file"
-                                            accept="image/*"
-                                            onChange={handleThumbnailChange}
-                                        />
-                                        <p className="text-sm text-red-500">
-                                            Thumbnails are useful for your event view when you post it!
-                                        </p>
-                                    </section>
-
-                                    {thumbnail && (
-                                        <section className="space-y-2">
-                                            <Label>Thumbnail Preview</Label>
-                                            <div className="rounded-lg overflow-hidden border">
-                                                <Image
-                                                    width={400}
-                                                    height={200}
-                                                    src={thumbnail}
-                                                    alt="Thumbnail preview"
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            </div>
-                                        </section>
-                                    )}
-                                </div>
-                            </section>
-
-                            {/* action button */}
-                            <section className="flex justify-end gap-4 rounded-[6px] text-secondary-color-text">
-                                <Button onClick={() => router.push("/organizer/events/")}
-                                        className="bg-primary-color rounded-[6px] my-5 hover:bg-primary-color/90 px-8">Save</Button>
-                            </section>
-
-                        </section>
-                    </section>
-
-                </CardContent>
-
-
-            </Card>
-
-        </form>
-    )
+type Props = {
+    id: string;
 }
 
+const eventSchema = z.object({
+    eventTitle: z.string().min(1, "Event title is required"),
+    eventCategoryName: z.string().min(1, "Category is required"),
+    location: z.string().min(1, "Location is required"),
+    startedDate: z.string().min(1, "Start date is required"),
+    endedDate: z.string().min(1, "End date is required"),
+    description: z.string().optional(),
+    thumbnail: z.string().nullable(),
+});
+
+export function EditEvent({ id }: Props) {
+    const router = useRouter();
+    const [startedDate, setStartedDate] = useState<Date | undefined>();
+    const [endedDate, setEndedDate] = useState<Date | undefined>();
+    const [thumbnail, setThumbnail] = useState<string | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [errors, setErrors] = useState<Record<string, string>>({});
+    const [action, setAction] = useState<string>("");
+    const [eventData, setEventData] = useState<EventType>({
+        eventTitle: "",
+        eventCategoryName: "",
+        location: "",
+        startedDate: "",
+        endedDate: "",
+        description: "",
+        thumbnail: null,
+    });
+
+    const handleSectionClick = () => {
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
+    };
+
+    const getEventDate = async () => {
+        try {
+            const response = await fetch(`/event-ticket/api/v1/events/${id}`, {
+                method: 'GET'
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            setEventData(data);
+            setStartedDate(new Date(data.startedDate));
+            setEndedDate(new Date(data.endedDate));
+            setThumbnail(data.thumbnail);
+            console.log("Event data:", data);
+        } catch (error) {
+            console.error("Error fetching event data:", error);
+        }
+    };
+
+    useEffect(() => {
+        getEventDate();
+    }, [id]);
+
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch('/asset/api/v1/files', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                setThumbnail(data.uri);
+            } catch (error) {
+                console.error("Error uploading file:", error);
+            }
+        }
+    };
+
+    const calculateCapacity = (start: Date | undefined, end: Date | undefined): number => {
+        if (!start || !end) return 0;
+        const diffTime = Math.abs(end.getTime() - start.getTime());
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return diffDays;
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setEventData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const formatStartedDate = startedDate ? format(startedDate, "yyyy-MM-dd'T'HH:mm") : "";
+        const formatEndedDate = endedDate ? format(endedDate, "yyyy-MM-dd'T'HH:mm") : "";
+
+        const formData = {
+            ...eventData,
+            startedDate: formatStartedDate,
+            endedDate: formatEndedDate,
+            thumbnail,
+            capacity: calculateCapacity(startedDate, endedDate),
+        };
+
+        const result = eventSchema.safeParse(formData);
+        if (!result.success) {
+            const newErrors: Record<string, string> = {};
+            result.error.errors.forEach(error => {
+                if (error.path.length > 0) {
+                    newErrors[error.path[0] as string] = error.message;
+                }
+            });
+            setErrors(newErrors);
+            console.log("Validation Errors:", newErrors);
+        } else {
+            setErrors({});
+            try {
+                const response = await fetch(`/event-ticket/api/v1/events/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log("Form submitted successfully");
+
+                if (action === "save") {
+                    router.push("/organizer/events");
+                } else if (action === "saveAndContinue") {
+                    router.push(`/organizer/events/tickets/${data.uuid}`);
+                }
+            } catch (error) {
+                console.error("Error submitting form:", error);
+            }
+        }
+    };
+
+    return (
+        <form onSubmit={handleSubmit}
+              className=" bg-white rounded-[6px] p-10 dark:bg-khotixs-background-dark dark:border dark:border-dark-border-color mx-5 lg:mx-10">
+            <Card className=" w-full rounded-[6px]">
+                <CardContent className=" w-full rounded-[6px]">
+                    <section className="space-y-6">
+                        <p className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text">Edit
+                            Event</p>
+                        <section className="grid md:grid-cols-2 gap-4">
+                            <section className=" flex flex-col space-y-2 ">
+                                <FormSectionComponent
+                                    id="eventTitle"
+                                    name="eventTitle"
+                                    label="Event title"
+                                    placeholder="Enter event title"
+                                    error={errors.eventTitle}
+                                    required
+                                    defaultValue={eventData.eventTitle}
+                                    onChange={handleInputChange}
+                                />
+                                <FormSectionComponent
+                                    id="eventCategoryName"
+                                    name="eventCategoryName"
+                                    label="Category"
+                                    placeholder="Select category"
+                                    error={errors.eventCategoryName}
+                                    required
+                                    defaultValue={eventData.eventCategoryName}
+                                    onChange={handleInputChange}
+                                />
+                                <FormSectionComponent
+                                    id="location"
+                                    name="location"
+                                    label="Location"
+                                    placeholder="Enter location"
+                                    error={errors.location}
+                                    required
+                                    defaultValue={eventData.location}
+                                    onChange={handleInputChange}
+                                />
+                                <DatePickerComponent
+                                    label="Start Date"
+                                    date={startedDate}
+                                    setDate={setStartedDate}
+                                    error={errors.startedDate}
+                                    required
+                                />
+                                <DatePickerComponent
+                                    label="End Date"
+                                    date={endedDate}
+                                    setDate={setEndedDate}
+                                    error={errors.endedDate}
+                                    required
+                                />
+                                <FormSectionComponent
+                                    id="description"
+                                    name="description"
+                                    label="Event Description"
+                                    placeholder="Enter event description"
+                                    type="textarea"
+                                    error={errors.description}
+                                    defaultValue={eventData.description}
+                                    onChange={handleInputChange}
+                                />
+                            </section>
+                            <section className=" w-full pt-[30px]">
+                                <section className=" w-full h-full border-gray-400 border border-dashed rounded-[6px]"
+                                         onClick={handleSectionClick}>
+                                    <div className=" w-full h-full flex flex-col justify-center items-center ">
+                                        {thumbnail ? (
+                                            <Image unoptimized width={100} height={100} src={thumbnail} alt="Uploaded"
+                                                   className="h-full w-full object-cover rounded-[6px]"/>
+                                        ) : (
+                                            <>
+                                                <LuUpload className=" h-[50px] w-[50px] text-gray-400"/>
+                                                <p className=" text-gray-400">Drop file here or click to upload
+                                                    here </p>
+                                            </>
+                                        )}
+                                    </div>
+                                    <input type="file" ref={fileInputRef} style={{display: 'none'}}
+                                           onChange={handleFileChange}/>
+                                </section>
+                            </section>
+                        </section>
+                    </section>
+                </CardContent>
+            </Card>
+            <section className="flex flex-wrap justify-end gap-4 pt-6 ">
+                <Button onClick={() => router.push("/organizer/events")}
+                        className="border-red-600 text-red-500 rounded-[6px] hover:text-red-600 hover:bg-red-50 "
+                        variant="outline">
+                    Cancel
+                </Button>
+                <Button type="submit" onClick={() => setAction("save")}
+                        className="bg-primary-color border border-primary-color rounded-[6px] text-secondary-color-text hover:bg-primary-color/80 ">
+                    Save
+                </Button>
+            </section>
+        </form>
+    );
+}

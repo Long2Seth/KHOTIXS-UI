@@ -21,20 +21,10 @@ import { NavigationMenuDemo } from "@/components/customer/navbar/NavigationMenuD
 import SkeletonNavbarComponent from "@/components/customer/navbar/SkeletonNavbar";
 import { useRouter } from "next/navigation";
 import { UserProfileComponent } from "@/components/customer/navbar/UserProfileComponent";
-
-type UserProfile = {
-    id: string;
-    fullName: string;
-    gender: string;
-    dob: string;
-    phoneNumber: string;
-    address: string;
-    avatar: string;
-    status: number;
-    position: string;
-    email: string;
-    businessName: string;
-}
+import { FiBell } from "react-icons/fi";
+import { fetchNotifications } from "@/lib/customer/api";
+import { WebSocketService } from "@/lib/customer/websocket";
+import { UserProfile } from "@/lib/navbar/UserProfile";
 
 const NavbarComponent = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -45,6 +35,16 @@ const NavbarComponent = () => {
     const router = useRouter();
     const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
     const [dynamicMenuItems, setDynamicMenuItems] = useState<MenuType[]>(menuItems);
+    const route = useRouter();
+    const [notifications, setNotifications] = useState<any[]>([]);
+    const [unreadCount, setUnreadCount] = useState<number>(0);
+    const [lastCheckedTime, setLastCheckedTime] = useState<number>(0);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setLastCheckedTime(Number(localStorage.getItem('lastNotificationCheck') || '0'));
+        }
+    }, []);
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -56,6 +56,7 @@ const NavbarComponent = () => {
                 if (response.ok) {
                     const data = await response.json();
                     setUserProfile(data);
+                    console.log("Data user: ", data)
                 } else {
                     setUserProfile(null);
                 }
@@ -68,11 +69,62 @@ const NavbarComponent = () => {
     }, []);
 
     useEffect(() => {
+        const wsService = new WebSocketService('http://localhost:8891/ws');
+
+        wsService.onNotification((notification) => {
+            setNotifications((prev) => [notification, ...prev]);
+            const notificationTime = new Date(notification.createdAt).getTime();
+            if (notificationTime > lastCheckedTime) {
+                setUnreadCount((prev) => prev + 1);
+            }
+        });
+
+        wsService.connect();
+
+        const loadInitialNotifications = async () => {
+            try {
+                const initialNotifications = await fetchNotifications();
+                setNotifications(initialNotifications);
+
+                const newNotificationsCount = initialNotifications.filter(
+                    (notification) =>
+                        new Date(notification.createdAt).getTime() > lastCheckedTime &&
+                        !notification.read
+                ).length;
+
+                setUnreadCount(newNotificationsCount);
+            } catch (error) {
+                console.error('Failed to fetch notifications:', error);
+            }
+        };
+
+        loadInitialNotifications();
+
+        return () => {
+            wsService.disconnect();
+        };
+    }, [lastCheckedTime, userProfile]);
+
+    const handleNotificationClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        const currentTime = Date.now();
+        setLastCheckedTime(currentTime);
+        setUnreadCount(0);
+
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('lastNotificationCheck', currentTime.toString());
+        }
+
+        route.push('/notification');
+    };
+
+    useEffect(() => {
         if (userProfile) {
             setDynamicMenuItems(menuItems.filter(item => item.link !== '/oauth2/authorization/nextjs'));
         } else {
             setDynamicMenuItems(menuItems);
         }
+        console.log("DATA: ", userProfile)
     }, [userProfile]);
 
     useEffect(() => {
@@ -197,18 +249,36 @@ const NavbarComponent = () => {
                             </section>
 
                             <div className="justify-center items-center flex gap-2 lg:gap-4 ">
-                                {userProfile ? null : <ModeToggle />}
-                                <NavigationMenuDemo />
+                                {userProfile ? null : <ModeToggle/>}
+                                <NavigationMenuDemo/>
 
                                 <div className="flex items-center">
                                     {userProfile ? (
-                                        <UserProfileComponent data={userProfile} />
+                                        <>
+                                            <button
+                                                className="relative text-primary mx-8"
+                                                onClick={handleNotificationClick}
+                                            >
+                                                <FiBell className="h-7 w-7"/>
+                                                {unreadCount > 0 && (
+                                                    <span
+                                                        className="absolute -top-1 -right-1 flex h-4 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white"
+                                                    >
+            {unreadCount > 9 ? "9+" : unreadCount}
+          </span>
+                                                )}
+                                            </button>
+                                            <UserProfileComponent data={userProfile}/>
+                                        </>
                                     ) : (
-                                        <Button
-                                            onClick={() => router.push("/oauth2/authorization/nextjs")}
-                                            className=" hidden md:flex bg-primary-color lg:text-md xl:text-lg border-[1px] rounded-[5px] text-secondary-color-text font-[10px] hover:bg-primary-color border-primary-color hover:bg-primary-color/80">
-                                            Log In
-                                        </Button>
+                                        <>
+                                            <Button
+                                                onClick={() => router.push("/oauth2/authorization/nextjs")}
+                                                className="hidden md:flex bg-primary-color lg:text-md xl:text-lg border-[1px] rounded-[5px] text-secondary-color-text font-[10px] hover:bg-primary-color border-primary-color hover:bg-primary-color/80"
+                                            >
+                                                Log In
+                                            </Button>
+                                        </>
                                     )}
                                 </div>
                             </div>
@@ -222,7 +292,7 @@ const NavbarComponent = () => {
                         aria-expanded={isMenuOpen ? "true" : "false"}
                     >
                         <span className="sr-only">{isMenuOpen ? "Close main menu" : "Open main menu"}</span>
-                        {isMenuOpen ? <IoMdCloseCircle /> : <IoMenu />}
+                        {isMenuOpen ? <IoMdCloseCircle/> : <IoMenu/>}
                     </div>
                     <div
                         id="mega-menu-full"

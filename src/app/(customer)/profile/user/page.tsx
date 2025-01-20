@@ -1,5 +1,11 @@
-import Me from "src/components/customer/user_profile/Me";
+import ProfileComponent from "@/components/customer/User-Profile/Profile";
 
-export default function ProfilePage() {
-    return <Me />;
+
+export default async function ProfilePage() {
+
+    return (
+        <section>
+            <ProfileComponent />
+        </section>
+    );
 }

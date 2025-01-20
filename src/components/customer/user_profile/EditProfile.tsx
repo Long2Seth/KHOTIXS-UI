@@ -6,27 +6,15 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Camera } from "lucide-react";
 import Image from "next/image";
+import {Profile} from "@/lib/customer/userProfile";
 
-type ProfileType = {
-    fullName: string;
-    position: string;
-    address: string;
-    description: string;
-    gender: string;
-    dob: string;
-    email: string;
-    businessName: string;
-    avatar: string;
-    username: string;
-    phoneNumber: string;
-};
 
 type EditProfileProps = {
-    profile: ProfileType;
+    profile: Profile;
 };
 
 export default function EditProfile({ profile }: EditProfileProps) {
-    const [formData, setFormData] = useState<ProfileType>(profile);
+    const [formData, setFormData] = useState<Profile>(profile);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -36,7 +24,7 @@ export default function EditProfile({ profile }: EditProfileProps) {
 
     const handleSave = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/user-profile/api/v1/user-profiles/${formData.username}`, {
+            const response = await fetch(`/user-profile/api/v1/user-profiles/${formData.id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -221,7 +209,7 @@ export default function EditProfile({ profile }: EditProfileProps) {
                                 </Label>
                                 <textarea
                                     id="description"
-                                    value={formData.description}
+                                    value={formData.bio}
                                     onChange={handleInputChange}
                                     className="p-2 text-lg border border-gray-300 rounded-[6px] dark:border placeholder:text-gray-300 dark:border-white dark:text-secondary-color-text dark:bg-khotixs-background-dark"
                                 ></textarea>

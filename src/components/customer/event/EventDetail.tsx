@@ -64,10 +64,26 @@ export default function EventDetails({ event }: EventDetailsProps) {
         setTickets(prevTickets => {
             const updatedTickets = prevTickets.map(ticket => {
                 if (ticket.id === id) {
-                    const newQuantity = increment ? Math.min(ticket.quantity + 1, ticket.capacity) : Math.max(0, ticket.quantity - 1);
-                    const updatedTicket = { ...ticket, quantity: newQuantity };
+                    const newQuantity = increment 
+                    ? Math.min(ticket.quantity + 1, ticket.capacity) 
+                    : Math.max(0, ticket.quantity - 1);
 
-                    return updatedTicket;
+                    fetch('http://localhost:8084/api/v1/order-saga/reserve', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            userId: 'a48aaccf-ef41-41a1-a8fe-1f290ce20e02',
+                            ticketId: ticket.id,
+                            quantity: newQuantity,
+                        }),
+                    })
+                        .then(res => res.json())
+                        .then(data => console.log('API Response:', data))
+                        .catch(error => console.error('Error updating quantity:', error));
+    
+                    return { ...ticket, quantity: newQuantity };
                 }
                 return ticket;
             });
