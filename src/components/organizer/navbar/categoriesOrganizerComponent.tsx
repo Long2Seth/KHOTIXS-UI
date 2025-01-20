@@ -7,7 +7,7 @@ import {useRouter, usePathname} from "next/navigation";
 
 export default function CategoriesOrganizerComponent() {
     const pathname = usePathname();
-    const [activeItem, setActiveItem] = useState<string | null>(null); // Initialize state with a type that can handle both null and string
+    const [activeItem, setActiveItem] = useState<string | null>(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -27,7 +27,7 @@ export default function CategoriesOrganizerComponent() {
                                 className="flex flex-col items-center justify-center p-4 sm:p-6 cursor-pointer hover:text-primary-color"
                                 onClick={() => {
                                     router.push(item.link);
-                                    setActiveItem(item.label); // Use label for the state
+                                    setActiveItem(item.label);
                                 }}
                             >
                                 <item.icon

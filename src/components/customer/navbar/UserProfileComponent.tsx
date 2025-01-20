@@ -51,7 +51,7 @@ export function UserProfileComponent({data}: UserProfileProps) {
                     <DropdownMenuItem>
                         <ModeToggleAfterLogin/>
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => router.push(`/profile/user/${data.id}`)}>
+                    <DropdownMenuItem onClick={() => router.push(`/profile/user`)}>
                         <User/>
                         <span>Profile</span>
                     </DropdownMenuItem>

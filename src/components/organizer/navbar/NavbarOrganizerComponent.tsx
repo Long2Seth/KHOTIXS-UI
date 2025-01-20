@@ -7,12 +7,31 @@ import * as React from "react";
 import {navItems} from "@/lib/organizer/navData";
 import {useRouter, usePathname} from "next/navigation";
 import {OrganizerProfileComponent} from "@/components/organizer/profile/UserProfileComponent";
+import {useEffect, useState} from "react";
+import {Profile} from "@/lib/customer/userProfile";
 
 export default function NavbarOrganizerComponent() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [activeItem, setActiveItem] = React.useState<string | null>(null);
     const router = useRouter();
     const pathname = usePathname();
+    const [profile, setProfile] = useState<Profile | null>(null);
+
+    const getMeData = async () => {
+        await fetch('/user-profile/api/v1/user-profiles/me')
+            .then((response) => response.json())
+            .then((data) => {
+                setProfile(data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+
+    useEffect(() => {
+        getMeData();
+
+    }, []);
 
     React.useEffect(() => {
         const currentItem = navItems.find(item => item.link === pathname);
@@ -32,13 +51,14 @@ export default function NavbarOrganizerComponent() {
 
     return (
         <header className=" bg-white dark:bg-khotixs-background-dark dark:border-b-[1px] dark:border-gray-700 mb-5">
-            <section className=" container mx-auto w-full z-20 top-0 sticky py-[10px] dark:bg-khotixs-background-dark bg-white  ">
+            <section
+                className=" container mx-auto w-full z-20 top-0 sticky py-[10px] dark:bg-khotixs-background-dark bg-white  ">
                 <section className="flex items-center gap-2 md:gap-4 justify-between pr-[10px]">
                     <div className="flex flex-row justify-center items-center gap-2 md:gap-5 p-2  ">
-                        <OrganizerProfileComponent/>
+                        <OrganizerProfileComponent data={profile}/>
                         <div>
                             <p className="text-[10px] md:text-lg text-gray-500">WELCOME BACK, ORGANIZER</p>
-                            <h1 className="text-lg md:text-2xl font-bold uppercase">CHAN CHhAYA</h1>
+                            <h1 className="text-lg md:text-2xl font-bold uppercase">{profile?.username}</h1>
                         </div>
                     </div>
                     <ModeToggle/>

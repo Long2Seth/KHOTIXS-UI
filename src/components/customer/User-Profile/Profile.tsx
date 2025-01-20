@@ -13,18 +13,14 @@ import EditProfile from "@/components/customer/User-Profile/EditProfile";
 import {ProfileComponentSkeleton} from "@/components/customer/User-Profile/user/ProfileComponentSkeleton";
 import {Profile} from "@/lib/customer/userProfile";
 
-type PropType = {
-    id : string;
-}
 
-export default function ProfileComponent({id}: PropType) {
+export default function ProfileComponent() {
     const [profile, setProfile] = useState<Profile | null>(null);
-    console.log(" ID IN COMPONENT " , id)
 
     useEffect(() => {
         const fetchAdminProfile = async () => {
             try {
-                const response = await fetch(`/user-profile/api/v1/user-profiles/${id}`);
+                const response = await fetch(`/user-profile/api/v1/user-profiles/me`);
                 if (response.ok) {
                     const data: Profile = await response.json();
                     setProfile(data);
@@ -35,7 +31,7 @@ export default function ProfileComponent({id}: PropType) {
         };
 
         fetchAdminProfile();
-    }, [id]);
+    }, []);
 
     if (!profile) {
         return <div><ProfileComponentSkeleton/></div>;
