@@ -1,4 +1,4 @@
-import Payment from "@/components/customer/User-Profile/Payment";
+import Payment from "@/components/customer/user_profile/Payment";
 
 export default function Payments(){
     return (

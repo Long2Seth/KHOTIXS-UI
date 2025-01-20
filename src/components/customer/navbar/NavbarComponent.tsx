@@ -1,4 +1,5 @@
 'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
@@ -163,7 +164,8 @@ const NavbarComponent = () => {
                         <p className="  text-[10px] sm:text-sm lg:text-lg font-semibold flex items-center">Do you
                             organize events? </p>
                         <Button
-                            className="   text-[10px] sm:text-sm lg:text-lg font-semibold text-white hover:bg-primary-color bg-primary-color rounded-[5px] ">
+                            onClick={() => router.push("/merchant")}
+                            className="text-[10px] sm:text-sm lg:text-lg font-semibold text-white hover:bg-primary-color bg-primary-color rounded-[5px] ">
                             Become a Partner <span><FaArrowRightLong /></span>
                         </Button>
                     </section>
@@ -173,7 +175,7 @@ const NavbarComponent = () => {
                         <div className=" flex  justify-between h-14 items-center ">
                             <Link href="/" className="flex items-center">
                                 <Image className=" w-[40px] h-40px] lg:w-[50px] lg:h-[50px] xl:w-[60px] xl:h-[60px] "
-                                       width={80} height={80} src="/khotixs_logo.png" alt="Khotixs Logo" />
+                                    width={80} height={80} src="/khotixs_logo.png" alt="Khotixs Logo" />
                             </Link>
 
                             <section className="  rounded-[5px] flex justify-center drop-shadow-xl">

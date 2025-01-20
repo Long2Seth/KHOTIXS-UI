@@ -64,6 +64,10 @@ export default function EditProfile({ profile }: EditProfileProps) {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
             const reader = new FileReader();
+
+            console.log(file);
+
+
             reader.onloadend = () => {
                 setFormData((prevData) => ({ ...prevData, avatar: reader.result as string }));
             };

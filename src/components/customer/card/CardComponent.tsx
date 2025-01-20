@@ -46,8 +46,8 @@ export function CardComponent({event}: EventTypes) {
             onClick={() => router.push(`event/${event.id}`)}
             className="relative cursor-pointer bg-white dark:bg-backdrop-blur dark:bg-opacity-5 rounded-[6px] flex flex-col justify-start items-start max-w-[300px] sm:max-w-[300px] md:max-w-[330px] md:h-[340px] xl:max-w-[400px] xl:h-[450px] h-[240px] sm:h-[250px] 2xl:max-w-[450px] md:p-0">
 
-            <a className="group block overflow-hidden rounded-[6px]">
-                <div className=" z-10 rounded-t-[6px] w-full h-[50%] overflow-hidden">
+            <a className="group block overflow-hidden rounded-[10px]">
+                <div className="rounded-tr-[10px] z-10 object-cover rounded-tl-[10px] w-full h-[58%] 2xl:h-[50%] md:h-[50%] overflow-hidden">
                     <Image
                         width={100}
                         height={100}
@@ -76,7 +76,7 @@ export function CardComponent({event}: EventTypes) {
                         </div>
                     </div>
                 </section>
-                <div className="absolute bottom-2 right-0">
+                <div className="absolute bottom-2 right-1">
                     {
                         event.tickets
                             .map((ticket, index) => (
