@@ -27,7 +27,7 @@ import {
 import {router} from "next/client";
 import {CgProfile} from "react-icons/cg";
 import React, { useState,useEffect } from "react";
-import {ProfileSkeleton} from "@/components/customer/User-Profile/ProfileSkeleton";
+import {ProfileComponentSkeleton} from "@/components/customer/User-Profile/ProfileComponentSkeleton";
 
 export default function Setting () {
     const [activeTab, setActiveTab] = useState("account");
@@ -43,14 +43,14 @@ export default function Setting () {
     return (
         <>
         {
-            isLoading ? <ProfileSkeleton/> :
+            isLoading ? <ProfileComponentSkeleton/> :
             <section className="container mx-auto mt-7 px-4 sm:px-6 lg:px-8">
 
         {/*List all tab have 4*/}
         <div className="w-full mx-auto h-auto flex justify-center items-center mb-5">
             <div className="rounded-lg w-full max-w-[1200px] flex flex-wrap justify-center gap-y-4">
                 <Link
-                    href="/user-profile/ticket"
+                    href="/(customer)/profile/ticket"
                     className="flex justify-center items-center w-[48%] sm:w-[45%] md:w-[22%] lg:w-[22%] h-[60px] rounded-lg shadow-sm"
                 >
                     <div
@@ -63,7 +63,7 @@ export default function Setting () {
                 </Link>
 
                 <Link
-                    href="/user-profile/payment"
+                    href="/(customer)/profile/payment"
                     className="flex justify-center items-center w-[48%] sm:w-[45%] md:w-[22%] lg:w-[22%] h-[60px] rounded-lg shadow-sm"
                 >
                     <div
@@ -76,7 +76,7 @@ export default function Setting () {
                 </Link>
 
                 <Link
-                    href="/user-profile/profile"
+                    href="/(customer)/profile/profile"
                     className="flex justify-center items-center w-[48%] sm:w-[45%] md:w-[22%] lg:w-[22%] h-[60px] rounded-lg shadow-sm"
                 >
                     <div
@@ -89,7 +89,7 @@ export default function Setting () {
                 </Link>
 
                 <Link
-                    href="/user-profile/setting"
+                    href="/(customer)/profile/setting"
                     className="flex justify-center items-center w-[48%] sm:w-[45%] md:w-[22%] lg:w-[22%] h-[60px] rounded-lg shadow-sm"
                 >
                     <div

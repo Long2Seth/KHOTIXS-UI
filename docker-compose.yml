@@ -1,10 +1,10 @@
 services:
-  khotixs_webplatform_ui:
-    image: khotixs_webplatform_ui:1.0
+  khotixs-webplatform-ui:
+    image: khotixs-webplatform-ui:1.0
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: khotixs_webplatform_ui
+    container_name: khotixs-webplatform-ui
     ports:
       - "3001:3001"
     restart: always
@@ -13,7 +13,8 @@ services:
       - PORT=3001
       - GENERATE_SOURCEMAP=false
     networks:
-      - khotixs_network
+      - khotixs-network
 
 networks:
-  khotixs_network:
+  khotixs-network:
+    external: true

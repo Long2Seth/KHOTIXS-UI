@@ -1,58 +1,60 @@
 'use client';
+
 import * as React from "react";
 import {HiOutlineLocationMarker} from "react-icons/hi";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
+import {Badge} from "@/components/ui/badge";
+import {EventType} from "@/lib/customer/event";
 
 
-type CardUpcomingProps = {
-    event: {
-        image: string;
-        date: string;
-        title: string;
-        location: string;
-        price: number;
-        labelType: string;
-        eventType: string;
-    };
+enum TicketType {
+    VIP = 'VIP',
+    REGULAR = 'REGULAR',
+    PREMIUM = 'PREMIUM',
+    FREE = 'FREE'
+}
+type EventTypes = {
+    event:EventType
 }
 
-export function CardComponent({event}: CardUpcomingProps) {
-    const date = new Date(event.date);
+export function CardComponent({event}: EventTypes) {
+    const date = new Date(event.startedDate);
     const month = date.toLocaleString('default', {month: 'short'});
     const day = String(date.getDate()).padStart(2, '0');
     const router = useRouter();
 
 
-    const getLabelClass = (labelType: string) => {
-        switch (labelType.toLowerCase()) {
-            case 'free':
-                return 'bg-label-free';
-            case 'vip':
+    const getLabelClass = (tickets: TicketType) => {
+        switch (tickets) {
+            case TicketType.VIP:
                 return 'bg-label-vip';
-            case 'regular':
-                return 'bg-label-regular';
-            case 'premium':
+            case TicketType.PREMIUM:
                 return 'bg-label-premium';
+            case TicketType.REGULAR:
+                return 'bg-label-regular';
+            case TicketType.FREE:
+                return 'bg-label-free';
             default:
-                return '';
+                return 'bg-label-free';
         }
     };
 
+
     return (
         <section
-            onClick={() => router.push(`/event`)}
-            className="relative cursor-pointer bg-white rounded-[10px] flex flex-col justify-start items-start h-[215px] max-w-[200px] sm:h-[215px] md:max-w-[330px] md:h-[340px] xl:max-w-[400px] xl:h-[450px] 2xl:max-w-[450px] dark:bg-secondary-color md:p-0">
+            onClick={() => router.push(`event/${event.id}`)}
+            className="relative cursor-pointer bg-white dark:bg-backdrop-blur dark:bg-opacity-5 rounded-[6px] flex flex-col justify-start items-start max-w-[300px] sm:max-w-[300px] md:max-w-[330px] md:h-[340px] xl:max-w-[400px] xl:h-[450px] h-[240px] sm:h-[250px] 2xl:max-w-[450px] md:p-0">
 
-            <a className="group block overflow-hidden rounded-[10px]">
-                <div className="rounded-tr-[10px] z-10 rounded-tl-[10px] w-full h-[50%] overflow-hidden">
+            <a className="group block overflow-hidden rounded-[6px]">
+                <div className=" z-10 rounded-t-[6px] w-full h-[50%] overflow-hidden">
                     <Image
                         width={100}
                         height={100}
                         unoptimized
-                        src={`${event.image}`}
+                        src={`${event.thumbnail}`}
                         alt=""
-                        className="z-10 rounded-tr-[10px] rounded-tl-[10px] w-full bg-cover bg-center transform transition-transform duration-300 group-hover:scale-110"
+                        className="z-10 rounded-t-[6px] w-full h-full bg-cover bg-center transform transition-transform duration-300 group-hover:scale-110"
                     />
                 </div>
                 <section
@@ -66,7 +68,7 @@ export function CardComponent({event}: CardUpcomingProps) {
                         <hr className="w-[40px] md:w-[70px] lg:w-[70px] xl:w-[70px] rotate-90 bg-black"/>
                     </div>
                     <div className="h-auto w-full my-2">
-                        <p className="text-title-color text-[10px] md:text-lg xl:text-xl font-bold line-clamp-3 uppercase dark:text-secondary-color-text">{event.title}</p>
+                        <p className="text-title-color text-[10px] md:text-lg xl:text-xl font-bold line-clamp-3 uppercase dark:text-secondary-color-text">{event.eventTitle}</p>
                         <div className="flex relative xl:my-[10px]">
                             <HiOutlineLocationMarker
                                 className="absolute top-[-5px] text-description-color my-2 w-[10px] h-[10px] md:w-[18px] md:h-[18px] lg:top-[-8px] lg:w-[20px] lg:h-[20px] xl:top-[-9px] xl:w-[25px] xl:h-[25px] dark:text-dark-description-color"/>
@@ -74,10 +76,18 @@ export function CardComponent({event}: CardUpcomingProps) {
                         </div>
                     </div>
                 </section>
-                <button
-                    className={`absolute bottom-0 right-0 min-w-[60px] text-white text-sm md:text-base xl:text-lg md:text-md lg:text-lg md:p-[2px] lg:p-1 xl:px-3 xl:py-2 rounded-br-[5px] rounded-l-[5px] ${getLabelClass(event.labelType)}`}>
-                    {event.labelType.toLowerCase() === 'free' ? 'FREE' : `$${event.price}`}
-                </button>
+                <div className="absolute bottom-2 right-0">
+                    {
+                        event.tickets
+                            .map((ticket, index) => (
+                                <Badge
+                                    key={index}
+                                    className={`dark:text-black text-white rounded-[6px] mx-2 ${getLabelClass(ticket.type as TicketType)}`}>
+                                    <span> {ticket.type === TicketType.FREE ? "FREE" : `$${ticket.price}`}</span>
+                                </Badge>
+                            ))
+                    }
+                </div>
             </a>
         </section>
     );

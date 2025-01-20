@@ -1,6 +1,6 @@
 // import {CreateEventForm} from "@/components/organizer/FormCreateEvent";
 import React from "react";
-import EventComponent from "@/components/event/EventComponent";
+import {EventComponent} from "@/components/organizer/event/data-table";
 
 export default function EventPage() {
     return (

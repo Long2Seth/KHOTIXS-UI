@@ -1,5 +1,5 @@
 import React from 'react';
-import {CreateEventForm} from "@/components/organizer/FormCreateEvent";
+import {CreateEventForm} from "@/components/organizer/event/FormCreateEvent";
 
 const Page = () => {
     return (

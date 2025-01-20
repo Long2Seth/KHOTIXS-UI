@@ -63,10 +63,12 @@ export default {
     			'dark-description-color': '#E5E7EB',
     			'light-border-color': '#D1D5DB',
     			'dark-border-color': '#ffffff',
+
     			'label-vip': '#D8AC0E',
     			'label-premium': '#5521B5',
     			'label-regular': '#FFA500',
     			'label-free': '#0EB638',
+
     			'label-paid': '#B3261E',
     			'label-published': '#006FEE',
     			'label-text-secondary': '#000000',

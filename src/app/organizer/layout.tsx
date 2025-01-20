@@ -2,9 +2,9 @@ import type {Metadata} from "next";
 import "../globals.css";
 import {ThemeProvider} from "next-themes";
 import {Toaster} from "@/components/ui/toaster";
-import FooterOrganizer from "@/components/organizer/FooterOrganizer";
-import NavbarOrganizerComponent from "@/components/organizer/NavbarOrganizerComponent";
-import CategoriesOrganizerComponent from "@/components/organizer/categoriesOrganizerComponent";
+import FooterOrganizer from "@/components/organizer/navbar/FooterOrganizer";
+import NavbarOrganizerComponent from "@/components/organizer/navbar/NavbarOrganizerComponent";
+import CategoriesOrganizerComponent from "@/components/organizer/navbar/categoriesOrganizerComponent";
 import React from "react";
 
 

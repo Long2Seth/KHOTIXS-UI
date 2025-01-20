@@ -1,44 +1,48 @@
-'use client';
+'use client'
+import React, { useState, useEffect } from 'react';
+import EventDetailsSkeleton from "@/components/customer/event/EventDetailsSkeleton";
+import EventDetails from "@/components/customer/event/EventDetail";
+import { EventType } from "@/lib/customer/event";
 
-import {eventData} from "@/lib/customer/upcomingData";
-import {CardComponent} from "@/components/customer/card/CardComponent";
-import {useParams} from 'next/navigation';
-import {useEffect, useState} from "react";
-import SkeletonEventByCategory from "@/components/customer/card/SkeletonEventByCategory";
+type Props = {
+    params: Promise<{
+        id: string
+    }>;
+    searchParams: Promise<{
+        [key: string]: string | string[] | undefined
+    }>;
+};
 
-export default function EventByCategory() {
-    const params = useParams();
-    const id = params.id as string;
+const getData = async (id: string) => {
+    const res = await fetch(`/event-ticket/api/v1/events/${id}`);
+    const data = await res.json();
+    console.log(data);
+    return data;
+};
+
+export default function EventPage(props: Props) {
     const [isLoading, setIsLoading] = useState(true);
+    const [event, setEvent] = useState<EventType | null>(null);
+    const [params, setParams] = useState<{ id: string } | null>(null);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 2000);
-        return () => clearTimeout(timer);
-    }, []);
+        const unwrapParams = async () => {
+            const resolvedParams = await props.params;
+            setParams(resolvedParams);
+        };
+        unwrapParams();
+    }, [props.params]);
 
-    const filteredEvents = eventData.filter(event => event.eventType.toLowerCase() === id.toLowerCase());
+    useEffect(() => {
+        if (params) {
+            const fetchData = async () => {
+                const data = await getData(params.id);
+                setEvent(data);
+                setIsLoading(false);
+            };
+            fetchData();
+        }
+    }, [params]);
 
-    return (
-        <>
-            {
-                isLoading ? <SkeletonEventByCategory/> :
-                    <section
-                        className="container mx-auto w-full bg-khotixs-background-white dark:bg-khotixs-background-dark flex flex-col justify-center items-start h-auto space-y-[30px] md:space-y-[50px] xl:space-y-[70px] mb-[30px] md:mb-50px] xl:mb-[70px] ">
-                        <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text uppercase  ">
-                            {id} Events
-                        </h1>
-                        <section
-                            className="h-auto grid gap-2 grid-cols-2 max-w-[600px] sm:w-full sm:grid-cols-3 md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center px-[30px] sm:p-0 lg:px-[30px]">
-                            {filteredEvents.map((event, index) => (
-                                <CardComponent key={index} event={event}/>
-                            ))}
-                        </section>
-                    </section>
-            }
-        </>
-
-    )
-        ;
+    return isLoading ? <EventDetailsSkeleton /> : <EventDetails event={event} />;
 }
