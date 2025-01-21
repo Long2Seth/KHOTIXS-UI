@@ -14,7 +14,7 @@ export default function PayNow(){
             </section>
 
             {/* Section Payment Details */}
-            <section className={`container mx-auto px-[20px] lg:px-[135px] py-[50px] flex flex-col justify-center items-center gap-[40px]`}>
+            <section className={`container  mx-auto px-[20px] lg:px-[135px] py-[50px] flex flex-col justify-center items-center gap-[40px]`}>
                 <StepperComponent />
                 <PayNowComponent/>
             </section>

@@ -15,6 +15,9 @@ import {
 } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
+import {useUser} from "@/lib/customer/notification/notification";
+import {useUserContext} from "@/context/UserContext";
+
 
 // Form schema
 export const formSchema = z.object({
@@ -29,7 +32,7 @@ export const formSchema = z.object({
 export default function OrderInfoRequirementFormComponent() {
     const router = useRouter();
     const { toast } = useToast();
-
+     const { setUser} = useUserContext()
     const requiredStyle = "text-red-500";
     const msgStyle = "italic";
 
@@ -44,10 +47,13 @@ export default function OrderInfoRequirementFormComponent() {
 
     const onSubmit = (values: z.infer<typeof formSchema>) => {
         if (values.fullName && values.email && values.phoneNumber) {
+            setUser(values)
             toast?.({
                 title: "Success!",
                 description: "Your information has been submitted successfully!",
             });
+
+
 
             setTimeout(() => {
                 router.push("/payment-details");

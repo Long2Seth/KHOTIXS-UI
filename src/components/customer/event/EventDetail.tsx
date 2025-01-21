@@ -24,6 +24,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { EventType } from "@/lib/customer/event";
 import { useState, useEffect } from "react";
+import {useTicket} from "@/context/TicketContext";
 
 type TicketType = {
     id: string
@@ -45,7 +46,7 @@ type EventDetailsProps = {
 };
 
 export default function EventDetails({ event }: EventDetailsProps) {
-
+    const { setTicket} = useTicket();
     const router = useRouter()
     const [tickets, setTickets] = useState<TicketType[]>(event?.tickets?.map(ticket => ({
         ...ticket,
@@ -58,6 +59,8 @@ export default function EventDetails({ event }: EventDetailsProps) {
         dd: '',
         yyyy: ''
     })) || [])
+
+
 
     const updateQuantity = (id: string, increment: boolean) => {
         // Use functional update to get the latest state
@@ -94,15 +97,19 @@ export default function EventDetails({ event }: EventDetailsProps) {
 
     useEffect(() => {
         const handlePlaceOrder = () => {
-            const getTickets = tickets.filter(ticket => ticket.quantity > 0)
+            const getTickets = tickets.filter(ticket => ticket.quantity > 0);
 
-            const userId: string = 'a48aaccf-ef41-41a1-a8fe-1f290ce20e02'
+            const userId: string = 'a48aaccf-ef41-41a1-a8fe-1f290ce20e02';
 
             const reserveTickets = getTickets.map(ticket => ({
                 userId: userId,
                 ticketId: ticket.id,
                 quantity: ticket.quantity,
-            }))
+                name: ticket.name,
+            }));
+
+            // Set the reserveTickets state to the calculated value
+
 
             fetch('http://localhost:8084/api/v1/order-saga/reserve', {
                 method: 'POST',
@@ -114,15 +121,25 @@ export default function EventDetails({ event }: EventDetailsProps) {
                 .then(res => res.json())
                 .then(data => console.log(data))
                 .catch(error => console.log('Error placing order:', error))
+        };
 
-            console.log(reserveTickets)
-        }
-
-        handlePlaceOrder()
+        handlePlaceOrder();
     }, [tickets]);
 
 
     const total = tickets.reduce((sum: number, ticket: TicketType) => sum + (ticket.price * ticket.quantity), 0)
+
+
+    // console.log("total before context", reserveTickets)
+    // console.log("total before context ", total)
+    //
+    // console.log("total after set into context", ticket.reserveTickets)
+    // console.log("ticket after set into context ", ticket.total)
+
+    const handleTicketData = () => {
+        setTicket({reserveTickets: tickets, total: total});
+        router.push('/order-info-requirement')
+    }
 
     return (
         <main className={`w-full container mx-auto px-5 lg:px-10 `}>
@@ -279,7 +296,7 @@ export default function EventDetails({ event }: EventDetailsProps) {
                                     <div className="flex items-center justify-between border p-4 pl-6 rounded-[8px]">
                                         <span className="text-label-paid text-lg md:text-2xl xl:text-4xl font-bold">${total.toFixed(2)}</span>
                                         <Button
-                                            onClick={() => router.push('/order-info-requirement')}
+                                            onClick={() => {handleTicketData()}}
                                             className="bg-primary-color hover:bg-primary-color hover:bg-opacity-85 text-label-text-primary rounded-[6px] h-[45px] font-bold">
                                             Place Order <RiArrowRightLine />
                                         </Button>

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import '../globals.css';
 import {ThemeWrapper} from "@/components/ThemeWrapper";
+import {TicketProvider} from "@/context/TicketContext";
+import {UserProvider} from "@/context/UserContext";
+import {QRProvider} from "@/context/QRContext";
 
 export const metadata: Metadata = {
     title: {
@@ -20,7 +23,14 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
             <body className=" bg-khotixs-background-white dark:bg-khotixs-background-dark ">
                 <ThemeWrapper>
-                {children}
+                    <TicketProvider>
+                        <UserProvider>
+                            <QRProvider>
+                            {children}
+                            </QRProvider>
+                        </UserProvider>
+                    </TicketProvider>
+
                 </ThemeWrapper>
             </body>
         </html>
