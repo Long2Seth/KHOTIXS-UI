@@ -1,27 +1,50 @@
-'use client'
-import React, { useState, useEffect } from 'react';
-import EventDetailsSkeleton from "@/components/customer/event/EventDetailsSkeleton";
+
+// import EventDetailsSkeleton from "@/components/customer/event/EventDetailsSkeleton";
 import EventDetails from "@/components/customer/event/EventDetail";
-import { EventType } from "@/lib/customer/event";
+// import { EventType } from "@/lib/customer/event";
 
 type Props = {
     params: Promise<{
         id: string
     }>;
-    searchParams: Promise<{
-        [key: string]: string | string[] | undefined
-    }>;
+    // searchParams: { [key: string]: string | string[] | undefined };
 };
 
-const getData = async (id: string) => {
-    const res = await fetch(`/event-ticket/api/v1/events/${id}`);
-    const data = await res.json();
-    console.log(data);
-    return data;
-};
+// const getData = async (id: string) => {
+//     const res = await fetch(`/event-ticket/api/v1/events/${id}`);
+//     const data = await res.json();
+//     return data;
+// };
+//
+// async function generateMetadata(
+//     { params, searchParams }: Props,
+//     parent: ResolvingMetadata
+// ): Promise<Metadata> {
+//     // read route params
+//     const id = params.id;
+//
+//     // fetch data
+//     const product = await fetch(`/event-ticket/api/v1/events/${id}`).then((res) => res.json());
+//
+//     // optionally access and extend (rather than replace) parent metadata
+//     // const previousImages = (await parent).openGraph?.images || [];
+//
+//     return {
+//         title: product.title,
+//         description: product.description,
+//
+//         openGraph: {
+//             images: [product.image],
+//         },
+//     };
+// }
+//
 
-export default function EventPage(props: Props) {
-    const [isLoading, setIsLoading] = useState(true);
+export default async function EventPage(props: Props) {
+
+    const {id} = await props.params;
+
+    /*const [isLoading, setIsLoading] = useState(true);
     const [event, setEvent] = useState<EventType | null>(null);
     const [params, setParams] = useState<{ id: string } | null>(null);
 
@@ -42,7 +65,7 @@ export default function EventPage(props: Props) {
             };
             fetchData();
         }
-    }, [params]);
+    }, [params]);*/
 
-    return isLoading ? <EventDetailsSkeleton /> : <EventDetails event={event} />;
+    return  <EventDetails id={id} />;
 }

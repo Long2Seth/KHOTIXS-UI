@@ -68,7 +68,7 @@
 
 import SockJS from 'sockjs-client';
 import {Client} from '@stomp/stompjs';
-import {fetchNotifications} from '@/lib/customer/api';
+// import {fetchNotifications} from '@/lib/customer/api';
 import type {Notification} from '@/type/notification';
 
 export class WebSocketService {
@@ -95,16 +95,16 @@ export class WebSocketService {
         });
     }
 
-    async fetchInitialNotifications(order: 'asc' | 'desc' = 'desc'): Promise<Notification[]> {
-        const notifications = await fetchNotifications();
-        return notifications.sort((a, b) => {
-            if (order === 'asc') {
-                return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
-            } else {
-                return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-            }
-        });
-    }
+    // async fetchInitialNotifications(order: 'asc' | 'desc' = 'desc'): Promise<Notification[]> {
+    //     // const notifications = await fetchNotifications();
+    //     return notifications.sort((a, b) => {
+    //         if (order === 'asc') {
+    //             return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+    //         } else {
+    //             return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    //         }
+    //     });
+    // }
 
     connect(): void {
         this.client.activate();

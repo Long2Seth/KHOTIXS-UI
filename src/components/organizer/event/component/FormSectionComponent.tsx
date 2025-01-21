@@ -1,31 +1,36 @@
-import React from 'react';
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-
 type FormSectionProps = {
     id: string;
+    name: string;
     label: string;
     placeholder: string;
-    type?: 'input' | 'textarea';
-    error?: string;
+    error: string;
     required?: boolean;
-    defaultValue?: string;
+    defaultValue: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
 };
 
-export const FormSectionComponent: React.FC<FormSectionProps> = ({ id, label, placeholder, type = 'input', error, required = false , defaultValue}) => (
-    <section className="space-y-2">
-        <Label className="text-base font-medium text-primary-color-text dark:text-secondary-color-text" htmlFor={id}>
-            {label}
-            {required && <span className="text-red-500">*</span>}
-        </Label>
-        {type === 'input' ? (
-            <Input id={id} name={id} placeholder={placeholder} defaultValue={defaultValue}
-                   className="p-2 text-lg border-light-border-color rounded-[6px] dark:border placeholder:text-gray-300 dark:border-white dark:text-secondary-color-text dark:bg-khotixs-background-dark"/>
-        ) : (
-            <Textarea id={id} name={id} placeholder={placeholder} defaultValue={defaultValue}
-                      className="min-h-[100px] border border-light-border-color rounded-[6px] text-base md:text-lg placeholder:text-light-border-color focus:outline-none"/>
-        )}
-        {error && <p className="text-red-500">{error}</p>}
-    </section>
-);
+export function FormSectionComponent({
+                                         id,
+                                         name,
+                                         label,
+                                         placeholder,
+                                         error,
+                                         required,
+                                         defaultValue,
+                                         onChange,
+                                     }: FormSectionProps) {
+    return (
+        <div>
+            <label htmlFor={id}>{label}</label>
+            <input
+                id={id}
+                name={name}
+                placeholder={placeholder}
+                required={required}
+                defaultValue={defaultValue}
+                onChange={onChange}
+            />
+            {error && <span>{error}</span>}
+        </div>
+    );
+}

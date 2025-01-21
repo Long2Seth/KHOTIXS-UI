@@ -40,10 +40,9 @@ export function CardComponent({event}: EventTypes) {
         }
     };
 
-
     return (
         <section
-            onClick={() => router.push(`event/${event.id}`)}
+            onClick={() => router.push(`/event/${event.id}`)}
             className="relative cursor-pointer bg-white dark:bg-backdrop-blur dark:bg-opacity-5 rounded-[6px] flex flex-col justify-start items-start max-w-[300px] sm:max-w-[300px] md:max-w-[330px] md:h-[340px] xl:max-w-[400px] xl:h-[450px] h-[240px] sm:h-[250px] 2xl:max-w-[450px] md:p-0">
 
             <a className="group block overflow-hidden rounded-[6px]">

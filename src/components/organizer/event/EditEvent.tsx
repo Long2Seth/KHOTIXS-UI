@@ -17,7 +17,7 @@ type Props = {
 
 const eventSchema = z.object({
     eventTitle: z.string().min(1, "Event title is required"),
-    eventCategoryName: z.string().min(1, "Category is required"),
+    eventCategory: z.string().min(1, "Category is required"),
     location: z.string().min(1, "Location is required"),
     startedDate: z.string().min(1, "Start date is required"),
     endedDate: z.string().min(1, "End date is required"),
@@ -34,13 +34,17 @@ export function EditEvent({ id }: Props) {
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [action, setAction] = useState<string>("");
     const [eventData, setEventData] = useState<EventType>({
+        id: "",
         eventTitle: "",
-        eventCategoryName: "",
+        eventCategory: "",
         location: "",
         startedDate: "",
         endedDate: "",
         description: "",
-        thumbnail: null,
+        thumbnail: "",
+        capacity: 0,
+        isPublish: "",
+        tickets: [],
     });
 
     const handleSectionClick = () => {
@@ -191,7 +195,7 @@ export function EditEvent({ id }: Props) {
                                     placeholder="Select category"
                                     error={errors.eventCategoryName}
                                     required
-                                    defaultValue={eventData.eventCategoryName}
+                                    defaultValue={eventData.eventCategory}
                                     onChange={handleInputChange}
                                 />
                                 <FormSectionComponent
@@ -223,7 +227,7 @@ export function EditEvent({ id }: Props) {
                                     name="description"
                                     label="Event Description"
                                     placeholder="Enter event description"
-                                    type="textarea"
+                                    // type="textarea"
                                     error={errors.description}
                                     defaultValue={eventData.description}
                                     onChange={handleInputChange}

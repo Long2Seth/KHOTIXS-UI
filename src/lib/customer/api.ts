@@ -75,29 +75,29 @@
 //
 //
 
-import type { Notification } from '@/type/notification';
-
-const API_BASE_URL = 'http://localhost:8891/api/v1';
-
-export const fetchNotifications = async (): Promise<Notification[]> => {
-    const response = await fetch(`${API_BASE_URL}/notifications/event-public`);
-    if (!response.ok) {
-        throw new Error(`Error fetching notifications: ${response.statusText}`);
-    }
-    return response.json();
-};
-
-export const markAsRead = async (id: string, status: boolean): Promise<void> => {
-    await fetch(`${API_BASE_URL}/notifications/${id}/status?read=${status}`, {
-        method: 'PUT',
-    });
-};
-
-export const removeNotification = async (id: string): Promise<void> => {
-    await fetch(`${API_BASE_URL}/notifications/${id}`, {
-        method: 'DELETE',
-    });
-};
+// import type { Notification } from '@/type/notification';
+//
+// const API_BASE_URL = '/api/v1';
+//
+// export const fetchNotifications = async (): Promise<Notification[]> => {
+//     const response = await fetch(`${API_BASE_URL}/notifications/event-public`);
+//     if (!response.ok) {
+//         throw new Error(`Error fetching notifications: ${response.statusText}`);
+//     }
+//     return response.json();
+// };
+//
+// export const markAsRead = async (id: string, status: boolean): Promise<void> => {
+//     await fetch(`${API_BASE_URL}/notifications/${id}/status?read=${status}`, {
+//         method: 'PUT',
+//     });
+// };
+//
+// export const removeNotification = async (id: string): Promise<void> => {
+//     await fetch(`${API_BASE_URL}/notifications/${id}`, {
+//         method: 'DELETE',
+//     });
+// };
 
 // import { Notification } from '@/types/notification';
 //

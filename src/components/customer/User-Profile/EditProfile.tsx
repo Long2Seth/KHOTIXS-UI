@@ -22,6 +22,30 @@ export default function EditProfile({ profile }: EditProfileProps) {
         setFormData((prevData) => ({ ...prevData, [id]: value }));
     };
 
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch('http://localhost:8000/asset/api/v1/files', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                setFormData((prevData) => ({ ...prevData, avatar: data.uri }));
+            } catch (error) {
+                console.error("Error uploading file:", error);
+            }
+        }
+    };
+
     const handleSave = async () => {
         try {
             const response = await fetch(`/user-profile/api/v1/user-profiles/${formData.id}`, {
@@ -58,17 +82,6 @@ export default function EditProfile({ profile }: EditProfileProps) {
 
     const handleImageClick = () => {
         fileInputRef.current?.click();
-    };
-
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files.length > 0) {
-            const file = e.target.files[0];
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setFormData((prevData) => ({ ...prevData, avatar: reader.result as string }));
-            };
-            reader.readAsDataURL(file);
-        }
     };
 
     return (
@@ -117,7 +130,7 @@ export default function EditProfile({ profile }: EditProfileProps) {
                                     ref={fileInputRef}
                                     type="file"
                                     accept="image/*"
-                                    onChange={handleImageChange}
+                                    onChange={handleFileChange}
                                     className="hidden"
                                     aria-label="Image upload input"
                                 />

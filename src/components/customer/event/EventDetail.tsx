@@ -21,7 +21,6 @@ import {
     RiTimerLine
 } from "react-icons/ri"
 import {Button} from "@/components/ui/button"
-import {EventType} from "@/lib/customer/event";
 import {useState} from "react";
 
 type TicketType = {
@@ -39,26 +38,53 @@ type TicketType = {
     yyyy: string
 }
 
+type EventType = {
+    id: string;
+    eventTitle: string;
+    startedDate: string;
+    thumbnail: string;
+    location: string;
+    description: string;
+    tickets: TicketType[];
+};
+
 type EventDetailsProps = {
     event: EventType | null;
 };
 
-export default function EventDetails({event}: EventDetailsProps) {
+type PropsType = {
+    id :string;
+}
 
-    console.log("Event", event)
+export default function EventDetails({id}: PropsType) {
+
+    const [eventData , setEventEvent] = useState<EventType | null>(null);
+
+    const getEvent = async () => {
+        const res = await fetch(`/event-ticket/api/v1/events/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        const data = await res.json();
+        setEventEvent(data);
+    }
 
     const router = useRouter()
-    const [tickets, setTickets] = useState<TicketType[]>(event?.tickets?.map(ticket => ({
-        ...ticket,
-        price: Number(ticket.price),
-        name: ticket.ticketTitle,
-        event: event?.eventTitle || '',
-        quantity: 0,
-        date: event?.startedDate || '',
-        mmm: '',
-        dd: '',
-        yyyy: ''
-    })) || [])
+    const [tickets, setTickets] = useState<TicketType[]>(
+        eventData?.tickets?.map((ticket: TicketType) => ({
+            ...ticket,
+            price: Number(ticket.price),
+            name: ticket.name,
+            event:  ticket.event|| '',
+            quantity: 0,
+            date:  ticket.date|| '',
+            mmm: '',
+            dd: '',
+            yyyy: ''
+        })) || []
+    );
 
     const updateQuantity = (id: string, increment: boolean) => {
         setTickets(tickets.map(ticket => {
@@ -100,7 +126,7 @@ export default function EventDetails({event}: EventDetailsProps) {
                 </section>
                 {/*Event title*/}
                 <section className="flex gap-5 mb-7">
-                    <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">{event?.eventTitle}</h1>
+                    <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">{eventData?.eventTitle}</h1>
                     <div
                         className="flex items-center rounded-[6px] px-2 text-label-premium h-6 mt-1.5 font-bold text-base bg-blue-100 bg-opacity-70 space-x-1">
                         <RiFirefoxLine className=""/>
@@ -113,7 +139,7 @@ export default function EventDetails({event}: EventDetailsProps) {
                         {/* cover of event*/}
                         <section className="relative mb-6  overflow-hidden rounded-lg">
                             <Image
-                                src={event?.thumbnail || '/event/event-banner.png'}
+                                src={eventData?.thumbnail || '/event/event-banner.png'}
                                 unoptimized
                                 alt="Event banner"
                                 width={800}
@@ -131,7 +157,7 @@ export default function EventDetails({event}: EventDetailsProps) {
                                 <div
                                     className="flex gap-2 items-center dark:text-label-text-primary text-label-description">
                                     <RiCalendarLine className="w-5"/>
-                                    <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">{event?.startedDate}</p>
+                                    <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">{eventData?.startedDate}</p>
                                 </div>
                                 <div
                                     className="flex gap-2 items-center dark:text-label-text-primary text-label-description">
@@ -146,7 +172,7 @@ export default function EventDetails({event}: EventDetailsProps) {
                                 <div
                                     className="flex gap-2 items-center dark:text-label-text-primary text-label-description">
                                     <RiMap2Line className="w-5"/>
-                                    <p className="  text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">{event?.location}</p>
+                                    <p className="  text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">{eventData?.location}</p>
                                 </div>
                             </section>
 
@@ -155,7 +181,7 @@ export default function EventDetails({event}: EventDetailsProps) {
                                 <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text">EVENT
                                     DESCRIPTION</h2>
                                 <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color ">
-                                    {event?.description}
+                                    {eventData?.description}
                                 </p>
                             </section>
                             {/*Note*/}
@@ -211,7 +237,7 @@ export default function EventDetails({event}: EventDetailsProps) {
 
                                         <div className="grow flex justify-between items-center p-2 lg:p-4">
                                             <section className="">
-                                                <h3 className="text-title-color text-base md:text-lg xl:text-xl font-bold uppercase dark:text-secondary-color-text">{event?.eventTitle}</h3>
+                                                <h3 className="text-title-color text-base md:text-lg xl:text-xl font-bold uppercase dark:text-secondary-color-text">{eventData?.eventTitle}</h3>
                                                 <p className="text-description-color text-base md:text-lg xl:text-xl uppercase line-clamp-1 dark:text-label-text-primary ">{ticket.name}</p>
                                                 <div className="flex space-x-2 mt-1">
                                                     {ticket.price === 0 ? (
