@@ -23,7 +23,7 @@ FROM node:18-alpine
 
 # update and install latest dependencies, add dumb-init package
 # add a non-root user
-RUN apk update && apk upgrade && apk add dumb-init && adduser -D nextuser
+RUN apk update && apk upgrade && apk add --no-cache dumb-init wget && adduser -D nextuser
 
 # Set work dir as app
 WORKDIR /app
