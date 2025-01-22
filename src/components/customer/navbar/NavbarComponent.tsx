@@ -22,7 +22,7 @@ import SkeletonNavbarComponent from "@/components/customer/navbar/SkeletonNavbar
 import { useRouter } from "next/navigation";
 import { UserProfileComponent } from "@/components/customer/navbar/UserProfileComponent";
 import { FiBell } from "react-icons/fi";
-import { fetchNotifications } from "@/lib/customer/api";
+// import { fetchNotifications } from "@/lib/customer/api";
 import { WebSocketService } from "@/lib/customer/websocket";
 import { UserProfile } from "@/lib/navbar/UserProfile";
 
@@ -56,7 +56,6 @@ const NavbarComponent = () => {
                 if (response.ok) {
                     const data = await response.json();
                     setUserProfile(data);
-                    console.log("Data user: ", data)
                 } else {
                     setUserProfile(null);
                 }
@@ -68,42 +67,42 @@ const NavbarComponent = () => {
         fetchUserProfile();
     }, []);
 
-    useEffect(() => {
-        const wsService = new WebSocketService('http://localhost:8891/ws');
+    // useEffect(() => {
+    //     const wsService = new WebSocketService('http://localhost:8891/ws');
+    //
+    //     wsService.onNotification((notification) => {
+    //         setNotifications((prev) => [notification, ...prev]);
+    //         const notificationTime = new Date(notification.createdAt).getTime();
+    //         if (notificationTime > lastCheckedTime) {
+    //             setUnreadCount((prev) => prev + 1);
+    //         }
+    //     });
+    //
+    //     wsService.connect();
 
-        wsService.onNotification((notification) => {
-            setNotifications((prev) => [notification, ...prev]);
-            const notificationTime = new Date(notification.createdAt).getTime();
-            if (notificationTime > lastCheckedTime) {
-                setUnreadCount((prev) => prev + 1);
-            }
-        });
+        // const loadInitialNotifications = async () => {
+        //     try {
+        //         const initialNotifications = await fetchNotifications();
+        //         setNotifications(initialNotifications);
 
-        wsService.connect();
+                // const newNotificationsCount = initialNotifications.filter(
+                //     (notification) =>
+                //         new Date(notification.createdAt).getTime() > lastCheckedTime &&
+                //         !notification.read
+                // ).length;
 
-        const loadInitialNotifications = async () => {
-            try {
-                const initialNotifications = await fetchNotifications();
-                setNotifications(initialNotifications);
-
-                const newNotificationsCount = initialNotifications.filter(
-                    (notification) =>
-                        new Date(notification.createdAt).getTime() > lastCheckedTime &&
-                        !notification.read
-                ).length;
-
-                setUnreadCount(newNotificationsCount);
-            } catch (error) {
-                console.error('Failed to fetch notifications:', error);
-            }
-        };
-
-        loadInitialNotifications();
-
-        return () => {
-            wsService.disconnect();
-        };
-    }, [lastCheckedTime, userProfile]);
+    //             setUnreadCount(newNotificationsCount);
+    //         } catch (error) {
+    //             console.error('Failed to fetch notifications:', error);
+    //         }
+    //     };
+    //
+    //     loadInitialNotifications();
+    //
+    //     return () => {
+    //         wsService.disconnect();
+    //     };
+    // }, [lastCheckedTime, userProfile]);
 
     const handleNotificationClick = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -124,7 +123,6 @@ const NavbarComponent = () => {
         } else {
             setDynamicMenuItems(menuItems);
         }
-        console.log("DATA: ", userProfile)
     }, [userProfile]);
 
     useEffect(() => {

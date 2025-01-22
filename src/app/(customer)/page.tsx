@@ -31,7 +31,7 @@ export default function Home() {
                 },
             });
             const data = await response.json();
-            setEvents(data); // Set the events state with the fetched data
+            setEvents(data);
         } catch (error) {
             console.error("Failed to fetch events:", error);
             setEvents([]);
