@@ -193,9 +193,9 @@ export default function InformationEventComponent() {
                                                             >
                                                                 {ticket.type}
                                                             </Badge></TableCell>
-                                                            <TableCell className="px-2 py-3 min-w-[200px] lg:min-w-[300px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">{"$" + parseFloat(ticket.price).toFixed(2)}</TableCell>
+                                                            <TableCell className="px-2 py-3 min-w-[200px] lg:min-w-[300px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">{"$" + parseFloat(String(ticket.price)).toFixed(2)}</TableCell>
                                                             <TableCell className="px-2 py-3 min-w-[200px] lg:min-w-[300px] text-start text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{ticket.capacity}</TableCell>
-                                                            <TableCell className="px-2 py-3 min-w-[100px] text-start text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{"$" + (parseFloat(ticket.price) * ticket.capacity).toFixed(2)}</TableCell>
+                                                            <TableCell className="px-2 py-3 min-w-[100px] text-start text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{"$" + (parseFloat(String(ticket.price)) * ticket.capacity).toFixed(2)}</TableCell>
                                                         </TableRow>
                                                     ))}
                                                 </TableBody>

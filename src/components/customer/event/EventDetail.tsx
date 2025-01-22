@@ -3,6 +3,7 @@ import Image from "next/image"
 import {MinusIcon, PlusIcon} from 'lucide-react'
 import Link from "next/link"
 import {useRouter} from "next/navigation";
+import { format, parseISO } from 'date-fns';
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -21,44 +22,18 @@ import {
     RiTimerLine
 } from "react-icons/ri"
 import {Button} from "@/components/ui/button"
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {EventType, Ticket} from "@/lib/customer/event";
 
-type TicketType = {
-    id: string
-    name: string
-    event: string
-    price: number
-    type: string
-    soldOut?: boolean
-    quantity: number
-    capacity: number
-    date: string
-    mmm: string
-    dd: string
-    yyyy: string
-}
-
-type EventType = {
-    id: string;
-    eventTitle: string;
-    startedDate: string;
-    thumbnail: string;
-    location: string;
-    description: string;
-    tickets: TicketType[];
-};
-
-type EventDetailsProps = {
-    event: EventType | null;
-};
 
 type PropsType = {
-    id :string;
+    id: string;
 }
 
-export default function EventDetails({id}: PropsType) {
 
-    const [eventData , setEventEvent] = useState<EventType | null>(null);
+
+export default function EventDetails({id}: PropsType) {
+    const [eventData, setEventData] = useState<EventType | null>(null);
 
     const getEvent = async () => {
         const res = await fetch(`/event-ticket/api/v1/events/${id}`, {
@@ -68,35 +43,57 @@ export default function EventDetails({id}: PropsType) {
             },
         });
         const data = await res.json();
-        setEventEvent(data);
-    }
-
-    const router = useRouter()
-    const [tickets, setTickets] = useState<TicketType[]>(
-        eventData?.tickets?.map((ticket: TicketType) => ({
-            ...ticket,
-            price: Number(ticket.price),
-            name: ticket.name,
-            event:  ticket.event|| '',
-            quantity: 0,
-            date:  ticket.date|| '',
-            mmm: '',
-            dd: '',
-            yyyy: ''
-        })) || []
-    );
-
-    const updateQuantity = (id: string, increment: boolean) => {
-        setTickets(tickets.map(ticket => {
-            if (ticket.id === id) {
-                const newQuantity = increment ? Math.min(ticket.quantity + 1, ticket.capacity) : Math.max(0, ticket.quantity - 1);
-                return {...ticket, quantity: newQuantity};
-            }
-            return ticket;
-        }));
+        setEventData(data);
     };
 
-    const total = tickets.reduce((sum: number, ticket: TicketType) => sum + (ticket.price * ticket.quantity), 0)
+    useEffect(() => {
+        getEvent();
+    }, []);
+
+    const router = useRouter();
+    const [tickets, setTickets] = useState<Ticket[]>([]);
+
+    useEffect(() => {
+        if (eventData) {
+            setTickets(
+                eventData.tickets.map((ticket) => ({
+                    ...ticket,
+                    price: Number(ticket.price),
+                    quantity: 0,
+                }))
+            );
+        }
+    }, [eventData]);
+
+    const updateQuantity = (id: string, increment: boolean) => {
+        setTickets((prevTickets) =>
+            prevTickets.map((ticket) => {
+                if (ticket.id === id) {
+                    const newQuantity = increment
+                        ? Math.min(ticket.quantity + 1, ticket.capacity)
+                        : Math.max(ticket.quantity - 1, 0);
+                    return {...ticket, quantity: newQuantity};
+                }
+                return ticket;
+            })
+        );
+    };
+
+    const total = tickets.reduce(
+        (sum, ticket) => sum + ticket.price * ticket.quantity,
+        0
+    );
+
+    const formatDate = (dateString: string) => {
+        const date = parseISO(dateString);
+        return format(date, 'yyyy-MM-dd');
+    };
+
+    const formatTime = (start: string, end: string) => {
+        const startTime = format(parseISO(start), 'h:mmaaa');
+        const endTime = format(parseISO(end), 'h:mmaaa');
+        return `${startTime}-${endTime}`;
+    };
 
     return (
         <main className={`w-full container mx-auto px-5 lg:px-10 `}>
@@ -157,12 +154,12 @@ export default function EventDetails({id}: PropsType) {
                                 <div
                                     className="flex gap-2 items-center dark:text-label-text-primary text-label-description">
                                     <RiCalendarLine className="w-5"/>
-                                    <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">{eventData?.startedDate}</p>
+                                    <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">{eventData ? formatDate(eventData.startedDate) : ''}</p>
                                 </div>
                                 <div
                                     className="flex gap-2 items-center dark:text-label-text-primary text-label-description">
                                     <RiTimerLine className="w-5"/>
-                                    <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">5:00PM-10:00PM</p>
+                                    <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">{eventData ? formatTime(eventData.startedDate, eventData.endedDate) : ''}</p>
                                 </div>
                             </section>
 
@@ -238,21 +235,21 @@ export default function EventDetails({id}: PropsType) {
                                         <div className="grow flex justify-between items-center p-2 lg:p-4">
                                             <section className="">
                                                 <h3 className="text-title-color text-base md:text-lg xl:text-xl font-bold uppercase dark:text-secondary-color-text">{eventData?.eventTitle}</h3>
-                                                <p className="text-description-color text-base md:text-lg xl:text-xl uppercase line-clamp-1 dark:text-label-text-primary ">{ticket.name}</p>
+                                                <p className="text-description-color text-base md:text-lg xl:text-xl uppercase line-clamp-1 dark:text-label-text-primary ">{ticket.ticketTitle}</p>
                                                 <div className="flex space-x-2 mt-1">
                                                     {ticket.price === 0 ? (
                                                         <>
                                                             <p className="rounded-[6px] bg-label-free lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-label-text-primary uppercase">
                                                                 Free</p>
-                                                            {ticket.soldOut ? (
+                                                            {ticket.isSoldOut ? (
                                                                 <p className="rounded-[6px] dark:bg-label-text-primary bg-red-100 dark:bg-opacity-70 bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-red-600">SOLD
                                                                     OUT</p>
                                                             ) : (<></>)}
                                                         </>
                                                     ) : (
                                                         <>
-                                                            <p className="rounded-[6px] bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-label-premium">${ticket.price.toFixed(2)}</p>
-                                                            {ticket.soldOut ? (
+                                                            <p className="rounded-[6px] bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-label-premium">${Number(ticket.price).toFixed(2)}</p>
+                                                            {ticket.isSoldOut ? (
                                                                 <p className="rounded-[6px] dark:bg-label-text-primary bg-red-100 dark:bg-opacity-70 bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-red-600">SOLD
                                                                     OUT</p>
                                                             ) : (<></>)}
@@ -267,7 +264,7 @@ export default function EventDetails({id}: PropsType) {
                                                 <Button
                                                     className="p-1 bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 text-label-premium h-[20px] lg:h-[25px] rounded-[4px]"
                                                     onClick={() => updateQuantity(ticket.id, false)}
-                                                    disabled={ticket.quantity === 0}
+                                                    disabled={ticket.capacity === 0}
                                                 >
                                                     <MinusIcon className="h-2 w-2"/>
                                                 </Button>
@@ -293,8 +290,9 @@ export default function EventDetails({id}: PropsType) {
                                 {/*Total*/}
                                 <section className="mt-6 space-y-4">
                                     <div className="flex items-center justify-between border p-4 pl-6 rounded-[8px]">
-                                    <span
-                                        className="text-label-paid text-lg md:text-2xl xl:text-4xl font-bold ">${total.toFixed(2)}</span>
+        <span className="text-label-paid text-lg md:text-2xl xl:text-4xl font-bold ">
+            ${tickets.reduce((sum, ticket) => sum + ticket.price * ticket.quantity, 0).toFixed(2)}
+        </span>
                                         <Button
                                             onClick={() => router.push('/order-info-requirement')}
                                             className="bg-primary-color hover:bg-primary-color hover:bg-opacity-85 text-label-text-primary rounded-[6px] h-[45px] font-bold">
@@ -316,5 +314,5 @@ export default function EventDetails({id}: PropsType) {
                 </section>
             </div>
         </main>
-    )
+    );
 }

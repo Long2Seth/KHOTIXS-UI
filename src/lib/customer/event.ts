@@ -2,11 +2,12 @@ export type Ticket = {
     id: string;
     ticketTitle: string;
     type: string;
-    price: string;
+    price: number;
     capacity: number;
     isPublish: string;
     isDisplay: string;
     isSoldOut: string;
+    quantity: number;
 };
 
 export type EventType = {

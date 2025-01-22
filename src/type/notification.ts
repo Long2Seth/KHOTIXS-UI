@@ -33,40 +33,77 @@ export interface EventData {
     isContent: boolean
 }
 
-export interface Notification {
-    id: string;
-    userId: string;
-    userName: string;
+
+
+export type Notification = {
+
+    id?: string;
+
+    eventId?: string;
+
     eventTitle?: string;
-    message: string;
-    notificationType: NotificationType;
-    read: boolean;
-    createdAt: string;
+
+    eventCategory?: string;
+
+    startedDate?: string;
+
+    timestamp: string; // Add this line
+
+    endedDate?: string;
+
+    capacity?: number;
+
     thumbnail?: string;
 
-    // id: string
-    // userId: string
-    // senderId: string
-    // userName: string
-    // eventTitle: string
-    // description: string
-    // location: string
-    // eventCategory: string
-    // message: string
-    // notificationType: NotificationType
-    // notificationData: EventData
-    // isRead: boolean
-    // startedDate: string
-    // endedDate: string
-    // capacity: number
-    // thumbnail: string
-    // published: boolean
-    // read: boolean
-    // createdAt: string
-}
+    isPublish?: boolean;
+
+    title?: string;
+
+    message?: string;
+
+    paymentDate?: string;
+
+    amount?: number;
+
+    location?: string;
+
+    description?: string;
+
+    thumbnailUrl?: string;
+
+    isContent?: boolean;
+
+    dateTime?: string;
+
+    ticketAmount?: number;
+
+    companyName?: string;
+
+    phoneNumber?: string;
+
+    email?: string;
+
+    status?: string;
+
+    template?: string;
+
+    avatar?: string;
+
+    position?: string;
+
+    businessName?: string;
+
+    notificationType?: string;
+
+    isRead?: boolean;
+
+    receiverId?: string;
+
+    createdAt?: Date;
+
+    read?: boolean;
+
+    role?: string;
 
 
-export interface NotificationActions {
-    markAsRead: (id: string, status: boolean) => Promise<void>;
-    remove: (id: string) => Promise<void>;
 }

@@ -54,7 +54,6 @@ const ticketSchema = z.object({
 
 export function TicketSettingsForm({id}: Props) {
 
-    console.log(" EVENT DATA ", id);
 
     const router = useRouter();
     const [isFree, setIsFree] = useState(false)
@@ -72,10 +71,6 @@ export function TicketSettingsForm({id}: Props) {
                 ...rest,
                 price: Number(rest.price)
             }));
-
-            console.log("  Filter Ticket ", filteredTickets);
-
-            console.log("Data to be submitted:", formattedTickets);
 
             const response = await fetch(`/event-ticket/api/v1/tickets/${id}`, {
                 method: "POST",

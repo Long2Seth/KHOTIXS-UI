@@ -29,7 +29,7 @@ export default function EditProfile({ profile }: EditProfileProps) {
             formData.append('file', file);
 
             try {
-                const response = await fetch('http://localhost:8000/asset/api/v1/files', {
+                const response = await fetch('/asset/api/v1/files', {
                     method: 'POST',
                     body: formData,
                 });

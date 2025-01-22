@@ -196,12 +196,12 @@ export default function Home() {
                         </section>
                     )}
 
-                    {events.some(event => event.eventCategory.toUpperCase() === "CONFERENCES AND SEMINARS") && (
+                    {events.some(event => event.eventCategory.toUpperCase() === "CONFERENCE") && (
                         <section
                             ref={conferenceRef}
                             className="container mx-auto p-5 space-y-4 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
                             <InfoCard
-                                title="CONFERENCES AND SEMINARS"
+                                title="CONFERENCE"
                                 description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets."
                             />
                             <section
@@ -220,7 +220,7 @@ export default function Home() {
                             </section>
                             <section
                                 className="h-auto grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
-                                {events.filter(event => event.eventCategory.toUpperCase() === "CONFERENCES AND SEMINARS").slice(0, 6).map((event, index) => (
+                                {events.filter(event => event.eventCategory.toUpperCase() === "CONFERENCE").slice(0, 6).map((event, index) => (
                                     <CardComponent key={index} event={event}/>
                                 ))}
                             </section>

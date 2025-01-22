@@ -16,7 +16,14 @@ const nextConfig: NextConfig = {
         protocol: "http",
         hostname: "khotixs.devkh.asia",
       }
-    ]
+    ],
+    domains: [
+      'gratisography.com',
+      'th.bing.com',
+      'www.piclumen.com',
+      'hebbkx1anhila5yf.public.blob.vercel-storage.com'
+    ],
+
   },
 };
 
