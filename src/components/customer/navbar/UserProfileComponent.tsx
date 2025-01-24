@@ -2,7 +2,7 @@ import {
     LogOut,
     User,
 } from "lucide-react"
-import { LuTickets } from "react-icons/lu";
+import {LuTickets} from "react-icons/lu";
 import {RiSecurePaymentLine} from "react-icons/ri";
 import {Settings} from "lucide-react";
 import {Button} from "@/components/ui/button"
@@ -19,6 +19,7 @@ import * as React from "react";
 import {useRouter} from "next/navigation";
 import {ModeToggleAfterLogin} from "@/components/customer/navbar/modeToggleAfterLogin";
 import {Profile} from "@/lib/customer/userProfile";
+import {warning} from "motion-utils";
 
 
 type UserProfileProps = {
@@ -26,12 +27,26 @@ type UserProfileProps = {
 };
 
 
-
-
 export function UserProfileComponent({data}: UserProfileProps) {
-    console.log(data)
-    console.log(( " ID : " + data.id))
+
     const router = useRouter();
+
+    const handleLogout = async () => {
+        await fetch(`/logout`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: "include"
+            })
+            .then((response) => {
+                if (response.ok) {
+                    router.push('/')
+                }
+            })
+    }
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className={` mr-[35px] sm:mr-20 md:mr-0 `} asChild>
@@ -67,7 +82,7 @@ export function UserProfileComponent({data}: UserProfileProps) {
                         <Settings/>
                         <span>Setting</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleLogout()}>
                         <LogOut className=" text-label-paid hover:text-label-paid/80"/>
                         <span className=" text-label-paid hover:text-label-paid/80">Log out</span>
                     </DropdownMenuItem>
