@@ -78,7 +78,6 @@ export default function NotificationCardComponent({ notification }: Props) {
                     </div>
                 </div>
             </Card>
-            {isDialogOpen && <NotificationDetailComponent id={notification.id} onClose={() => setIsDialogOpen(false)} />}
-        </div>
+            {isDialogOpen && <NotificationDetailComponent id={notification.id ?? null} onClose={() => setIsDialogOpen(false)} />}        </div>
     );
 }
