@@ -1,29 +1,30 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
-import { IoMenu, IoSearch } from 'react-icons/io5';
-import { IoMdCloseCircle } from 'react-icons/io';
-import { FaArrowRightLong } from "react-icons/fa6";
-import { menuItems, MenuType } from "@/lib/navbar/navbar";
+import {useState, useEffect} from 'react';
+import {IoMenu, IoSearch} from 'react-icons/io5';
+import {IoMdCloseCircle} from 'react-icons/io';
+import {FaArrowRightLong} from "react-icons/fa6";
+import {menuItems, MenuType} from "@/lib/navbar/navbar";
 import * as React from "react";
-import { CiBullhorn } from "react-icons/ci";
-import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { cn } from "@/lib/utils";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
-import { format } from "date-fns";
-import { Calendar } from "@/components/ui/calendar";
-import { ModeToggle } from "@/components/ui/modeToggle";
-import { NavigationMenuDemo } from "@/components/customer/navbar/NavigationMenuDemo";
+import {CiBullhorn} from "react-icons/ci";
+import {Button} from "@/components/ui/button";
+import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
+import {cn} from "@/lib/utils";
+import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
+import {CalendarIcon} from "lucide-react";
+import {format} from "date-fns";
+import {Calendar} from "@/components/ui/calendar";
+import {ModeToggle} from "@/components/ui/modeToggle";
+import {NavigationMenuDemo} from "@/components/customer/navbar/NavigationMenuDemo";
 import SkeletonNavbarComponent from "@/components/customer/navbar/SkeletonNavbar";
-import { useRouter } from "next/navigation";
-import { UserProfileComponent } from "@/components/customer/navbar/UserProfileComponent";
-import { FiBell } from "react-icons/fi";
+import {useRouter} from "next/navigation";
+import {UserProfileComponent} from "@/components/customer/navbar/UserProfileComponent";
+import {FiBell} from "react-icons/fi";
 // import { fetchNotifications } from "@/lib/customer/api";
-import { WebSocketService } from "@/lib/customer/websocket";
-import { UserProfile } from "@/lib/navbar/UserProfile";
+import {WebSocketService} from "@/lib/customer/websocket";
+import {UserProfile} from "@/lib/navbar/UserProfile";
+import NotificationComponent from "@/components/customer/notification/NotificationComponent";
 
 const NavbarComponent = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -66,42 +67,6 @@ const NavbarComponent = () => {
         fetchUserProfile();
     }, []);
 
-    // useEffect(() => {
-    //     const wsService = new WebSocketService('http://localhost:8891/ws');
-    //
-    //     wsService.onNotification((notification) => {
-    //         setNotifications((prev) => [notification, ...prev]);
-    //         const notificationTime = new Date(notification.createdAt).getTime();
-    //         if (notificationTime > lastCheckedTime) {
-    //             setUnreadCount((prev) => prev + 1);
-    //         }
-    //     });
-    //
-    //     wsService.connect();
-
-        // const loadInitialNotifications = async () => {
-        //     try {
-        //         const initialNotifications = await fetchNotifications();
-        //         setNotifications(initialNotifications);
-
-                // const newNotificationsCount = initialNotifications.filter(
-                //     (notification) =>
-                //         new Date(notification.createdAt).getTime() > lastCheckedTime &&
-                //         !notification.read
-                // ).length;
-
-    //             setUnreadCount(newNotificationsCount);
-    //         } catch (error) {
-    //             console.error('Failed to fetch notifications:', error);
-    //         }
-    //     };
-    //
-    //     loadInitialNotifications();
-    //
-    //     return () => {
-    //         wsService.disconnect();
-    //     };
-    // }, [lastCheckedTime, userProfile]);
 
     const handleNotificationClick = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -153,16 +118,17 @@ const NavbarComponent = () => {
 
     return (
         <>
-            {isLoading ? <SkeletonNavbarComponent /> :
+            {isLoading ? <SkeletonNavbarComponent/> :
                 <nav className=" w-full top-[0px] sticky z-50 bg-white flex flex-col dark:bg-khotixs-background-dark ">
                     <section
                         className=" container mx-auto w-full h-[60px] bg-white py-[10px]  flex px-5 lg:px-10 justify-center gap-5 dark:bg-khotixs-background-dark ">
-                        <CiBullhorn className="  w-[40px] p-[8px] rounded-[50%] text-gray-400 bg-gray-200  h-full " />
+                        <CiBullhorn className="  w-[40px] p-[8px] rounded-[50%] text-gray-400 bg-gray-200  h-full "/>
                         <p className="  text-[10px] sm:text-sm lg:text-lg font-semibold flex items-center">Do you
                             organize events? </p>
                         <Button
-                            className="   text-[10px] sm:text-sm lg:text-lg font-semibold text-white hover:bg-primary-color bg-primary-color rounded-[5px] ">
-                            Become a Partner <span><FaArrowRightLong /></span>
+                            onClick={() => router.push("/merchants")}
+                            className="text-[10px] sm:text-sm lg:text-lg font-semibold text-white hover:bg-primary-color bg-primary-color rounded-[5px] ">
+                            Become a Partner <span><FaArrowRightLong/></span>
                         </Button>
                     </section>
 
@@ -171,19 +137,20 @@ const NavbarComponent = () => {
                         <div className=" flex  justify-between h-14 items-center ">
                             <Link href="/" className="flex items-center">
                                 <Image className=" w-[40px] h-40px] lg:w-[50px] lg:h-[50px] xl:w-[60px] xl:h-[60px] "
-                                       width={80} height={80} src="/khotixs_logo.png" alt="Khotixs Logo" />
+                                       width={80} height={80} src="/khotixs_logo.png" alt="Khotixs Logo"/>
                             </Link>
 
                             <section className="  rounded-[5px] flex justify-center drop-shadow-xl">
                                 <form className=" w-full rounded-[5px] bg-gray-50 flex items-center ">
-                                    <div className=" flex items-center w-auto md:max-w-[200px] lg:max-w-[220px] xl:w-auto">
+                                    <div
+                                        className=" flex items-center w-auto md:max-w-[200px] lg:max-w-[220px] xl:w-auto">
                                         <input
                                             type="text"
                                             placeholder="Search events name"
                                             className=" w-auto bg-transparent h-full rounded-tl-[5px] text-[12px] lg:text-[14px] focus:text-gray-500 rounded-bl-[5px] pl-5 lg:pl-2 xl:pl-5 focus:outline-none pr-4 border-0 focus:ring-0 px-0 py-2 dark:text-primary-color-text "
                                             name="topic"
                                         />
-                                        <hr className=" hidden md:block w-[20px] bg-gray-400 rotate-90" />
+                                        <hr className=" hidden md:block w-[20px] bg-gray-400 rotate-90"/>
                                     </div>
 
                                     <div className=" hidden lg:flex lg:w-auto items-center ">
@@ -194,7 +161,7 @@ const NavbarComponent = () => {
                                                     selectedLocation ? "text-black" : "text-gray-400"
                                                 )}
                                             >
-                                                <SelectValue className="text-gray-400" placeholder="Select location" />
+                                                <SelectValue className="text-gray-400" placeholder="Select location"/>
                                             </SelectTrigger>
                                             <SelectContent className="text-gray-800 bg-gray-100">
                                                 <SelectGroup>
@@ -202,7 +169,7 @@ const NavbarComponent = () => {
                                                 </SelectGroup>
                                             </SelectContent>
                                         </Select>
-                                        <hr className="w-[20px] bg-gray-400 rotate-90" />
+                                        <hr className="w-[20px] bg-gray-400 rotate-90"/>
                                     </div>
 
                                     <div className=" hidden md:block ">
@@ -217,7 +184,7 @@ const NavbarComponent = () => {
                                                         !date && "text-muted-foreground"
                                                     )}
                                                 >
-                                                    <CalendarIcon className="mr-2 text-gray-400" />
+                                                    <CalendarIcon className="mr-2 text-gray-400"/>
                                                     {date ? format(date, "PPP") :
                                                         <span className="text-gray-400">Pick a date</span>}
                                                 </Button>
@@ -238,7 +205,7 @@ const NavbarComponent = () => {
                                         className="flex flex-row items-center justify-center rounded-tr-[5px] rounded-br-[5px]">
                                         <div
                                             className="bg-primary-color text-2xl text-white p-2 lg:p-3 rounded-tr-[5px] rounded-br-[5px]">
-                                            <IoSearch />
+                                            <IoSearch/>
                                         </div>
                                     </button>
                                 </form>
@@ -250,22 +217,10 @@ const NavbarComponent = () => {
 
                                 <div className="flex items-center">
                                     {userProfile ? (
-                                        <>
-                                            <button
-                                                className="relative text-primary mx-8"
-                                                onClick={handleNotificationClick}
-                                            >
-                                                <FiBell className="h-7 w-7"/>
-                                                {unreadCount > 0 && (
-                                                    <span
-                                                        className="absolute -top-1 -right-1 flex h-4 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white"
-                                                    >
-            {unreadCount > 9 ? "9+" : unreadCount}
-          </span>
-                                                )}
-                                            </button>
+                                        <div className={`flex gap-x-2 `}>
+                                            <NotificationComponent/>
                                             <UserProfileComponent data={userProfile}/>
-                                        </>
+                                        </div>
                                     ) : (
                                         <>
                                             <Button

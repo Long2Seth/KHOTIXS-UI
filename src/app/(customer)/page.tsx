@@ -31,7 +31,7 @@ export default function Home() {
                 },
             });
             const data = await response.json();
-            setEvents(data);
+            setEvents(data); // Set the events state with the fetched data
         } catch (error) {
             console.error("Failed to fetch events:", error);
             setEvents([]);
@@ -68,7 +68,7 @@ export default function Home() {
                     {events.some(event => event.eventCategory.toUpperCase() === "TECHNOLOGY") && (
                         <section
                             ref={technologyRef}
-                            className="space-y-4 container mx-auto p-5 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto"
+                            className="space-y-4 container mx-auto w-full py-[15px] px-5 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto"
                         >
                             <InfoCard
                                 title="TECHNOLOGY"
@@ -85,7 +85,7 @@ export default function Home() {
                                     </span>
                                 </Button>
                             </section>
-                            <section className="h-auto grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
+                            <section className="container mx-auto w-full py-[15px] px-5 grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
                                 {events
                                     .filter((event) => event.eventCategory.toUpperCase() === "TECHNOLOGY")
                                     .slice(0, 6)
@@ -99,7 +99,7 @@ export default function Home() {
                     {events.some(event => event.eventCategory.toUpperCase() === "CONCERT") && (
                         <section
                             ref={concertRef}
-                            className="container mx-auto p-5 space-y-4 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            className="container mx-auto w-full py-[15px] px-5 space-y-4 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
                             <InfoCard
                                 title="CONCERTS"
                                 description="The Concerts feature provides users with detailed information about live music events, tailored for music enthusiasts. It enhances the user experience by offering curated content and tools to explore, book, and engage with concert events."
@@ -119,7 +119,7 @@ export default function Home() {
 
                             </section>
                             <section
-                                className="h-auto grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
+                                className="container mx-auto w-full py-[15px] px-5 grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
                                 {events.filter(event => event.eventCategory.toUpperCase() === "CONCERT").slice(0, 6).map((event, index) => (
                                     <CardComponent key={index} event={event}/>
                                 ))}
@@ -130,7 +130,7 @@ export default function Home() {
                     {events.some(event => event.eventCategory.toUpperCase() === "SPORT") && (
                         <section
                             ref={sportRef}
-                            className="container mx-auto p-5 space-y-4 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            className="container mx-auto w-full py-[15px] px-5 space-y-4 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
                             <InfoCard
                                 title="SPORT"
                                 description="The Sports Events feature provides users with comprehensive information about live sports
@@ -153,7 +153,7 @@ export default function Home() {
 
                             </section>
                             <section
-                                className="h-auto grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
+                                className="container mx-auto w-full py-[15px] px-5 grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
                                 {events.filter(event => event.eventCategory.toUpperCase() === "SPORT").slice(0, 6).map((event, index) => (
                                     <CardComponent key={index} event={event}/>
                                 ))}
@@ -164,7 +164,7 @@ export default function Home() {
                     {events.some(event => event.eventCategory.toUpperCase() === "COMMUNITY") && (
                         <section
                             ref={communityRef}
-                            className="container mx-auto p-5 space-y-4 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            className="container mx-auto w-full py-[15px] px-5 space-y-4 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
                             <InfoCard
                                 title="COMMUNITY"
                                 description="The Community Events feature connects users with local gatherings, social activities, and events
@@ -188,7 +188,7 @@ export default function Home() {
 
                             </section>
                             <section
-                                className="h-auto grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
+                                className="container mx-auto w-full py-[15px] px-5 grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
                                 {events.filter(event => event.eventCategory.toUpperCase() === "COMMUNITY").slice(0, 6).map((event, index) => (
                                     <CardComponent key={index} event={event}/>
                                 ))}
@@ -199,9 +199,9 @@ export default function Home() {
                     {events.some(event => event.eventCategory.toUpperCase() === "CONFERENCE") && (
                         <section
                             ref={conferenceRef}
-                            className="container mx-auto p-5 space-y-4 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            className="container mx-auto w-full py-[15px] px-5 space-y-4 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
                             <InfoCard
-                                title="CONFERENCE"
+                                title="CONFERENCES "
                                 description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets."
                             />
                             <section
@@ -219,7 +219,7 @@ export default function Home() {
 
                             </section>
                             <section
-                                className="h-auto grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
+                                className="container mx-auto w-full py-[15px] px-5 grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
                                 {events.filter(event => event.eventCategory.toUpperCase() === "CONFERENCE").slice(0, 6).map((event, index) => (
                                     <CardComponent key={index} event={event}/>
                                 ))}
@@ -230,7 +230,7 @@ export default function Home() {
                     {events.some(event => event.eventCategory.toUpperCase() === "GENERAL") && (
                         <section
                             ref={generalRef}
-                            className="container mx-auto p-5 space-y-4 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
+                            className="container mx-auto w-full py-[15px] px-5 space-y-4 sm:w-full dark:bg-khotixs-background-dark bg-khotixs-background-white flex flex-col justify-center items-center h-auto">
                             <InfoCard
                                 title="GENERAL"
                                 description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets."
@@ -247,7 +247,7 @@ export default function Home() {
                                 </div>
                             </section>
                             <section
-                                className="h-auto grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
+                                className="container mx-auto w-full py-[15px] px-5 grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
                                 {events.filter(event => event.eventCategory.toUpperCase() === "GENERAL").slice(0, 6).map((event, index) => (
                                     <CardComponent key={index} event={event}/>
                                 ))}

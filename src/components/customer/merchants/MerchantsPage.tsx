@@ -20,8 +20,12 @@ export default function MerchantsComponent() {
                     <p className="mt-4 text-lg">Take your events and venue management to the next level with Khotixs. Join us to access powerful
                         tools for ticket management, booking, and revenue tracking, and reach a wider audience through
                         our platform.</p>
-                    <Button
-                        onClick={() => router.push("/contact-us")} className="rounded-[6px] hover:bg-primary-color/80 text-white text-lg bg-primary-color w-32">Contact us</Button>
+                    <div className="flex gap-2">
+                        <Button
+                            onClick={() => router.push("/contact-us")} className="rounded-[6px] hover:bg-primary-color/80 text-primary-color hover:text-white text-lg bg-primary-color/10 border border-primary-color w-32">Contact us</Button>
+                        <Button
+                            onClick={() => router.push("/partner-register")} className="rounded-[6px] hover:bg-primary-color/80 text-white text-lg bg-primary-color border border-primary-color hover:border-primary-color/80 w-32">Apply Now</Button>
+                    </div>
                 </div>
                 <motion.div
                     className="lg:w-[500px] lg:h-[500px] hidden md:block  w-full object-cover"

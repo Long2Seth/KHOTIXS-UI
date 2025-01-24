@@ -8,7 +8,7 @@ export class WebSocketService {
     private subscriptionCallback: ((notification: Notification) => void) | null = null;
     private userRole: string;
 
-    constructor(wsUrl: string = 'http://localhost:8891/ws', userRole: string) {
+    constructor(wsUrl: string = '/ws', userRole: string) {
         this.wsUrl = wsUrl;
         this.userRole = userRole;
 
@@ -26,7 +26,8 @@ export class WebSocketService {
 
     async   fetchInitialNotifications(userRole:string): Promise<Notification[]> {
         const notifications = await fetch(`/communication/api/v1/notifications/publish-event/${this.userRole}`)
-            .then((response) => response.json());
+            .then((response) => response.json())
+            .then(data => data.content);
 
         return notifications;
     }

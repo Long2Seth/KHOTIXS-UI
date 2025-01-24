@@ -38,7 +38,7 @@ export function UserProfileComponent({data}: UserProfileProps) {
 
                 <Button variant="ghost" className="p-0 rounded-full">
                     <div className="flex flex-col items-center gap-4">
-                        <Avatar className="w-[45px] h-[50px] rounded-[5px]">
+                        <Avatar className="w-[40px] h-[40px] rounded-[5px]">
                             <AvatarImage src={data.avatar}/>
                         </Avatar>
                     </div>

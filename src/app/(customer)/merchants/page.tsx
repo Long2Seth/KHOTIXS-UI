@@ -1,12 +1,12 @@
-import ContactUsComponent from "@/components/customer/contact/ContactUsComponent";
+import MerchantsComponent from "@/components/customer/merchants/MerchantsPage";
 import { generateMetadata } from './metadata';
 
 export { generateMetadata };
 
-export default function Contact() {
+export default function MerchantsPage() {
     return (
-        <main className="flex flex-col dark:bg-khotixs-background-dark">
-            <ContactUsComponent/>
+        <main className="container mx-auto my-[50px] md:my-[80px] xl:my-[100px] md:mb-[80px] xl:mb-[100px] bg-khotixs-background-white dark:bg-khotixs-background-dark">
+            <MerchantsComponent/>
         </main>
     );
 }
