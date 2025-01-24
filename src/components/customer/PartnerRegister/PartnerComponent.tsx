@@ -110,9 +110,9 @@ export default function PartnerComponent() {
                         src="/khotixs_logo.png"
                         alt="logo"
                     />
-                    <div className="col-span-2 font-bold justify-center">
+                    <div className="col-span-2 font-bold justify-center uppercase ">
                         <p>Welcome to the</p>
-                        <h1 className="text-2xl">
+                        <h1 className="text-xl">
                             Partner Registration
                         </h1>
                     </div>

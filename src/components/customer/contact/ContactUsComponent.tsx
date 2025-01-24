@@ -8,7 +8,7 @@ import {HiOutlineMail} from "react-icons/hi";
 import {Input} from "@/components/ui/input";
 import Link from "next/link";
 
-type FormErrors = {
+type PartnerRegister = {
     name: string;
     email: string;
     message: string;
@@ -19,7 +19,7 @@ export default function ContactUsComponent() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
-    const [errors, setErrors] = useState<FormErrors>({name: '', email: '', message: ''});
+    const [errors, setErrors] = useState<PartnerRegister>({name: '', email: '', message: ''});
 
 
     const validateForm = () => {
@@ -46,16 +46,35 @@ export default function ContactUsComponent() {
         return isValid;
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (validateForm()) {
-            // Handle form submission
-            console.log('Form submitted');
+            try {
+                const response = await fetch('/communication/api/v1/feedback', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, email, message }),
+                });
+                if (response.ok) {
+                    console.log('Form submitted successfully');
+                    // Clear form fields
+                    setName('');
+                    setEmail('');
+                    setMessage('');
+                    setErrors({ name: '', email: '', message: '' });
+                } else {
+                    console.error('Form submission failed');
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+            }
         }
     };
 
-    const handleBlur = (field: keyof FormErrors, value: string) => {
-        const newErrors: FormErrors = {...errors};
+    const handleBlur = (field: keyof PartnerRegister, value: string) => {
+        const newErrors: PartnerRegister = {...errors};
         if (value.trim() === '') {
             newErrors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required`;
         } else if (field === 'email' && !/\S+@\S+\.\S+/.test(value)) {

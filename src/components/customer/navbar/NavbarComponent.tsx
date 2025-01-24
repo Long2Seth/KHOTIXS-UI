@@ -25,6 +25,7 @@ import {FiBell} from "react-icons/fi";
 import {WebSocketService} from "@/lib/customer/websocket";
 import {UserProfile} from "@/lib/navbar/UserProfile";
 import NotificationComponent from "@/components/customer/notification/NotificationComponent";
+import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet"
 
 const NavbarComponent = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -119,41 +120,43 @@ const NavbarComponent = () => {
     return (
         <>
             {isLoading ? <SkeletonNavbarComponent/> :
-                <nav className=" w-full top-[0px] sticky z-50 bg-white flex flex-col dark:bg-khotixs-background-dark ">
+                <nav className="w-full top-[0px] sticky z-50 bg-white flex flex-col dark:bg-khotixs-background-dark">
                     <section
-                        className=" container mx-auto w-full h-[60px] bg-white py-[10px]  flex px-5 lg:px-10 justify-center gap-5 dark:bg-khotixs-background-dark ">
-                        <CiBullhorn className="  w-[40px] p-[8px] rounded-[50%] text-gray-400 bg-gray-200  h-full "/>
-                        <p className="  text-[10px] sm:text-sm lg:text-lg font-semibold flex items-center">Do you
+                        className="container mx-auto h-[40px] md:h-[60px] bg-white py-[10px] flex items-center md:px-5 lg:px-10 justify-center gap-5 dark:bg-khotixs-background-dark">
+                        <CiBullhorn
+                            className="p-1.5 md:w-[40px] md:h-[40px] md:p-[8px] rounded-[100%] text-gray-400 bg-gray-200 h-8 w-8"/>
+                        <p className="text-[10px] sm:text-sm lg:text-lg font-semibold flex items-center">Do you
                             organize events? </p>
                         <Button
                             onClick={() => router.push("/merchants")}
-                            className="text-[10px] sm:text-sm lg:text-lg font-semibold text-white hover:bg-primary-color bg-primary-color rounded-[5px] ">
-                            Become a Partner <span><FaArrowRightLong/></span>
+                            className="text-[10px] sm:text-sm lg:text-lg p-2 md:px-4 font-semibold text-white hover:bg-primary-color bg-primary-color rounded-[5px] h-8 md:h-10">
+                            Become a Partner<FaArrowRightLong className="w-16 p-0.5 md:p-0"/>
                         </Button>
                     </section>
 
                     <section
-                        className=" container  mx-auto w-full py-[15px] px-5 lg:px-10">
-                        <div className=" flex  justify-between h-14 items-center ">
+                        className="container mx-auto w-full md:py-[15px] md:px-5 lg:px-10">
+                        <div className="flex justify-between h-12 md:h-14 items-center">
                             <Link href="/" className="flex items-center">
-                                <Image className=" w-[40px] h-40px] lg:w-[50px] lg:h-[50px] xl:w-[60px] xl:h-[60px] "
+                                <Image className="w-[40px] h-40px] lg:w-[50px] lg:h-[50px] xl:w-[60px] xl:h-[60px] "
                                        width={80} height={80} src="/khotixs_logo.png" alt="Khotixs Logo"/>
                             </Link>
 
-                            <section className="  rounded-[5px] flex justify-center drop-shadow-xl">
-                                <form className=" w-full rounded-[5px] bg-gray-50 flex items-center ">
+                            <section className="rounded-[5px] flex justify-center drop-shadow-xl">
+                                <form className="w-full rounded-[5px] bg-gray-50 flex items-center">
                                     <div
-                                        className=" flex items-center w-auto md:max-w-[200px] lg:max-w-[220px] xl:w-auto">
+                                        className="flex items-center w-[160px] md:max-w-[200px] lg:max-w-[220px] xl:w-auto">
                                         <input
                                             type="text"
                                             placeholder="Search events name"
-                                            className=" w-auto bg-transparent h-full rounded-tl-[5px] text-[12px] lg:text-[14px] focus:text-gray-500 rounded-bl-[5px] pl-5 lg:pl-2 xl:pl-5 focus:outline-none pr-4 border-0 focus:ring-0 px-0 py-2 dark:text-primary-color-text "
+                                            className="w-auto bg-transparent h-full rounded-tl-[5px] text-[12px] lg:text-[14px] focus:text-gray-500 rounded-bl-[5px] md:pl-5 pl-2 lg:pl-2 xl:pl-5 focus:outline-none pr-4 border-0 focus:ring-0 px-0 py-2 dark:text-primary-color-text "
                                             name="topic"
                                         />
-                                        <hr className=" hidden md:block w-[20px] bg-gray-400 rotate-90"/>
+                                        <hr className="w-[20px] bg-gray-400 rotate-90"/>
+                                        <hr className="hidden md:block xl:block  w-[20px] bg-gray-400 rotate-90"/>
                                     </div>
 
-                                    <div className=" hidden lg:flex lg:w-auto items-center ">
+                                    <div className="hidden lg:flex lg:w-auto items-center">
                                         <Select onValueChange={setSelectedLocation}>
                                             <SelectTrigger
                                                 className={cn(
@@ -172,10 +175,10 @@ const NavbarComponent = () => {
                                         <hr className="w-[20px] bg-gray-400 rotate-90"/>
                                     </div>
 
-                                    <div className=" hidden md:block ">
+                                    <div className="hidden md:block">
                                         <Popover>
                                             <PopoverTrigger
-                                                className=" text-[12px] lg:text-[14px] bg-red-950 focus:outline-none ring-0 dark:text-primary-color-text dark:hover:bg-white "
+                                                className="text-[12px] lg:text-[14px] bg-red-950 focus:outline-none ring-0 dark:text-primary-color-text dark:hover:bg-white "
                                                 asChild>
                                                 <Button
                                                     variant="ghost"
@@ -204,14 +207,14 @@ const NavbarComponent = () => {
                                     <button
                                         className="flex flex-row items-center justify-center rounded-tr-[5px] rounded-br-[5px]">
                                         <div
-                                            className="bg-primary-color text-2xl text-white p-2 lg:p-3 rounded-tr-[5px] rounded-br-[5px]">
-                                            <IoSearch/>
+                                            className="bg-primary-color text-2xl text-white p-1 md:px-2 lg:p-3 rounded-tr-[5px] rounded-br-[5px]">
+                                            <IoSearch className="w-4"/>
                                         </div>
                                     </button>
                                 </form>
                             </section>
 
-                            <div className="justify-center items-center flex gap-2 lg:gap-4 ">
+                            <div className="justify-center items-center flex gap-2 md:gap-0">
                                 {userProfile ? null : <ModeToggle/>}
                                 <NavigationMenuDemo/>
 
@@ -236,36 +239,39 @@ const NavbarComponent = () => {
                         </div>
                     </section>
 
-                    <div
-                        onClick={toggleMenu}
-                        className=" absolute cursor-pointer top-[85px] hover:bg-gray-100 rounded-[6px] mr-5 sm:mr-[70px] md:mr-0 pr-0 lg:pr-10 right-0 inline-flex items-center w-10 h-10 justify-center text-3xl text-primary-color md:hidden focus:outline-none dark:text-primary-color "
-                        aria-controls="mega-menu-full"
-                        aria-expanded={isMenuOpen ? "true" : "false"}
-                    >
-                        <span className="sr-only">{isMenuOpen ? "Close main menu" : "Open main menu"}</span>
-                        {isMenuOpen ? <IoMdCloseCircle/> : <IoMenu/>}
-                    </div>
-                    <div
-                        id="mega-menu-full"
-                        className={`container mx-auto px-5 md:hidden items-center justify-between font-semibold dark:bg-khotixs-background-dark ${isMenuOpen ? "block" : "hidden"} w-full `}
-                    >
-                        <ul className="text-primary-color-text flex flex-col p-1 mt-4 rounded-[6px] bg-white dark:bg-khotixs-background-dark ">
-                            {dynamicMenuItems.map((item, index) => (
-                                <li key={index}>
-                                    <Link
-                                        href={item.link}
-                                        className={`block py-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-300 dark:bg-khotixs-background-dark dark:text-secondary-color-text ${activeItem === item.name ? 'text-primary-color' : ''}`}
-                                        onClick={() => handleItemClick(item.name)}
-                                    >
-                                        <span className="flex items-center gap-2">
-                                            {item.icon}
-                                            {item.name}
-                                        </span>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                    <Sheet>
+                        <SheetTrigger>
+                            <div
+                                className="absolute cursor-pointer top-[52px] hover:bg-gray-100 rounded-[6px] sm:mr-[70px] md:mr-0 pr-0 lg:pr-10 right-0 inline-flex w-8 h-8 text-2xl text-primary-color md:hidden focus:outline-none dark:text-primary-color"
+                                aria-controls="mega-menu-full"
+                                aria-expanded={isMenuOpen ? "true" : "false"}
+                            >
+                                <span className="sr-only">{isMenuOpen ? "Close main menu" : "Open main menu"}</span>
+                                {isMenuOpen ? <IoMdCloseCircle/> : <IoMenu/>}
+                            </div>
+                        </SheetTrigger>
+                        <SheetContent className="mt-[48px] rounded-tl-[6px]">
+                            <SheetHeader>
+                                <SheetTitle className={`text-secondary-color-text  text-start`}>Menu</SheetTitle>
+                            </SheetHeader>
+                            <ul className="flex flex-col p-1 mt-2 rounded-[6px]">
+                                {dynamicMenuItems.map((item, index) => (
+                                    <li key={index}>
+                                        <Link
+                                            href={item.link}
+                                            className={`block py-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-300 hover:text-primary-color text-secondary-color-text ${activeItem === item.name ? 'text-primary-color' : ''}`}
+                                            onClick={() => handleItemClick(item.name)}
+                                        >
+                                            <span className="flex items-center gap-2">
+                                                {item.icon}
+                                                {item.name}
+                                            </span>
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </SheetContent>
+                    </Sheet>
                 </nav>
             }
         </>

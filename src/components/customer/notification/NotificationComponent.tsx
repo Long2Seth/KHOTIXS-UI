@@ -34,7 +34,7 @@ export default function NotificationComponent() {
     return (
         <Sheet >
             <SheetTrigger asChild>
-                <Button variant="outline">
+                <Button className={` border-none`} >
                     <FiBell className="h-7 w-7" />
                 </Button>
             </SheetTrigger>

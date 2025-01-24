@@ -96,7 +96,7 @@ export default function EventDetails({id}: PropsType) {
     };
 
     return (
-        <main className={`w-full container mx-auto px-5 lg:px-10 `}>
+        <main className={`container mx-auto px-5 lg:px-10 `}>
             <div className="py-7">
                 {/* Breadcrumb */}
                 <section className="mb-6 flex items-center gap-2 text-sm text-muted-foreground">
@@ -335,10 +335,10 @@ export default function EventDetails({id}: PropsType) {
 
                 {/*Event details*/}
                 {tickets.length == 0 && (
-                    <section className="grid md:gap-x-2 lg:gap-x-8 lg:grid-cols-2">
+                    <section className="grid grid-cols-1 gap-x-4 md:gap-x-4 lg:gap-x-8 md:grid-cols-2">
 
                         {/* cover of event*/}
-                        <section className="relative mb-6 justify-center flex col-span-1 h-[200px] md:h-[370px] w-full overflow-hidden rounded-lg">
+                        <section className="relative mb-6 justify-center flex col-span-1 md:col-span-1 h-[200px] md:h-[370px] w-full overflow-hidden rounded-lg">
                             <Image
                                 src={eventData?.thumbnail || '/event/event-banner.png'}
                                 unoptimized
@@ -383,7 +383,7 @@ export default function EventDetails({id}: PropsType) {
                         </section>
 
                         {/* event description*/}
-                        <section className="col-span-2 space-y-2">
+                        <section className="col-span-1 md:col-span-2 space-y-2 mt-6 md:mt-0">
                             <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text">EVENT
                                 DESCRIPTION</h2>
                             <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color ">
