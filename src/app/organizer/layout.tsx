@@ -6,6 +6,8 @@ import FooterOrganizer from "@/components/organizer/navbar/FooterOrganizer";
 import NavbarOrganizerComponent from "@/components/organizer/navbar/NavbarOrganizerComponent";
 import CategoriesOrganizerComponent from "@/components/organizer/navbar/categoriesOrganizerComponent";
 import React from "react";
+import {ApiProvider} from "@reduxjs/toolkit/query/react";
+import StoreProvider from "@/app/StoreProvider";
 
 
 export const metadata: Metadata = {
@@ -27,11 +29,13 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
         >
-            <NavbarOrganizerComponent/>
-            <CategoriesOrganizerComponent/>
+            <StoreProvider>
+                <NavbarOrganizerComponent/>
+                <CategoriesOrganizerComponent/>
                 {children}
-            <FooterOrganizer/>
-            <Toaster/>
+                <FooterOrganizer/>
+                <Toaster/>
+            </StoreProvider>
         </ThemeProvider>
         </body>
         </html>

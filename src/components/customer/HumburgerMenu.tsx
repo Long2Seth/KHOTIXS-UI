@@ -2,7 +2,7 @@
 import {IoMenu} from "react-icons/io5";
 import * as React from "react"
 
-import {cn} from "@/lib/utils"
+import {cn} from "@/lib/types/utils"
 import {
     NavigationMenu,
     NavigationMenuContent,

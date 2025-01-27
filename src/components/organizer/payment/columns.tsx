@@ -3,7 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import React from "react";
 import { DataTableColumnHeader } from "@/components/ui/data-table-column-header";
-import {PaymentType} from "@/lib/organizer/tablePaymentData";
+import {PaymentType} from "@/lib/types/organizer/tablePaymentData";
 
 
 export const columnPayment: ColumnDef<PaymentType>[] = [

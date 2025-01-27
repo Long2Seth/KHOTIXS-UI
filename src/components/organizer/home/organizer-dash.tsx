@@ -1,7 +1,7 @@
 "use client"
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer} from 'recharts';
-import {eventData} from '@/lib/organizer/barchartData';
+import {eventData} from '@/lib/types/organizer/barchartData';
 import { LuNotebookPen } from "react-icons/lu";
 
 

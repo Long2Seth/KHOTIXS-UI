@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { calculateRevenue } from "@/lib/organizer/utils"
+import { calculateRevenue } from "@/lib/types/organizer/utils"
 
 export default function RevenueDashboard() {
     const { totalRevenue, averageRevenue } = calculateRevenue()

@@ -1,9 +1,8 @@
 'use client'
-import React from 'react';
-import {useState} from "react";
-import {Input} from "@/components/ui/input";
+import React, { useState } from "react";
+import { Input } from "@/components/ui/input";
 import Image from "next/image";
-
+import { useSubmitPartnerFormMutation } from "@/redux/feature/user/PartnerRegister";
 
 type PartnerRegister = {
     email: string;
@@ -19,11 +18,11 @@ export default function PartnerComponent() {
     const [bankId, setBankID] = useState('');
     const [position, setPosition] = useState('');
     const [address, setLocation] = useState('');
-    const [errors, setErrors] = useState<PartnerRegister>({email: '', businessName: '', bankId: '', position: '', address: ''});
-
+    const [errors, setErrors] = useState<PartnerRegister>({ email: '', businessName: '', bankId: '', position: '', address: '' });
+    const [submitPartnerForm] = useSubmitPartnerFormMutation();
 
     const validateForm = () => {
-        const formErrors = {email: '', businessName: '', bankId: '', position: '', address: ''};
+        const formErrors = { email: '', businessName: '', bankId: '', position: '', address: '' };
         let isValid = true;
 
         if (!bankId) {
@@ -65,19 +64,15 @@ export default function PartnerComponent() {
             };
 
             try {
-                const response = await fetch('http://localhost:8000/identity/api/v1/partners/request', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                if (response.ok) {
-                    console.log('Form submitted successfully', response);
-                } else {
-                    console.error('Form submission failed');
-                }
+                const response = await submitPartnerForm(formData).unwrap();
+                console.log('Form submitted successfully', response);
+                // Clear form fields
+                setEmail('');
+                setBusinessName('');
+                setBankID('');
+                setPosition('');
+                setLocation('');
+                setErrors({ email: '', businessName: '', bankId: '', position: '', address: '' });
             } catch (error) {
                 console.error('Error submitting form:', error);
             }
@@ -85,19 +80,19 @@ export default function PartnerComponent() {
     };
 
     const handleBlur = (field: keyof PartnerRegister, value: string) => {
-        const newErrors: PartnerRegister = {...errors};
+        const newErrors: PartnerRegister = { ...errors };
         if (value.trim() === '') {
             newErrors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required`;
         } else if (field === 'email' && !/\S+@\S+\.\S+/.test(value)) {
-            newErrors.email = 'Emil is invalid';
+            newErrors.email = 'Email is invalid';
         } else {
             newErrors[field] = '';
         }
         setErrors(newErrors);
     };
+
     return (
-        <section
-            className="flex items-center flex-col justify-center w-full px-2 ">
+        <section className="flex items-center flex-col justify-center w-full px-2">
             <form
                 className="md:p-10 p-4 text-start md:w-[500px] rounded-[5px] bg-white dark:bg-background-blur dark:bg-opacity-5 flex flex-col gap-4"
                 onSubmit={handleSubmit}>
@@ -110,7 +105,7 @@ export default function PartnerComponent() {
                         src="/khotixs_logo.png"
                         alt="logo"
                     />
-                    <div className="col-span-2 font-bold justify-center uppercase ">
+                    <div className="col-span-2 font-bold justify-center uppercase">
                         <p>Welcome to the</p>
                         <h1 className="text-xl">
                             Partner Registration
@@ -130,7 +125,7 @@ export default function PartnerComponent() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         onBlur={(e) => handleBlur('email', e.target.value)}
-                        className="p-2 text-lg border-gray-300 rounded-[6px] dark:border-label-description placeholder:text-gray-500  dark:text-secondary-color-text dark:bg-background-blur dark:bg-opacity-5"
+                        className="p-2 text-lg border-gray-300 rounded-[6px] dark:border-label-description placeholder:text-gray-500 dark:text-secondary-color-text dark:bg-background-blur dark:bg-opacity-5"
                     />
                     {errors.email && <span className="text-red-500">{errors.email}</span>}
                 </div>
@@ -147,7 +142,7 @@ export default function PartnerComponent() {
                         value={businessName}
                         onChange={(e) => setBusinessName(e.target.value)}
                         onBlur={(e) => handleBlur('businessName', e.target.value)}
-                        className="p-2 text-lg border-gray-300 rounded-[6px] dark:border-label-description placeholder:text-gray-500  dark:text-secondary-color-text dark:bg-background-blur dark:bg-opacity-5"
+                        className="p-2 text-lg border-gray-300 rounded-[6px] dark:border-label-description placeholder:text-gray-500 dark:text-secondary-color-text dark:bg-background-blur dark:bg-opacity-5"
                     />
                     {errors.businessName && <span className="text-red-500">{errors.businessName}</span>}
                 </div>
@@ -163,8 +158,7 @@ export default function PartnerComponent() {
                         value={bankId}
                         onChange={(e) => setBankID(e.target.value)}
                         onBlur={(e) => handleBlur('bankId', e.target.value)}
-                        className="p-2 text-lg border-gray-300 rounded-[6px] dark:border-label-description placeholder:text-gray-500
-                 dark:text-secondary-color-text dark:bg-background-blur dark:bg-opacity-5"
+                        className="p-2 text-lg border-gray-300 rounded-[6px] dark:border-label-description placeholder:text-gray-500 dark:text-secondary-color-text dark:bg-background-blur dark:bg-opacity-5"
                     />
                     {errors.bankId && <span className="text-red-500">{errors.bankId}</span>}
                 </div>
@@ -179,11 +173,9 @@ export default function PartnerComponent() {
                         value={position}
                         onChange={(e) => setPosition(e.target.value)}
                         onBlur={(e) => handleBlur('position', e.target.value)}
-                        className="p-2 text-lg border border-gray-300 rounded-[6px] dark:border-label-description placeholder:text-gray-500
-                         dark:text-secondary-color-text bg-transparent"
+                        className="p-2 text-lg border border-gray-300 rounded-[6px] dark:border-label-description placeholder:text-gray-500 dark:text-secondary-color-text bg-transparent"
                     />
-                    {errors.position &&
-                        <span className="text-red-500">{errors.position}</span>}
+                    {errors.position && <span className="text-red-500">{errors.position}</span>}
                 </div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="address"
@@ -196,18 +188,16 @@ export default function PartnerComponent() {
                         value={address}
                         onChange={(e) => setLocation(e.target.value)}
                         onBlur={(e) => handleBlur('address', e.target.value)}
-                        className="p-2 text-lg border border-gray-300 rounded-[6px] dark:border-label-description placeholder:text-gray-500  dark:text-secondary-color-text bg-transparent"
+                        className="p-2 text-lg border border-gray-300 rounded-[6px] dark:border-label-description placeholder:text-gray-500 dark:text-secondary-color-text bg-transparent"
                     />
-                    {errors.address &&
-                        <span className="text-red-500">{errors.address}</span>}
+                    {errors.address && <span className="text-red-500">{errors.address}</span>}
                 </div>
                 <button
                     type="submit"
-                    className="bg-primary-color text-white text-lg py-2 px-4 rounded-[5px] hover:bg-primary-color/80 transition"
-                >
+                    className="bg-primary-color text-white text-lg py-2 px-4 rounded-[5px] hover:bg-primary-color/80 transition">
                     Submit
                 </button>
             </form>
         </section>
-    )
+    );
 }

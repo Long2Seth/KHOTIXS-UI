@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
-import { Notification } from "@/type/notification";
+import { Notification } from "@/lib/types/customer/notification";
 import { Avatar } from "@/components/ui/avatar";
 import { NotificationActionComponent } from "@/components/customer/notification/NotificationActionComponent";
 import { NotificationDetailComponent } from "@/components/customer/notification/NotificationDetailComponent";
@@ -65,7 +65,7 @@ export default function NotificationCardComponent({ notification }: Props) {
                     </div>
                     <div>
                         {notification.isRead ? (
-                            <span className=" absolute top-[16px] right-[16px] w-2 h-2 rounded-full ">Read</span>
+                            <span className=" absolute top-[16px] right-[16px] w-2 h-2 rounded-full "></span>
                         ) : (
                             <span
                                 className=" absolute top-[16px] right-[16px] w-2 h-2 rounded-full bg-green-600"></span>

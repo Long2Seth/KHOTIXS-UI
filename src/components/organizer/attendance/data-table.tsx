@@ -36,7 +36,7 @@ import {Calendar as CalendarComponent} from "@/components/ui/calendar";
 import {useMemo, useState} from "react";
 import Image from "next/image";
 import {Pagination} from "@/components/ui/Pagination";
-import {attendanceData} from "@/lib/organizer/attendanceData";
+import {attendanceData} from "@/lib/types/organizer/attendanceData";
 import * as XLSX from "xlsx";
 import {columnAttendance} from "@/components/organizer/attendance/columns";
 

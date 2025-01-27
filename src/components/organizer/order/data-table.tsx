@@ -36,10 +36,10 @@ import {Calendar as CalendarComponent} from "@/components/ui/calendar";
 import {useMemo, useState} from "react";
 import Image from "next/image";
 import {Pagination} from "@/components/ui/Pagination";
-import {orderData} from "@/lib/organizer/orderData";
+import {orderData} from "@/lib/types/organizer/orderData";
 import {columnOrder} from "@/components/organizer/order/columns";
 import * as XLSX from "xlsx";
-import {payments} from "@/lib/organizer/tablePaymentData";
+import {payments} from "@/lib/types/organizer/tablePaymentData";
 
 const locations = Array.from(new Set(orderData.map(order => order.location)));
 

@@ -9,7 +9,7 @@ import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {Calendar as CalendarComponent} from "@/components/ui/calendar";
 import {Pagination} from "@/components/ui/Pagination";
-import {NotificationData} from "@/lib/organizer/NotificationData";
+import {NotificationData} from "@/lib/types/organizer/NotificationData";
 import {Badge} from "@/components/ui/badge";
 
 // const categories = ["Sport", "Technology", "Music", "Art"];

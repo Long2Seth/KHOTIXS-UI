@@ -1,6 +1,6 @@
 import SockJS from 'sockjs-client';
 import { Client } from '@stomp/stompjs';
-import type { Notification } from '@/type/notification';
+import type { Notification } from '@/lib/types/customer/notification';
 
 export class WebSocketService {
     private wsUrl: string;

@@ -18,11 +18,11 @@ import {Textarea} from "@/components/ui/textarea";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {Calendar as CalendarComponent} from "@/components/ui/calendar";
 import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area";
-import {cn} from "@/lib/utils";
+import {cn} from "@/lib/types/utils";
 import {format} from "date-fns";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
-import {EventType} from "@/lib/customer/event";
+import {EventType} from "@/lib/types/customer/event";
 import {LoadingButton} from "@/components/ui/loading-button";
 
 const eventSchema = z.object({

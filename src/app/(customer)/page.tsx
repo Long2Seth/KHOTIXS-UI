@@ -6,14 +6,13 @@ import {CardComponent} from "@/components/customer/card/CardComponent";
 import {Button} from "@/components/ui/button";
 import {IoMdArrowRoundForward} from "react-icons/io";
 import {useRouter} from "next/navigation";
-import {useEffect, useRef, useState} from "react";
+import {useRef} from "react";
 import {SkeletonHomePageComponent} from "@/components/customer/card/SkeletonHomePageComponent";
-import {EventType} from "@/lib/customer/event";
+import {useGetAllEventPublishQuery} from "@/redux/feature/user/Event";
 
 export default function Home() {
     const route = useRouter();
-    const [isLoading, setIsLoading] = useState(true);
-    const [events, setEvents] = useState<EventType[]>([]);
+    const { data: events = [], isLoading } = useGetAllEventPublishQuery();
 
     const technologyRef = useRef<HTMLDivElement>(null);
     const concertRef = useRef<HTMLDivElement>(null);
@@ -21,28 +20,6 @@ export default function Home() {
     const communityRef = useRef<HTMLDivElement>(null);
     const conferenceRef = useRef<HTMLDivElement>(null);
     const generalRef = useRef<HTMLDivElement>(null);
-
-    const eventData = async () => {
-        try {
-            const response = await fetch(`event-ticket/api/v1/events/published`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            const data = await response.json();
-            setEvents(data); // Set the events state with the fetched data
-        } catch (error) {
-            console.error("Failed to fetch events:", error);
-            setEvents([]);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        eventData();
-    }, []);
 
     const handleButtonClick = (value: string) => {
         route.push(`/event-category/${value}`);
@@ -119,7 +96,7 @@ export default function Home() {
 
                             </section>
                             <section
-                               className="container mx-auto px-[25px] w-full py-[15px] grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
+                                className="container mx-auto px-[25px] w-full py-[15px] grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
                                 {events.filter(event => event.eventCategory.toUpperCase() === "CONCERT").slice(0, 6).map((event, index) => (
                                     <CardComponent key={index} event={event}/>
                                 ))}
@@ -153,7 +130,7 @@ export default function Home() {
 
                             </section>
                             <section
-                               className="container mx-auto px-[25px] w-full py-[15px] grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
+                                className="container mx-auto px-[25px] w-full py-[15px] grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
                                 {events.filter(event => event.eventCategory.toUpperCase() === "SPORT").slice(0, 6).map((event, index) => (
                                     <CardComponent key={index} event={event}/>
                                 ))}
@@ -188,7 +165,7 @@ export default function Home() {
 
                             </section>
                             <section
-                               className="container mx-auto px-[25px] w-full py-[15px] grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
+                                className="container mx-auto px-[25px] w-full py-[15px] grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
                                 {events.filter(event => event.eventCategory.toUpperCase() === "COMMUNITY").slice(0, 6).map((event, index) => (
                                     <CardComponent key={index} event={event}/>
                                 ))}
@@ -219,7 +196,7 @@ export default function Home() {
 
                             </section>
                             <section
-                               className="container mx-auto px-[25px] w-full py-[15px] grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
+                                className="container mx-auto px-[25px] w-full py-[15px] grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
                                 {events.filter(event => event.eventCategory.toUpperCase() === "CONFERENCE").slice(0, 6).map((event, index) => (
                                     <CardComponent key={index} event={event}/>
                                 ))}
@@ -247,7 +224,7 @@ export default function Home() {
                                 </div>
                             </section>
                             <section
-                               className="container mx-auto px-[25px] w-full py-[15px] grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
+                                className="container mx-auto px-[25px] w-full py-[15px] grid gap-2 grid-cols-1 sm:grid-cols-2 sm:w-full md:gap-5 md:grid-cols-2 lg:max-w-full lg:grid-cols-3 justify-center items-center sm:p-0 lg:px-[30px] xl:gap-10 ">
                                 {events.filter(event => event.eventCategory.toUpperCase() === "GENERAL").slice(0, 6).map((event, index) => (
                                     <CardComponent key={index} event={event}/>
                                 ))}

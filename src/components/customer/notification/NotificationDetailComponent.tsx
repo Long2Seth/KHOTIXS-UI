@@ -13,7 +13,7 @@ import {
 import {Input} from "@/components/ui/input";
 import {Label} from "@/components/ui/label";
 import Image from "next/image";
-import { Notification } from "@/type/notification";
+import { Notification } from "@/lib/types/customer/notification";
 import {RiCalendarLine, RiMap2Line, RiTimerLine} from "react-icons/ri";
 
 type NotificationDetailComponentProps = {

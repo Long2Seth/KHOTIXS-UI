@@ -23,32 +23,16 @@ import {
 } from "react-icons/ri"
 import {Button} from "@/components/ui/button"
 import {useEffect, useState} from "react";
-import {EventType, Ticket} from "@/lib/customer/event";
-
+import {EventType, Ticket} from "@/lib/types/customer/event";
+import { useGetEventByIdQuery } from "@/redux/feature/user/Event";
+import EventDetailsSkeleton from "@/components/customer/event/EventDetailsSkeleton";
 
 type PropsType = {
     id: string;
 }
 
 export default function EventDetails({id}: PropsType) {
-    const [eventData, setEventData] = useState<EventType | null>(null);
-
-    const getEvent = async () => {
-        const res = await fetch(`/event-ticket/api/v1/events/${id}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-        const data = await res.json();
-        setEventData(data);
-    };
-
-    useEffect(() => {
-        getEvent();
-    }, []);
-
-    const router = useRouter();
+    const { data: eventData, error, isLoading } = useGetEventByIdQuery(id);
     const [tickets, setTickets] = useState<Ticket[]>([]);
 
     useEffect(() => {
@@ -95,6 +79,9 @@ export default function EventDetails({id}: PropsType) {
         return `${startTime}-${endTime}`;
     };
 
+    if (isLoading) return <EventDetailsSkeleton />;
+    if (error) return <p>Error loading event details</p>;
+
     return (
         <main className={`container mx-auto px-5 lg:px-10 `}>
             <div className="py-7">
@@ -121,7 +108,6 @@ export default function EventDetails({id}: PropsType) {
                         </BreadcrumbList>
                     </Breadcrumb>
                 </section>
-
 
                 {/*Event title*/}
                 <section className="sm:flex gap-5 mb-7">

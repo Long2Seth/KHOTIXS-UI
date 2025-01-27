@@ -1,41 +1,19 @@
 'use client';
 import React, {useEffect, useState} from 'react';
 import {CardComponent} from "@/components/customer/card/CardComponent";
-import {EventType} from "@/lib/customer/event";
+import {EventType} from "@/lib/types/customer/event";
+import {useGetEventByCategoryQuery} from "@/redux/feature/user/Event";
+import {EventCategorySkeleton} from "@/components/customer/event/EventCategorySkeleton";
 
 type Props = {
     category: string;
 }
 
 export default function EventCategoryComponent({category}: Props) {
-    const [isLoading, setIsLoading] = useState(true);
-    const [events, setEvents] = useState<EventType[]>([]);
+    const {data: events = [], error, isLoading} = useGetEventByCategoryQuery(category);
 
-    console.log(" CATEGORY :", category)
-
-    useEffect(() => {
-        const data = async () => {
-            try {
-                const response = await fetch(`/event-ticket/api/v1/events/category/${category}`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                });
-                const result = await response.json();
-                setEvents(result);
-            } catch (error) {
-                console.error("Failed to fetch events:", error);
-                setEvents([]);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        data().then(r => console.log("Data : ", r));
-    }, [category]);
-
-    console.log("Events", events);
+    if (isLoading) return <EventCategorySkeleton/>;
+    if (error) return <p>Error loading events</p>;
 
     return (
         <section
@@ -50,6 +28,5 @@ export default function EventCategoryComponent({category}: Props) {
                 ))}
             </section>
         </section>
-    )
-        ;
+    );
 }

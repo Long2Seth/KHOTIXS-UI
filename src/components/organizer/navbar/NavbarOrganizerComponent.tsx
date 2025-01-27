@@ -4,11 +4,11 @@ import {IoMdCloseCircle} from "react-icons/io";
 import {IoMenu} from "react-icons/io5";
 import Link from "next/link";
 import * as React from "react";
-import {navItems} from "@/lib/organizer/navData";
+import {navItems} from "@/lib/types/organizer/navData";
 import {useRouter, usePathname} from "next/navigation";
 import {OrganizerProfileComponent} from "@/components/organizer/profile/UserProfileComponent";
 import {useEffect, useState} from "react";
-import {Profile} from "@/lib/customer/userProfile";
+import {Profile} from "@/lib/types/customer/userProfile";
 
 export default function NavbarOrganizerComponent() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);

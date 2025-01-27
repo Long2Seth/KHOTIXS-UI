@@ -18,7 +18,7 @@ import {Avatar, AvatarImage} from "@/components/ui/avatar";
 import * as React from "react";
 import {useRouter} from "next/navigation";
 import {ModeToggleAfterLogin} from "@/components/customer/navbar/modeToggleAfterLogin";
-import {Profile} from "@/lib/customer/userProfile";
+import {Profile} from "@/lib/types/customer/userProfile";
 import {warning} from "motion-utils";
 
 

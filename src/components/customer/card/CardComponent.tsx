@@ -5,7 +5,7 @@ import {HiOutlineLocationMarker} from "react-icons/hi";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
 import {Badge} from "@/components/ui/badge";
-import {EventType} from "@/lib/customer/event";
+import {EventType} from "@/lib/types/customer/event";
 
 
 enum TicketType {

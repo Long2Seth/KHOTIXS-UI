@@ -18,7 +18,7 @@ import {Textarea} from "@/components/ui/textarea";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {Calendar as CalendarComponent} from "@/components/ui/calendar";
 import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area";
-import {cn} from "@/lib/utils";
+import {cn} from "@/lib/types/utils";
 import {format} from "date-fns";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
@@ -75,7 +75,7 @@ export function CreateEventForm() {
             formData.append('file', file);
 
             try {
-                const response = await fetch('http://localhost:8000/asset/api/v1/files', {
+                const response = await fetch('/asset/api/v1/files', {
                     method: 'POST',
                     body: formData,
                 });

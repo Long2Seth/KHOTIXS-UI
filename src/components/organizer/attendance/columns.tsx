@@ -2,7 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
 import React from "react";
 import { DataTableColumnHeader } from "@/components/ui/data-table-column-header";
-import { AttendanceEntry } from "@/lib/organizer/attendanceData";
+import { AttendanceEntry } from "@/lib/types/organizer/attendanceData";
 
 
 export const columnAttendance: ColumnDef<AttendanceEntry>[] = [

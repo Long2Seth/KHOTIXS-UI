@@ -23,7 +23,7 @@ import {Badge} from "@/components/ui/badge"
 import {Checkbox} from "@/components/ui/checkbox";
 import {useRouter} from "next/navigation";
 import {RiStarFill} from "react-icons/ri";
-import {EventType, Ticket} from "@/lib/customer/event";
+import {EventType, Ticket} from "@/lib/types/customer/event";
 import {z} from 'zod';
 import {Button} from "@/components/ui/button";
 

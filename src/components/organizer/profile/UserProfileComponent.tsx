@@ -15,7 +15,7 @@ import {
 import {Avatar, AvatarImage} from "@/components/ui/avatar";
 import * as React from "react";
 import {useRouter} from "next/navigation";
-import {Profile} from "@/lib/customer/userProfile";
+import {Profile} from "@/lib/types/customer/userProfile";
 
 type PropTypes = {
     data : Profile | null;

@@ -5,7 +5,7 @@ import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { CalendarIcon } from 'lucide-react';
 import { format } from "date-fns";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/types/utils";
 import {Label} from "@/components/ui/label";
 
 type DatePickerProps = {

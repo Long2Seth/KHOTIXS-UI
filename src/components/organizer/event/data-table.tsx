@@ -38,7 +38,7 @@ import {Calendar as CalendarComponent} from "@/components/ui/calendar";
 import {useEffect, useMemo, useState} from "react";
 import Image from "next/image";
 import {Pagination} from "@/components/ui/Pagination";
-import {EventType} from "@/lib/customer/event";
+import {EventType} from "@/lib/types/customer/event";
 import LoadingComponent from "@/components/loading/LoadingComponent";
 
 export function EventComponent() {

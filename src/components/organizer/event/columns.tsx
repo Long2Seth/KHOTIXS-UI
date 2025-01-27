@@ -6,7 +6,7 @@ import React from "react";
 import Image from "next/image";
 import { DataTableColumnHeader } from "@/components/ui/data-table-column-header";
 import {ActionEventComponent} from "@/components/organizer/event/ActionEventComponent";
-import {EventType} from "@/lib/customer/event";
+import {EventType} from "@/lib/types/customer/event";
 
 export const columnEvent: ColumnDef<EventType>[] = [
     {

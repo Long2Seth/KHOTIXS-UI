@@ -4,19 +4,19 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 import { Button } from "@/components/ui/button";
 import { FiBell } from "react-icons/fi";
 import NotificationCardComponent from "@/components/customer/notification/NotificationCardComponent";
-import { Notification } from "@/type/notification";
+import { Notification } from "@/lib/types/customer/notification";
 import { useEffect, useState } from "react";
-import { WebSocketService } from "@/lib/customer/websocket";
+import { WebSocketService } from "@/lib/types/customer/websocket";
 
 export default function NotificationComponent() {
     const [notifications, setNotifications] = useState<Notification[]>([]);
     const userRole = "USER";
 
     useEffect(() => {
-        const wsServer = new WebSocketService('http://localhost:8891/ws', userRole);
+        const wsServer = new WebSocketService('/ws', userRole);
 
         wsServer.onNotification((notification) => {
-            setNotifications((prev) => [notification, ...prev]); // Add new notification at the top
+            setNotifications((prev) => [notification, ...prev]);
         });
 
         wsServer.connect();

@@ -1,4 +1,4 @@
-import { upcomingData } from "@/lib/customer/upcomingData";
+import { upcomingData } from "@/lib/types/customer/upcomingData";
 import {UpcomingCardComponent} from "@/components/customer/card/UpcomingCardComponent";
 
 export function UpcomingEventComponent() {

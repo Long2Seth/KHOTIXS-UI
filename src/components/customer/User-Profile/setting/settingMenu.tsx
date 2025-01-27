@@ -1,6 +1,6 @@
 'use client'
 
-import {cn} from "@/lib/utils"
+import {cn} from "@/lib/types/utils"
 import {MdOutlineLockPerson} from "react-icons/md";
 import {IoMdNotificationsOutline} from "react-icons/io";
 

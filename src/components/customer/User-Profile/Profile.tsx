@@ -11,7 +11,7 @@ import Image from "next/image";
 import React, {useState, useEffect} from "react";
 import EditProfile from "@/components/customer/User-Profile/EditProfile";
 import {ProfileComponentSkeleton} from "@/components/customer/User-Profile/user/ProfileComponentSkeleton";
-import {Profile} from "@/lib/customer/userProfile";
+import {Profile} from "@/lib/types/customer/userProfile";
 
 
 export default function ProfileComponent() {

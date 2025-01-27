@@ -5,12 +5,12 @@ import {useState, useEffect} from 'react';
 import {IoMenu, IoSearch} from 'react-icons/io5';
 import {IoMdCloseCircle} from 'react-icons/io';
 import {FaArrowRightLong} from "react-icons/fa6";
-import {menuItems, MenuType} from "@/lib/navbar/navbar";
+import {menuItems, MenuType} from "@/lib/types/navbar/navbar";
 import * as React from "react";
 import {CiBullhorn} from "react-icons/ci";
 import {Button} from "@/components/ui/button";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
-import {cn} from "@/lib/utils";
+import {cn} from "@/lib/types/utils";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {CalendarIcon} from "lucide-react";
 import {format} from "date-fns";
@@ -22,8 +22,8 @@ import {useRouter} from "next/navigation";
 import {UserProfileComponent} from "@/components/customer/navbar/UserProfileComponent";
 import {FiBell} from "react-icons/fi";
 // import { fetchNotifications } from "@/lib/customer/api";
-import {WebSocketService} from "@/lib/customer/websocket";
-import {UserProfile} from "@/lib/navbar/UserProfile";
+import {WebSocketService} from "@/lib/types/customer/websocket";
+import {UserProfile} from "@/lib/types/navbar/UserProfile";
 import NotificationComponent from "@/components/customer/notification/NotificationComponent";
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet"
 

@@ -10,12 +10,10 @@ export default async function EventByCategory({params}: PropsType) {
     const {category} = await params
 
 
-
     return (
-     <main>
-         <EventCategoryComponent category={category}/>
-     </main>
+        <main>
+            <EventCategoryComponent category={category}/>
+        </main>
 
-    )
-        ;
+    );
 }

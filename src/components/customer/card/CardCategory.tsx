@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import {motion} from 'framer-motion';
-import {CategoriesIcon, useCategories} from "@/lib/customer/categories";
+import {CategoriesIcon, useCategories} from "@/lib/types/customer/categories";
 
 type CardCategoryProps = {
     technologyRef: React.RefObject<HTMLElement>;

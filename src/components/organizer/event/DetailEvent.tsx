@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { RiCalendarLine, RiMap2Line, RiTimerLine } from "react-icons/ri";
 import { useRouter } from "next/navigation";
-import { EventType } from "@/lib/customer/event";
+import { EventType } from "@/lib/types/customer/event";
 import { useEffect, useState } from "react";
 
 type PropType = {

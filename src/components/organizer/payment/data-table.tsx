@@ -38,7 +38,7 @@ import Image from "next/image";
 import { CardHeader, CardTitle } from "@/components/ui/card";
 import { Pagination } from "@/components/ui/Pagination";
 import { columnPayment } from "@/components/organizer/payment/columns";
-import { payments } from "@/lib/organizer/tablePaymentData";
+import { payments } from "@/lib/types/organizer/tablePaymentData";
 import * as XLSX from "xlsx";
 
 const paymentMethods = Array.from(new Set(payments.map(event => event.paymentMethod)));
