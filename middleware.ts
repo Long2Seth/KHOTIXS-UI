@@ -20,6 +20,6 @@ export async function middleware(req: NextRequest,api: MiddlewareAPI) {
 
 }
 export const config = {
-    matcher: ['/','/admin/:path*', '/student/:path*', '/instructor/:path*'], // List of routes to apply the CustomMiddleware to
+    matcher: ['/','/organizer/:path*', '/student/:path*', '/instructor/:path*'], // List of routes to apply the CustomMiddleware to
 };
 

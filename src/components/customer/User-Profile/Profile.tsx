@@ -8,33 +8,20 @@ import {LuBriefcaseBusiness} from "react-icons/lu";
 import {Card, CardContent} from "@/components/ui/card";
 import {MapPin} from "lucide-react";
 import Image from "next/image";
-import React, {useState, useEffect} from "react";
+import React from "react";
 import EditProfile from "@/components/customer/User-Profile/EditProfile";
 import {ProfileComponentSkeleton} from "@/components/customer/User-Profile/user/ProfileComponentSkeleton";
-import {Profile} from "@/lib/types/customer/userProfile";
-
+import {useGetUserProfileQuery} from "@/redux/feature/user/UserProfile";
 
 export default function ProfileComponent() {
-    const [profile, setProfile] = useState<Profile | null>(null);
+    const {data: profile, error, isLoading} = useGetUserProfileQuery();
 
-    useEffect(() => {
-        const fetchAdminProfile = async () => {
-            try {
-                const response = await fetch(`/user-profile/api/v1/user-profiles/me`);
-                if (response.ok) {
-                    const data: Profile = await response.json();
-                    setProfile(data);
-                }
-            } catch (err) {
-                console.error("Error fetching admin profile:", err);
-            }
-        };
-
-        fetchAdminProfile();
-    }, []);
-
-    if (!profile) {
+    if (isLoading) {
         return <div><ProfileComponentSkeleton/></div>;
+    }
+
+    if (error || !profile) {
+        return <div>Error loading profile</div>;
     }
 
     const fields = [

@@ -24,3 +24,7 @@ export type EventType = {
     tickets: Ticket[];
 };
 
+export type EventResponse = {
+    content: EventType[];
+}
+

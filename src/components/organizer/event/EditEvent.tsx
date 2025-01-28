@@ -24,6 +24,8 @@ import {useRouter} from "next/navigation";
 import Image from "next/image";
 import {EventType} from "@/lib/types/customer/event";
 import {LoadingButton} from "@/components/ui/loading-button";
+import {useUploadFileMutation} from "@/redux/feature/upload-file/UploadFile";
+import {useGetEventByIdQuery, useUpdateEventByIdMutation} from "@/redux/feature/organizer/Event";
 
 const eventSchema = z.object({
     eventTitle: z.string().min(1, "Event title is required"),
@@ -46,28 +48,20 @@ export function EditEvent({id}: PropsType) {
     const [thumbnail, setThumbnail] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [errors, setErrors] = useState<Record<string, string>>({});
-    const [eventData, setEventData] = useState<EventType | null>(null);
     const [selectedCategory, setSelectedCategory] = useState<string>("");
     const [loading, setLoading] = useState(false);
+    const [uploadFile] = useUploadFileMutation();
+    const { data: eventData, isLoading: eventLoading } = useGetEventByIdQuery(id);
+    const [updateEvent] = useUpdateEventByIdMutation();
 
-    const getdata = async () => {
-        await fetch(`/event-ticket/api/v1/events/${id}`)
-            .then(response => response.json())
-            .then(data => {
-                setStartedDate(new Date(data.startedDate));
-                setEndedDate(new Date(data.endedDate));
-                setThumbnail(data.thumbnail);
-                setEventData(data);
-                setSelectedCategory(data.eventCategory);
-            })
-            .catch((error) => {
-                    console.error('Error:', error);
-                }
-            );
-    }
     useEffect(() => {
-        getdata();
-    }, []);
+        if (eventData) {
+            setStartedDate(new Date(eventData.startedDate));
+            setEndedDate(new Date(eventData.endedDate));
+            setThumbnail(eventData.thumbnail);
+            setSelectedCategory(eventData.eventCategory);
+        }
+    }, [eventData]);
 
     const handleTimeChange = (
         type: "hour" | "minute",
@@ -99,16 +93,7 @@ export function EditEvent({id}: PropsType) {
             formData.append('file', file);
 
             try {
-                const response = await fetch('/asset/api/v1/files', {
-                    method: 'POST',
-                    body: formData,
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.json();
+                const data = await uploadFile(formData).unwrap();
                 setThumbnail(data.uri);
             } catch (error) {
                 console.error("Error uploading file:", error);
@@ -137,7 +122,7 @@ export function EditEvent({id}: PropsType) {
             startedDate: formatStartedDate,
             endedDate: formatEndedDate,
             description: ((e.target as HTMLFormElement).elements.namedItem('description') as HTMLTextAreaElement).value,
-            thumbnail,
+            thumbnail: thumbnail || undefined,
             capacity: calculateCapacity(startedDate, endedDate),
         };
 
@@ -155,18 +140,7 @@ export function EditEvent({id}: PropsType) {
         } else {
             setErrors({});
             try {
-                const response = await fetch(`/event-ticket/api/v1/events/${id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData),
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const data = await response.json();
+                await updateEvent({ id, data: formData }).unwrap();
                 router.push("/organizer/events");
             } catch (error) {
                 console.error("Error submitting form:", error);
@@ -175,6 +149,10 @@ export function EditEvent({id}: PropsType) {
             }
         }
     };
+
+    // if (eventLoading) {
+    //     return <div>Loading...</div>;
+    // }
 
     return (
         <form

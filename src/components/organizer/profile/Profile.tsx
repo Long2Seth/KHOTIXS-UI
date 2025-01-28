@@ -11,26 +11,25 @@ import {MapPin} from "lucide-react";
 import Image from "next/image";
 import EditProfile from "@/components/customer/User-Profile/EditProfile";
 import {ProfileComponentSkeleton} from "@/components/customer/User-Profile/user/ProfileComponentSkeleton";
-import {Profile} from "@/lib/types/customer/userProfile";
+import {UserProfileType} from "@/lib/types/customer/userProfile";
 
 type PropType = {
     id : string;
 }
 
 export default function ProfileComponent({id}: PropType) {
-    const [profile, setProfile] = useState<Profile | null>(null);
-    console.log(" ID IN COMPONENT " , id)
+    const [profile, setProfile] = useState<UserProfileType | null>(null);
 
     useEffect(() => {
         const fetchAdminProfile = async () => {
             try {
                 const response = await fetch(`/user-profile/api/v1/user-profiles/${id}`);
                 if (response.ok) {
-                    const data: Profile = await response.json();
+                    const data: UserProfileType = await response.json();
                     setProfile(data);
                 }
             } catch (err) {
-                console.error("Error fetching admin profile:", err);
+                console.error("Error fetching organizer profile:", err);
             }
         };
 

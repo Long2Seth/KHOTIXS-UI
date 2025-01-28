@@ -12,46 +12,21 @@ import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Pagination } from "@/components/ui/Pagination";
 import { EventType } from "@/lib/types/customer/event";
-import {Badge} from "@/components/ui/badge";
+import { Badge } from "@/components/ui/badge";
+import { useGetAllEventUpcomingQuery } from "@/redux/feature/organizer/Event";
 
 export default function InformationEventComponent() {
     const [searchData, setSearchData] = useState("");
     const [date, setDate] = useState<Date>();
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
-    const [events, setEvents] = useState<EventType[]>([]);
+    const { data: events = [], isLoading, isError } = useGetAllEventUpcomingQuery();
 
-    const eventData = async () => {
-        try {
-            const response = await fetch(`event-ticket/api/v1/events/published`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
+    const filteredEvents = events.filter((event: EventType) =>
+        isWithinInterval(new Date(event.startedDate), { start: new Date(), end: addDays(new Date(), 7) })
+    );
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json();
-            const now = new Date();
-            const filteredEvents = data.filter((event: EventType) =>
-                isWithinInterval(new Date(event.startedDate), { start: now, end: addDays(now, 7) })
-            );
-            setEvents(filteredEvents); // Set the events state with the filtered data
-        } catch (error) {
-            console.error("Failed to fetch events:", error);
-            setEvents([]);
-        }
-    };
-
-    useEffect(() => {
-        eventData();
-    }, []);
-
-
-    const filterOrderData = events.filter(attendance =>
+    const filterOrderData = filteredEvents.filter(attendance =>
         attendance.eventTitle.toLowerCase().includes(searchData.toLowerCase()) ||
         attendance.id.toLowerCase().includes(searchData.toLowerCase())
     );
@@ -63,12 +38,20 @@ export default function InformationEventComponent() {
         currentPage * itemsPerPage
     );
 
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (isError) {
+        return <div>Failed to fetch events</div>;
+    }
+
     return (
         <section className="w-full border-primary-color overflow-x-hidden">
             <CardHeader>
                 <section className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 my-5 ">
                     <CardTitle>
-                        <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text my-2">INFORMATION EVENTS</h1>
+                        <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text my-2">UPCOMING EVENTS</h1>
                     </CardTitle>
                 </section>
             </CardHeader>
@@ -131,7 +114,7 @@ export default function InformationEventComponent() {
                                     <TableRow>
                                         <TableHead className="px-2 py-3 min-w-[100px] lg:min-w-[150px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">NO</TableHead>
                                         <TableHead className="px-2 py-3 min-w-[200px] lg:min-w-[500px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">EVENT NAME</TableHead>
-                                        <TableHead className="px-2 py-3 min-w-[250px] lg:min-w-[300px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">EVENT DATE</TableHead>
+                                        <TableHead className="px-2 py-3 min-w-[350px] lg:min-w-[400px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">EVENT DATE</TableHead>
                                         <TableHead className="px-2 py-3 min-w-[200px] lg:min-w-[300px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">CATEGORY</TableHead>
                                         <TableHead className="px-2 py-3 min-w-[200px] lg:min-w-[300px] text-start text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">LOCATION</TableHead>
                                         <TableHead className="px-2 py-3 min-w-[100px] text-start text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">STATUS</TableHead>
@@ -147,7 +130,7 @@ export default function InformationEventComponent() {
                                                     <TableRow className="hover:bg-gray-100 dark:hover:bg-khotixs-background-dark">
                                                         <TableHead className="px-2 py-3 min-w-[100px] lg:min-w-[150px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">{eventIndex + 1}</TableHead>
                                                         <TableCell className="px-2 py-3 min-w-[200px] lg:min-w-[500px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">{eventData.eventTitle}</TableCell>
-                                                        <TableCell className="px-2 py-3 min-w-[250px] lg:min-w-[300px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">{eventData.startedDate + " / " + eventData.endedDate}</TableCell>
+                                                        <TableCell className="px-2 py-3 min-w-[350px] lg:min-w-[400px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">{eventData.startedDate + " / " + eventData.endedDate}</TableCell>
                                                         <TableCell className="px-2 py-3 min-w-[200px] lg:min-w-[300px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">{eventData.eventCategory }</TableCell>
                                                         <TableCell className="px-2 py-3 min-w-[200px] lg:min-w-[300px] text-start text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{eventData.location}</TableCell>
                                                         <TableCell className="px-2 py-3 min-w-[100px] text-start text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">
@@ -167,7 +150,7 @@ export default function InformationEventComponent() {
                                                     <TableRow>
                                                         <TableHead className="px-2 py-3 min-w-[100px] lg:min-w-[150px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">NO</TableHead>
                                                         <TableHead className="px-2 py-3 min-w-[200px] lg:min-w-[500px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">TICKET NAME </TableHead>
-                                                        <TableHead className="px-2 py-3 min-w-[250px] lg:min-w-[300px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">TICKET TYPE</TableHead>
+                                                        <TableHead className="px-2 py-3 min-w-[350px] lg:min-w-[400px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">TICKET TYPE</TableHead>
                                                         <TableHead className="px-2 py-3 min-w-[200px] lg:min-w-[300px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">PRICE</TableHead>
                                                         <TableHead className="px-2 py-3 min-w-[200px] lg:min-w-[300px] text-start text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">QTY</TableHead>
                                                         <TableHead className="px-2 py-3 min-w-[100px] text-start text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">TOTAL</TableHead>
@@ -178,7 +161,7 @@ export default function InformationEventComponent() {
                                                         <TableRow key={ticket.id} className="hover:bg-gray-100 dark:hover:bg-khotixs-background-dark">
                                                             <TableCell className="px-2 py-3 min-w-[100px] lg:min-w-[150px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">{ticketIndex + 1}</TableCell>
                                                             <TableCell className="px-2 py-3 min-w-[200px] lg:min-w-[500px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">{ticket.ticketTitle}</TableCell>
-                                                            <TableCell className="px-2 py-3 min-w-[250px] lg:min-w-[300px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text "><Badge
+                                                            <TableCell className="px-2 py-3 min-w-[350px] lg:min-w-[400px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text "><Badge
                                                                 className={`text-secondary-color-text text-start text-[10px] justify-center md:text-sm font-light rounded-[6px] min-w-[60px] ${
                                                                     ticket.type === "VIP"
                                                                         ? "bg-label-vip hover:bg-label-vip/90"

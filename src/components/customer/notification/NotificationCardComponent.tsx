@@ -1,3 +1,4 @@
+'use client';
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
@@ -5,62 +6,74 @@ import { Notification } from "@/lib/types/customer/notification";
 import { Avatar } from "@/components/ui/avatar";
 import { NotificationActionComponent } from "@/components/customer/notification/NotificationActionComponent";
 import { NotificationDetailComponent } from "@/components/customer/notification/NotificationDetailComponent";
+import { useReadNotificationByIdMutation } from "@/redux/feature/user/Notification";
 
 type Props = {
     notification: Notification;
 };
 
+function timeSince(date: Date) {
+    const now = new Date();
+    const createdAt = new Date(date);
+    const seconds = Math.floor((now.getTime() - createdAt.getTime()) / 1000);
+
+    let interval = Math.floor(seconds / 31536000);
+    if (interval > 1) return `${interval} years ago`;
+
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) return `${interval} months ago`;
+
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) return `${interval} days ago`;
+
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) return `${interval} hours ago`;
+
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) return `${interval} minutes ago`;
+
+    return `${Math.floor(seconds)} seconds ago`;
+}
+
 export default function NotificationCardComponent({ notification }: Props) {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [readNotificationById] = useReadNotificationByIdMutation();
 
-    const getNotificationDetails = (notification: Notification) => {
-        switch (notification.notificationType) {
-            case 'PUBLISH-EVENT':
-                return {
-                    title: 'Publish Event',
-                    image: '/images/planner.png',
-                    description: "A new event has been published. Check the details and stay updated!"
-                };
-            case 'UPCOMING-EVENT':
-                return {
-                    title: 'Upcoming Event',
-                    image: '/images/schedule.png',
-                    description: "An event is coming up soon. Don't forget to mark your calendar!"
-                };
-            default:
-                return {
-                    title: 'Unknown Event',
-                    image: '/images/default.png',
-                    description: "This notification type is not recognized."
-                };
+    const handleCardClick = async () => {
+        if (notification.id) {
+            try {
+                await readNotificationById(notification.id).unwrap();
+                setIsDialogOpen(true);
+            } catch (error) {
+                console.error('Failed to update notification as read:', error);
+            }
         }
     };
-
-    const { title, image, description } = getNotificationDetails(notification);
 
     return (
         <div className="relative container mx-auto flex items-center justify-center">
             <Card
-                onClick={() => setIsDialogOpen(true)}
+                onClick={handleCardClick}
                 className="w-full max-w-[700px] p-4 hover:bg-accent/50 transition-colors rounded-[5px] bg-white border border-gray-200 cursor-pointer">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3 w-full">
                         <div className="relative">
                             <Avatar className="h-10 w-10 flex items-center justify-center">
                                 <Image
-                                    src={image}
-                                    alt={title}
+                                    src={notification.thumbnail || '/event/event-banner.png'}
+                                    alt="notification.thumbnail"
                                     width={40}
                                     height={40}
-                                    className="w-full h-full rounded-[6px]"
+                                    className="w-full h-full rounded-full"
                                 />
                             </Avatar>
                         </div>
                         <div className="flex flex-col w-full">
                             <p className="text-sm">
-                                <span className="text-lg font-bold line-clamp-1">{title}</span>
+                                <span className="text-lg font-bold line-clamp-1">{notification.eventTitle}</span>
                             </p>
-                            <p className="text-sm line-clamp-1">{description}</p>
+                            <p className="text-sm line-clamp-1">{notification.description}</p>
+                            <p className={` text-primary-color `}>{notification.createdAt ? timeSince(notification.createdAt) : 'Unknown time'}</p>
                         </div>
                     </div>
                     <div>
@@ -78,6 +91,7 @@ export default function NotificationCardComponent({ notification }: Props) {
                     </div>
                 </div>
             </Card>
-            {isDialogOpen && <NotificationDetailComponent id={notification.id ?? null} onClose={() => setIsDialogOpen(false)} />}        </div>
+            {isDialogOpen && <NotificationDetailComponent id={notification.id ?? null} onClose={() => setIsDialogOpen(false)} />}
+        </div>
     );
 }

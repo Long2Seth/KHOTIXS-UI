@@ -38,7 +38,7 @@ export default function NotificationComponent() {
                     <FiBell className="h-7 w-7" />
                 </Button>
             </SheetTrigger>
-            <SheetContent className={`overflow-y-scroll no-scrollbar`}>
+            <SheetContent className={`overflow-y-scroll no-scrollbar bg-white`}>
                 <SheetHeader>
                     <SheetTitle className={`text-start text-2xl`}>Notification</SheetTitle>
                 </SheetHeader>

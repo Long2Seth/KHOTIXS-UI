@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { RiCalendarLine, RiMap2Line, RiTimerLine } from "react-icons/ri";
 import { useRouter } from "next/navigation";
-import { EventType } from "@/lib/types/customer/event";
-import { useEffect, useState } from "react";
+import { useGetTicketByEventIdQuery } from "@/redux/feature/organizer/Ticket";
+import LoadingComponent from "@/components/loading/LoadingComponent";
 
 type PropType = {
     id: string;
@@ -12,37 +12,30 @@ type PropType = {
 
 export default function EventDetailsPage({ id }: PropType) {
     const router = useRouter();
-    const [eventData, setEventData] = useState<EventType | null>(null);
+    const { data: eventData, error, isLoading } = useGetTicketByEventIdQuery(id);
 
-    const getData = async () => {
-        try {
-            const response = await fetch(`/event-ticket/api/v1/events/organizer/${id}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            const data: EventType = await response.json();
-            setEventData(data);
-        } catch (error) {
-            console.error('Error:', error);
-        }
+    if (isLoading) {
+        return <LoadingComponent/>;
+    }
+
+    if (error) {
+        return <div>Error loading event details.</div>;
+    }
+
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+        const formattedDate = date.toISOString().split('T')[0];
+        const formattedTime = date.toTimeString().split(' ')[0].slice(0, 5);
+        return { formattedDate, formattedTime };
     };
-    useEffect(() => {
-        getData();
-    }, [id]);
 
-    console.log(" EVENT DATA ", eventData);
+    const { formattedDate: startDate, formattedTime: startTime } = formatDate(eventData?.startedDate || '');
+    const { formattedDate: endDate, formattedTime: endTime } = formatDate(eventData?.endedDate || '');
 
     return (
         <section className="space-y-6 ">
             <div className="flex items-center justify-between ">
                 <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text">EVENT DETAILS</h1>
-                <Button
-                    className="bg-primary-color text-secondary-color-text rounded-[6px] px-5 hover:bg-primary-color/80 dark:text-secondary-color-text"
-                    onClick={() => router.push("/organizer/events/edit-event")}>
-                    Edit Event
-                </Button>
             </div>
             <div className='bg-white dark:bg-khotixs-background-dark dark:border dark:border-white rounded-[6px]'>
                 <section className="p-6 space-y-6">
@@ -55,11 +48,11 @@ export default function EventDetailsPage({ id }: PropType) {
                                         <h3 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-dark-description-color">EVENT DATE</h3>
                                         <div className="flex items-center gap-2 text-muted-foreground dark:text-label-text-primary">
                                             <RiCalendarLine className="h-5 w-5" />
-                                            <span className="text-description-color text-sm md:text-base xl:text-lg dark:text-dark-description-color">{eventData?.startedDate}</span>
+                                            <span className="text-description-color text-sm md:text-base xl:text-lg dark:text-dark-description-color">{`${startDate} - ${endDate}`}</span>
                                         </div>
                                         <div className="flex items-center gap-2 text-muted-foreground dark:text-label-text-primary">
                                             <RiTimerLine className="h-5 w-5" />
-                                            <span className="text-description-color text-sm md:text-base xl:text-lg dark:text-dark-description-color ">{eventData?.startedDate}</span>
+                                            <span className="text-description-color text-sm md:text-base xl:text-lg dark:text-dark-description-color ">{`${startTime} - ${endTime}`}</span>
                                         </div>
                                     </section>
                                     <section className="space-y-2">

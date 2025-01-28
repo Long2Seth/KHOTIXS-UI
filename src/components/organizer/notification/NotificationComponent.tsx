@@ -80,10 +80,10 @@ export default function EventComponent() {
                             <SelectContent
                                 className="w-full sm:w-[150px] md:w-[200px] border-[1px] text-md md:text-lg bg-white border-light-border-color rounded-[6px] placeholder:text-gray-400 text-primary-color-text dark:backdrop-blur dark:bg-opacity-5 dark:text-secondary-color-text">
                                 <SelectItem value="all">All</SelectItem>
-                                <SelectItem value="enable">VIP</SelectItem>
-                                <SelectItem value="disable">PREMIUM</SelectItem>
-                                <SelectItem value="enable">REGULAR</SelectItem>
-                                <SelectItem value="disable">FREE</SelectItem>
+                                <SelectItem value="VIP">VIP</SelectItem>
+                                <SelectItem value="Premium">PREMIUM</SelectItem>
+                                <SelectItem value="Regular">REGULAR</SelectItem>
+                                <SelectItem value="Free">FREE</SelectItem>
                             </SelectContent>
 
                         </Select>

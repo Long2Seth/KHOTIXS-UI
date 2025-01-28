@@ -9,6 +9,7 @@ import {LiaEdit} from "react-icons/lia";
 import {AiOutlineDelete} from "react-icons/ai";
 import {IoIosPower} from "react-icons/io";
 import {Badge} from "@/components/ui/badge";
+import {usePublishEventMutation, useUnpublishEventMutation} from "@/redux/feature/organizer/Event";
 
 type Props = {
     id: string;
@@ -17,19 +18,15 @@ type Props = {
 
 export function ActionEventComponent({id, isPublish}: Props) {
     const router = useRouter();
+    const [publishEvent] = usePublishEventMutation();
+    const [unpublishEvent] = useUnpublishEventMutation();
 
     const handlePublishToggle = async () => {
-        const endpoint = isPublish
-            ? `/event-ticket/api/v1/events/${id}/unpublish`
-            : `/event-ticket/api/v1/events/${id}/publish`;
-
         try {
-            const response = await fetch(endpoint, {
-                method: 'PUT',
-            });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+            if (isPublish) {
+                await unpublishEvent(id).unwrap();
+            } else {
+                await publishEvent(id).unwrap();
             }
         } catch (error) {
             console.error('Failed to toggle publish state:', error);

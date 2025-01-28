@@ -7,6 +7,10 @@ export const khotixsApi = createApi({
     baseQuery: baseQuery,
     endpoints: () => ({}),
     tagTypes: [
-        'EventPublish'
+        'EventPublish',
+        'UserProfile',
+        'Notification',
+        'EventOrganizer',
+        'TicketOrganizer'
     ]
 });

@@ -6,16 +6,19 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Camera } from "lucide-react";
 import Image from "next/image";
-import {Profile} from "@/lib/types/customer/userProfile";
-
+import { UserProfileType } from "@/lib/types/customer/userProfile";
+import { useUploadFileMutation } from "@/redux/feature/upload-file/UploadFile";
+import { useUpdateUserProfileMutation } from "@/redux/feature/user/UserProfile";
 
 type EditProfileProps = {
-    profile: Profile;
+    profile: UserProfileType;
 };
 
 export default function EditProfile({ profile }: EditProfileProps) {
-    const [formData, setFormData] = useState<Profile>(profile);
+    const [formData, setFormData] = useState<UserProfileType>(profile);
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const [uploadFile] = useUploadFileMutation();
+    const [updateUserProfile] = useUpdateUserProfileMutation();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { id, value } = e.target;
@@ -29,16 +32,7 @@ export default function EditProfile({ profile }: EditProfileProps) {
             formData.append('file', file);
 
             try {
-                const response = await fetch('/asset/api/v1/files', {
-                    method: 'POST',
-                    body: formData,
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.json();
+                const data = await uploadFile(formData).unwrap();
                 setFormData((prevData) => ({ ...prevData, avatar: data.uri }));
             } catch (error) {
                 console.error("Error uploading file:", error);
@@ -48,27 +42,7 @@ export default function EditProfile({ profile }: EditProfileProps) {
 
     const handleSave = async () => {
         try {
-            const response = await fetch(`/user-profile/api/v1/user-profiles/${formData.id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    fullName: formData.fullName,
-                    gender: formData.gender,
-                    dob: formData.dob,
-                    phoneNumber: formData.phoneNumber,
-                    address: formData.address,
-                    avatar: formData.avatar,
-                    position: formData.position,
-                    businessName: formData.businessName,
-                }),
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to update profile');
-            }
-
+            await updateUserProfile({ data: formData }).unwrap();
             // Handle successful update (e.g., show a success message)
         } catch (error) {
             console.error('Error updating profile:', error);

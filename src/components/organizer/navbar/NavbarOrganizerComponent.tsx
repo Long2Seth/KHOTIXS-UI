@@ -8,14 +8,14 @@ import {navItems} from "@/lib/types/organizer/navData";
 import {useRouter, usePathname} from "next/navigation";
 import {OrganizerProfileComponent} from "@/components/organizer/profile/UserProfileComponent";
 import {useEffect, useState} from "react";
-import {Profile} from "@/lib/types/customer/userProfile";
+import {UserProfileType} from "@/lib/types/customer/userProfile";
 
 export default function NavbarOrganizerComponent() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [activeItem, setActiveItem] = React.useState<string | null>(null);
     const router = useRouter();
     const pathname = usePathname();
-    const [profile, setProfile] = useState<Profile | null>(null);
+    const [profile, setProfile] = useState<UserProfileType | null>(null);
 
     const getMeData = async () => {
         await fetch('/user-profile/api/v1/user-profiles/me')

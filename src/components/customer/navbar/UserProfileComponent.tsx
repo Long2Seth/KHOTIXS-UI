@@ -18,12 +18,12 @@ import {Avatar, AvatarImage} from "@/components/ui/avatar";
 import * as React from "react";
 import {useRouter} from "next/navigation";
 import {ModeToggleAfterLogin} from "@/components/customer/navbar/modeToggleAfterLogin";
-import {Profile} from "@/lib/types/customer/userProfile";
+import {UserProfileType} from "@/lib/types/customer/userProfile";
 import {warning} from "motion-utils";
 
 
 type UserProfileProps = {
-    data: Profile
+    data: UserProfileType
 };
 
 

@@ -1,18 +1,52 @@
 'use client'
 
-import {useState} from 'react'
-import {useRouter} from 'next/navigation'
-import {Label} from "@/components/ui/label"
-import {Input} from "@/components/ui/input"
-import {Button} from "@/components/ui/button"
-import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card"
-import {IoEyeOffOutline, IoEyeOutline} from "react-icons/io5"
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5"
+import { z } from 'zod'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useUpdateUserPasswordMutation } from "@/redux/feature/user/UserProfile"
+
+const schema = z.object({
+    currentPassword: z.string().min(1, 'Current password is required'),
+    newPassword: z.string().min(8, 'New password must be at least 8 characters long'),
+    confirmPassword: z.string().min(8, 'Confirm password must be at least 8 characters long')
+}).refine(data => data.newPassword === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ['confirmPassword']
+})
 
 export default function ChangePassword() {
     const router = useRouter()
     const [showCurrentPassword, setShowCurrentPassword] = useState(false)
     const [showNewPassword, setShowNewPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+        resolver: zodResolver(schema)
+    })
+
+    const [updateUserPassword, { isLoading, isError, isSuccess }] = useUpdateUserPasswordMutation()
+
+    const onSubmit = async (data: any) => {
+        try {
+            await updateUserPassword({
+                data: {
+                    oldPassword: data.currentPassword,
+                    password: data.newPassword,
+                    confirmedPassword: data.confirmPassword
+                }
+            }).unwrap()
+            reset() // Clear form data after successful password change
+        } catch (error) {
+            console.error('Failed to update password:', error)
+        }
+    }
 
     return (
         <section className="w-full mx-auto flex justify-center items-center bg-secondary-colr">
@@ -29,103 +63,117 @@ export default function ChangePassword() {
                                 current password for verification. Then, set your new password. It is that easy!
                             </CardDescription>
                         </CardHeader>
-                        <CardContent className="space-y-4 ">
-                            <div className="space-y-1">
-                                <Label
-                                    htmlFor="current"
-                                    className="text-base font-medium text-primary-color-text dark:text-secondary-color-text">
-                                    Current password <span className="text-label-paid">*</span>
-                                </Label>
-                                <div className="relative">
-                                    <Input
-                                        id="current"
-                                        type={showCurrentPassword ? "text" : "password"}
-                                        placeholder="Enter your current password"
-                                        className="p-2 text-lg border-light-border-color rounded-[6px] dark:border placeholder:text-gray-300 dark:border-white dark:text-secondary-color-text dark:bg-khotixs-background-dark"                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                                        className="absolute right-4 top-3"
-                                    >
-                                        {showCurrentPassword ? (
-                                            <IoEyeOutline className="cursor-pointer text-label-text-description"/>
-                                        ) : (
-                                            <IoEyeOffOutline className="cursor-pointer text-label-text-description"/>
-                                        )}
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <form className={`space-y-4 `} onSubmit={handleSubmit(onSubmit)}>
+                            <CardContent className="space-y-4 ">
                                 <div className="space-y-1">
                                     <Label
-                                        htmlFor="new"
-                                        className="text-base font-medium text-primary-color-text dark:text-secondary-color-text"
-                                    >
-                                        New password<span className="text-label-paid">*</span>
-                                    </Label>
-                                    <div className="relative">
-                                        <Input
-                                            id="new"
-                                            type={showNewPassword ? "text" : "password"}
-                                            placeholder="Enter your new password"
-                                            className="p-2 text-lg border-light-border-color rounded-[6px] dark:border placeholder:text-gray-300 dark:border-white dark:text-secondary-color-text dark:bg-khotixs-background-dark"                                        />
-                                        <button
-                                            type="button"
-                                            onClick={() => setShowNewPassword(!showNewPassword)}
-                                            className="absolute right-4 top-3"
-                                        >
-                                            {showNewPassword ? (
-                                                <IoEyeOutline className="cursor-pointer text-label-text-description"/>
-                                            ) : (
-                                                <IoEyeOffOutline
-                                                    className="cursor-pointer text-label-text-description"/>
-                                            )}
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="space-y-1">
-                                    <Label
-                                        htmlFor="confirm"
+                                        htmlFor="current"
                                         className="text-base font-medium text-primary-color-text dark:text-secondary-color-text">
-                                        Confirm Password <span className="text-label-paid">*</span>
+                                        Current password <span className="text-label-paid">*</span>
                                     </Label>
                                     <div className="relative">
                                         <Input
-                                            id="confirm"
-                                            type={showConfirmPassword ? "text" : "password"}
-                                            placeholder="Enter your confirm password"
-                                            className="p-2 text-lg border-light-border-color rounded-[6px] dark:border placeholder:text-gray-300 dark:border-white dark:text-secondary-color-text dark:bg-khotixs-background-dark"                                        />
+                                            id="current"
+                                            type={showCurrentPassword ? "text" : "password"}
+                                            placeholder="Enter your current password"
+                                            {...register('currentPassword')}
+                                            className="p-2 text-lg border-light-border-color rounded-[6px] dark:border placeholder:text-gray-300 dark:border-white dark:text-secondary-color-text dark:bg-khotixs-background-dark"                                    />
                                         <button
                                             type="button"
-                                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                            onClick={() => setShowCurrentPassword(!showCurrentPassword)}
                                             className="absolute right-4 top-3"
                                         >
-                                            {showConfirmPassword ? (
+                                            {showCurrentPassword ? (
                                                 <IoEyeOutline className="cursor-pointer text-label-text-description"/>
                                             ) : (
-                                                <IoEyeOffOutline
-                                                    className="cursor-pointer text-label-text-description"/>
+                                                <IoEyeOffOutline className="cursor-pointer text-label-text-description"/>
                                             )}
                                         </button>
                                     </div>
+                                    {errors.currentPassword?.message && typeof errors.currentPassword.message === 'string' && (
+                                        <span className="text-red-500">{errors.currentPassword.message}</span>
+                                    )}
                                 </div>
-                            </div>
-                        </CardContent>
-                        <CardFooter className="flex flex-col sm:flex-row gap-5">
-                            <Button
-                                className="w-full mx-auto sm:w-1/2 bg-white text-red-500 border-red-600 dark:bg-khotixs-background-dark hover:bg-red-100 dark:hover:bg-red-500 dark:hover:text-white  dark:border-[1px] border-[1px]"
-                                onClick={() => router.back()}
-                            >
-                                Cancel
-                            </Button>
-                            <Button
-                                type="submit"
-                                className="w-full sm:w-1/2 text-white bg-primary-color hover:bg-primary-color dark:text-secondary-color-text hover:bg-primary-color/80 "
-                            >
-                                Save
-                            </Button>
-                        </CardFooter>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div className="space-y-1">
+                                        <Label
+                                            htmlFor="new"
+                                            className="text-base font-medium text-primary-color-text dark:text-secondary-color-text"
+                                        >
+                                            New password<span className="text-label-paid">*</span>
+                                        </Label>
+                                        <div className="relative">
+                                            <Input
+                                                id="new"
+                                                type={showNewPassword ? "text" : "password"}
+                                                placeholder="Enter your new password"
+                                                {...register('newPassword')}
+                                                className="p-2 text-lg border-light-border-color rounded-[6px] dark:border placeholder:text-gray-300 dark:border-white dark:text-secondary-color-text dark:bg-khotixs-background-dark"                                        />
+                                            <button
+                                                type="button"
+                                                onClick={() => setShowNewPassword(!showNewPassword)}
+                                                className="absolute right-4 top-3"
+                                            >
+                                                {showNewPassword ? (
+                                                    <IoEyeOutline className="cursor-pointer text-label-text-description"/>
+                                                ) : (
+                                                    <IoEyeOffOutline
+                                                        className="cursor-pointer text-label-text-description"/>
+                                                )}
+                                            </button>
+                                        </div>
+                                        {errors.newPassword?.message && typeof errors.newPassword.message === 'string' && (
+                                            <span className="text-red-500">{errors.newPassword.message}</span>
+                                        )}
+                                    </div>
+                                    <div className="space-y-1">
+                                        <Label
+                                            htmlFor="confirm"
+                                            className="text-base font-medium text-primary-color-text dark:text-secondary-color-text">
+                                            Confirm Password <span className="text-label-paid">*</span>
+                                        </Label>
+                                        <div className="relative">
+                                            <Input
+                                                id="confirm"
+                                                type={showConfirmPassword ? "text" : "password"}
+                                                placeholder="Enter your confirm password"
+                                                {...register('confirmPassword')}
+                                                className="p-2 text-lg border-light-border-color rounded-[6px] dark:border placeholder:text-gray-300 dark:border-white dark:text-secondary-color-text dark:bg-khotixs-background-dark"                                        />
+                                            <button
+                                                type="button"
+                                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                                className="absolute right-4 top-3"
+                                            >
+                                                {showConfirmPassword ? (
+                                                    <IoEyeOutline className="cursor-pointer text-label-text-description"/>
+                                                ) : (
+                                                    <IoEyeOffOutline
+                                                        className="cursor-pointer text-label-text-description"/>
+                                                )}
+                                            </button>
+                                        </div>
+                                        {errors.confirmPassword?.message && typeof errors.confirmPassword.message === 'string' && (
+                                            <span className="text-red-500">{errors.confirmPassword.message}</span>
+                                        )}
+                                    </div>
+                                </div>
+                            </CardContent>
+                            <CardFooter className="flex flex-col sm:flex-row gap-5">
+                                <Button
+                                    className="w-full mx-auto sm:w-1/2 bg-white text-red-500 border-red-600 dark:bg-khotixs-background-dark hover:bg-red-100 dark:hover:bg-red-500 dark:hover:text-white  dark:border-[1px] border-[1px]"
+                                    onClick={() => router.back()}
+                                >
+                                    Cancel
+                                </Button>
+                                <Button
+                                    type="submit"
+                                    className="w-full sm:w-1/2 text-white bg-primary-color hover:bg-primary-color dark:text-secondary-color-text hover:bg-primary-color/80 "
+                                >
+                                    Save
+                                </Button>
+                            </CardFooter>
+                        </form>
                     </Card>
                 </div>
             </section>

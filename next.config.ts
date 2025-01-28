@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
       {
         protocol: "http",
         hostname: "khotixs.devkh.asia",
+      },
+      {
+        protocol: "https",
+        hostname: "khotixs.istad.co",
       }
     ],
     domains: [

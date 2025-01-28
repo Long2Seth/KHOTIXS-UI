@@ -38,8 +38,9 @@ import {Calendar as CalendarComponent} from "@/components/ui/calendar";
 import {useEffect, useMemo, useState} from "react";
 import Image from "next/image";
 import {Pagination} from "@/components/ui/Pagination";
-import {EventType} from "@/lib/types/customer/event";
+import {EventType, EventResponse} from "@/lib/types/customer/event";
 import LoadingComponent from "@/components/loading/LoadingComponent";
+import {useGetAllEventOrganizerQuery} from "@/redux/feature/organizer/Event";
 
 export function EventComponent() {
     const [sorting, setSorting] = useState<SortingState>([]);
@@ -55,29 +56,14 @@ export function EventComponent() {
     const [eventName, setEventName] = useState("");
     const route = useRouter();
     const [events, setEvents] = useState<EventType[]>([]);
-    const [loading, setLoading] = useState(true);
 
-    const eventData = async () => {
-        try {
-            const response = await fetch(`/event-ticket/api/v1/events?page=${currentPage-1}&size=${itemsPerPage}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            const data = await response.json();
-            setEvents(data.content);
-            setLoading(false);
-        } catch (error) {
-            console.error("Failed to fetch events:", error);
-            setLoading(false);
-            setEvents([]);
-        }
-    };
+    const { data, isLoading: loading } = useGetAllEventOrganizerQuery({ page: currentPage - 1, size: itemsPerPage });
 
     useEffect(() => {
-        eventData();
-    }, [currentPage, itemsPerPage]);
+        if (data) {
+            setEvents(data.content);
+        }
+    }, [data]);
 
     const locations = useMemo(() => Array.from(new Set(events.map(event => event.location))), [events]);
     const categories = useMemo(() => Array.from(new Set(events.map(event => event.eventCategory))), [events]);
