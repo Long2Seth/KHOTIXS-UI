@@ -10,6 +10,7 @@ import { useReadNotificationByIdMutation } from "@/redux/feature/user/Notificati
 
 type Props = {
     notification: Notification;
+    onRead: (id: string) => void;
 };
 
 function timeSince(date: Date) {
@@ -35,7 +36,7 @@ function timeSince(date: Date) {
     return `${Math.floor(seconds)} seconds ago`;
 }
 
-export default function NotificationCardComponent({ notification }: Props) {
+export default function NotificationCardComponent({ notification, onRead }: Props) {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [readNotificationById] = useReadNotificationByIdMutation();
 
@@ -43,6 +44,7 @@ export default function NotificationCardComponent({ notification }: Props) {
         if (notification.id) {
             try {
                 await readNotificationById(notification.id).unwrap();
+                onRead(notification.id);
                 setIsDialogOpen(true);
             } catch (error) {
                 console.error('Failed to update notification as read:', error);
@@ -73,15 +75,14 @@ export default function NotificationCardComponent({ notification }: Props) {
                                 <span className="text-lg font-bold line-clamp-1">{notification.eventTitle}</span>
                             </p>
                             <p className="text-sm line-clamp-1">{notification.description}</p>
-                            <p className={` text-primary-color `}>{notification.createdAt ? timeSince(notification.createdAt) : 'Unknown time'}</p>
+                            <p className={`text-primary-color`}>{notification.createdAt ? timeSince(notification.createdAt) : 'Unknown time'}</p>
                         </div>
                     </div>
                     <div>
                         {notification.isRead ? (
-                            <span className=" absolute top-[16px] right-[16px] w-2 h-2 rounded-full "></span>
+                            <span className="absolute top-[16px] right-[16px] w-2 h-2 rounded-full"></span>
                         ) : (
-                            <span
-                                className=" absolute top-[16px] right-[16px] w-2 h-2 rounded-full bg-green-600"></span>
+                            <span className="absolute top-[16px] right-[16px] w-2 h-2 rounded-full bg-green-600"></span>
                         )}
                     </div>
                     <div className="flex items-center gap-2 ml-4">

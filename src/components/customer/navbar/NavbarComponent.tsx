@@ -21,11 +21,11 @@ import SkeletonNavbarComponent from "@/components/customer/navbar/SkeletonNavbar
 import {useRouter} from "next/navigation";
 import {UserProfileComponent} from "@/components/customer/navbar/UserProfileComponent";
 import {FiBell} from "react-icons/fi";
-// import { fetchNotifications } from "@/lib/customer/api";
 import {WebSocketService} from "@/lib/types/customer/websocket";
 import {UserProfile} from "@/lib/types/navbar/UserProfile";
 import NotificationComponent from "@/components/customer/notification/NotificationComponent";
-import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet"
+import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet";
+import { useGetUserProfileQuery } from "@/redux/feature/user/UserProfile";
 
 const NavbarComponent = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -34,7 +34,7 @@ const NavbarComponent = () => {
     const [selectedLocation, setSelectedLocation] = React.useState<string | undefined>();
     const [date, setDate] = React.useState<Date>();
     const router = useRouter();
-    const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+    const { data: userProfile, error } = useGetUserProfileQuery();
     const [dynamicMenuItems, setDynamicMenuItems] = useState<MenuType[]>(menuItems);
     const route = useRouter();
     const [notifications, setNotifications] = useState<any[]>([]);
@@ -46,28 +46,6 @@ const NavbarComponent = () => {
             setLastCheckedTime(Number(localStorage.getItem('lastNotificationCheck') || '0'));
         }
     }, []);
-
-    useEffect(() => {
-        const fetchUserProfile = async () => {
-            try {
-                const response = await fetch(`/user-profile/api/v1/user-profiles/me`, {
-                    credentials: "include",
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    setUserProfile(data);
-                } else {
-                    setUserProfile(null);
-                }
-            } catch (error) {
-                console.error("Error fetching user user:", error);
-                setUserProfile(null);
-            }
-        };
-        fetchUserProfile();
-    }, []);
-
 
     const handleNotificationClick = (e: React.MouseEvent) => {
         e.preventDefault();

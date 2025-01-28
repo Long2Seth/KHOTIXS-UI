@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import { Notification } from "@/lib/types/customer/notification";
 import { RiCalendarLine, RiMap2Line, RiTimerLine } from "react-icons/ri";
-import { useGetNotificationByIdMutation} from "@/redux/feature/user/Notification";
+import { useGetNotificationByIdMutation, useReadNotificationByIdMutation } from "@/redux/feature/user/Notification";
 
 type NotificationDetailComponentProps = {
     onClose: () => void;
@@ -37,29 +37,31 @@ function formatTime(startDateString: string | undefined, endDateString: string |
 
 export function NotificationDetailComponent({ onClose, id }: NotificationDetailComponentProps) {
     const [getNotificationById, { data, isLoading, error }] = useGetNotificationByIdMutation();
+    const [readNotificationById] = useReadNotificationByIdMutation();
 
     useEffect(() => {
         if (id) {
             getNotificationById(id);
+            readNotificationById(id);
         }
-    }, [id, getNotificationById]);
+    }, [id, getNotificationById, readNotificationById]);
 
     return (
         <Dialog open onOpenChange={onClose}>
             <DialogTrigger asChild>
             </DialogTrigger>
-            <DialogContent className=" max-w-[60%] bg-white rounded-[6px] ">
-                <div>
+            <DialogContent className=" max-w-[60%] max-h-[80%] bg-white rounded-[6px]  overflow-auto ">
+                <div className={`flex flex-col md:flex-row  gap-5`}>
                     {/* cover of event*/}
                     <section
-                        className="relative mb-6 w-auto h-[200px] md:h-[370px] justify-center flex overflow-hidden rounded-lg">
+                        className="relative mb-6 min-w-[50%] h-full justify-center flex overflow-hidden rounded-lg">
                         <Image
                             src={data?.thumbnail || '/event/event-banner.png'}
                             unoptimized
                             alt="Event banner"
                             width={800}
                             height={600}
-                            className="object-cover h-[200px] md:h-[370px] w-full rounded-xl"
+                            className="object-cover h-full w-full rounded-xl"
                             priority
                         />
                     </section>

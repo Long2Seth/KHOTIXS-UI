@@ -13,3 +13,15 @@ export type UserProfile = {
     email: string;
     businessName: string;
 }
+
+export type UpdateUserProfile = {
+    fullName: string,
+    gender: string,
+    dob: string,
+    phoneNumber: string,
+    address: string,
+    avatar: string,
+    status: number,
+    position: string,
+    businessName: string
+}

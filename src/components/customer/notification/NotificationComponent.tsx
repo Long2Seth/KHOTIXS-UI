@@ -1,6 +1,6 @@
 'use client'
 
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { FiBell } from "react-icons/fi";
 import NotificationCardComponent from "@/components/customer/notification/NotificationCardComponent";
@@ -31,10 +31,18 @@ export default function NotificationComponent() {
         };
     }, [userRole]);
 
+    const handleNotificationRead = (id: string) => {
+        setNotifications((prev) =>
+            prev.map((notification) =>
+                notification.id === id ? { ...notification, isRead: true } : notification
+            )
+        );
+    };
+
     return (
-        <Sheet >
+        <Sheet>
             <SheetTrigger asChild>
-                <Button className={` border-none`} >
+                <Button className={`border-none`}>
                     <FiBell className="h-7 w-7" />
                 </Button>
             </SheetTrigger>
@@ -44,7 +52,11 @@ export default function NotificationComponent() {
                 </SheetHeader>
                 <section className="p-4 space-y-2">
                     {notifications.map((notification) => (
-                        <NotificationCardComponent key={notification.id} notification={notification} />
+                        <NotificationCardComponent
+                            key={notification.id}
+                            notification={notification}
+                            onRead={handleNotificationRead}
+                        />
                     ))}
                 </section>
             </SheetContent>

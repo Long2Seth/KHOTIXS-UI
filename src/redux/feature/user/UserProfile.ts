@@ -1,6 +1,7 @@
 import {khotixsApi} from "@/lib/api";
 import {UserProfileType} from "@/lib/types/customer/userProfile";
 import {UserSettingType} from "@/lib/types/customer/userSetting";
+import {UpdateUserProfile, UserProfile} from "@/lib/types/navbar/UserProfile";
 
 export const getUserProfile = khotixsApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -9,7 +10,16 @@ export const getUserProfile = khotixsApi.injectEndpoints({
             providesTags: [{type: 'UserProfile', id: 'LIST'}],
         }),
 
-        updateUserProfile: builder.mutation<UserProfileType, { data: Partial<UserProfileType> }>({
+        logout: builder.mutation<UserProfileType, void>({
+            query: () => ({
+                url: '/logout',
+                method: 'POST',
+            }),
+            invalidatesTags: [{type: 'UserProfile', id: 'LIST'}],
+        }),
+
+
+        updateUserProfile: builder.mutation<UpdateUserProfile, { data: Partial<UpdateUserProfile> }>({
             query: ({data}) => ({
                 url: `/user-profile/api/v1/user-profiles`,
                 method: 'PATCH',
@@ -33,4 +43,5 @@ export const {
     useGetUserProfileQuery,
     useUpdateUserProfileMutation,
     useUpdateUserPasswordMutation,
+    useLogoutMutation,
 } = getUserProfile;

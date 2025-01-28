@@ -24,7 +24,7 @@ export class WebSocketService {
         });
     }
 
-    async   fetchInitialNotifications(userRole:string): Promise<Notification[]> {
+    async fetchInitialNotifications(userRole: string): Promise<Notification[]> {
         const notifications = await fetch(`/communication/api/v1/notifications/publish-event/${this.userRole}`)
             .then((response) => response.json())
             .then(data => data.content);
@@ -54,5 +54,17 @@ export class WebSocketService {
                 this.subscriptionCallback!(notification);
             });
         }
+    }
+
+    handleNotificationClick(notificationId: string): void {
+        // Fetch the notification details by ID and update the state
+        fetch(`/communication/api/v1/notifications/${notificationId}`)
+            .then(response => response.json())
+            .then((notification: Notification) => {
+                if (this.subscriptionCallback) {
+                    this.subscriptionCallback(notification);
+                }
+            })
+            .catch(error => console.error('Error fetching notification details:', error));
     }
 }

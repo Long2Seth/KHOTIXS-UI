@@ -1,4 +1,3 @@
-'use client';
 import React, { useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,6 +15,7 @@ type EditProfileProps = {
 
 export default function EditProfile({ profile }: EditProfileProps) {
     const [formData, setFormData] = useState<UserProfileType>(profile);
+    const [isOpen, setIsOpen] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [uploadFile] = useUploadFileMutation();
     const [updateUserProfile] = useUpdateUserProfileMutation();
@@ -41,17 +41,20 @@ export default function EditProfile({ profile }: EditProfileProps) {
     };
 
     const handleSave = async () => {
+        const { fullName, gender, dob, phoneNumber, address, avatar, status, position, businessName } = formData;
+        const requestBody = { fullName, gender, dob, phoneNumber, address, avatar, status, position, businessName };
+
         try {
-            await updateUserProfile({ data: formData }).unwrap();
-            // Handle successful update (e.g., show a success message)
+            await updateUserProfile({ data: requestBody }).unwrap();
+            setIsOpen(false); // Close the form on successful save
         } catch (error) {
             console.error('Error updating profile:', error);
-            // Handle error (e.g., show an error message)
         }
     };
 
     const handleCancel = () => {
         setFormData(profile); // Reset form data to initial profile data
+        setIsOpen(false); // Close the form
     };
 
     const handleImageClick = () => {
@@ -60,10 +63,11 @@ export default function EditProfile({ profile }: EditProfileProps) {
 
     return (
         <div>
-            <Dialog>
+            <Dialog open={isOpen} onOpenChange={setIsOpen}>
                 <DialogTrigger asChild>
                     <Button
                         className="w-full text-white bg-primary-color hover:bg-primary-color/80 dark:text-secondary-color-text"
+                        onClick={() => setIsOpen(true)}
                     >
                         EDIT
                     </Button>

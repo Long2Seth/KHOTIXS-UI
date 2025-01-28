@@ -19,38 +19,29 @@ import * as React from "react";
 import {useRouter} from "next/navigation";
 import {ModeToggleAfterLogin} from "@/components/customer/navbar/modeToggleAfterLogin";
 import {UserProfileType} from "@/lib/types/customer/userProfile";
-import {warning} from "motion-utils";
-
+import {useLogoutMutation} from "@/redux/feature/user/UserProfile";
 
 type UserProfileProps = {
     data: UserProfileType
 };
 
-
 export function UserProfileComponent({data}: UserProfileProps) {
-
     const router = useRouter();
+    const [logout] = useLogoutMutation();
 
     const handleLogout = async () => {
-        await fetch(`/logout`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: "include"
-            })
-            .then((response) => {
-                if (response.ok) {
-                    router.push('/')
-                }
-            })
-    }
+        try {
+            await logout().unwrap();
+            router.replace('/');
+            window.location.reload();
+        } catch (error) {
+            console.error("Failed to logout:", error);
+        }
+    };
 
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className={` mr-[35px] sm:mr-20 md:mr-0 `} asChild>
-
                 <Button variant="ghost" className="p-0 rounded-full">
                     <div className="flex flex-col items-center gap-4">
                         <Avatar className="w-[40px] h-[40px] rounded-[5px]">
@@ -86,7 +77,6 @@ export function UserProfileComponent({data}: UserProfileProps) {
                         <LogOut className=" text-label-paid hover:text-label-paid/80"/>
                         <span className=" text-label-paid hover:text-label-paid/80">Log out</span>
                     </DropdownMenuItem>
-
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>
