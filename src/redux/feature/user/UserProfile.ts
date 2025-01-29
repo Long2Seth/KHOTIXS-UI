@@ -18,7 +18,6 @@ export const getUserProfile = khotixsApi.injectEndpoints({
             invalidatesTags: [{type: 'UserProfile', id: 'LIST'}],
         }),
 
-
         updateUserProfile: builder.mutation<UpdateUserProfile, { data: Partial<UpdateUserProfile> }>({
             query: ({data}) => ({
                 url: `/user-profile/api/v1/user-profiles`,

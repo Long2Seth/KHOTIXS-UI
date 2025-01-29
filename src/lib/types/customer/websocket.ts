@@ -8,7 +8,7 @@ export class WebSocketService {
     private subscriptionCallback: ((notification: Notification) => void) | null = null;
     private userRole: string;
 
-    constructor(wsUrl: string = '/communication/ws', userRole: string) {
+    constructor(wsUrl: string = '/ws', userRole: string) {
         this.wsUrl = wsUrl;
         this.userRole = userRole;
 
