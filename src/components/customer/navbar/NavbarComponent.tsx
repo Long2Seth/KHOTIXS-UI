@@ -1,4 +1,5 @@
 'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import {useState, useEffect} from 'react';
@@ -20,9 +21,6 @@ import {NavigationMenuDemo} from "@/components/customer/navbar/NavigationMenuDem
 import SkeletonNavbarComponent from "@/components/customer/navbar/SkeletonNavbar";
 import {useRouter} from "next/navigation";
 import {UserProfileComponent} from "@/components/customer/navbar/UserProfileComponent";
-import {FiBell} from "react-icons/fi";
-import {WebSocketService} from "@/lib/types/customer/websocket";
-import {UserProfile} from "@/lib/types/navbar/UserProfile";
 import NotificationComponent from "@/components/customer/notification/NotificationComponent";
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet";
 import { useGetUserProfileQuery } from "@/redux/feature/user/UserProfile";
@@ -117,7 +115,7 @@ const NavbarComponent = () => {
                         <div className="flex justify-between h-12 md:h-14 items-center">
                             <Link href="/" className="flex items-center">
                                 <Image className="w-[40px] h-40px] lg:w-[50px] lg:h-[50px] xl:w-[60px] xl:h-[60px] "
-                                       width={80} height={80} src="/khotixs_logo.png" alt="Khotixs Logo"/>
+                                    width={80} height={80} src="/khotixs_logo.png" alt="Khotixs Logo"/>
                             </Link>
 
                             <section className="rounded-[5px] flex justify-center drop-shadow-xl">

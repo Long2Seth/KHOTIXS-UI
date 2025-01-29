@@ -1,4 +1,5 @@
 'use client';
+
 import {FaRegUser} from "react-icons/fa";
 import {RiCalendarScheduleLine} from "react-icons/ri";
 import {PiNotePencilBold, PiPhoneCallBold} from "react-icons/pi";
@@ -9,7 +10,7 @@ import {Card, CardContent} from "@/components/ui/card";
 import {MapPin} from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import EditProfile from "@/components/customer/User-Profile/EditProfile";
+import EditProfile from "./EditProfile";
 import {ProfileComponentSkeleton} from "@/components/customer/User-Profile/user/ProfileComponentSkeleton";
 import {useGetUserProfileQuery} from "@/redux/feature/user/UserProfile";
 

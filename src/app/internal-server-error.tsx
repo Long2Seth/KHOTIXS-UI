@@ -13,10 +13,10 @@ const NotFoundPage = () => {
                         animate={{y: [0, 10, 0]}} transition={{duration: 4, repeat: Infinity, ease: "easeInOut"}}
             >
                 <Image src="/Internal-Server-Error.png"
-                       alt="404"
-                       width={500}
-                       height={500}
-                       priority
+                    alt="404"
+                    width={500}
+                    height={500}
+                    priority
                 />
             </motion.div>
 
