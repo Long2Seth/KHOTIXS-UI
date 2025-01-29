@@ -32,10 +32,10 @@ export function UserProfileComponent({data}: UserProfileProps) {
     const handleLogout = async () => {
         try {
             await logout().unwrap();
-            router.replace('/');
-            window.location.reload();
+            router.push("/");
         } catch (error) {
             console.error("Failed to logout:", error);
+            router.push("/");
         }
     };
 

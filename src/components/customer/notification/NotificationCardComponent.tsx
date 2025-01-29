@@ -55,10 +55,12 @@ export default function NotificationCardComponent({ notification, onRead }: Prop
     return (
         <div className="relative container mx-auto flex items-center justify-center">
             <Card
-                onClick={handleCardClick}
                 className="w-full max-w-[700px] p-4 hover:bg-accent/50 transition-colors rounded-[5px] bg-white border border-gray-200 cursor-pointer">
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3 w-full">
+                <div
+                    className="flex items-center justify-between">
+                    <div
+                        onClick={handleCardClick}
+                        className="flex items-center gap-3 w-full">
                         <div className="relative">
                             <Avatar className="h-10 w-10 flex items-center justify-center">
                                 <Image
@@ -86,7 +88,7 @@ export default function NotificationCardComponent({ notification, onRead }: Prop
                         )}
                     </div>
                     <div className="flex items-center gap-2 ml-4">
-                        <button className="flex-shrink-0 right-10 hover:bg-gray-100 rounded-full">
+                        <button className=" flex-shrink-0 right-10 hover:bg-gray-100 rounded-full">
                             <NotificationActionComponent id={notification.id as string | null} />
                         </button>
                     </div>
