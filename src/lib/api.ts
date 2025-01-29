@@ -12,6 +12,6 @@ export const khotixsApi = createApi({
         'Notification',
         'EventOrganizer',
         'TicketOrganizer',
-        'MyData'
+        'MyData',
     ]
 });
