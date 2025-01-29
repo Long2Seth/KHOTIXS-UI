@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
             siteName: 'KHOTIXS',
             images: [
                 {
-                    url: 'http://khotixs.devkh.asia/asset/api/v1/files/view/10d5f2ea-6af8-48ee-861e-27b6f71843c6.png',
+                    url: 'https://khotixs.istad.co/asset/api/v1/files/view/37e026de-841f-40b6-a05d-d8254aa1057e.png',
                     width: 494,
                     height: 505,
                 },
@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
             title: "Contact Us - KHOTIXS",
             description: desc,
             creator: '@KHOTIXS',
-            images: 'http://khotixs.devkh.asia/asset/api/v1/files/view/10d5f2ea-6af8-48ee-861e-27b6f71843c6.png',
+            images: 'https://khotixs.istad.co/asset/api/v1/files/view/37e026de-841f-40b6-a05d-d8254aa1057e.png',
         },
     };
 }

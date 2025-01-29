@@ -6,6 +6,7 @@ import {useRouter} from "next/navigation";
 import Image from "next/image";
 import {Badge} from "@/components/ui/badge";
 import {EventType} from "@/lib/types/customer/event";
+import { FaTicketAlt } from 'react-icons/fa';
 
 
 enum TicketType {
@@ -47,20 +48,15 @@ export function CardComponent({event}: EventTypes) {
             className="relative cursor-pointer bg-white dark:bg-backdrop-blur dark:bg-opacity-5 rounded-[6px] flex flex-col justify-start items-start max-w-[300px] sm:max-w-[300px] md:max-w-[330px] md:h-[340px] xl:max-w-[400px] xl:h-[450px] h-[240px] sm:h-[250px] lg:h-[300px] 2xl:max-w-[450px] md:p-0">
 
             <a className="group block overflow-hidden rounded-[6px]">
-                <div className=" z-10 rounded-t-[6px] w-full h-[54%] overflow-hidden">
-                    {/*<section*/}
-                    {/*    className="rounded-[8px] items-center object-cover justify-center bg-cover bg-center"*/}
-                    {/*    style={{backgroundImage: `url(${event.thumbnail})`, height: '250px'}}*/}
-                    {/*>*/}
-                    {/*</section>*/}
-                    <section className="rounded-[8px] h-[300px] items-center object-cover justify-center bg-cover bg-center">
+                <div className=" z-10 rounded-t-[6px] w-full h-[56%] overflow-hidden">
+                    <section className="rounded-[8px] h-[300px] items-center object-cover justify-center bg-center">
                         <Image
                             width={100}
                             height={100}
                             unoptimized
                             src={`${event.thumbnail}`}
                             alt="event image"
-                            className="z-10 rounded-l-[6px] w-full bg-cover bg-center transform transition-transform duration-300 group-hover:scale-110"
+                            className="z-10 rounded-l-[6px] w-full md:h-[200px] md:w-[448px] bg-cover bg-center object-cover transform transition-transform duration-300 group-hover:scale-110"
                         />
                     </section>
                 </div>
@@ -83,16 +79,22 @@ export function CardComponent({event}: EventTypes) {
                         </div>
                     </div>
                 </section>
-                <div className="absolute bottom-2 right-0">
+                <div className="absolute bottom-2 sm:bottom-1 sm:right-1 right-2">
                     {
-                        event.tickets
-                            .map((ticket, index) => (
+                        event.tickets.length === 0 ? (
+                            <Badge className="flex items-center bg-primary-color dark:text-black text-white rounded-[6px]">
+                                <FaTicketAlt className="text-white" />
+                                <span className="ml-2 text-white uppercase">Not Ticket</span>
+                            </Badge>
+                        ) : (
+                            event.tickets.map((ticket, index) => (
                                 <Badge
                                     key={index}
-                                    className={`dark:text-black text-white rounded-[6px] mx-1.5 ${getLabelClass(ticket.type as TicketType)}`}>
+                                    className={`dark:text-black text-white rounded-[6px] mx-0.5 ${getLabelClass(ticket.type as TicketType)}`}>
                                     <span> {ticket.type === TicketType.FREE ? "FREE" : `$${ticket.price}`}</span>
                                 </Badge>
                             ))
+                        )
                     }
                 </div>
             </a>
