@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from "react"
-import SettingMenu from "@/components/customer/user_profile/setting/settingMenu"
-import ChangePassword from "@/components/customer/user_profile/setting/changePassword"
-import UserNotifications from "@/components/customer/user_profile/setting/user-notifications"
+import SettingMenu from "@/components/customer/User-Profile/setting/settingMenu"
+import ChangePassword from "@/components/customer/User-Profile/setting/changePassword"
+import UserNotifications from "@/components/customer/User-Profile/setting/user-notifications"
 
 export default function SettingComponent() {
     const [activeTab, setActiveTab] = useState<'password' | 'notifications'>('password')

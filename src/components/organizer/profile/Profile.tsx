@@ -34,7 +34,7 @@ export default function ProfileComponent({id}: PropType) {
         };
 
         fetchAdminProfile();
-    }, []);
+    }, [id]);
 
 
     if (!profile) {

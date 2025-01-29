@@ -95,19 +95,21 @@ export function TicketSettingsForm({id}: Props) {
         }
     };
 
-    const getTickets = async () => {
-        try {
-            const response = await fetch(`/event-ticket/api/v1/events/organizer/${id}`);
-            const data = await response.json();
-            setDataEvent(data);
-        } catch (error) {
-            console.error("Error:", error);
-            alert("An error occurred while fetching tickets.");
-        }
-    }
     useEffect(() => {
+        const getTickets = async () => {
+            try {
+                const response = await fetch(`/event-ticket/api/v1/events/organizer/${id}`);
+                const data = await response.json();
+                setDataEvent(data);
+            } catch (error) {
+                console.error("Error:", error);
+                alert("An error occurred while fetching tickets.");
+            }
+        }
+
         getTickets();
-    }, []);
+
+    }, [id]);
 
     const handleAddTicket = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()

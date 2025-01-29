@@ -61,7 +61,7 @@ export function AttendanceTable() {
             const matchesStatus = selectedStatus === "all" || item.status === selectedStatus;
             return matchesLocation && matchesSearch && matchesStatus;
         });
-    }, [selectedLocation, selectedStatus, date, search]);
+    }, [selectedLocation, selectedStatus, search]);
 
     const paginatedData = useMemo(
         () => filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage),
