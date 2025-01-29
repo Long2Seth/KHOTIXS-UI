@@ -46,23 +46,16 @@ export function CardComponent({event}: EventTypes) {
             onClick={() => router.push(`event/${event.id}`)}
             className="relative cursor-pointer bg-white dark:bg-backdrop-blur dark:bg-opacity-5 rounded-[6px] flex flex-col justify-start items-start max-w-[300px] sm:max-w-[300px] md:max-w-[330px] md:h-[340px] xl:max-w-[400px] xl:h-[450px] h-[240px] sm:h-[250px] lg:h-[300px] 2xl:max-w-[450px] md:p-0">
 
-            <a className="group block overflow-hidden rounded-[6px]">
-                <div className=" z-10 rounded-t-[6px] w-full h-[54%] overflow-hidden">
-                    {/*<section*/}
-                    {/*    className="rounded-[8px] items-center object-cover justify-center bg-cover bg-center"*/}
-                    {/*    style={{backgroundImage: `url(${event.thumbnail})`, height: '250px'}}*/}
-                    {/*>*/}
-                    {/*</section>*/}
-                    <section className="rounded-[8px] h-[300px] items-center object-cover justify-center bg-cover bg-center">
-                        <Image
-                            width={100}
-                            height={100}
-                            unoptimized
-                            src={`${event.thumbnail}`}
-                            alt="event image"
-                            className="z-10 rounded-l-[6px] w-full bg-cover bg-center transform transition-transform duration-300 group-hover:scale-110"
-                        />
-                    </section>
+            <a className="group block overflow-hidden rounded-[10px]">
+                <div className="rounded-tr-[10px] z-10 object-cover rounded-tl-[10px] w-full h-[58%] 2xl:h-[50%] md:h-[50%] overflow-hidden">
+                    <Image
+                        width={100}
+                        height={100}
+                        unoptimized
+                        src={`${event.thumbnail}`}
+                        alt=""
+                        className="z-10 rounded-t-[6px] w-full h-full bg-cover bg-center transform transition-transform duration-300 group-hover:scale-110"
+                    />
                 </div>
                 <section
                     className="relative z-20 pb-5 flex w-full gap-3 h-[46%] md:w-full lg:gap-5 px-[10px] lg:pb-[25px] xl:my-5 xl:px-5">
@@ -83,7 +76,7 @@ export function CardComponent({event}: EventTypes) {
                         </div>
                     </div>
                 </section>
-                <div className="absolute bottom-2 right-0">
+                <div className="absolute bottom-2 right-1">
                     {
                         event.tickets
                             .map((ticket, index) => (

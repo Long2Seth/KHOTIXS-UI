@@ -6,6 +6,10 @@ import {FooterComponent} from "@/components/customer/footer/FooterComponent";
 import {Toaster} from "@/components/ui/toaster"
 import ScrollToTopButton from "@/components/customer/home/ScrollToTopButton";
 import StoreProvider from "@/app/StoreProvider";
+import {ThemeWrapper} from "@/components/ThemeWrapper";
+import {TicketProvider} from "@/context/TicketContext";
+import {UserProvider} from "@/context/UserContext";
+import {QRProvider} from "@/context/QRContext";
 
 export const metadata: Metadata = {
     title: {
@@ -17,27 +21,25 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
+    children,
+}: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
         <body className=" bg-khotixs-background-white dark:bg-khotixs-background-dark ">
-        <StoreProvider>
-            <ThemeProvider
-                attribute="class"
-                defaultTheme="light"
-                enableSystem
-                disableTransitionOnChange
-            >
-                <NavbarComponent/>
-                {children}
-                <FooterComponent/>
-                <Toaster/>
-                <ScrollToTopButton/>
-            </ThemeProvider>
-        </StoreProvider>
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+        >
+            <NavbarComponent />
+            {children}
+            <FooterComponent />
+            <Toaster />
+            <ScrollToTopButton/>
+        </ThemeProvider>
         </body>
         </html>
     );

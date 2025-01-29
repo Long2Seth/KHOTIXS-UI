@@ -1,4 +1,4 @@
-import Tickets from "@/components/customer/User-Profile/Tickets";
+import Tickets from "@/components/customer/user_profile/Tickets";
 
 
 export default function Page(){

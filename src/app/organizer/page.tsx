@@ -8,7 +8,6 @@ const MyComponent = () => {
         <main className="  container mx-auto w-full px-5 md:px-10 ">
             <OrganizerDashboard/>
             <InformationEventComponent/>
-
         </main>
     );
 };
