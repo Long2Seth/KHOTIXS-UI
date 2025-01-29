@@ -27,7 +27,7 @@ import {
 import {router} from "next/client";
 import {CgProfile} from "react-icons/cg";
 import React, { useState,useEffect } from "react";
-import {ProfileComponentSkeleton} from "@/components/customer/user_profile/ProfileComponentSkeleton";
+import {ProfileComponentSkeleton} from "@/components/customer/User-Profile/ProfileComponentSkeleton";
 
 export default function Setting () {
     const [activeTab, setActiveTab] = useState("account");

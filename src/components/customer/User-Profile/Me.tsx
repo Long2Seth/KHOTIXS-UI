@@ -2,7 +2,7 @@
 
 import ProfileComponent from "@/components/customer/User-Profile/Profile";
 import { useEffect, useState } from "react";
-import {ProfileComponentSkeleton} from "@/components/customer/user_profile/user/ProfileComponentSkeleton";
+import {ProfileComponentSkeleton} from "@/components/customer/User-Profile/user/ProfileComponentSkeleton";
 
 type UserProfile = {
     id: string;
@@ -68,7 +68,7 @@ export default function Me() {
 
     return (
         <section>
-            <ProfileComponent userProfile={userProfile} />
+            <ProfileComponent/>
         </section>
     );
 }
