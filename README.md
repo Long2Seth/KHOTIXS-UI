@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ✨KHOTIXS
 
-## Getting Started
+KHOTIXS, established in 2024 by Institute of Science and Technology Advanced Development students, is built on inclusivity, innovation, and user-centric design. By addressing the needs of both organizers and users, the platform bridges the gap between vision and execution, helping events become more accessible and impactful. The idea for KHOTIXS emerged from a deep understanding of the challenges event organizers and users face in today’s fast-paced, digital-first world. Despite the abundance of tools available, many platforms failed to provide a seamless and efficient experience for managing events and ticketing. 
 
-First, run the development server:
+### 👥Mentors
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Teacher: Chan Chhaya
+- Teacher: Kim Chansokphen
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 👥Members
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Proeung Chiso
+- Pov Soknem
+- Long Piseth
+- Vuth Sarandy
+- Phal Seakngim
+- Phal Sophanmai
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🗂️Pages
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| User                  | Event Organizer | Handle By |
+|-----------------------|-----------------|-----------|
+| Home (...%)           |                 |           |
+| About (...%)          |                 |           |
+| Contact (...%)        |                 |           |
+| Event Category (...%) |                 |           |
+| Event Detail (...%)   |                 |           |
+| Order (...%)          |                 |           |
+| Confirm Order (...%)  |                 |           |
+| Payment (...%)        |                 |           |
+| Profile (...%)        |                 |           |
+| Setting (...%)        |                 |           |
