@@ -142,7 +142,7 @@ export default function EventDetails({ event }: EventDetailsProps) {
     }
 
     return (
-        <main className={`container mx-auto px-5 lg:px-10 `}>
+        <main className={`w-full container mx-auto px-5 lg:px-10 `}>
             <div className="py-7">
                 {/* Breadcrumb */}
                 <section className="mb-6 flex items-center gap-2 text-sm text-muted-foreground">
@@ -167,7 +167,6 @@ export default function EventDetails({ event }: EventDetailsProps) {
                         </BreadcrumbList>
                     </Breadcrumb>
                 </section>
-
                 {/*Event title*/}
                 <section className="flex gap-5 mb-7 items-center">
                     <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text uppercase">{event?.eventTitle}</h1>
@@ -314,5 +313,5 @@ export default function EventDetails({ event }: EventDetailsProps) {
                 </section>
             </div>
         </main>
-    );
+    )
 }
