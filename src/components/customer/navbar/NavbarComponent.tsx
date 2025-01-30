@@ -228,7 +228,7 @@ const NavbarComponent = () => {
                         </SheetTrigger>
                         <SheetContent className="mt-[48px] rounded-tl-[6px]">
                             <SheetHeader>
-                                <SheetTitle className={`text-secondary-color-text  text-start`}>Menu</SheetTitle>
+                                <SheetTitle className={`text-secondary-color-text uppercase text-start`}>Menu</SheetTitle>
                             </SheetHeader>
                             <ul className="flex flex-col p-1 mt-2 rounded-[6px]">
                                 {dynamicMenuItems.map((item, index) => (
