@@ -45,18 +45,18 @@ export function CardComponent({event}: EventTypes) {
     return (
         <section
             onClick={() => router.push(`event/${event.id}`)}
-            className="relative cursor-pointer bg-white dark:bg-backdrop-blur dark:bg-opacity-5 rounded-[6px] flex flex-col justify-start items-start max-w-[300px] sm:max-w-[300px] md:max-w-[330px] md:h-[340px] xl:max-w-[400px] xl:h-[450px] h-[240px] sm:h-[250px] lg:h-[300px] 2xl:max-w-[450px] md:p-0">
+            className="relative cursor-pointer bg-white dark:bg-backdrop-blur dark:bg-opacity-5 rounded-[6px] flex flex-col justify-start items-start max-w-[300px] sm:max-w-[300px] md:max-w-[330px] md:h-[340px] xl:max-w-[400px] xl:h-[400px] h-[240px] sm:h-[250px] lg:h-[300px] 2xl:max-w-[450px] md:p-0">
 
             <a className="group block overflow-hidden rounded-[6px]">
                 <div className=" z-10 rounded-t-[6px] w-full h-[56%] overflow-hidden">
-                    <section className="rounded-[8px] h-[300px] items-center object-cover justify-center bg-center">
+                    <section className="rounded-[8px] h-[300px] xl:h-[450px] items-center object-cover justify-center bg-center">
                         <Image
                             width={100}
                             height={100}
                             unoptimized
                             src={`${event.thumbnail}`}
                             alt="event image"
-                            className="z-10 rounded-l-[6px] w-full md:h-[200px] md:w-[448px] bg-cover bg-center object-cover transform transition-transform duration-300 group-hover:scale-110"
+                            className="z-10 rounded-l-[6px] w-full md:h-[200px] md:w-[448px] xl:h-[300px] bg-cover bg-center object-cover transform transition-transform duration-300 group-hover:scale-110"
                         />
                     </section>
                 </div>
