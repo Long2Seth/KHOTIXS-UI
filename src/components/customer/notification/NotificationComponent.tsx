@@ -51,7 +51,7 @@ export default function NotificationComponent() {
                     <SheetTitle className={`text-start text-2xl`}>Notification</SheetTitle>
                 </SheetHeader>
                 <section className="p-4 space-y-2">
-                    {notifications.map((notification) => (
+                    {notifications?.map((notification) => (
                         <NotificationCardComponent
                             key={notification.id}
                             notification={notification}
