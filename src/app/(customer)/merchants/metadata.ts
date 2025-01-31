@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
             siteName: 'KHOTIXS',
             images: [
                 {
-                    url: 'https://khotixs.istad.co/asset/api/v1/files/view/37e026de-841f-40b6-a05d-d8254aa1057e.png',
+                    url: 'https://khotixs.istad.co/asset/api/v1/files/view/22b0d35d-8687-452e-98ee-9d0ffe0dafbe.jpg',
                     alt: 'Merchants',
                 },
             ],

@@ -55,12 +55,12 @@ export default function NotificationCardComponent({ notification, onRead }: Prop
     return (
         <div className="relative container mx-auto flex items-center justify-center">
             <Card
-                className="w-full max-w-[700px] p-4 hover:bg-accent/50 transition-colors rounded-[5px] bg-white border border-gray-200 cursor-pointer">
+                className="w-auto md:w-[700px] md:p-4 p-2 hover:bg-accent/50 transition-colors rounded-[5px] bg-white border border-gray-200 cursor-pointer">
                 <div
                     className="flex items-center justify-between">
                     <div
                         onClick={handleCardClick}
-                        className="flex items-center gap-3 w-full">
+                        className="flex items-center gap-2 md:gap-3 w-full">
                         <div className="relative">
                             <Avatar className="h-10 w-10 flex items-center justify-center">
                                 <Image
@@ -74,10 +74,10 @@ export default function NotificationCardComponent({ notification, onRead }: Prop
                         </div>
                         <div className="flex flex-col w-full">
                             <p className="text-sm">
-                                <span className="text-lg font-bold line-clamp-1">{notification.eventTitle}</span>
+                                <span className="text-sm uppercase text-label-text-secondary font-bold line-clamp-1">{notification.eventTitle}</span>
                             </p>
-                            <p className="text-sm line-clamp-1">{notification.description}</p>
-                            <p className={`text-primary-color`}>{notification.createdAt ? timeSince(notification.createdAt) : 'Unknown time'}</p>
+                            <p className="text-sm text-label-text-secondary line-clamp-1">{notification.description}</p>
+                            <p className={`text-primary-color text-[12px]`}>{notification.createdAt ? timeSince(notification.createdAt) : 'Unknown time'}</p>
                         </div>
                     </div>
                     <div>

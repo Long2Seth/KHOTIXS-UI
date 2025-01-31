@@ -29,7 +29,7 @@ export function NotificationActionComponent({ id }: Props) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button><IoMdMore className="w-5 h-5 text-gray-500 cursor-pointer" /></Button>
+                <Button className="px-2"><IoMdMore className="w-2 h-5 text-gray-500 cursor-pointer" /></Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
                 className="bg-white dark:bg-khotixs-background-dark dark:border-none rounded-[6px] shadow-lg"

@@ -1,6 +1,26 @@
-'use client'
 // import { useRouter } from 'next/router';
+import { Metadata } from "next";
 
+export async function generateMetadata(): Promise<Metadata> {
+    const desc = "Search for events and view search results.";
+
+    return {
+        title: "Search",
+        description: desc,
+        openGraph: {
+            title: "Search",
+            description: desc,
+            siteName: 'KHOTIXS',
+            images: [
+                {
+                    url: 'https://khotixs.istad.co/asset/api/v1/files/view/22b0d35d-8687-452e-98ee-9d0ffe0dafbe.jpg',
+                    alt: 'Search'
+                },
+            ],
+        },
+
+    };
+}
 export default function SearchPage() {
     // const router = useRouter();
     // const { results } = router.query;

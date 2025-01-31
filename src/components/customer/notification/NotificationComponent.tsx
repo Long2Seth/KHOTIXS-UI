@@ -42,15 +42,15 @@ export default function NotificationComponent() {
     return (
         <Sheet>
             <SheetTrigger asChild>
-                <Button className={`border-none`}>
-                    <FiBell className="h-7 w-7" />
+                <Button className={`border-none p-2 pr-0`}>
+                    <FiBell className="h-4 w-4 text-primary-color" />
                 </Button>
             </SheetTrigger>
-            <SheetContent className={`overflow-y-scroll no-scrollbar bg-white`}>
+            <SheetContent className={`no-scrollbar w-[270px] bg-white bg-opacity-95 absolute top-[48px]`}>
                 <SheetHeader>
-                    <SheetTitle className={`text-start text-2xl`}>Notification</SheetTitle>
+                    <SheetTitle className={`text-start dark:text-label-text-secondary text-2xl`}>Notification</SheetTitle>
                 </SheetHeader>
-                <section className="p-4 space-y-2">
+                <section className="md:p-4 py-2 space-y-2">
                     {notifications?.map((notification) => (
                         <NotificationCardComponent
                             key={notification.id}
