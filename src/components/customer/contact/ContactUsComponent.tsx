@@ -1,13 +1,13 @@
 'use client'
-import React from 'react';
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ContactSkeletonComponent } from "@/components/customer/contact/ContactSkeletonComponent";
 import { GrLocation } from "react-icons/gr";
 import { FiPhone } from "react-icons/fi";
 import { HiOutlineMail } from "react-icons/hi";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { useSubmitContactFormMutation} from "@/redux/feature/user/Contact";
+import { useSubmitContactFormMutation } from "@/redux/feature/user/Contact";
+import { LoadingButton } from "@/components/ui/loading-button";
 
 type PartnerRegister = {
     name: string;
@@ -21,6 +21,7 @@ export default function ContactUsComponent() {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [errors, setErrors] = useState<PartnerRegister>({ name: '', email: '', message: '' });
+    const [loading, setLoading] = useState(false);
     const [submitContactForm] = useSubmitContactFormMutation();
 
     const validateForm = () => {
@@ -50,6 +51,7 @@ export default function ContactUsComponent() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (validateForm()) {
+            setLoading(true);
             try {
                 const response = await submitContactForm({ name, email, message }).unwrap();
                 console.log('Form submitted successfully', response);
@@ -60,6 +62,8 @@ export default function ContactUsComponent() {
                 setErrors({ name: '', email: '', message: '' });
             } catch (error) {
                 console.error('Error submitting form:', error);
+            } finally {
+                setLoading(false);
             }
         }
     };
@@ -204,9 +208,12 @@ export default function ContactUsComponent() {
                                             ></textarea>
                                             {errors.message && <span className="text-red-500">{errors.message}</span>}
                                         </div>
-                                        <button type="submit" className="bg-primary-color text-white text-lg py-2 px-4 rounded-[5px] hover:bg-primary-color/80 transition">
+                                        <LoadingButton
+                                            type="submit"
+                                            loading={loading}
+                                            className="bg-primary-color text-white text-lg py-2 px-4 rounded-[5px] hover:bg-primary-color/80 transition">
                                             Submit
-                                        </button>
+                                        </LoadingButton>
                                     </form>
                                 </div>
                             </div>

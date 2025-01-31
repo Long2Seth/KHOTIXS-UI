@@ -1,12 +1,12 @@
 'use client';
-import React, {useState, useRef} from "react";
-import {CalendarIcon} from 'lucide-react';
-import {Button} from "@/components/ui/button";
-import {Card, CardContent} from "@/components/ui/card";
-import {Input} from "@/components/ui/input";
-import {LuUpload} from "react-icons/lu";
-import {Label} from "@/components/ui/label";
-import {z} from 'zod';
+import React, { useState, useRef } from "react";
+import { CalendarIcon } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { LuUpload } from "react-icons/lu";
+import { Label } from "@/components/ui/label";
+import { z } from 'zod';
 import {
     Select,
     SelectContent,
@@ -14,15 +14,16 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import {Textarea} from "@/components/ui/textarea";
-import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
-import {Calendar as CalendarComponent} from "@/components/ui/calendar";
-import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area";
-import {cn} from "@/lib/types/utils";
-import {format} from "date-fns";
-import {useRouter} from "next/navigation";
+import { Textarea } from "@/components/ui/textarea";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { cn } from "@/lib/types/utils";
+import { format } from "date-fns";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
-
+import { LoadingButton } from "@/components/ui/loading-button";
+import { toast } from 'react-hot-toast';
 
 // Define the zod schema
 const eventSchema = z.object({
@@ -43,7 +44,7 @@ export function CreateEventForm() {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [action, setAction] = useState<string>("");
-
+    const [loading, setLoading] = useState(false);
 
     const handleTimeChange = (
         type: "hour" | "minute",
@@ -128,31 +129,37 @@ export function CreateEventForm() {
             console.log("Validation Errors:", newErrors);
         } else {
             setErrors({});
-            // Handle form submission
-            try {
-                const response = await fetch("/event-ticket/api/v1/events", {
+            setLoading(true);
+
+            toast.promise(
+                fetch("/event-ticket/api/v1/events", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(formData),
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                }).then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                }).then(data => {
+                    if (action === "save") {
+                        router.push("/organizer/events");
+                    } else if (action === "saveAndContinue") {
+                        router.push(`/organizer/events/tickets/${data.uuid}`);
+                    }
+                }).catch(error => {
+                    console.error("Error submitting form:", error);
+                }).finally(() => {
+                    setLoading(false);
+                }),
+                {
+                    loading: <b className={` p-3 `}>Saving event . . . </b>,
+                    success: <b className={` p-3 `}>Successfully created event!</b>,
+                    error: <b className={` p-3 `}>Could not create event.</b>,
                 }
-
-                const data = await response.json();
-                console.log("Form submitted successfully");
-
-                if (action === "save") {
-                    router.push("/organizer/events");
-                } else if (action === "saveAndContinue") {
-                    router.push(`/organizer/events/tickets/${data.uuid}`);
-                }
-            } catch (error) {
-                console.error("Error submitting form:", error);
-            }
+            );
         }
     };
 
@@ -440,21 +447,24 @@ export function CreateEventForm() {
             <section className="flex flex-wrap justify-end gap-4 pt-6 ">
                 <Button
                     onClick={() => router.push("/organizer/events")}
-                    className="border-red-600 text-red-500 rounded-[6px] hover:text-red-600 hover:bg-red-50 "
+                    className="border-red-600 text-red-500 rounded-[6px] hover:text-white hover:bg-red-500 "
                     variant="outline">
                     Cancel
                 </Button>
-                <Button type="submit"
-                        onClick={() => setAction("save")}
-                        className="bg-primary-color border border-primary-color rounded-[6px] text-secondary-color-text hover:bg-primary-color/80 ">
-                    Save
-                </Button>
-                <Button
+                <LoadingButton
                     type="submit"
+                    loading={loading}
+                    onClick={() => setAction("save")}
+                    className="bg-primary-color border border-primary-color rounded-[6px] text-secondary-color-text hover:bg-primary-color/80 ">
+                    Save
+                </LoadingButton>
+                <LoadingButton
+                    type="submit"
+                    loading={loading}
                     onClick={() => setAction("saveAndContinue")}
                     className="bg-primary-color border border-primary-color rounded-[6px] text-secondary-color-text hover:bg-primary-color/80">
                     Save & Continue
-                </Button>
+                </LoadingButton>
             </section>
         </form>
     )

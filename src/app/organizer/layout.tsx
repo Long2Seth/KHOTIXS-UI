@@ -1,12 +1,11 @@
 import type {Metadata} from "next";
 import "../globals.css";
 import {ThemeProvider} from "next-themes";
-import {Toaster} from "@/components/ui/toaster";
+import {Toaster} from "react-hot-toast";
 import FooterOrganizer from "@/components/organizer/navbar/FooterOrganizer";
 import NavbarOrganizerComponent from "@/components/organizer/navbar/NavbarOrganizerComponent";
 import CategoriesOrganizerComponent from "@/components/organizer/navbar/categoriesOrganizerComponent";
 import React from "react";
-import {ApiProvider} from "@reduxjs/toolkit/query/react";
 import StoreProvider from "@/app/StoreProvider";
 
 
@@ -36,9 +35,11 @@ export default function RootLayout({
             <StoreProvider>
                 <NavbarOrganizerComponent/>
                 <CategoriesOrganizerComponent/>
+                <Toaster
+                    position="top-right"
+                    reverseOrder={false}/>
                 {children}
                 <FooterOrganizer/>
-                <Toaster/>
             </StoreProvider>
         </ThemeProvider>
         </body>

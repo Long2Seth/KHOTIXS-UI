@@ -1,8 +1,9 @@
-'use client'
+'use client';
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { useSubmitPartnerFormMutation } from "@/redux/feature/user/PartnerRegister";
+import { LoadingButton } from "@/components/ui/loading-button";
 
 type PartnerRegister = {
     email: string;
@@ -19,6 +20,7 @@ export default function PartnerComponent() {
     const [position, setPosition] = useState('');
     const [address, setLocation] = useState('');
     const [errors, setErrors] = useState<PartnerRegister>({ email: '', businessName: '', bankId: '', position: '', address: '' });
+    const [loading, setLoading] = useState(false);
     const [submitPartnerForm] = useSubmitPartnerFormMutation();
 
     const validateForm = () => {
@@ -55,6 +57,7 @@ export default function PartnerComponent() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (validateForm()) {
+            setLoading(true);
             const formData: PartnerRegister = {
                 email,
                 businessName,
@@ -75,6 +78,8 @@ export default function PartnerComponent() {
                 setErrors({ email: '', businessName: '', bankId: '', position: '', address: '' });
             } catch (error) {
                 console.error('Error submitting form:', error);
+            } finally {
+                setLoading(false);
             }
         }
     };
@@ -192,11 +197,12 @@ export default function PartnerComponent() {
                     />
                     {errors.address && <span className="text-red-500">{errors.address}</span>}
                 </div>
-                <button
+                <LoadingButton
                     type="submit"
+                    loading={loading}
                     className="bg-primary-color text-white text-lg py-2 px-4 rounded-[5px] hover:bg-primary-color/80 transition">
                     Submit
-                </button>
+                </LoadingButton>
             </form>
         </section>
     );
