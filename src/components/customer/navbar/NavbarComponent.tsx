@@ -119,24 +119,23 @@ const NavbarComponent = () => {
                             </Link>
 
                             <section className="rounded-[5px] flex justify-center drop-shadow-xl">
-                                <form className="w-full rounded-[5px] bg-gray-50 flex items-center">
+                                <form className="md:h-[32px] h-full lg:h-full rounded-[5px] bg-gray-50 flex items-center">
                                     <div
-                                        className="flex items-center w-[160px] md:max-w-[200px] lg:max-w-[220px] xl:w-auto">
+                                        className="flex items-center w-[140px] sm:w-[160px] md:max-w-[200px] lg:max-w-[220px] xl:w-auto">
                                         <input
                                             type="text"
                                             placeholder="Search events name"
                                             className="w-auto bg-transparent h-full rounded-tl-[5px] text-[12px] lg:text-[14px] focus:text-gray-500 rounded-bl-[5px] md:pl-5 pl-2 lg:pl-2 xl:pl-5 focus:outline-none pr-4 border-0 focus:ring-0 px-0 py-2 dark:text-primary-color-text "
                                             name="topic"
                                         />
-                                        <hr className="w-[20px] bg-gray-400 rotate-90"/>
-                                        <hr className="hidden md:block xl:block  w-[20px] bg-gray-400 rotate-90"/>
+                                        <hr className="hidden md:block xl:block w-[20px] bg-gray-400 rotate-90"/>
                                     </div>
 
                                     <div className="hidden lg:flex lg:w-auto items-center">
                                         <Select onValueChange={setSelectedLocation}>
                                             <SelectTrigger
                                                 className={cn(
-                                                    "w-[170px] lg:w-[130px] xl:w-[180px] text-[12px] lg:text-[14px] focus:outline-none ring-0 bg-transparent border-0",
+                                                    "w-[170px] p-0 m-0 lg:w-[130px] xl:w-[180px] text-[12px] lg:text-[14px] focus:outline-none ring-0 bg-transparent border-0",
                                                     selectedLocation ? "text-black" : "text-gray-400"
                                                 )}
                                             >
@@ -159,7 +158,7 @@ const NavbarComponent = () => {
                                                 <Button
                                                     variant="ghost"
                                                     className={cn(
-                                                        "md:w-[180px] lg:w-[190px] justify-start text-left bg-transparent border-0 focus:ring-0 focus:outline-none",
+                                                        "md:w-[180px] p-0 m-0 lg:w-[190px] justify-start text-left bg-transparent border-0 focus:ring-0 focus:outline-none",
                                                         !date && "text-muted-foreground"
                                                     )}
                                                 >
@@ -181,7 +180,7 @@ const NavbarComponent = () => {
                                     </div>
 
                                     <button
-                                        className="flex flex-row items-center justify-center rounded-tr-[5px] rounded-br-[5px]">
+                                        className="flex flex-row items-center h-full justify-center rounded-tr-[5px] rounded-br-[5px]">
                                         <div
                                             className="bg-primary-color text-2xl text-white p-1 md:px-2 lg:p-3 rounded-tr-[5px] rounded-br-[5px]">
                                             <IoSearch className="w-4"/>
@@ -218,7 +217,7 @@ const NavbarComponent = () => {
                     <Sheet>
                         <SheetTrigger>
                             <div
-                                className="absolute cursor-pointer top-[52px] hover:bg-gray-100 rounded-[6px] sm:mr-[70px] md:mr-0 pr-0 lg:pr-10 right-0 inline-flex w-8 h-8 text-2xl text-primary-color md:hidden focus:outline-none dark:text-primary-color"
+                                className="absolute cursor-pointer top-[48px] hover:bg-gray-50 hover:rounded-[6px] sm:mr-[70px] items-center justify-center md:mr-0 lg:pr-10 right-0 inline-flex w-8 h-8 text-2xl text-primary-color md:hidden focus:outline-none dark:text-primary-color"
                                 aria-controls="mega-menu-full"
                                 aria-expanded={isMenuOpen ? "true" : "false"}
                             >
@@ -226,19 +225,19 @@ const NavbarComponent = () => {
                                 {isMenuOpen ? <IoMdCloseCircle/> : <IoMenu/>}
                             </div>
                         </SheetTrigger>
-                        <SheetContent className="mt-[48px] rounded-tl-[6px]">
+                        <SheetContent className="mt-[48px] w-[270px] rounded-tl-[6px] bg-white bg-opacity-95">
                             <SheetHeader>
-                                <SheetTitle className={`text-secondary-color-text  text-start`}>Menu</SheetTitle>
+                                <SheetTitle className={`text-label-text-secondary uppercase text-start`}>Menu</SheetTitle>
                             </SheetHeader>
                             <ul className="flex flex-col p-1 mt-2 rounded-[6px]">
                                 {dynamicMenuItems.map((item, index) => (
-                                    <li key={index}>
+                                    <li key={index} className={`menu-item ${!userProfile ? 'last:bg-gray-400 last:rounded-[6px] last:bg-blur-5 last:bg-opacity-10 last:my-2' : ''}`}>
                                         <Link
                                             href={item.link}
                                             className={`block py-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-300 hover:text-primary-color text-secondary-color-text ${activeItem === item.name ? 'text-primary-color' : ''}`}
                                             onClick={() => handleItemClick(item.name)}
                                         >
-                                            <span className="flex items-center gap-2">
+                                            <span className="flex items-center text-label-text-secondary gap-2">
                                                 {item.icon}
                                                 {item.name}
                                             </span>

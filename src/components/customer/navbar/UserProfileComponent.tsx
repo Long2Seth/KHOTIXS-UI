@@ -44,7 +44,7 @@ export function UserProfileComponent({data}: UserProfileProps) {
             <DropdownMenuTrigger className={` mr-[35px] sm:mr-20 md:mr-0 `} asChild>
                 <Button variant="ghost" className="p-0 rounded-full">
                     <div className="flex flex-col items-center gap-4">
-                        <Avatar className="w-[40px] h-[40px] rounded-[5px]">
+                        <Avatar className="md:w-[40px] md:h-[40px] w-[32px] h-[32px] rounded-[5px]">
                             <AvatarImage src={data.avatar}/>
                         </Avatar>
                     </div>
