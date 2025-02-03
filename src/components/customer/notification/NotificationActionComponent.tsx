@@ -3,23 +3,25 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { IoMdMore } from "react-icons/io";
 import React from "react";
-import { useRouter } from "next/navigation";
 import { AiOutlineDelete } from "react-icons/ai";
-import { useDeleteNotificationByIdMutation} from "@/redux/feature/user/Notification";
+import { useDeleteNotificationByIdMutation } from "@/redux/feature/user/Notification";
+import { WebSocketService } from "@/lib/types/customer/websocket";
 
 type Props = {
     id: string | null;
+    onDelete: () => void;
 }
 
-export function NotificationActionComponent({ id }: Props) {
-    const router = useRouter();
+export function NotificationActionComponent({ id, onDelete }: Props) {
     const [deleteNotificationById] = useDeleteNotificationByIdMutation();
+    const wsServer = new WebSocketService('/communication/ws', 'USER');
 
     const handleDelete = async () => {
         if (id) {
             try {
                 await deleteNotificationById(id).unwrap();
-                // Optionally, you can handle the response or update the state here
+                wsServer.notifyDeletion(id); // Notify the server about the deletion
+                onDelete(); // Update the state in the parent component
             } catch (error) {
                 console.error('Failed to delete event:', error);
             }

@@ -6,6 +6,7 @@ export class WebSocketService {
     private wsUrl: string;
     private client: Client;
     private subscriptionCallback: ((notification: Notification) => void) | null = null;
+    private deleteCallback: ((notificationId: string) => void) | null = null;
     private userRole: string;
 
     constructor(wsUrl: string = '/communication/ws', userRole: string) {
@@ -47,11 +48,33 @@ export class WebSocketService {
         }
     }
 
+    onDeleteNotification(callback: (notificationId: string) => void): void {
+        this.deleteCallback = callback;
+        if (this.client.connected) {
+            this.subscribe();
+        }
+    }
+
     private subscribe(): void {
         if (this.subscriptionCallback) {
             this.client.subscribe(`/topic/notifications/`, (message) => {
                 const notification = JSON.parse(message.body) as Notification;
                 this.subscriptionCallback!(notification);
+            });
+        }
+        if (this.deleteCallback) {
+            this.client.subscribe(`/topic/notifications/delete`, (message) => {
+                const { notificationId } = JSON.parse(message.body);
+                this.deleteCallback!(notificationId);
+            });
+        }
+    }
+
+    notifyDeletion(notificationId: string): void {
+        if (this.client.connected) {
+            this.client.publish({
+                destination: `/app/notifications/delete`,
+                body: JSON.stringify({ notificationId }),
             });
         }
     }

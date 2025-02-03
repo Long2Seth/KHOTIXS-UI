@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useSubmitContactFormMutation } from "@/redux/feature/user/Contact";
 import { LoadingButton } from "@/components/ui/loading-button";
+import { toast } from 'react-hot-toast';
 
 type PartnerRegister = {
     name: string;
@@ -52,9 +53,20 @@ export default function ContactUsComponent() {
         e.preventDefault();
         if (validateForm()) {
             setLoading(true);
+            toast.loading('Submitting form...', {
+                style: {
+                    padding: '12px'
+                }
+            });
             try {
                 const response = await submitContactForm({ name, email, message }).unwrap();
                 console.log('Form submitted successfully', response);
+                toast.dismiss();
+                toast.success('Form submitted successfully!', {
+                    style: {
+                        padding: '12px'
+                    }
+                });
                 // Clear form fields
                 setName('');
                 setEmail('');
@@ -62,6 +74,12 @@ export default function ContactUsComponent() {
                 setErrors({ name: '', email: '', message: '' });
             } catch (error) {
                 console.error('Error submitting form:', error);
+                toast.dismiss();
+                toast.error('Error submitting form', {
+                    style: {
+                        padding: '12px'
+                    }
+                });
             } finally {
                 setLoading(false);
             }
