@@ -1,14 +1,13 @@
-import type {Metadata} from "next";
+import type { Metadata } from "next";
 import "../globals.css";
-import {ThemeProvider} from "next-themes";
-import {Toaster} from "@/components/ui/toaster";
+import { ThemeProvider } from "next-themes";
+import { Toaster } from "react-hot-toast";
 import FooterOrganizer from "@/components/organizer/navbar/FooterOrganizer";
 import NavbarOrganizerComponent from "@/components/organizer/navbar/NavbarOrganizerComponent";
-import CategoriesOrganizerComponent from "@/components/organizer/navbar/categoriesOrganizerComponent";
 import React from "react";
-import {ApiProvider} from "@reduxjs/toolkit/query/react";
 import StoreProvider from "@/app/StoreProvider";
-
+import GoogleAnalytics from "@/components/google/GoogleAnalytics";
+import CategoriesOrganizerComponent from "@/components/organizer/navbar/categoriesOrganizerComponent";
 
 export const metadata: Metadata = {
     title: {
@@ -26,7 +25,8 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-        <body className=" bg-khotixs-background-white dark:bg-khotixs-background-dark ">
+        <body className="bg-khotixs-background-white dark:bg-khotixs-background-dark">
+        <GoogleAnalytics />
         <ThemeProvider
             attribute="class"
             defaultTheme="light"
@@ -34,11 +34,11 @@ export default function RootLayout({
             disableTransitionOnChange
         >
             <StoreProvider>
-                <NavbarOrganizerComponent/>
-                <CategoriesOrganizerComponent/>
+                <NavbarOrganizerComponent />
+                <CategoriesOrganizerComponent />
+                <Toaster position="top-right" reverseOrder={false} />
                 {children}
-                <FooterOrganizer/>
-                <Toaster/>
+                <FooterOrganizer />
             </StoreProvider>
         </ThemeProvider>
         </body>

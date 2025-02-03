@@ -1,22 +1,27 @@
 'use client'
 
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
 import { FiBell } from "react-icons/fi";
 import NotificationCardComponent from "@/components/customer/notification/NotificationCardComponent";
 import { Notification } from "@/lib/types/customer/notification";
 import { useEffect, useState } from "react";
 import { WebSocketService } from "@/lib/types/customer/websocket";
+import { useDeleteNotificationByIdMutation } from "@/redux/feature/user/Notification";
 
 export default function NotificationComponent() {
     const [notifications, setNotifications] = useState<Notification[]>([]);
     const userRole = "USER";
+    const [deleteNotification] = useDeleteNotificationByIdMutation();
 
     useEffect(() => {
-        const wsServer = new WebSocketService('/ws', userRole);
+        const wsServer = new WebSocketService('/communication/ws', userRole);
 
         wsServer.onNotification((notification) => {
             setNotifications((prev) => [notification, ...prev]);
+        });
+
+        wsServer.onDeleteNotification((notificationId) => {
+            setNotifications((prev) => prev.filter(notification => notification.id !== notificationId));
         });
 
         wsServer.connect();
@@ -39,14 +44,23 @@ export default function NotificationComponent() {
         );
     };
 
+    const handleNotificationDelete = async (id: string) => {
+        try {
+            await deleteNotification(id).unwrap();
+            setNotifications((prev) => prev.filter(notification => notification.id !== id));
+        } catch (error) {
+            console.error('Error deleting notification:', error);
+        }
+    };
+
     return (
         <Sheet>
             <SheetTrigger asChild>
-                <Button className={`border-none p-2 pr-0`}>
-                    <FiBell className="h-4 w-4 text-primary-color" />
-                </Button>
+                <div className={`border-none mx-4 cursor-pointer`}>
+                    <FiBell className="h-6 w-6 text-primary-color" />
+                </div>
             </SheetTrigger>
-            <SheetContent className={`no-scrollbar w-[270px] bg-white bg-opacity-95 absolute top-[48px]`}>
+            <SheetContent className={`no-scrollbar w-[270px] md:w-[370px] bg-white bg-opacity-95 absolute top-[48px]`}>
                 <SheetHeader>
                     <SheetTitle className={`text-start dark:text-label-text-secondary text-2xl`}>Notification</SheetTitle>
                 </SheetHeader>
@@ -56,6 +70,7 @@ export default function NotificationComponent() {
                             key={notification.id}
                             notification={notification}
                             onRead={handleNotificationRead}
+                            onDelete={handleNotificationDelete}
                         />
                     ))}
                 </section>

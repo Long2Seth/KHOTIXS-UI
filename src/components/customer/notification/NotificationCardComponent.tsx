@@ -1,16 +1,17 @@
 'use client';
-import { useState } from "react";
-import { Card } from "@/components/ui/card";
+import {useState} from "react";
+import {Card} from "@/components/ui/card";
 import Image from "next/image";
-import { Notification } from "@/lib/types/customer/notification";
-import { Avatar } from "@/components/ui/avatar";
-import { NotificationActionComponent } from "@/components/customer/notification/NotificationActionComponent";
-import { NotificationDetailComponent } from "@/components/customer/notification/NotificationDetailComponent";
-import { useReadNotificationByIdMutation } from "@/redux/feature/user/Notification";
+import {Notification} from "@/lib/types/customer/notification";
+import {Avatar} from "@/components/ui/avatar";
+import {NotificationActionComponent} from "@/components/customer/notification/NotificationActionComponent";
+import {NotificationDetailComponent} from "@/components/customer/notification/NotificationDetailComponent";
+import {useReadNotificationByIdMutation} from "@/redux/feature/user/Notification";
 
 type Props = {
     notification: Notification;
     onRead: (id: string) => void;
+    onDelete: (id: string) => void;
 };
 
 function timeSince(date: Date) {
@@ -36,7 +37,7 @@ function timeSince(date: Date) {
     return `${Math.floor(seconds)} seconds ago`;
 }
 
-export default function NotificationCardComponent({ notification, onRead }: Props) {
+export default function NotificationCardComponent({notification, onRead, onDelete}: Props) {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [readNotificationById] = useReadNotificationByIdMutation();
 
@@ -52,10 +53,14 @@ export default function NotificationCardComponent({ notification, onRead }: Prop
         }
     };
 
+    const handleDeleteClick = () => {
+        onDelete(notification.id as string);
+    };
+
     return (
         <div className="relative container mx-auto flex items-center justify-center">
             <Card
-                className="w-auto md:w-[700px] md:p-4 p-2 hover:bg-accent/50 transition-colors rounded-[5px] bg-white border border-gray-200 cursor-pointer">
+                className="w-full md:p-4 p-2 hover:bg-accent/50 transition-colors rounded-[5px] bg-white border border-gray-200 cursor-pointer">
                 <div
                     className="flex items-center justify-between">
                     <div
@@ -74,9 +79,10 @@ export default function NotificationCardComponent({ notification, onRead }: Prop
                         </div>
                         <div className="flex flex-col w-full">
                             <p className="text-sm">
-                                <span className="text-sm uppercase text-label-text-secondary font-bold line-clamp-1">{notification.eventTitle}</span>
+                                <span
+                                    className="text-[12px] uppercase text-label-text-secondary font-bold line-clamp-1">{notification.eventTitle}</span>
                             </p>
-                            <p className="text-sm text-label-text-secondary line-clamp-1">{notification.description}</p>
+                            <p className="text-[12px] text-label-text-secondary line-clamp-1">{notification.description}</p>
                             <p className={`text-primary-color text-[12px]`}>{notification.createdAt ? timeSince(notification.createdAt) : 'Unknown time'}</p>
                         </div>
                     </div>
@@ -88,13 +94,15 @@ export default function NotificationCardComponent({ notification, onRead }: Prop
                         )}
                     </div>
                     <div className="flex items-center gap-2 ml-4">
-                        <button className=" flex-shrink-0 right-10 hover:bg-gray-100 rounded-full">
-                            <NotificationActionComponent id={notification.id as string | null} />
+                        <button className="flex-shrink-0 right-10 hover:bg-gray-100 rounded-full">
+                            <NotificationActionComponent id={notification.id as string | null}
+                                                         onDelete={() => onDelete(notification.id as string)}/>
                         </button>
                     </div>
                 </div>
             </Card>
-            {isDialogOpen && <NotificationDetailComponent id={notification.id ?? null} onClose={() => setIsDialogOpen(false)} />}
+            {isDialogOpen &&
+                <NotificationDetailComponent id={notification.id ?? null} onClose={() => setIsDialogOpen(false)}/>}
         </div>
     );
 }

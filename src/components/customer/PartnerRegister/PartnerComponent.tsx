@@ -1,8 +1,11 @@
-'use client'
-import React, { useState } from "react";
+'use client';
+import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { useSubmitPartnerFormMutation } from "@/redux/feature/user/PartnerRegister";
+import { LoadingButton } from "@/components/ui/loading-button";
+import { toast } from 'react-hot-toast';
+import { useGetUserProfileQuery } from "@/redux/feature/user/UserProfile";
 
 type PartnerRegister = {
     email: string;
@@ -12,14 +15,32 @@ type PartnerRegister = {
     address: string;
 };
 
+interface ApiError {
+    data: {
+        error: {
+            code: string;
+            description: string;
+        };
+    };
+}
+
 export default function PartnerComponent() {
+    const { data: userProfile } = useGetUserProfileQuery();
     const [email, setEmail] = useState('');
     const [businessName, setBusinessName] = useState('');
     const [bankId, setBankID] = useState('');
     const [position, setPosition] = useState('');
     const [address, setLocation] = useState('');
     const [errors, setErrors] = useState<PartnerRegister>({ email: '', businessName: '', bankId: '', position: '', address: '' });
+    const [loading, setLoading] = useState(false);
     const [submitPartnerForm] = useSubmitPartnerFormMutation();
+
+    useEffect(() => {
+        if (userProfile) {
+            setEmail(userProfile.email);
+            setLocation(userProfile.address);
+        }
+    }, [userProfile]);
 
     const validateForm = () => {
         const formErrors = { email: '', businessName: '', bankId: '', position: '', address: '' };
@@ -55,6 +76,12 @@ export default function PartnerComponent() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (validateForm()) {
+            setLoading(true);
+            toast.loading('Submitting form...', {
+                style: {
+                    padding: '12px'
+                }
+            });
             const formData: PartnerRegister = {
                 email,
                 businessName,
@@ -65,7 +92,12 @@ export default function PartnerComponent() {
 
             try {
                 const response = await submitPartnerForm(formData).unwrap();
-                console.log('Form submitted successfully', response);
+                toast.dismiss();
+                toast.success('Form submitted successfully!', {
+                    style: {
+                        padding: '12px'
+                    }
+                });
                 // Clear form fields
                 setEmail('');
                 setBusinessName('');
@@ -74,7 +106,17 @@ export default function PartnerComponent() {
                 setLocation('');
                 setErrors({ email: '', businessName: '', bankId: '', position: '', address: '' });
             } catch (error) {
+                toast.dismiss();
+                const apiError = error as ApiError;
+                const errorMessage = apiError.data.error.description || 'Error submitting form';
+                toast.error(errorMessage, {
+                    style: {
+                        padding: '12px'
+                    }
+                });
                 console.error('Error submitting form:', error);
+            } finally {
+                setLoading(false);
             }
         }
     };
@@ -192,11 +234,12 @@ export default function PartnerComponent() {
                     />
                     {errors.address && <span className="text-red-500">{errors.address}</span>}
                 </div>
-                <button
+                <LoadingButton
                     type="submit"
+                    loading={loading}
                     className="bg-primary-color text-white text-lg py-2 px-4 rounded-[5px] hover:bg-primary-color/80 transition">
                     Submit
-                </button>
+                </LoadingButton>
             </form>
         </section>
     );
