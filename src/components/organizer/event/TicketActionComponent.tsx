@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
@@ -7,46 +8,43 @@ import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { IoIosPower } from "react-icons/io";
 import { PiEye, PiEyeSlash } from "react-icons/pi";
-import EditTicketForm from './EditTicketForm';
+import { UpdateTicket } from "@/lib/types/customer/event";
+import EditTicket from "@/components/organizer/event/EditTicket";
+import { usePublishTicketMutation, useUnpublishTicketMutation, useDisplayTicketMutation, useHideTicketMutation, useDeleteTicketMutation } from "@/redux/feature/organizer/Ticket";
 
 type PropType = {
-    id: string;
+    eventId: string;
+    ticketId: string;
     isPublish: string;
     isDisplay: string;
 }
 
-export default function TicketActionComponent({ id, isPublish, isDisplay }: PropType) {
+export default function TicketActionComponent({ eventId, ticketId, isPublish, isDisplay }: PropType) {
     const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-    const [selectedTicketId, setSelectedTicketId] = useState<string | null>(null);
+    const [publishTicket] = usePublishTicketMutation();
+    const [unpublishTicket] = useUnpublishTicketMutation();
+    const [displayTicket] = useDisplayTicketMutation();
+    const [hideTicket] = useHideTicketMutation();
+    const [deleteTicket] = useDeleteTicketMutation();
 
     const handlePublish = async () => {
-        const endpoint = isPublish ? `unpublish` : `publish`;
-        await fetch(`/event-ticket/api/v1/tickets/${id}/${endpoint}`, {
-            method: 'PUT'
-        });
+        if (isPublish) {
+            await unpublishTicket(ticketId);
+        } else {
+            await publishTicket(ticketId);
+        }
     };
 
     const handleDisplay = async () => {
-        const endpoint = isDisplay ? `hide` : `display`;
-        await fetch(`/event-ticket/api/v1/tickets/${id}/${endpoint}`, {
-            method: 'PUT'
-        });
+        if (isDisplay) {
+            await hideTicket(ticketId);
+        } else {
+            await displayTicket(ticketId);
+        }
     };
 
     const handleDelete = async () => {
-        await fetch(`/event-ticket/api/v1/tickets/${id}`, {
-            method: 'DELETE'
-        });
-    }
-
-    const handleEdit = () => {
-        setSelectedTicketId(id);
-        setIsEditDialogOpen(true);
-    }
-
-    const handleClose = () => {
-        setIsEditDialogOpen(false);
-        setSelectedTicketId(null);
+        await deleteTicket(ticketId);
     }
 
     return (
@@ -68,7 +66,7 @@ export default function TicketActionComponent({ id, isPublish, isDisplay }: Prop
                         {isDisplay ? <PiEyeSlash className="h-5 w-5" /> : <PiEye className="h-5 w-5" />}
                         <span>{isDisplay ? "Undisplayed" : "Display"}</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleEdit}>
+                    <DropdownMenuItem onClick={() => setIsEditDialogOpen(true)}>
                         <LiaEdit className="h-5 w-5" />
                         <span>Edit</span>
                     </DropdownMenuItem>
@@ -80,13 +78,16 @@ export default function TicketActionComponent({ id, isPublish, isDisplay }: Prop
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
-            {isEditDialogOpen && (
-                <EditTicketForm
-                    isOpen={isEditDialogOpen}
-                    onClose={handleClose}
-                    ticketId={selectedTicketId}
-                />
-            )}
+            <EditTicket
+                eventId={eventId}
+                ticketId={ticketId}
+                isOpen={isEditDialogOpen}
+                onClose={() => setIsEditDialogOpen(false)}
+                onUpdate={(updatedTicket) => {
+                    // Handle the updated ticket
+                    console.log("Ticket updated:", updatedTicket);
+                }}
+            />
         </>
     )
 }

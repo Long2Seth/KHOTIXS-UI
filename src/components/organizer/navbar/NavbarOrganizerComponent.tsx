@@ -52,7 +52,7 @@ export default function NavbarOrganizerComponent() {
     return (
         <header className=" bg-white dark:bg-khotixs-background-dark dark:border-b-[1px] dark:border-gray-700 mb-5">
             <section
-                className=" container mx-auto w-full z-20 top-0 sticky py-[10px] dark:bg-khotixs-background-dark bg-white  ">
+                className=" container mx-auto w-full z-20 top-0 sticky py-[10px]s">
                 <section className="flex items-center gap-2 md:gap-4 justify-between pr-[10px]">
                     <div className="flex flex-row justify-center items-center gap-2 md:gap-5 p-2  ">
                         <OrganizerProfileComponent data={profile}/>

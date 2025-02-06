@@ -31,6 +31,21 @@ export type UpcomingEvent = {
     thumbnail: string;
 }
 
+export type UpdateTicket = {
+    eventUuid: string;
+    ticketTitle: string;
+    type: string;
+    price: number;
+    capacity: number;
+}
+
+export type SummaryEvent = {
+    totalEvent: number;
+    totalTicket: number;
+    eventPublished: number;
+    eventUnpublished: number;
+    totalPaymentOfAllEvent: number;
+}
 
 export type EventResponse = {
     content: EventType[];

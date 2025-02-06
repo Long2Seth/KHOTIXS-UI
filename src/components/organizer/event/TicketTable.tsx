@@ -1,12 +1,11 @@
 'use client'
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { RiStarFill } from "react-icons/ri";
-import { PiEye } from "react-icons/pi";
-import { PiEyeSlash } from "react-icons/pi";
+import { PiEye, PiEyeSlash } from "react-icons/pi";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Ticket } from "@/lib/types/customer/event";
@@ -14,12 +13,15 @@ import TicketActionComponent from "@/components/organizer/event/TicketActionComp
 import Image from "next/image";
 import { Pagination } from "@/components/ui/Pagination";
 import { useGetTicketByEventIdQuery } from "@/redux/feature/organizer/Ticket";
+import LoadingComponent from "@/components/loading/LoadingComponent";
 
 type PropType = {
     id: string;
 }
 
 export default function TicketTable({ id }: PropType) {
+
+
     const router = useRouter();
     const { data: eventData, error, isLoading } = useGetTicketByEventIdQuery(id);
 
@@ -29,8 +31,13 @@ export default function TicketTable({ id }: PropType) {
     const [displayStatus, setDisplayStatus] = useState('all');
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [ticketData, setTicketData] = useState<Ticket[]>([]);
 
-    const ticketData = eventData?.tickets || [];
+    useEffect(() => {
+        if (eventData?.tickets) {
+            setTicketData(eventData.tickets);
+        }
+    }, [eventData]);
 
     const filteredTickets = ticketData.filter((ticket: Ticket) => {
         return (
@@ -46,10 +53,6 @@ export default function TicketTable({ id }: PropType) {
         const endIndex = startIndex + itemsPerPage;
         return filteredTickets.slice(startIndex, endIndex);
     }, [filteredTickets, currentPage, itemsPerPage]);
-
-    if (error) {
-        return <div>Error loading tickets.</div>;
-    }
 
     return (
         <section className="space-y-4">
@@ -138,16 +141,18 @@ export default function TicketTable({ id }: PropType) {
                                         <TableCell>{ticket.capacity}</TableCell>
                                         <TableCell className="text-green-600 font-bold text-lg">${ticket.price}</TableCell>
                                         <TableCell>
-                                            <TicketActionComponent id={ticket.id} isPublish={ticket.isPublish} isDisplay={ticket.isDisplay} />
+                                            <TicketActionComponent
+                                                eventId={id}
+                                                ticketId={ticket.id}
+                                                isPublish={ticket.isPublish}
+                                                isDisplay={ticket.isDisplay}
+                                            />
                                         </TableCell>
                                     </TableRow>
                                 ))
                             ) : (
                                 <TableRow>
-                                    <TableCell
-                                        colSpan={7}
-                                        className="h-20 text-center text-lg md:text-2xl xl:text-4xl"
-                                    >
+                                    <TableCell colSpan={7} className="h-20 text-center text-lg md:text-2xl xl:text-4xl">
                                         <div className="flex w-full justify-center items-center">
                                             <Image src="/no-data.png" alt="noData" width={50} height={50} />
                                             <span>No results.</span>
