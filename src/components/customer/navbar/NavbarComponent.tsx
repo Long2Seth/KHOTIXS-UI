@@ -115,7 +115,7 @@ const NavbarComponent = () => {
                         <div className="flex justify-between h-12 md:h-14 items-center">
                             <Link href="/" className="flex items-center">
                                 <Image className="w-[40px] h-40px] lg:w-[50px] lg:h-[50px] xl:w-[60px] xl:h-[60px] "
-                                    width={80} height={80} src="/khotixs_logo.png" alt="Khotixs Logo"/>
+                                       width={80} height={80} src="/khotixs_logo.png" alt="Khotixs Logo"/>
                             </Link>
 
                             <section className="rounded-[5px] flex justify-center drop-shadow-xl">

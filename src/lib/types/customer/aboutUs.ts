@@ -90,8 +90,8 @@ export const MemberData: PersonType[] = [
         info: [
             { icon: "IoLogoGithub", link: "https://github.com/soknem" ,name:"soknem"},
             { icon: "FaFacebook", link: "https://web.facebook.com/pov.soknem" ,name:"Pov Soknem"},
-            { icon: "AiFillGoogleCircle", link: "" ,name:"             "},
-            { icon: "FaTelegram", link: "" ,name:""},
+            { icon: "AiFillGoogleCircle", link: "povsoknem@gmail.com" ,name:"povsoknem@gmail.com"},
+            { icon: "FaTelegram", link: "pov_soknem" ,name:"Pov Soknem"},
         ],
     },
 ];
