@@ -1,5 +1,5 @@
 import React from 'react';
-import {TicketSettingsForm} from "@/components/organizer/event/TicketSettingForm";
+import {CreateTicketForm} from "@/components/organizer/event/CreateTicketForm";
 
 type PropTypes = {
     params: Promise<{
@@ -12,7 +12,7 @@ const Page = async ( prop : PropTypes) => {
 
     return (
         <main className=" container mx-auto w-full space-y-[30px] md:space-y-[50px] xl:space-y-[80px] my-[30px] md:my-[50px] xl:my-[80px] ">
-            <TicketSettingsForm id={id}/>
+            <CreateTicketForm id={id}/>
         </main>
     );
 };

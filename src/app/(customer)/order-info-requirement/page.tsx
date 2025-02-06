@@ -1,6 +1,9 @@
 import StepperComponent from "@/components/customer/StepperComponent/StepperComponent";
 import OrderInfoRequirementFormComponent from "@/components/customer/OrderInfoRequirementComponent/OrderInfoRequirementFormComponent";
 import TitleAndDesComponent from "@/components/customer/TitleAndDesComponent/TitleAndDesComponent";
+import { generateMetadata } from './metadata';
+
+export { generateMetadata };
 
 export default function OrderInfoRequirement() {
     return (

@@ -16,9 +16,10 @@ import {Avatar, AvatarImage} from "@/components/ui/avatar";
 import * as React from "react";
 import {useRouter} from "next/navigation";
 import {UserProfileType} from "@/lib/types/customer/userProfile";
+import Image from "next/image";
 
 type PropTypes = {
-    data : UserProfileType | null;
+    data: UserProfileType | null;
 }
 
 export function OrganizerProfileComponent({data}: PropTypes) {
@@ -27,15 +28,10 @@ export function OrganizerProfileComponent({data}: PropTypes) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className={` mr-[35px] sm:mr-20 md:mr-0 `} asChild>
-
-                <Button variant="ghost" className="p-0 rounded-full">
-                    <div className="flex ">
-                        <Avatar
-                            className="h-auto w-12 cursor-pointer">
-                            <AvatarImage src={data?.avatar} alt="cher image"/>
-                        </Avatar>
-                    </div>
-                </Button>
+                <div className="flex ">
+                        <Image className="h-auto z-10 w-12 rounded-full bg-transparent cursor-pointer" height={100} width={100}
+                               src={data?.avatar || "/images/place-holder.jpg"} alt="cher image"/>
+                </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent
                 className="w-auto rounded-[6px] bg-white dark:border dark:border-gray-400 dark:bg-khotixs-background-dark border-0">

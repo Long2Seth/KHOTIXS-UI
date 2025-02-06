@@ -1,6 +1,9 @@
 import StepperComponent from "@/components/customer/StepperComponent/StepperComponent";
 import TitleAndDesComponent from "@/components/customer/TitleAndDesComponent/TitleAndDesComponent";
 import PaymentDetailsComponent from "@/components/customer/PaymentDetailsComponent/PaymentDetailsComponent";
+import { generateMetadata } from './metadata';
+
+export { generateMetadata };
 
 export default function PaymentDetail() {
     return (

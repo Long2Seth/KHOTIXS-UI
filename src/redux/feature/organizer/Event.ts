@@ -1,5 +1,5 @@
 import {khotixsApi} from "@/lib/api";
-import {EventResponse, EventType} from "@/lib/types/customer/event";
+import {EventResponse, EventType, SummaryEvent} from "@/lib/types/customer/event";
 
 export const Event = khotixsApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -19,6 +19,11 @@ export const Event = khotixsApi.injectEndpoints({
             query: (id) => `/event-ticket/api/v1/events/${id}`,
             providesTags: [{type: 'EventOrganizer', id: "LIST"}],
         }),
+        getSummaryEvent: builder .query<SummaryEvent,void>(
+            {
+                query: () => '/event-ticket/api/v1/events/organizer/summary'
+            }
+        ),
         getAllEventOrganizer: builder.query<EventResponse, { page: number, size: number }>({
             query: ({page, size}) => `/event-ticket/api/v1/events?page=${page}&size=${size}`,
             providesTags: [{type: 'EventOrganizer', id: "LIST"}],
@@ -56,4 +61,5 @@ export const {
     useCreateEventMutation,
     usePublishEventMutation,
     useUnpublishEventMutation,
+    useGetSummaryEventQuery,
 } = Event;

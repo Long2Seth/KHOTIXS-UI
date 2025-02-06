@@ -1,15 +1,14 @@
 'use client'
-import React from 'react';
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ContactSkeletonComponent } from "@/components/customer/contact/ContactSkeletonComponent";
 import { GrLocation } from "react-icons/gr";
 import { FiPhone } from "react-icons/fi";
 import { HiOutlineMail } from "react-icons/hi";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { useSubmitContactFormMutation} from "@/redux/feature/user/Contact";
-import Image from "next/image";
-import { motion } from 'framer-motion';
+import { useSubmitContactFormMutation } from "@/redux/feature/user/Contact";
+import { LoadingButton } from "@/components/ui/loading-button";
+import { toast } from 'react-hot-toast';
 
 type PartnerRegister = {
     name: string;
@@ -23,6 +22,7 @@ export default function ContactUsComponent() {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [errors, setErrors] = useState<PartnerRegister>({ name: '', email: '', message: '' });
+    const [loading, setLoading] = useState(false);
     const [submitContactForm] = useSubmitContactFormMutation();
 
     const validateForm = () => {
@@ -52,9 +52,21 @@ export default function ContactUsComponent() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (validateForm()) {
+            setLoading(true);
+            toast.loading('Submitting form...', {
+                style: {
+                    padding: '12px'
+                }
+            });
             try {
                 const response = await submitContactForm({ name, email, message }).unwrap();
                 console.log('Form submitted successfully', response);
+                toast.dismiss();
+                toast.success('Form submitted successfully!', {
+                    style: {
+                        padding: '12px'
+                    }
+                });
                 // Clear form fields
                 setName('');
                 setEmail('');
@@ -62,6 +74,14 @@ export default function ContactUsComponent() {
                 setErrors({ name: '', email: '', message: '' });
             } catch (error) {
                 console.error('Error submitting form:', error);
+                toast.dismiss();
+                toast.error('Error submitting form', {
+                    style: {
+                        padding: '12px'
+                    }
+                });
+            } finally {
+                setLoading(false);
             }
         }
     };
@@ -90,49 +110,20 @@ export default function ContactUsComponent() {
             {isLoading ? <ContactSkeletonComponent /> :
                 <section className="flex flex-col space-y-[50px] md:space-y-[80px] xl:space-y-[100px] mb-[50px] md:mb-[80px] xl:mb-[100px] bg-khotixs-background-white dark:bg-khotixs-background-dark">
                     {/* Hero section */}
-                    <section
-                        className="relative h-[400px] xl:h-[600px] w-full overflow-x-hidden flex items-center justify-center px-6">
-                        {/* Background Shapes */}
-                        <div
-                            className="absolute bg-primary-color h-[400px] xl:h-[600px] w-[520px] rounded-bl-[100%] left-[-200px] overflow-x-hidden"></div>
-                        <div
-                            className="absolute bg-primary-color h-[400px] xl:h-[600px] w-[1600px] left-[300px]"></div>
-
-                        {/* Content Wrapper */}
-                        <div className="flex flex-col md:flex-row items-center justify-between max-w-[80%] w-full">
-                            {/* Left Section for Text */}
-                            <div
-                                className="z-10 max-w-[100%] md:max-w-[45%] text-center md:text-left space-y-4 px-4 md:px-8">
-                                <h1 className="text-secondary-color-text text-lg md:text-2xl xl:text-4xl font-bold left-[-230px] sm:left-[-180px] md:left-[-130px] xl:left-[30px] xl:top-[10px]">
-                                    CONTACT US
-                                </h1>
-                                <p className="text-white text-md md:text-lg xl:text-2xl dark:text-white">
-                                    We’re here to help! Whether you have a question about your booking, need assistance, or want to share feedback, the KHOTIXS team is ready to assist you.
-                                </p>
-                            </div>
-
-                            {/* Right Section for Image */}
-                            <div className="relative lg:w-[500px] lg:h-[500px] w-[300px] h-[300px] hidden md:block">
-                                <motion.div
-                                    className="lg:w-[500px] lg:h-[500px] w-[350px] h-[350px] hidden md:block object-cover"
-                                    initial={{y: 10}}
-                                    animate={{y: [0, 10, 0]}}
-                                    transition={{duration: 4, repeat: Infinity, ease: "easeInOut"}}
-                                >
-                                    <Image
-                                        src="/contact-us.gif"
-                                        alt="Contact Us"
-                                        layout="fill"
-                                        objectFit="cover"
-                                    />
-                                </motion.div>
-                            </div>
+                    <section className="relative h-[400px] w-full overflow-x-hidden xl:h-[600px]">
+                        <div className="absolute bg-primary-color h-[400px] w-[520px] rounded-bl-[100%] left-[-200px] overflow-x-hidden xl:h-[600px]"></div>
+                        <div className="absolute bg-primary-color h-[400px] w-[1600px] left-[300px] xl:h-[600px]">
+                            <h1 className="absolute text-secondary-color-text text-lg md:text-2xl xl:text-4xl font-bold mt-[100px] left-[-230px] sm:left-[-180px] md:left-[-130px] xl:left-[30px] xl:top-[10px] z-10">
+                                CONTACT US
+                            </h1>
+                            <p className="absolute text-base md:text-lg xl:text-xl text-white my-10 mt-[140px] max-w-[250px] text-md left-[-230px] sm:left-[-180px] md:left-[-130px] md:max-w-[350px] xl:left-[30px] xl:top-[30px] xl:max-w-[400px] dark:text-white dark:my-10 dark:mt-[140px] dark:max-w-[250px] dark:text-md dark:left-[-230px] dark:sm:left-[-180px] dark:md:left-[-130px] dark:md:max-w-[350px] dark:md:text-lg dark:xl:left-[30px] dark:xl:top-[30px] dark:xl:max-w-[400px] dark:xl:text-2xl">
+                                We’re here to help! Whether you have a question about your booking, need assistance, or want to share feedback, the KHOTIXS team is ready to assist you.
+                            </p>
                         </div>
                     </section>
 
                     {/* Contact Info and Form */}
-                    <section
-                        className="container mx-auto w-full h-auto text-primary-color-text dark:text-secondary-color-text">
+                    <section className="container mx-auto w-full h-auto text-primary-color-text dark:text-secondary-color-text">
                         <div className="grid grid-cols-1 lg:gap-[100px] gap-5 w-full md:grid-cols-2 px-[24px]">
                             {/* Left Section: Contact Information */}
                             <div className="flex flex-col gap-8 text-center">
@@ -235,9 +226,12 @@ export default function ContactUsComponent() {
                                             ></textarea>
                                             {errors.message && <span className="text-red-500">{errors.message}</span>}
                                         </div>
-                                        <button type="submit" className="bg-primary-color text-white text-lg py-2 px-4 rounded-[5px] hover:bg-primary-color/80 transition">
+                                        <LoadingButton
+                                            type="submit"
+                                            loading={loading}
+                                            className="bg-primary-color text-white text-lg py-2 px-4 rounded-[5px] hover:bg-primary-color/80 transition">
                                             Submit
-                                        </button>
+                                        </LoadingButton>
                                     </form>
                                 </div>
                             </div>

@@ -9,7 +9,7 @@ import {LuBriefcaseBusiness} from "react-icons/lu";
 import {Card, CardContent} from "@/components/ui/card";
 import {MapPin} from "lucide-react";
 import Image from "next/image";
-import EditProfile from "@/components/customer/User-Profile/EditProfile";
+import EditProfile from "@/components/customer/User-Profile/user/EditProfile";
 import {ProfileComponentSkeleton} from "@/components/customer/User-Profile/user/ProfileComponentSkeleton";
 import {UserProfileType} from "@/lib/types/customer/userProfile";
 

@@ -10,7 +10,7 @@ import {Card, CardContent} from "@/components/ui/card";
 import {MapPin} from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import EditProfile from "./EditProfile";
+import EditProfile from "./user/EditProfile";
 import {ProfileComponentSkeleton} from "@/components/customer/User-Profile/user/ProfileComponentSkeleton";
 import {useGetUserProfileQuery} from "@/redux/feature/user/UserProfile";
 
@@ -38,7 +38,6 @@ export default function ProfileComponent() {
         {icon: FaRegUser, label: "Gender", value: profile.gender},
         {icon: MapPin, label: "Address", value: profile.address},
         {icon: BsPostcard, label: "Position", value: profile.position},
-        {icon: RiCalendarScheduleLine, label: "Birth Date", value: profile.dob}
     ];
 
     const fieldscontact = [
@@ -55,7 +54,7 @@ export default function ProfileComponent() {
                             <div className="aspect-square shadow-2xl rounded-full overflow-hidden">
                                 <Image
                                     unoptimized
-                                    src={profile.avatar}
+                                    src={profile.avatar || "/images/place-holder.jpg"}
                                     alt="Profile"
                                     fill
                                     className="rounded-full object-cover"

@@ -8,6 +8,9 @@ import Image from "next/image";
 import { UserProfileType } from "@/lib/types/customer/userProfile";
 import { useUploadFileMutation } from "@/redux/feature/upload-file/UploadFile";
 import { useUpdateUserProfileMutation } from "@/redux/feature/user/UserProfile";
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
+import { toast } from 'react-hot-toast';
+import { LoadingButton } from "@/components/ui/loading-button";
 
 type EditProfileProps = {
     profile: UserProfileType;
@@ -16,11 +19,12 @@ type EditProfileProps = {
 export default function EditProfile({ profile }: EditProfileProps) {
     const [formData, setFormData] = useState<UserProfileType>(profile);
     const [isOpen, setIsOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [uploadFile] = useUploadFileMutation();
     const [updateUserProfile] = useUpdateUserProfileMutation();
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { id, value } = e.target;
         setFormData((prevData) => ({ ...prevData, [id]: value }));
     };
@@ -41,14 +45,35 @@ export default function EditProfile({ profile }: EditProfileProps) {
     };
 
     const handleSave = async () => {
+        setLoading(true);
+        toast.loading('Saving profile...', {
+            style: {
+                padding: '12px'
+            }
+        });
+
         const { fullName, gender, dob, phoneNumber, address, avatar, status, position, businessName } = formData;
         const requestBody = { fullName, gender, dob, phoneNumber, address, avatar, status, position, businessName };
 
         try {
             await updateUserProfile({ data: requestBody }).unwrap();
+            toast.dismiss();
+            toast.success('Profile updated successfully!', {
+                style: {
+                    padding: '12px'
+                }
+            });
             setIsOpen(false); // Close the form on successful save
         } catch (error) {
             console.error('Error updating profile:', error);
+            toast.dismiss();
+            toast.error('Error updating profile', {
+                style: {
+                    padding: '12px'
+                }
+            });
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -91,7 +116,7 @@ export default function EditProfile({ profile }: EditProfileProps) {
                                     className="relative cursor-pointer aspect-square overflow-hidden rounded-[6px]"
                                 >
                                     <Image
-                                        src={formData.avatar}
+                                        src={formData.avatar|| "/images/place-holder.jpg"}
                                         alt="Profile"
                                         fill
                                         className="object-cover rounded-[6px]"
@@ -149,12 +174,15 @@ export default function EditProfile({ profile }: EditProfileProps) {
                                     >
                                         Gender <span className="text-label-paid">*</span>
                                     </Label>
-                                    <Input
-                                        id="gender"
-                                        value={formData.gender}
-                                        onChange={handleInputChange}
-                                        className="border border-light-border-color rounded-[6px] text-base md:text-lg focus:outline-none"
-                                    />
+                                    <Select value={formData.gender} onValueChange={(value) => setFormData((prevData) => ({ ...prevData, gender: value }))}>
+                                        <SelectTrigger id="gender" className="border border-light-border-color rounded-[6px] text-base md:text-lg focus:outline-none">
+                                            <SelectValue placeholder="Select gender" />
+                                        </SelectTrigger>
+                                        <SelectContent className={`bg-white dark:bg-khotixs-background-dark rounded-[6px]`}>
+                                            <SelectItem value="Male">Male</SelectItem>
+                                            <SelectItem value="Female">Female</SelectItem>
+                                        </SelectContent>
+                                    </Select>
                                 </div>
                                 <div>
                                     <Label
@@ -211,13 +239,14 @@ export default function EditProfile({ profile }: EditProfileProps) {
                             >
                                 Cancel
                             </Button>
-                            <Button
+                            <LoadingButton
                                 type="submit"
                                 className="w-full text-white bg-primary-color hover:bg-primary-color hover:bg-primary-color/80 dark:text-secondary-color-text"
                                 onClick={handleSave}
+                                loading={loading}
                             >
                                 Save
-                            </Button>
+                            </LoadingButton>
                         </div>
                     </section>
                 </DialogContent>

@@ -26,6 +26,7 @@ import {EventType} from "@/lib/types/customer/event";
 import {LoadingButton} from "@/components/ui/loading-button";
 import {useUploadFileMutation} from "@/redux/feature/upload-file/UploadFile";
 import {useGetEventByIdQuery, useUpdateEventByIdMutation} from "@/redux/feature/organizer/Event";
+import {toast} from 'react-hot-toast';
 
 const eventSchema = z.object({
     eventTitle: z.string().min(1, "Event title is required"),
@@ -51,7 +52,7 @@ export function EditEvent({id}: PropsType) {
     const [selectedCategory, setSelectedCategory] = useState<string>("");
     const [loading, setLoading] = useState(false);
     const [uploadFile] = useUploadFileMutation();
-    const { data: eventData, isLoading: eventLoading } = useGetEventByIdQuery(id);
+    const {data: eventData, isLoading: eventLoading} = useGetEventByIdQuery(id);
     const [updateEvent] = useUpdateEventByIdMutation();
 
     useEffect(() => {
@@ -95,8 +96,10 @@ export function EditEvent({id}: PropsType) {
             try {
                 const data = await uploadFile(formData).unwrap();
                 setThumbnail(data.uri);
+                toast.success('File uploaded successfully!');
             } catch (error) {
                 console.error("Error uploading file:", error);
+                toast.error('Error uploading file');
             }
         }
     };
@@ -111,6 +114,11 @@ export function EditEvent({id}: PropsType) {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
+        toast.loading(' Saving event . . . ', {
+            style: {
+                padding: '12px'
+            }
+        });
 
         const formatStartedDate = startedDate ? format(startedDate, "yyyy-MM-dd'T'HH:mm") : "";
         const formatEndedDate = endedDate ? format(endedDate, "yyyy-MM-dd'T'HH:mm") : "";
@@ -137,22 +145,32 @@ export function EditEvent({id}: PropsType) {
             setErrors(newErrors);
             console.log("Validation Errors:", newErrors);
             setLoading(false);
+            toast.dismiss();
+            toast.error('Validation errors occurred');
         } else {
             setErrors({});
             try {
-                await updateEvent({ id, data: formData }).unwrap();
+                await updateEvent({id, data: formData}).unwrap();
+                toast.dismiss();
+                toast.success('Event updated successfully!', {
+                    style: {
+                        padding: '12px'
+                    }
+                });
                 router.push("/organizer/events");
             } catch (error) {
                 console.error("Error submitting form:", error);
+                toast.dismiss();
+                toast.error('Error updating event', {
+                    style: {
+                        padding: '12px'
+                    }
+                });
             } finally {
                 setLoading(false);
             }
         }
     };
-
-    // if (eventLoading) {
-    //     return <div>Loading...</div>;
-    // }
 
     return (
         <form
@@ -195,7 +213,8 @@ export function EditEvent({id}: PropsType) {
                                         htmlFor="eventCategoryName">
                                         Category
                                     </Label>
-                                    <Select name="eventCategoryName" value={selectedCategory} onValueChange={setSelectedCategory}>
+                                    <Select name="eventCategoryName" value={selectedCategory}
+                                            onValueChange={setSelectedCategory}>
                                         <SelectTrigger
                                             className=" border border-light-border-color rounded-[6px] text-base md:text-lg ">
                                             <SelectValue placeholder="Select category"/>
@@ -437,14 +456,12 @@ export function EditEvent({id}: PropsType) {
                 </CardContent>
             </Card>
             <section className="flex flex-wrap justify-end gap-4 pt-6 ">
-                <LoadingButton
+                <Button
                     onClick={() => router.push("/organizer/events")}
-                    className="w-24 text-red-500 border border-red-500 rounded-[6px] hover:bg-red-300/10 hover:bg-red-500 hover:text-white"
-                    size={"lg"}
-                    loading={loading}
-                >
-                    {!loading && "Cancel"}
-                </LoadingButton>
+                    className="border-red-600 text-red-500 rounded-[6px] hover:text-white hover:bg-red-500 "
+                    variant="outline">
+                    Cancel
+                </Button>
                 <LoadingButton
                     type="submit"
                     className="bg-primary-color w-24 rounded-[6px] text-secondary-color-text hover:bg-primary-color/90 dark:text-secondary-color-text"

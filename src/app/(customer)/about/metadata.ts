@@ -4,26 +4,18 @@ export async function generateMetadata(): Promise<Metadata> {
     const desc = "We’re here to help! Whether you have a question about your booking, need assistance, or want to share feedback, the KHOTIXS team is ready to assist you.";
 
     return {
-        title: "About Us - KHOTIXS",
+        title: "About Us",
         description: desc,
         openGraph: {
-            title: "About Us - KHOTIXS",
+            title: "About Us",
             description: desc,
             siteName: 'KHOTIXS',
             images: [
                 {
-                    url: 'https://khotixs.istad.co/asset/api/v1/files/view/37e026de-841f-40b6-a05d-d8254aa1057e.png',
-                    width: 800,
-                    height: 600,
+                    url: 'https://khotixs.istad.co/asset/api/v1/files/view/22b0d35d-8687-452e-98ee-9d0ffe0dafbe.jpg',
+                    alt: 'About Us',
                 },
             ],
-        },
-        twitter: {
-            card: 'summary_large_image',
-            title: "About Us - KHOTIXS",
-            description: desc,
-            creator: '@KHOTIXS',
-            images: 'https://khotixs.istad.co/asset/api/v1/files/view/37e026de-841f-40b6-a05d-d8254aa1057e.png',
         },
     };
 }
