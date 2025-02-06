@@ -52,7 +52,7 @@ const ticketSchema = z.object({
 });
 
 
-export function TicketSettingsForm({id}: Props) {
+export function CreateTicketForm({id}: Props) {
 
 
     const router = useRouter();

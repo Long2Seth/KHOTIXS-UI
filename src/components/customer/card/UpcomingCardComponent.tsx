@@ -43,20 +43,6 @@ export function UpcomingCardComponent({event}: CardUpcomingProps) {
     const day = String(date.getDate()).padStart(2, '0');
     const router = useRouter();
 
-    const getLabelClass = (tickets: TicketType) => {
-        switch (tickets) {
-            case TicketType.VIP:
-                return 'bg-label-vip';
-            case TicketType.PREMIUM:
-                return 'bg-label-premium';
-            case TicketType.REGULAR:
-                return 'bg-label-regular';
-            case TicketType.FREE:
-                return 'bg-label-free';
-            default:
-                return 'bg-label-free';
-        }
-    };
 
 
     return (
@@ -100,7 +86,7 @@ export function UpcomingCardComponent({event}: CardUpcomingProps) {
                             .map((ticket, index) => (
                                 <Badge
                                     key={index}
-                                    className={`dark:text-black text-white rounded-[6px] mx-2 ${getLabelClass(ticket.type)}`}>
+                                    className={`dark:text-black text-white rounded-[6px] mx-2`}>
                                     <span> {ticket.type === TicketType.FREE ? "FREE" : `$${ticket.price}`}</span>
                                 </Badge>
                             ))

@@ -10,12 +10,6 @@ import {menuItems, MenuType} from "@/lib/types/navbar/navbar";
 import * as React from "react";
 import {CiBullhorn} from "react-icons/ci";
 import {Button} from "@/components/ui/button";
-// import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
-// import {cn} from "@/lib/types/utils";
-// import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
-// import {CalendarIcon} from "lucide-react";
-// import {format} from "date-fns";
-// import {Calendar} from "@/components/ui/calendar";
 import {ModeToggle} from "@/components/ui/modeToggle";
 import {NavigationMenuDemo} from "@/components/customer/navbar/NavigationMenuDemo";
 import SkeletonNavbarComponent from "@/components/customer/navbar/SkeletonNavbar";
@@ -24,6 +18,7 @@ import {UserProfileComponent} from "@/components/customer/navbar/UserProfileComp
 import NotificationComponent from "@/components/customer/notification/NotificationComponent";
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet";
 import {useGetUserProfileQuery} from "@/redux/feature/user/UserProfile";
+import Autocomplete from '@/components/customer/navbar/Autocomplete';
 
 const NavbarComponent = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -44,7 +39,6 @@ const NavbarComponent = () => {
             setLastCheckedTime(Number(localStorage.getItem('lastNotificationCheck') || '0'));
         }
     }, []);
-
 
     useEffect(() => {
         if (userProfile) {
@@ -85,8 +79,6 @@ const NavbarComponent = () => {
         <>
             {isLoading ? <SkeletonNavbarComponent/> :
                 <nav className="w-full top-[0px] sticky z-50 bg-white flex flex-col dark:bg-khotixs-background-dark">
-
-
                     <section
                         className="container mx-auto h-[40px] md:h-[60px] bg-white py-[10px] flex items-center md:px-5 lg:px-10 justify-center gap-5 dark:bg-khotixs-background-dark">
                         <CiBullhorn
@@ -109,75 +101,10 @@ const NavbarComponent = () => {
                             </Link>
 
                             <section className="rounded-[5px] flex justify-center drop-shadow-xl w-[60%]">
-                                <form
-                                    className=" w-full h-[40px] sm:h-[45px] lg:h-[50px] rounded-[5px] bg-gray-50 flex items-center">
-                                    <div
-                                        className="flex items-center w-full">
-                                        <input
-                                            type="text"
-                                            placeholder="Search events name"
-                                            className="w-full bg-transparent h-full rounded-tl-[5px] text-base lg:text-lg focus:text-gray-500 rounded-bl-[5px] md:pl-5 pl-2 lg:pl-2 xl:pl-5 focus:outline-none pr-4 border-0 focus:ring-0 px-0 py-2 dark:text-primary-color-text "
-                                            name="topic"
-                                        />
-                                        {/*<hr className="hidden lg:block w-[20px] bg-gray-400 rotate-90"/>*/}
-                                    </div>
-
-                                    {/*<div className="hidden lg:flex lg:w-auto items-center">*/}
-                                    {/*    <Select onValueChange={setSelectedLocation}>*/}
-                                    {/*        <SelectTrigger*/}
-                                    {/*            className={cn(*/}
-                                    {/*                "w-[170px] p-0 m-0 lg:w-[130px] xl:w-[180px] text-[12px] lg:text-[14px] focus:outline-none ring-0 bg-transparent border-0",*/}
-                                    {/*                selectedLocation ? "text-black" : "text-gray-400"*/}
-                                    {/*            )}*/}
-                                    {/*        >*/}
-                                    {/*            <SelectValue className="text-gray-400" placeholder="Select location"/>*/}
-                                    {/*        </SelectTrigger>*/}
-                                    {/*        <SelectContent className="text-gray-800 bg-gray-100">*/}
-                                    {/*            <SelectGroup>*/}
-                                    {/*                <SelectItem value="Phnome Phenh">Phnom Penh</SelectItem>*/}
-                                    {/*            </SelectGroup>*/}
-                                    {/*        </SelectContent>*/}
-                                    {/*    </Select>*/}
-                                    {/*    <hr className="w-[20px] bg-gray-400 rotate-90"/>*/}
-                                    {/*</div>*/}
-
-                                    {/*<div className="hidden lg:block ">*/}
-                                    {/*    <Popover>*/}
-                                    {/*        <PopoverTrigger*/}
-                                    {/*            className="text-[10px] sm:text-sm lg:text-lg bg-red-950 focus:outline-none ring-0 dark:text-primary-color-text dark:hover:bg-white "*/}
-                                    {/*            asChild>*/}
-                                    {/*            <Button*/}
-                                    {/*                variant="ghost"*/}
-                                    {/*                className={cn(*/}
-                                    {/*                    "md:w-[180px] p-0 m-0 lg:w-[190px] justify-start text-left bg-transparent border-0 focus:ring-0 focus:outline-none",*/}
-                                    {/*                    !date && "text-muted-foreground"*/}
-                                    {/*                )}*/}
-                                    {/*            >*/}
-                                    {/*                <CalendarIcon className="mr-2 text-gray-400"/>*/}
-                                    {/*                {date ? format(date, "PPP") :*/}
-                                    {/*                    <span className="text-gray-400">Pick a date</span>}*/}
-                                    {/*            </Button>*/}
-                                    {/*        </PopoverTrigger>*/}
-                                    {/*        <PopoverContent className="w-auto p-0 text-black outline-none border-0">*/}
-                                    {/*            <Calendar*/}
-                                    {/*                className="text-gray-600 border-0 bg-white z-50 rounded-[5px] "*/}
-                                    {/*                mode="single"*/}
-                                    {/*                selected={date}*/}
-                                    {/*                onSelect={setDate}*/}
-                                    {/*                initialFocus*/}
-                                    {/*            />*/}
-                                    {/*        </PopoverContent>*/}
-                                    {/*    </Popover>*/}
-                                    {/*</div>*/}
-
-                                    <button
-                                        className="flex flex-row items-center h-[40px] sm:h-[45px] lg:h-[50px] rounded-r-[6px] ">
-                                        <div
-                                            className="bg-primary-color text-white h-full rounded-r-[6px] flex items-center px-2 ">
-                                            <IoSearch className="w-7 h-7"/>
-                                        </div>
-                                    </button>
-                                </form>
+                                <div
+                                    className="w-full h-[40px] sm:h-[45px] lg:h-[50px] rounded-[5px] bg-gray-50 flex items-center">
+                                    <Autocomplete/>
+                                </div>
                             </section>
 
                             <div className="justify-center items-center flex gap-2 md:gap-0">

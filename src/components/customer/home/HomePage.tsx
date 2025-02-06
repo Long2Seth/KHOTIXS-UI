@@ -8,11 +8,11 @@ import {IoMdArrowRoundForward} from "react-icons/io";
 import {useRouter} from "next/navigation";
 import {useRef} from "react";
 import {SkeletonHomePageComponent} from "@/components/customer/card/SkeletonHomePageComponent";
-import {useGetAllEventPublishQuery} from "@/redux/feature/user/Event";
+import {useGetAllEventPublishQuery,useGetEventUpcomingQuery} from "@/redux/feature/user/Event";
 
 export default function HomePageComponent() {
     const route = useRouter();
-    const { data: events = [], isLoading } = useGetAllEventPublishQuery();
+    const {data: events = [], isLoading} = useGetAllEventPublishQuery();
 
     const technologyRef = useRef<HTMLDivElement>(null);
     const concertRef = useRef<HTMLDivElement>(null);
@@ -21,6 +21,8 @@ export default function HomePageComponent() {
     const conferenceRef = useRef<HTMLDivElement>(null);
     const generalRef = useRef<HTMLDivElement>(null);
 
+
+
     const handleButtonClick = (value: string) => {
         route.push(`/event-category/${value}`);
     };
@@ -28,9 +30,10 @@ export default function HomePageComponent() {
     return (
         <section>
             {isLoading ? (
-                <SkeletonHomePageComponent />
+                <SkeletonHomePageComponent/>
             ) : (
-                <section className="flex flex-col space-y-10 bg-khotixs-background-white dark:bg-khotixs-background-dark">
+                <section
+                    className="flex flex-col space-y-10 bg-khotixs-background-white dark:bg-khotixs-background-dark no-scrollbar">
                     <CardCategory
                         technologyRef={technologyRef}
                         concertRef={concertRef}
@@ -40,7 +43,7 @@ export default function HomePageComponent() {
                         generalRef={generalRef}
                     />
 
-                    <UpcomingEventComponent />
+                    <UpcomingEventComponent/>
 
                     {events.some(event => event.eventCategory.toUpperCase() === "TECHNOLOGY") && (
                         <section
@@ -50,14 +53,15 @@ export default function HomePageComponent() {
                                 title="TECHNOLOGY"
                                 description="The General Event feature provides comprehensive information about a specific event, ensuring users have all the details needed to make an informed decision about attending or booking tickets."
                             />
-                            <section className="flex flex-col w-[300px] sm:w-[100%] justify-end md:pr-[25px] lg:px-[30px] lg:flex-row xl:px-[33px] items-end">
+                            <section
+                                className="flex flex-col w-[300px] sm:w-[100%] justify-end md:pr-[25px] lg:px-[30px] lg:flex-row xl:px-[33px] items-end">
                                 <Button
                                     onClick={() => handleButtonClick("technology")}
                                     className=" w-auto lg:h-[45px] text-white text-sm md:text-base xl:text-lg bg-primary-color hover:bg-primary-color/80 "
                                 >
                                     View All
                                     <span>
-                                        <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w-10 " />
+                                        <IoMdArrowRoundForward className=" h-5 w-5 md:h-10 md:w-10 "/>
                                     </span>
                                 </Button>
                             </section>
@@ -67,7 +71,7 @@ export default function HomePageComponent() {
                                     .filter((event) => event.eventCategory.toUpperCase() === "TECHNOLOGY")
                                     .slice(0, 6)
                                     .map((event, index) => (
-                                        <CardComponent key={index} event={event} />
+                                        <CardComponent key={index} event={event}/>
                                     ))}
                             </section>
                         </section>

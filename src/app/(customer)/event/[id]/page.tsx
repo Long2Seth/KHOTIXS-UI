@@ -49,6 +49,5 @@ export async function generateMetadata(
 
 export default async function EventPage({params}: Props) {
     const {id} = await params;
-    console.log("EVENT ID: ", id);
     return <EventDetails id={id}/>;
 }

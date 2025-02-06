@@ -24,6 +24,14 @@ export type EventType = {
     tickets: Ticket[];
 };
 
+export type UpcomingEvent = {
+    id: string;
+    eventTitle: string;
+    startedDate: string;
+    thumbnail: string;
+}
+
+
 export type EventResponse = {
     content: EventType[];
 }

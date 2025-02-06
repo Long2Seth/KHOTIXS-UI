@@ -10,7 +10,7 @@ import {Card, CardContent} from "@/components/ui/card";
 import {MapPin} from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import EditProfile from "./EditProfile";
+import EditProfile from "./user/EditProfile";
 import {ProfileComponentSkeleton} from "@/components/customer/User-Profile/user/ProfileComponentSkeleton";
 import {useGetUserProfileQuery} from "@/redux/feature/user/UserProfile";
 

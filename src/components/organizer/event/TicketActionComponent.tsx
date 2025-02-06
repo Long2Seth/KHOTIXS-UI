@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { RiMore2Line } from "react-icons/ri";
@@ -6,6 +7,7 @@ import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { IoIosPower } from "react-icons/io";
 import { PiEye, PiEyeSlash } from "react-icons/pi";
+import EditTicketForm from './EditTicketForm';
 
 type PropType = {
     id: string;
@@ -14,6 +16,8 @@ type PropType = {
 }
 
 export default function TicketActionComponent({ id, isPublish, isDisplay }: PropType) {
+    const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+    const [selectedTicketId, setSelectedTicketId] = useState<string | null>(null);
 
     const handlePublish = async () => {
         const endpoint = isPublish ? `unpublish` : `publish`;
@@ -35,35 +39,54 @@ export default function TicketActionComponent({ id, isPublish, isDisplay }: Prop
         });
     }
 
+    const handleEdit = () => {
+        setSelectedTicketId(id);
+        setIsEditDialogOpen(true);
+    }
+
+    const handleClose = () => {
+        setIsEditDialogOpen(false);
+        setSelectedTicketId(null);
+    }
+
     return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="h-8 w-8 p-0">
-                    <RiMore2Line className="h-5 w-5" />
-                </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-                className="bg-white dark:bg-khotixs-background-dark dark:border-none rounded-[6px] shadow-lg"
-                align="end">
-                <DropdownMenuItem onClick={handlePublish}>
-                    <IoIosPower className="h-5 w-5" />
-                    <span>{isPublish ? "Unpublished" : "Published"}</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleDisplay}>
-                    {isDisplay ? <PiEyeSlash className="h-5 w-5" /> : <PiEye className="h-5 w-5" />}
-                    <span>{isDisplay ? "Undisplayed" : "Display"}</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                    <LiaEdit className="h-5 w-5" />
-                    <span>Edit</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                    onClick={handleDelete}
-                    className={` text-red-600 hover:text-red-600`}>
-                    <AiOutlineDelete className="h-5 w-5" />
-                    Delete
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
+        <>
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="h-8 w-8 p-0">
+                        <RiMore2Line className="h-5 w-5" />
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                    className="bg-white dark:bg-khotixs-background-dark dark:border-none rounded-[6px] shadow-lg"
+                    align="end">
+                    <DropdownMenuItem onClick={handlePublish}>
+                        <IoIosPower className="h-5 w-5" />
+                        <span>{isPublish ? "Unpublished" : "Published"}</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleDisplay}>
+                        {isDisplay ? <PiEyeSlash className="h-5 w-5" /> : <PiEye className="h-5 w-5" />}
+                        <span>{isDisplay ? "Undisplayed" : "Display"}</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleEdit}>
+                        <LiaEdit className="h-5 w-5" />
+                        <span>Edit</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                        onClick={handleDelete}
+                        className={` text-red-600 hover:text-red-600`}>
+                        <AiOutlineDelete className="h-5 w-5" />
+                        Delete
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
+            {isEditDialogOpen && (
+                <EditTicketForm
+                    isOpen={isEditDialogOpen}
+                    onClose={handleClose}
+                    ticketId={selectedTicketId}
+                />
+            )}
+        </>
     )
 }

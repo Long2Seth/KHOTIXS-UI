@@ -1,26 +1,95 @@
-import { upcomingData } from "@/lib/types/customer/upcomingData";
-import {UpcomingCardComponent} from "@/components/customer/card/UpcomingCardComponent";
+import * as React from "react";
+import {useState, useEffect} from "react";
+import {RiCalendarLine,} from "react-icons/ri";
+import {useGetEventUpcomingQuery} from "@/redux/feature/user/Event";
+import {router} from "next/client";
+import {useRouter} from "next/navigation";
+
+interface Event {
+    id: string;
+    startedDate: string;
+    thumbnail: string;
+    eventTitle: string;
+}
 
 export function UpcomingEventComponent() {
+    const {data} = useGetEventUpcomingQuery();
+    const router = useRouter();
+    const [shuffledData, setShuffledData] = useState<Event[]>([]);
+
+    // Function to shuffle the array
+    const shuffleArray = (array: Event[]): Event[] => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    };
+
+    useEffect(() => {
+        if (data) {
+            const shuffleAndSetData = () => {
+                setShuffledData(shuffleArray([...data]).slice(0, 5));
+            };
+
+            shuffleAndSetData();
+            const intervalId = setInterval(shuffleAndSetData, 10000);
+
+            return () => clearInterval(intervalId);
+        }
+    }, [data]);
 
     return (
         <section
-            className="space-y-10 p-5 container mx-auto sm:w-full bg-khotixs-background-white dark:bg-khotixs-background-dark flex flex-col justify-center items-center h-auto ">
-            <section className="space-y-4 w-full flex flex-col justify-center items-center ">
-                <h1 className=" text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text ">
+            className="space-y-10 p-5 container mx-auto sm:w-full bg-khotixs-background-white dark:bg-khotixs-background-dark flex flex-col justify-center items-center h-auto">
+            <section className="space-y-4 w-full flex flex-col justify-center items-center">
+                <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text">
                     UPCOMING EVENTS
                 </h1>
-                <p className=" text-description-color text-base md:text-lg xl:text-xl max-w-[500px] lg:max-w-[800px] sm:px-0 md:px-0 md:text-md lg:text-lgnfont-light text-center dark:text-dark-description-color">
+                <p className="text-description-color text-base md:text-lg xl:text-xl max-w-[500px] lg:max-w-[800px] sm:px-0 md:px-0 md:text-md lg:text-lgnfont-light text-center dark:text-dark-description-color">
                     The General Event feature provides comprehensive information about a specific event,
-                    ensuring users have all the details needed to make an informed decision about attending or booking tickets.
+                    ensuring users have all the details needed to make an informed decision about attending or booking
+                    tickets.
                 </p>
             </section>
-            <section
-                className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-2 md:px-[0px] md:gap-5 lg:px-[190px] xl:px-[220px] xl:gap-10">
-                {upcomingData.map((event, index) => (
-                    <UpcomingCardComponent key={index} event={event} />
-                ))}
+
+            <section className="w-full px-40">
+                <div className="grid grid-cols-12 gap-4">
+                    {shuffledData.map((event: Event, index: number) => {
+                        const date = new Date(event.startedDate);
+                        const day = date.getDate();
+                        const month = date.toLocaleString("default", {month: "short"});
+                        const year = date.getFullYear();
+
+                        return (
+                            <section
+                                key={event.id}
+                                onClick={() => router.push(`/event/${event.id}`)}
+                                className={`${index < 2 ? "col-span-6" : "col-span-4"} cursor-pointer rounded-[6px]`}>
+                                <div
+                                    className="rounded-[6px] w-full h-72 bg-cover bg-center transform transition-transform duration-300 group-hover:scale-110"
+                                    style={{backgroundImage: `url(${event.thumbnail})`}}>
+                                    <div className="bg-secondary-color bg-opacity-70 rounded-t-[6px]">
+                                        <div className="flex relative px-10 py-[15px]">
+                                            <div>
+                                                <div className="flex">
+                                                    <RiCalendarLine className="w-4 h-4 text-white mt-1"/>
+                                                    <h2 className="text-white text-base pl-2">
+                                                        {day} {month} {year}
+                                                    </h2>
+                                                </div>
+                                                <h1 className="text-white font-semibold text-lg line-clamp-1">
+                                                    {event.eventTitle}
+                                                </h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        );
+                    })}
+                </div>
             </section>
         </section>
-    )
+    );
 }
