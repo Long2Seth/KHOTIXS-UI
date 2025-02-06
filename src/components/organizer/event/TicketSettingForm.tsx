@@ -26,6 +26,7 @@ import {RiStarFill} from "react-icons/ri";
 import {EventType, Ticket} from "@/lib/types/customer/event";
 import {z} from 'zod';
 import {Button} from "@/components/ui/button";
+import LoadingComponent from "@/components/loading/LoadingComponent";
 
 
 type Props = {
@@ -140,7 +141,7 @@ export function TicketSettingsForm({id}: Props) {
     const combinedTickets = [...(dataEvent?.tickets || []), ...tickets];
 
     return (
-        <section className="space-y-6">
+        <section className="container mx-auto w-full space-y-6 my-[30px] md:my-[50px] xl:my-[80px] 2xl:my-[80px] px-5 md:px-10 2xl:mx-auto">
             <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text uppercase">
                 Ticket Setting
             </h1>
@@ -270,65 +271,65 @@ export function TicketSettingsForm({id}: Props) {
                         <Table>
                             <TableHeader>
                                 <TableRow className="dark:border-label-text-primary">
-                                    <TableHead
-                                        className="text-title-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">NAME</TableHead>
-                                    <TableHead
-                                        className="text-title-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">TICKET
-                                        TYPE</TableHead>
-                                    <TableHead
-                                        className="text-title-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">PRICE</TableHead>
-                                    <TableHead
-                                        className="text-title-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">CAPACITY</TableHead>
+                                    <TableHead className="text-title-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">NAME</TableHead>
+                                    <TableHead className="text-title-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">TICKET TYPE</TableHead>
+                                    <TableHead className="text-title-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">PRICE</TableHead>
+                                    <TableHead className="text-title-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">CAPACITY</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {combinedTickets.map((ticket, index) => (
-                                    <TableRow key={index} className="dark:border-label-text-primary">
-                                        <TableCell
-                                            className=" text-description-color text-sm md:text-base xl:text-lg dark:text-dark-description-color ">{ticket.ticketTitle}
-                                        </TableCell>
-                                        <TableCell
-                                            className=" text-description-color text-sm md:text-base xl:text-lg dark:text-dark-description-color ">
-                                            {ticket.type.toLowerCase() === 'vip' ? (
-                                                <Badge
-                                                    className="bg-label-vip min-w-[100px] justify-center text-sm md:text-base xl:text-lg text-dark-description-color hover:bg-label-vip/90 rounded-[6px] font-normal flex w-14 items-center gap-x-1.5">
-                                                    VIP
-                                                    <RiStarFill className="h-2.5 w-2.5"/>
-                                                </Badge>
-                                            ) : ticket.type.toLowerCase() === 'premium' ? (
-                                                <Badge
-                                                    className="bg-label-premium  min-w-[100px] justify-center text-sm md:text-base xl:text-lg text-dark-description-color hover:bg-label-premium/90 rounded-[6px] font-normal flex w-14 items-center gap-x-1.5">
-                                                    Premium
-                                                </Badge>
-                                            ) : ticket.type.toLowerCase() === 'regular' ? (
-                                                <Badge
-                                                    className="bg-label-regular min-w-[100px]  justify-center text-sm md:text-base xl:text-lg text-dark-description-color hover:bg-label-regular/90 rounded-[6px] font-normal flex w-14 items-center gap-x-1.5">
-                                                    Regular
-                                                </Badge>
-                                            ) : (
-                                                <Badge
-                                                    className="bg-label-free  min-w-[100px]  justify-center text-sm md:text-base xl:text-lg text-dark-description-color  hover:bg-label-free/90 rounded-[6px] font-normal ">
-                                                    Free
-                                                </Badge>
-                                            )}
-                                        </TableCell>
-                                        <TableCell
-                                            className="text-green-600 font-bold text-lg">${Number(ticket.price).toFixed(2)}
-                                        </TableCell>
-                                        <TableCell
-                                            className="text-sm md:text-base xl:text-lg text-start">{ticket.capacity}
+                                {loading ? (
+                                    <TableRow>
+                                        <TableCell colSpan={4} className="text-center">
+                                            <div className="flex justify-center items-center h-20 text-lg md:text-2xl xl:text-4xl">
+                                                <LoadingComponent />
+                                            </div>
                                         </TableCell>
                                     </TableRow>
-                                ))}
+                                ) : (
+                                    combinedTickets.map((ticket, index) => (
+                                        <TableRow key={index} className="dark:border-label-text-primary">
+                                            <TableCell className="text-description-color text-sm md:text-base xl:text-lg dark:text-dark-description-color">
+                                                {ticket.ticketTitle}
+                                            </TableCell>
+                                            <TableCell className="text-description-color text-sm md:text-base xl:text-lg dark:text-dark-description-color">
+                                                {ticket.type.toLowerCase() === 'vip' ? (
+                                                    <Badge className="bg-label-vip min-w-[100px] justify-center text-sm md:text-base xl:text-lg text-dark-description-color hover:bg-label-vip/90 rounded-[6px] font-normal flex w-14 items-center gap-x-1.5">
+                                                        VIP
+                                                        <RiStarFill className="h-2.5 w-2.5" />
+                                                    </Badge>
+                                                ) : ticket.type.toLowerCase() === 'premium' ? (
+                                                    <Badge className="bg-label-premium min-w-[100px] justify-center text-sm md:text-base xl:text-lg text-dark-description-color hover:bg-label-premium/90 rounded-[6px] font-normal flex w-14 items-center gap-x-1.5">
+                                                        Premium
+                                                    </Badge>
+                                                ) : ticket.type.toLowerCase() === 'regular' ? (
+                                                    <Badge className="bg-label-regular min-w-[100px] justify-center text-sm md:text-base xl:text-lg text-dark-description-color hover:bg-label-regular/90 rounded-[6px] font-normal flex w-14 items-center gap-x-1.5">
+                                                        Regular
+                                                    </Badge>
+                                                ) : (
+                                                    <Badge className="bg-label-free min-w-[100px] justify-center text-sm md:text-base xl:text-lg text-dark-description-color hover:bg-label-free/90 rounded-[6px] font-normal">
+                                                        Free
+                                                    </Badge>
+                                                )}
+                                            </TableCell>
+                                            <TableCell className="text-green-600 font-bold text-lg">
+                                                ${Number(ticket.price).toFixed(2)}
+                                            </TableCell>
+                                            <TableCell className="text-sm md:text-base xl:text-lg text-start">
+                                                {ticket.capacity}
+                                            </TableCell>
+                                        </TableRow>
+                                    ))
+                                )}
                             </TableBody>
                         </Table>
                     </section>
                 </div>
                 <hr className=" w-full lg:col-span-2 dark:border-label-text-primary"/>
-                <div className="lg:col-span-2 flex justify-between">
+                <div className="col-span-2 flex items-center justify-end gap-4">
                     <LoadingButton
                         onClick={() => router.push("/organizer/events")}
-                        className="w-24 text-red-500 border border-red-500 rounded-[6px] hover:bg-red-300/10 hover:bg-red-500 hover:text-white"
+                        className="w-24 text-red-500 border border-red-500 rounded-[6px] hover:bg-red-50"
                         size={"lg"}
                         loading={loading}
                     >

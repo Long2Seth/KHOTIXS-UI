@@ -24,7 +24,22 @@ export type EventType = {
     tickets: Ticket[];
 };
 
+export type SummaryEvent = {
+    totalEvent: number;
+    totalTicket: number;
+    eventPublished: number;
+    eventUnpublished: number;
+    totalPaymentOfAllEvent: number;
+};
+
 export type EventResponse = {
     content: EventType[];
 }
 
+export type UpdateTicket = {
+    eventUuid: string;
+    ticketTitle: string;
+    type: string;
+    price: number;
+    capacity: number;
+}

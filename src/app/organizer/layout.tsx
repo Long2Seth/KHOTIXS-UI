@@ -4,10 +4,11 @@ import { ThemeProvider } from "next-themes";
 import { Toaster } from "react-hot-toast";
 import FooterOrganizer from "@/components/organizer/navbar/FooterOrganizer";
 import NavbarOrganizerComponent from "@/components/organizer/navbar/NavbarOrganizerComponent";
-import React from "react";
+import React, { Suspense } from "react";
 import StoreProvider from "@/app/StoreProvider";
 import GoogleAnalytics from "@/components/google/GoogleAnalytics";
 import CategoriesOrganizerComponent from "@/components/organizer/navbar/categoriesOrganizerComponent";
+import LoadingPage from "@/app/organizer/loading";
 
 export const metadata: Metadata = {
     title: {
@@ -37,7 +38,9 @@ export default function RootLayout({
                 <NavbarOrganizerComponent />
                 <CategoriesOrganizerComponent />
                 <Toaster position="top-right" reverseOrder={false} />
-                {children}
+                <Suspense fallback={<LoadingPage />}>
+                    {children}
+                </Suspense>
                 <FooterOrganizer />
             </StoreProvider>
         </ThemeProvider>

@@ -3,9 +3,13 @@ import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer} from 'recharts';
 import {eventData} from '@/lib/types/organizer/barchartData';
 import { LuNotebookPen } from "react-icons/lu";
+import {useGetSummaryEventQuery} from "@/redux/feature/organizer/Event";
 
 
 export default function OrganizerDashboard() {
+    const {data} = useGetSummaryEventQuery();
+
+    console.log(" DATA : " , data)
     return (
         <section
             className=" space-y-[50px] md:space-y-[80px] xl:space-y-[100px] my-[50px] md:my-[80px] xl:my-[80px] ">
@@ -28,7 +32,7 @@ export default function OrganizerDashboard() {
                                     Total Events
                                 </CardTitle>
                                 <CardContent>
-                                    <div className="text-2xl xl:text-4xl font-bold dark:text-primary-color text-primary-color pl-2">10</div>
+                                    <div className="text-2xl xl:text-4xl font-bold dark:text-primary-color text-primary-color pl-2">{data?.totalEvent || 0}</div>
                                 </CardContent>
                             </CardHeader>
 
@@ -42,7 +46,7 @@ export default function OrganizerDashboard() {
                                     Total Tickets
                                 </CardTitle>
                                 <CardContent>
-                                    <div className="text-2xl xl:text-4xl font-bold dark:text-primary-color text-primary-color pl-2">50</div>
+                                    <div className="text-2xl xl:text-4xl font-bold dark:text-primary-color text-primary-color pl-2">{data?.totalTicket || 0 }</div>
                                 </CardContent>
                             </CardHeader>
 
@@ -56,7 +60,7 @@ export default function OrganizerDashboard() {
                                     Event Unpublish
                                 </CardTitle>
                                 <CardContent>
-                                    <div className="text-2xl xl:text-4xl font-bold dark:text-primary-color text-primary-color pl-2">5</div>
+                                    <div className="text-2xl xl:text-4xl font-bold dark:text-primary-color text-primary-color pl-2">{data?.eventUnpublished || 0}</div>
                                 </CardContent>
                             </CardHeader>
 
@@ -70,7 +74,7 @@ export default function OrganizerDashboard() {
                                     Event Publish
                                 </CardTitle>
                                 <CardContent>
-                                    <div className="text-2xl xl:text-4xl font-bold dark:text-primary-color text-primary-color pl-2">5</div>
+                                    <div className="text-2xl xl:text-4xl font-bold dark:text-primary-color text-primary-color pl-2">{data?.eventPublished || 0}</div>
                                 </CardContent>
                             </CardHeader>
 
@@ -84,7 +88,7 @@ export default function OrganizerDashboard() {
                                     Total Payment
                                 </CardTitle>
                                 <CardContent>
-                                    <div className="text-2xl xl:text-4xl font-bold dark:text-primary-color text-primary-color pl-2">$ 1020</div>
+                                    <div className="text-2xl xl:text-4xl font-bold dark:text-primary-color text-primary-color pl-2">$ {data?.totalPaymentOfAllEvent || 0}</div>
                                 </CardContent>
                             </CardHeader>
 

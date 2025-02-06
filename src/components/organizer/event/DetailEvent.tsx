@@ -15,7 +15,7 @@ export default function EventDetailsPage({ id }: PropType) {
     const { data: eventData, error, isLoading } = useGetTicketByEventIdQuery(id);
 
     if (isLoading) {
-        return <LoadingComponent/>;
+        return <></>;
     }
 
     if (error) {
