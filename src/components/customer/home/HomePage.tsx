@@ -12,8 +12,8 @@ import {useGetAllEventPublishQuery,useGetEventUpcomingQuery} from "@/redux/featu
 
 export default function HomePageComponent() {
     const route = useRouter();
-    const {data: events = [], isLoading} = useGetAllEventPublishQuery();
 
+    const {data: events = [], isLoading} = useGetAllEventPublishQuery();
     const technologyRef = useRef<HTMLDivElement>(null);
     const concertRef = useRef<HTMLDivElement>(null);
     const sportRef = useRef<HTMLDivElement>(null);

@@ -9,6 +9,8 @@ import {FaFacebook} from "react-icons/fa";
 import {FaTelegram} from "react-icons/fa";
 import {AiFillGoogleCircle} from "react-icons/ai";
 import {MemberData, MentorData} from "@/lib/types/customer/aboutUs";
+import ProfileCard from "@/components/customer/aboutus/ProfileCard";
+import Image from "next/image";
 
 const iconMap: { [key: string]: React.ComponentType<{ className?: string }> } = {
     IoLogoGithub,
@@ -33,23 +35,41 @@ export default function AboutUsComponent() {
         <>
             {
                 isLoading ? <AboutUsSkeletonComponent/> :
-                    <section className="space-y-[50px] md:space-y-[80px] xl:space-y-[100px] mb-[50px] md:mb-[80px] xl:mb-[100px] bg-khotixs-background-white dark:bg-khotixs-background-dark">
+                    <section
+                        className="space-y-[50px] md:space-y-[80px] xl:space-y-[100px] mb-[50px] md:mb-[80px] xl:mb-[100px] bg-khotixs-background-white dark:bg-khotixs-background-dark">
                         {/* Hero section */}
-                        <section className="relative h-[400px] xl:h-[600px] w-full overflow-x-hidden">
-
+                        <section
+                            className="relative h-[400px] xl:h-[600px] w-full overflow-x-hidden flex items-center justify-center px-6">
+                            {/* Background Shapes */}
                             <div
                                 className="absolute bg-primary-color h-[400px] xl:h-[600px] w-[520px] rounded-bl-[100%] left-[-200px] overflow-x-hidden"></div>
-                            <div className="absolute bg-primary-color h-[400px] xl:h-[600px] w-[1600px] left-[300px]">
-                                <h1 className="absolute text-secondary-color-text text-2xl font-semibold mt-[100px] left-[-230px] sm:left-[-180px] md:left-[-130px] xl:left-[30px] xl:top-[10px] xl:text-5xl z-10">
-                                    ABOUT US
-                                </h1>
-                                <p className="absolute text-white my-10 mt-[140px] max-w-[250px] text-md left-[-230px] sm:left-[-180px] md:left-[-130px] md:max-w-[350px] md:text-lg xl:left-[30px] xl:top-[30px] xl:max-w-[400px] xl:text-2xl dark:text-white dark:my-10 dark:mt-[140px] dark:max-w-[250px] dark:text-md dark:left-[-230px] dark:sm:left-[-180px] dark:md:left-[-130px] dark:md:max-w-[350px] dark:md:text-lg dark:xl:left-[30px] dark:xl:top-[30px] dark:xl:max-w-[400px] dark:xl:text-2xl">
-                                    We’re here to help! Whether you have a question about your booking, need assistance,
-                                    or want to
-                                    share feedback, the KHOTIXS team is ready to assist you.
-                                </p>
-                            </div>
+                            <div
+                                className="absolute bg-primary-color h-[400px] xl:h-[600px] w-[1600px] left-[300px]"></div>
 
+                            {/* Content Wrapper */}
+                            <div className="flex flex-col md:flex-row items-center justify-between max-w-[90%] w-full">
+                                {/* Left Section for Text */}
+                                <div
+                                    className="z-10 max-w-[100%] md:max-w-[45%] md:text-left space-y-4 px-4 md:px-8">
+                                    <h1 className="text-secondary-color-text text-lg md:text-2xl xl:text-4xl font-bold left-[-230px] sm:left-[-180px] md:left-[-130px] xl:left-[30px] xl:top-[10px]">
+                                        ABOUT US
+                                    </h1>
+                                    <p className="text-white text-md md:text-lg xl:text-2xl dark:text-white">
+                                        We’re here to help! Whether you have a question about your booking, need
+                                        assistance, or want to share feedback, the KHOTIXS team is ready to assist you.
+                                    </p>
+                                </div>
+
+                                {/* Right Section for Image */}
+                                <div className="relative lg:w-[400px] lg:h-[400px] w-[300px] h-[300px] hidden md:block">
+                                    <Image
+                                        src="/about-us.gif"
+                                        alt="About Us"
+                                        layout="fill"
+                                        objectFit="cover"
+                                    />
+                                </div>
+                            </div>
                         </section>
 
                         <section className="w-full h-auto text-secondary-color dark:text-secondary-color-text">
@@ -96,10 +116,9 @@ export default function AboutUsComponent() {
                                         {/* Description */}
                                         <p className="text-description-color text-base md:text-lg xl:text-xl text-center dark:text-secondary-color-text">
                                             Our mission is to empower individuals and organizations by providing a
-                                            seamless,
-                                            user-friendly ticketing solution that connects event organizers with their
-                                            audiences. We aim
-                                            to make every event accessible, every booking easy, and every experience
+                                            seamless, user-friendly ticketing solution that connects event organizers
+                                            with their audiences. We aim to make every event accessible, every booking
+                                            easy, and every experience
                                             unforgettable.
                                         </p>
                                     </section>
@@ -115,12 +134,10 @@ export default function AboutUsComponent() {
                                         {/* Description */}
                                         <p className="text-description-color text-base md:text-lg xl:text-xl text-center dark:text-secondary-color-text">
                                             Our vision is to become the leading online ticketing platform in Cambodia,
-                                            fostering a
-                                            thriving events ecosystem where people can discover, participate in, and
-                                            celebrate the
-                                            vibrant culture and creativity of the nation. We envision a future where
-                                            KHOTIXXS is the
-                                            go-to platform for both customers and event organizers across the region.
+                                            fostering a thriving events ecosystem where people can discover, participate
+                                            in, and celebrate the vibrant culture and creativity of the nation. We
+                                            envision a future where KHOTIXS is the go-to platform for both customers and
+                                            event organizers across the region.
                                         </p>
                                     </section>
                                 </section>
@@ -136,42 +153,8 @@ export default function AboutUsComponent() {
                             <section
                                 className="grid grid-cols-1 sm:grid-cols-2 justify-center items-center w-fullz gap-5 px-5 my-[20px]">
                                 {MentorData.map((mentor) => (
-                                    <div className="flex flex-col justify-center items-center" key={mentor.name}>
-                                        <p className="text-[12px] text-title-color md:text-lg xl:text-2xl font-semibold uppercase my-[8px] dark:text-dark-description-color">
-                                            {mentor.name}
-                                        </p>
-                                        <div className="flex gap-[15px] justify-center items-center">
-                                            <div
-                                                className="w-[100px] h-[100px] rounded-[5px] lg:w-[130px] lg:h-[130px] bg-cover bg-center"
-                                                style={{backgroundImage: `url(${mentor.image})`}}
-                                            />
-
-                                            <div className=" w-[190px] sm:w-[180px] lg:w-[260px] flex flex-col text-center ">
-
-                                                <ul className="flex flex-col gap-2 ">
-
-                                                    {mentor.info?.map((link, index) => (
-                                                        <a
-                                                            href={link.link}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            key={index}>
-                                                            <li className="flex items-center ">
-                                                                {React.createElement(iconMap[link.icon], {
-                                                                    className: "text-title-color w-[20px] h-[20px] md:w-[26px] md:h-[26px] dark:text-dark-description-color",
-                                                                })}
-                                                                <p className=" text-start text-description-color  mx-[2px] px-[2px] w-full rounded-[5px] text-[10px] line-clamp-1 md:text-sm  dark:text-gray-200">
-                                                                    {link.name}
-                                                                </p>
-                                                            </li>
-                                                        </a>
-                                                    ))}
-
-                                                </ul>
-
-                                            </div>
-
-                                        </div>
+                                    <div className="flex justify-center items-center" key={mentor.name}>
+                                        <ProfileCard name={mentor.name} imageUrl={mentor.image} links={mentor.info}/>
                                     </div>
                                 ))}
                             </section>
@@ -180,48 +163,14 @@ export default function AboutUsComponent() {
 
                         <section
                             className="container overflow-x-hidden mx-auto w-full h-auto text-secondary-color dark:text-secondary-color-text">
-                        <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold uppercase text-center my-[20px] dark:text-secondary-color-text ">
+                            <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold uppercase text-center dark:text-secondary-color-text ">
                                 OUR MEMBERS
                             </h1>
                             <section
-                                className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 justify-center items-center w-full gap-10 lg:gap-20 px-5">
-                                {MemberData.map((mentor) => (
-                                    <div
-                                        className="flex flex-col justify-center items-center w-[300px] mx-auto sm:w-auto "
-                                        key={mentor.name}>
-                                        <p className="text-[12px] text-title-color md:text-lg xl:text-2xl font-semibold uppercase my-[8px] dark:text-dark-description-color">
-                                            {mentor.name}
-                                        </p>
-                                        <div className="flex gap-[15px] justify-center items-center">
-                                            <div
-                                                className=" w-[100px] h-[100px] rounded-[5px] bg-cover bg-center"
-                                                style={{backgroundImage: `url(${mentor.image})`}}
-                                            />
-
-                                            <div
-                                                className="w-[200px] sm:w-[160px] md:w-[210px] flex flex-col text-center">
-
-                                                <ul className="flex flex-col gap-2">
-
-                                                    {mentor.info?.map((link, index) => (
-                                                        <a href={link.link} target="_blank" rel="noopener noreferrer"
-                                                           key={index}>
-                                                            <li className="flex items-center">
-                                                                {React.createElement(iconMap[link.icon], {
-                                                                    className: "text-title-color w-[20px] h-[20px]  dark:text-dark-description-color",
-                                                                })}
-                                                                <p className=" text-start text-description-color  mx-[2px] px-[2px] max-w-full rounded-[5px] text-[10px] line-clamp-1 md:text-sm  dark:text-gray-200">
-                                                                    {link.name}
-                                                                </p>
-                                                            </li>
-                                                        </a>
-                                                    ))}
-
-                                                </ul>
-
-                                            </div>
-
-                                        </div>
+                                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center w-fullz gap-5 px-5 my-[20px]">
+                                {MemberData.map((member) => (
+                                    <div className="flex justify-center items-center" key={member.name}>
+                                        <ProfileCard name={member.name} imageUrl={member.image} links={member.info}/>
                                     </div>
                                 ))}
                             </section>
