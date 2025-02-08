@@ -44,7 +44,9 @@ export function CreateEventForm() {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [action, setAction] = useState<string>("");
-    const [loading, setLoading] = useState(false);
+    const [loadingSave, setLoadingSave] = useState(false);
+    const [loadingSaveAndContinue, setLoadingSaveAndContinue] = useState(false);
+    const [imageLoading, setImageLoading] = useState(false);
 
     const handleTimeChange = (
         type: "hour" | "minute",
@@ -74,6 +76,7 @@ export function CreateEventForm() {
         if (file) {
             const formData = new FormData();
             formData.append('file', file);
+            setImageLoading(true);
 
             try {
                 const response = await fetch('/asset/api/v1/files', {
@@ -89,6 +92,8 @@ export function CreateEventForm() {
                 setThumbnail(data.uri);
             } catch (error) {
                 console.error("Error uploading file:", error);
+            } finally {
+                setImageLoading(false);
             }
         }
     };
@@ -129,7 +134,11 @@ export function CreateEventForm() {
             console.log("Validation Errors:", newErrors);
         } else {
             setErrors({});
-            setLoading(true);
+            if (action === "save") {
+                setLoadingSave(true);
+            } else if (action === "saveAndContinue") {
+                setLoadingSaveAndContinue(true);
+            }
 
             toast.promise(
                 fetch("/event-ticket/api/v1/events", {
@@ -152,7 +161,8 @@ export function CreateEventForm() {
                 }).catch(error => {
                     console.error("Error submitting form:", error);
                 }).finally(() => {
-                    setLoading(false);
+                    setLoadingSave(false);
+                    setLoadingSaveAndContinue(false);
                 }),
                 {
                     loading: <b className={` p-3 `}>Saving event . . . </b>,
@@ -162,8 +172,6 @@ export function CreateEventForm() {
             );
         }
     };
-
-
 
     return (
         <form
@@ -416,7 +424,13 @@ export function CreateEventForm() {
                                     className=" w-full h-full border-gray-400 border border-dashed rounded-[6px]"
                                     onClick={handleSectionClick}>
                                     <div className=" w-full h-full flex flex-col justify-center items-center ">
-                                        {thumbnail ? (
+                                        {imageLoading ? (
+                                            <LoadingButton
+                                                loading={imageLoading}
+                                            >
+                                                Uploading...
+                                            </LoadingButton>
+                                        ) : thumbnail ? (
                                             <Image
                                                 unoptimized width={100} height={100} src={thumbnail} alt="Uploaded"
                                                 className="h-full w-full object-cover rounded-[6px]"/>
@@ -453,19 +467,19 @@ export function CreateEventForm() {
                 </Button>
                 <LoadingButton
                     type="submit"
-                    loading={loading}
+                    loading={loadingSave}
                     onClick={() => setAction("save")}
                     className="bg-primary-color border border-primary-color rounded-[6px] text-secondary-color-text hover:bg-primary-color/80 ">
                     Save
                 </LoadingButton>
                 <LoadingButton
                     type="submit"
-                    loading={loading}
+                    loading={loadingSaveAndContinue}
                     onClick={() => setAction("saveAndContinue")}
-                    className="bg-primary-color border border-primary-color rounded-[6px] text-secondary-color-text hover:bg-primary-color/80">
+                    className="bg-primary-color border border-primary-color rounded-[6px] text-secondary-color-text hover:bg-primary-color/80 ">
                     Save & Continue
                 </LoadingButton>
             </section>
         </form>
-    )
+    );
 }

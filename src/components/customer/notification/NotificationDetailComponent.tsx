@@ -1,21 +1,14 @@
 'use client';
 import { useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import { Notification } from "@/lib/types/customer/notification";
 import { RiCalendarLine, RiMap2Line, RiTimerLine } from "react-icons/ri";
-import { useGetNotificationByIdMutation, useReadNotificationByIdMutation } from "@/redux/feature/user/Notification";
+import { useGetNotificationByIdMutation, useReadNotificationByIdMutation } from "@/redux/feature/user/notification/Notification";
 
 type NotificationDetailComponentProps = {
     onClose: () => void;

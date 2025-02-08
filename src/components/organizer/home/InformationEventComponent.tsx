@@ -38,12 +38,12 @@ export default function InformationEventComponent() {
         currentPage * itemsPerPage
     );
 
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
+    // if (isLoading) {
+    //     return <div className={` w-full flex justify-center`}>Loading...</div>;
+    // }
 
     if (isError) {
-        return <div>Failed to fetch events</div>;
+        return <div className={` w-full flex justify-center `}>Failed to fetch events</div>;
     }
 
     return (
@@ -114,10 +114,11 @@ export default function InformationEventComponent() {
                                     <TableRow>
                                         <TableHead className="px-2 py-3 min-w-[100px] lg:min-w-[150px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">NO</TableHead>
                                         <TableHead className="px-2 py-3 min-w-[200px] lg:min-w-[500px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">EVENT NAME</TableHead>
-                                        <TableHead className="px-2 py-3 min-w-[350px] lg:min-w-[400px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">EVENT DATE</TableHead>
+                                        <TableHead className="px-2 py-3 min-w-[350px] lg:min-w-[400px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">STARTED DATE</TableHead>
+                                        <TableHead className="px-2 py-3 min-w-[350px] lg:min-w-[400px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">ENDED DATE</TableHead>
                                         <TableHead className="px-2 py-3 min-w-[200px] lg:min-w-[300px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">CATEGORY</TableHead>
                                         <TableHead className="px-2 py-3 min-w-[200px] lg:min-w-[300px] text-start text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">LOCATION</TableHead>
-                                        <TableHead className="px-2 py-3 min-w-[100px] text-start text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">STATUS</TableHead>
+                                        {/*<TableHead className="px-2 py-3 min-w-[100px] text-start text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">STATUS</TableHead>*/}
                                     </TableRow>
                                 </TableHeader>
                             </Table>
@@ -130,16 +131,21 @@ export default function InformationEventComponent() {
                                                     <TableRow className="hover:bg-gray-100 dark:hover:bg-khotixs-background-dark">
                                                         <TableHead className="px-2 py-3 min-w-[100px] lg:min-w-[150px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">{eventIndex + 1}</TableHead>
                                                         <TableCell className="px-2 py-3 min-w-[200px] lg:min-w-[500px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">{eventData.eventTitle}</TableCell>
-                                                        <TableCell className="px-2 py-3 min-w-[350px] lg:min-w-[400px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">{eventData.startedDate + " / " + eventData.endedDate}</TableCell>
+                                                        <TableCell className="px-2 py-3 min-w-[350px] lg:min-w-[400px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">
+                                                            {`${format(new Date(eventData.startedDate), "dd MMMM yyyy  hh:mm a")}`}
+                                                        </TableCell>
+                                                        <TableCell className="px-2 py-3 min-w-[350px] lg:min-w-[400px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">
+                                                            {`${format(new Date(eventData.endedDate), "dd MMMM yyyy  hh:mm a")}`}
+                                                        </TableCell>
                                                         <TableCell className="px-2 py-3 min-w-[200px] lg:min-w-[300px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">{eventData.eventCategory }</TableCell>
                                                         <TableCell className="px-2 py-3 min-w-[200px] lg:min-w-[300px] text-start text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">{eventData.location}</TableCell>
-                                                        <TableCell className="px-2 py-3 min-w-[100px] text-start text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">
-                                                            <Badge
-                                                                className={`rounded-[6px] text[10px] md:text-base justify-center font-normal ${eventData.isPublish ? 'bg-label-free text-label-text-primary hover:bg-label-free/90' : 'bg-label-paid text-label-text-primary hover:bg-label-paid/90'}`}
-                                                            >
-                                                                {eventData.isPublish ? 'Enable' : 'Disable'}
-                                                            </Badge>
-                                                        </TableCell>
+                                                        {/*<TableCell className="px-2 py-3 min-w-[100px] text-start text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">*/}
+                                                        {/*    <Badge*/}
+                                                        {/*        className={`rounded-[6px] text[10px] md:text-base justify-center font-normal ${eventData.isPublish ? 'bg-label-free text-label-text-primary hover:bg-label-free/90' : 'bg-label-paid text-label-text-primary hover:bg-label-paid/90'}`}*/}
+                                                        {/*    >*/}
+                                                        {/*        {eventData.isPublish ? 'Enable' : 'Disable'}*/}
+                                                        {/*    </Badge>*/}
+                                                        {/*</TableCell>*/}
                                                     </TableRow>
                                                 </TableBody>
                                             </Table>
@@ -151,7 +157,7 @@ export default function InformationEventComponent() {
                                                         <TableHead className="px-2 py-3 min-w-[100px] lg:min-w-[150px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">NO</TableHead>
                                                         <TableHead className="px-2 py-3 min-w-[200px] lg:min-w-[500px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">TICKET NAME </TableHead>
                                                         <TableHead className="px-2 py-3 min-w-[350px] lg:min-w-[400px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">TICKET TYPE</TableHead>
-                                                        <TableHead className="px-2 py-3 min-w-[200px] lg:min-w-[300px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">PRICE</TableHead>
+                                                        <TableHead className="px-2 py-3 min-w-[350px] lg:min-w-[400px] text-start text-title-color text-sm md:text-md xl:text-lg dark:text-secondary-color-text ">PRICE</TableHead>
                                                         <TableHead className="px-2 py-3 min-w-[200px] lg:min-w-[300px] text-start text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">QTY</TableHead>
                                                         <TableHead className="px-2 py-3 min-w-[100px] text-start text-description-color text-[10px] md:text-sm xl:text-base dark:text-dark-description-color">TOTAL</TableHead>
                                                     </TableRow>

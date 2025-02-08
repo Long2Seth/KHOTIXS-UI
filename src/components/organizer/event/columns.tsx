@@ -5,16 +5,17 @@ import { Badge } from "@/components/ui/badge";
 import React from "react";
 import Image from "next/image";
 import { DataTableColumnHeader } from "@/components/ui/data-table-column-header";
-import {ActionEventComponent} from "@/components/organizer/event/ActionEventComponent";
-import {EventType} from "@/lib/types/customer/event";
+import { ActionEventComponent } from "@/components/organizer/event/ActionEventComponent";
+import { EventType } from "@/lib/types/customer/event";
+import { format } from "date-fns";
 
 export const columnEvent: ColumnDef<EventType>[] = [
     {
-        accessorKey: "id",
+        accessorKey: "no",
         header: ({ column }) => (
-            <DataTableColumnHeader className="min-w-[70px] md:min-w-[250px] lg:min-w-[350px] text-start" column={column} title="ID" />
+            <DataTableColumnHeader className="min-w-[70px] md:min-w-[250px] lg:min-w-[350px] text-start" column={column} title="NO" />
         ),
-        cell: ({ row }) => <div className="text-start">{row.original.id}</div>,
+        cell: ({ row, table }) => <div className="text-start">{table.getSortedRowModel().flatRows.indexOf(row) + 1}</div>,
     },
     {
         accessorKey: "eventTitle",
@@ -24,7 +25,7 @@ export const columnEvent: ColumnDef<EventType>[] = [
         cell: ({ row }) => (
             <div className="flex items-center">
                 <Image
-                    className="rounded-[6px] h-auto w-[50px] md:w-[70px]"
+                    className="rounded-[6px] bg-cover w-[55px] h-[40px] "
                     width={70}
                     height={10}
                     src={row.original.thumbnail}
@@ -46,16 +47,18 @@ export const columnEvent: ColumnDef<EventType>[] = [
     {
         accessorKey: "startedDate",
         header: ({ column }) => (
-            <DataTableColumnHeader className="min-w-[100px] md:min-w-[150px] lg:min-w-[200px]" column={column} title="START DATE" />
+            <DataTableColumnHeader className="min-w-[100px] md:min-w-[150px] lg:min-w-[200px]" column={column} title="EVENT DATE" />
         ),
-        cell: ({ row }) => <div>{row.original.startedDate}</div>,
+        cell: ({ row }) => <div>{format(new Date(row.original.startedDate), "dd MMMM yyyy")}</div>,
     },
     {
-        accessorKey: "endedDate",
+        accessorKey: "eventTime",
         header: ({ column }) => (
-            <DataTableColumnHeader className="min-w-[100px] md:min-w-[150px] lg:min-w-[200px]" column={column} title="END DATE" />
+            <DataTableColumnHeader className="min-w-[100px] md:min-w-[150px] lg:min-w-[200px]" column={column} title="EVENT TIME" />
         ),
-        cell: ({ row }) => <div>{row.original.endedDate}</div>,
+        cell: ({ row }) => (
+            <div>{`${format(new Date(row.original.startedDate), "hh:mm a")} - ${format(new Date(row.original.endedDate), "hh:mm a")}`}</div>
+        ),
     },
     {
         accessorKey: "location",
@@ -82,6 +85,6 @@ export const columnEvent: ColumnDef<EventType>[] = [
     {
         accessorKey: "action",
         header: () => <div className="text-start"></div>,
-        cell: ({row}) => <ActionEventComponent isPublish={row.original.isPublish} id={row.original.id}/>,
+        cell: ({ row }) => <ActionEventComponent isPublish={row.original.isPublish} id={row.original.id} />,
     },
 ];

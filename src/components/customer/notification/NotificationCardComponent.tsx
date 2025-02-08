@@ -1,17 +1,15 @@
-'use client';
-import {useState} from "react";
-import {Card} from "@/components/ui/card";
+import { useState } from "react";
+import { Card } from "@/components/ui/card";
 import Image from "next/image";
-import {Notification} from "@/lib/types/customer/notification";
-import {Avatar} from "@/components/ui/avatar";
-import {NotificationActionComponent} from "@/components/customer/notification/NotificationActionComponent";
-import {NotificationDetailComponent} from "@/components/customer/notification/NotificationDetailComponent";
-import {useReadNotificationByIdMutation} from "@/redux/feature/user/Notification";
+import { Notification } from "@/lib/types/customer/notification";
+import { Avatar } from "@/components/ui/avatar";
+import { NotificationActionComponent } from "@/components/customer/notification/NotificationActionComponent";
+import { NotificationDetailComponent } from "@/components/customer/notification/NotificationDetailComponent";
+import { useReadNotificationByIdMutation, useGetNotificationByIdMutation } from "@/redux/feature/user/notification/Notification";
 
 type Props = {
     notification: Notification;
     onRead: (id: string) => void;
-    onDelete: (id: string) => void;
 };
 
 function timeSince(date: Date) {
@@ -37,24 +35,27 @@ function timeSince(date: Date) {
     return `${Math.floor(seconds)} seconds ago`;
 }
 
-export default function NotificationCardComponent({notification, onRead, onDelete}: Props) {
+export default function NotificationCardComponent({ notification, onRead }: Props) {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [readNotificationById] = useReadNotificationByIdMutation();
+    const [getNotificationById] = useGetNotificationByIdMutation();
 
     const handleCardClick = async () => {
         if (notification.id) {
             try {
+                // Mark the notification as read
                 await readNotificationById(notification.id).unwrap();
                 onRead(notification.id);
+
+                // Fetch the notification details to mark it as readDetailNotification
+                await getNotificationById(notification.id).unwrap();
+
+                // Open the dialog to show the notification details
                 setIsDialogOpen(true);
             } catch (error) {
                 console.error('Failed to update notification as read:', error);
             }
         }
-    };
-
-    const handleDeleteClick = () => {
-        onDelete(notification.id as string);
     };
 
     return (
@@ -95,8 +96,7 @@ export default function NotificationCardComponent({notification, onRead, onDelet
                     </div>
                     <div className="flex items-center gap-2 ml-4">
                         <button className="flex-shrink-0 right-10 hover:bg-gray-100 rounded-full">
-                            <NotificationActionComponent id={notification.id as string | null}
-                                                         onDelete={() => onDelete(notification.id as string)}/>
+                            <NotificationActionComponent id={notification.id as string | null}/>
                         </button>
                     </div>
                 </div>

@@ -1,12 +1,14 @@
 import SockJS from 'sockjs-client';
 import { Client } from '@stomp/stompjs';
 import type { Notification } from '@/lib/types/customer/notification';
+import { incrementUnreadCount } from '@/redux/feature/user/notification/notificationCountSlice';
+import { store } from '@/lib/store'; // Correctly import the store
 
 export class WebSocketService {
     private wsUrl: string;
     private client: Client;
     private subscriptionCallback: ((notification: Notification) => void) | null = null;
-    private deleteCallback: ((notificationId: string) => void) | null = null;
+    private readDetailCallback: ((notificationId: string) => void) | null = null;
     private userRole: string;
 
     constructor(wsUrl: string = '/communication/ws', userRole: string) {
@@ -17,16 +19,18 @@ export class WebSocketService {
             webSocketFactory: () => new SockJS(this.wsUrl),
             onConnect: () => {
                 console.log('Connected to WebSocket');
+                // Subscribe to topics after connection is established
                 this.subscribe();
+                this.subscribeToReadDetail();
             },
             onStompError: (frame) => {
                 console.error('STOMP error', frame);
-            }
+            },
         });
     }
 
-    async fetchInitialNotifications(userRole: string): Promise<Notification[]> {
-        const notifications = await fetch(`/communication/api/v1/notifications/publish-event/${this.userRole}`)
+    async fetchInitialNotifications(order: string): Promise<Notification[]> {
+        const notifications = await fetch(`/communication/api/v1/notifications/publish-event/${this.userRole}?order=${order}`)
             .then((response) => response.json())
             .then(data => data.content);
 
@@ -43,51 +47,33 @@ export class WebSocketService {
 
     onNotification(callback: (notification: Notification) => void): void {
         this.subscriptionCallback = callback;
-        if (this.client.connected) {
-            this.subscribe();
-        }
     }
 
-    onDeleteNotification(callback: (notificationId: string) => void): void {
-        this.deleteCallback = callback;
-        if (this.client.connected) {
-            this.subscribe();
-        }
+    onReadDetailNotification(callback: (notificationId: string) => void): void {
+        this.readDetailCallback = callback;
     }
 
     private subscribe(): void {
-        if (this.subscriptionCallback) {
+        if (this.subscriptionCallback && this.client.connected) {
             this.client.subscribe(`/topic/notifications/`, (message) => {
                 const notification = JSON.parse(message.body) as Notification;
                 this.subscriptionCallback!(notification);
-            });
-        }
-        if (this.deleteCallback) {
-            this.client.subscribe(`/topic/notifications/delete`, (message) => {
-                const { notificationId } = JSON.parse(message.body);
-                this.deleteCallback!(notificationId);
-            });
-        }
-    }
 
-    notifyDeletion(notificationId: string): void {
-        if (this.client.connected) {
-            this.client.publish({
-                destination: `/app/notifications/delete`,
-                body: JSON.stringify({ notificationId }),
-            });
-        }
-    }
 
-    handleNotificationClick(notificationId: string): void {
-        // Fetch the notification details by ID and update the state
-        fetch(`/communication/api/v1/notifications/${notificationId}`)
-            .then(response => response.json())
-            .then((notification: Notification) => {
-                if (this.subscriptionCallback) {
-                    this.subscriptionCallback(notification);
+                // Dispatch action to increment unread count if the notification is unread
+                if (!notification.isRead) {
+                    store.dispatch(incrementUnreadCount());
                 }
-            })
-            .catch(error => console.error('Error fetching notification details:', error));
+            });
+        }
+    }
+
+    private subscribeToReadDetail(): void {
+        if (this.readDetailCallback && this.client.connected) {
+            this.client.subscribe(`/topic/notifications/read-detail`, (message) => {
+                const notificationId = message.body;
+                this.readDetailCallback!(notificationId);
+            });
+        }
     }
 }

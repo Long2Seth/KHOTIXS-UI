@@ -26,6 +26,7 @@ import {EventType} from "@/lib/types/customer/event";
 import {LoadingButton} from "@/components/ui/loading-button";
 import {useUploadFileMutation} from "@/redux/feature/upload-file/UploadFile";
 import {useGetEventByIdQuery, useUpdateEventByIdMutation} from "@/redux/feature/organizer/Event";
+import {IoCameraReverseOutline} from "react-icons/io5";
 import {toast} from 'react-hot-toast';
 
 const eventSchema = z.object({
@@ -61,6 +62,7 @@ export function EditEvent({id}: PropsType) {
             setEndedDate(new Date(eventData.endedDate));
             setThumbnail(eventData.thumbnail);
             setSelectedCategory(eventData.eventCategory);
+            setSelectedCategory(eventData.eventCategory.toLocaleLowerCase());
         }
     }, [eventData]);
 
@@ -213,19 +215,19 @@ export function EditEvent({id}: PropsType) {
                                         htmlFor="eventCategoryName">
                                         Category
                                     </Label>
-                                    <Select name="eventCategoryName" value={selectedCategory}
-                                            onValueChange={setSelectedCategory}>
+                                    <Select value={selectedCategory} onValueChange={setSelectedCategory}
+                                            name="eventCategoryName">
                                         <SelectTrigger
-                                            className=" border border-light-border-color rounded-[6px] text-base md:text-lg ">
-                                            <SelectValue placeholder="Select category"/>
+                                            className="border border-light-border-color rounded-[6px] text-base md:text-lg">
+                                            <SelectValue placeholder={eventData?.eventCategory || "Select a category"}/>
                                         </SelectTrigger>
-                                        <SelectContent className=" bg-khotixs-background-white rounded-[6px] ">
-                                            <SelectItem value="concert">Concert</SelectItem>
-                                            <SelectItem value="technology">Technology</SelectItem>
-                                            <SelectItem value="conference">Conference</SelectItem>
-                                            <SelectItem value="sport">Sport</SelectItem>
-                                            <SelectItem value="community">Community</SelectItem>
-                                            <SelectItem value="general">General</SelectItem>
+                                        <SelectContent className="bg-khotixs-background-white rounded-[6px]">
+                                            <SelectItem value="concert">CONCERT</SelectItem>
+                                            <SelectItem value="technology">TECHNOLOGY</SelectItem>
+                                            <SelectItem value="conference">CONFERENCE</SelectItem>
+                                            <SelectItem value="sport">SPORT</SelectItem>
+                                            <SelectItem value="community">COMMUNITY</SelectItem>
+                                            <SelectItem value="general">GENERAL</SelectItem>
                                         </SelectContent>
                                     </Select>
                                     {errors.eventCategoryName &&
@@ -425,9 +427,9 @@ export function EditEvent({id}: PropsType) {
 
                             <section className=" w-full pt-[30px]">
                                 <section
-                                    className=" w-full h-full border-gray-400 border border-dashed rounded-[6px]"
+                                    className="cursor-pointer w-full h-full border-gray-400 border border-dashed rounded-[6px]"
                                     onClick={handleSectionClick}>
-                                    <div className=" w-full h-full flex flex-col justify-center items-center ">
+                                    <div className="relative w-full h-full flex flex-col justify-center items-center ">
                                         {thumbnail ? (
                                             <Image
                                                 unoptimized width={100} height={100} src={thumbnail} alt="Uploaded"
@@ -435,10 +437,12 @@ export function EditEvent({id}: PropsType) {
                                         ) : (
                                             <>
                                                 <LuUpload className=" h-[50px] w-[50px] text-gray-400"/>
-                                                <p className=" text-gray-400">Drop file here or click to upload
-                                                    here </p>
+                                                <p className=" text-gray-400">Drop file here or click to upload here </p>
                                             </>
                                         )}
+                                        <div className={` absolute bg-white rounded-tl-full right-0 bottom-0 w-[40px] h-[40px] pl-[10px] pt-[10px] flex items-center justify-center`}>
+                                            <IoCameraReverseOutline className={` w-5 h-5 `}/>
+                                        </div>
                                     </div>
                                     <input
                                         type="file"

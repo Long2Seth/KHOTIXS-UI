@@ -67,9 +67,9 @@ export function UpcomingEventComponent() {
                                 onClick={() => router.push(`/event/${event.id}`)}
                                 className={`${index < 2 ? "col-span-6" : "col-span-4"} cursor-pointer rounded-[6px]`}>
                                 <div
-                                    className="rounded-[6px] w-full h-72 bg-cover bg-center transform transition-transform duration-300 group-hover:scale-110"
+                                    className="rounded-[6px] w-full h-72 bg-cover bg-center transform transition-transform duration-300 group-hover:scale-110 flex items-end"
                                     style={{backgroundImage: `url(${event.thumbnail})`}}>
-                                    <div className="bg-secondary-color bg-opacity-70 rounded-t-[6px]">
+                                    <div className="bg-secondary-color bg-opacity-70 rounded-t-[6px] w-full">
                                         <div className="flex relative px-10 py-[15px]">
                                             <div>
                                                 <div className="flex">
