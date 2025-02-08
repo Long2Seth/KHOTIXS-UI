@@ -13,12 +13,12 @@ const categories = [
     { id: "general", name: "General" }
 ];
 
-export default function SearchComponent({ onFilterChange }: { onFilterChange: (category: string) => void }) {
+export default function SearchComponent() {
     const [selectedCategory, setSelectedCategory] = useState<string>("");
 
     const handleCategoryChange = (value: string) => {
         setSelectedCategory(value);
-        onFilterChange(value); // Notify parent about the selected category
+        // onFilterChange(value);
     };
 
     return (

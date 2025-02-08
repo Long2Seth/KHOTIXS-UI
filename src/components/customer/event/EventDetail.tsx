@@ -3,7 +3,7 @@ import Image from "next/image"
 import {MinusIcon, PlusIcon} from 'lucide-react'
 import Link from "next/link"
 import {useRouter} from "next/navigation";
-import { format, parseISO } from 'date-fns';
+import {format, parseISO} from 'date-fns';
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -24,7 +24,7 @@ import {
 import {Button} from "@/components/ui/button"
 import {useEffect, useState} from "react";
 import {EventType, Ticket} from "@/lib/types/customer/event";
-import { useGetEventByIdQuery } from "@/redux/feature/user/Event";
+import {useGetEventByIdQuery} from "@/redux/feature/user/Event";
 import EventDetailsSkeleton from "@/components/customer/event/EventDetailsSkeleton";
 
 type PropsType = {
@@ -32,7 +32,7 @@ type PropsType = {
 }
 
 export default function EventDetails({id}: PropsType) {
-    const { data: eventData, error, isLoading } = useGetEventByIdQuery(id);
+    const {data: eventData, error, isLoading} = useGetEventByIdQuery(id);
     const [tickets, setTickets] = useState<Ticket[]>([]);
 
     useEffect(() => {
@@ -79,7 +79,7 @@ export default function EventDetails({id}: PropsType) {
         return `${startTime}-${endTime}`;
     };
 
-    if (isLoading) return <EventDetailsSkeleton />;
+    if (isLoading) return <EventDetailsSkeleton/>;
     if (error) return <p>Error loading event details</p>;
 
     return (
@@ -123,7 +123,8 @@ export default function EventDetails({id}: PropsType) {
                     <section className="grid md:gap-2 lg:gap-8 lg:grid-cols-2">
                         <div>
                             {/* cover of event*/}
-                            <section className="relative mb-6 h-[200px] md:h-[370px] w-full justify-center flex overflow-hidden rounded-lg">
+                            <section
+                                className="relative mb-6 h-[200px] md:h-[370px] w-full justify-center flex overflow-hidden rounded-lg">
                                 <Image
                                     src={eventData?.thumbnail || '/event/event-banner.png'}
                                     unoptimized
@@ -242,12 +243,17 @@ export default function EventDetails({id}: PropsType) {
                                                             </>
                                                         ) : (
                                                             <>
-                                                                <p className="rounded-[6px] bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-label-premium">${ticket.price.toFixed(2)}</p>
+                                                                {/*<div className={` flex flex-col gap-2`}>*/}
+                                                                    <p className="rounded-[6px] w-auto bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-label-premium">Price : ${ticket.price.toFixed(2)}</p>
+                                                                    <p className="rounded-[6px] w-auto bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-label-premium">Capacity
+                                                                        : {ticket.capacity}</p>
+                                                                {/*</div>*/}
                                                                 {ticket.isSoldOut === 'true' ? (
                                                                     <p className="rounded-[6px] dark:bg-label-text-primary bg-red-100 dark:bg-opacity-70 bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-red-600">SOLD
                                                                         OUT</p>
                                                                 ) : (<></>)}
-                                                            </>)}
+                                                            </>
+                                                        )}
 
                                                     </div>
                                                 </section>
@@ -324,7 +330,8 @@ export default function EventDetails({id}: PropsType) {
                     <section className="grid grid-cols-1 gap-x-4 md:gap-x-4 lg:gap-x-8 md:grid-cols-2">
 
                         {/* cover of event*/}
-                        <section className="relative mb-6 justify-center flex col-span-1 md:col-span-1 h-[200px] md:h-[370px] w-full overflow-hidden rounded-lg">
+                        <section
+                            className="relative mb-6 justify-center flex col-span-1 md:col-span-1 h-[200px] md:h-[370px] w-full overflow-hidden rounded-lg">
                             <Image
                                 src={eventData?.thumbnail || '/event/event-banner.png'}
                                 unoptimized

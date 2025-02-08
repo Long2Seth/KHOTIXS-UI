@@ -18,11 +18,11 @@ export function NavigationMenuDemo() {
             <NavigationMenuList>
                 <NavigationMenuItem>
                     <NavigationMenuTrigger className=" lg:w-auto text-[10px] sm:text-sm lg:text-lg font-medium dark:bg-khotixs-background-dark lg:px-4 ">About & Contact</NavigationMenuTrigger>
-                    <NavigationMenuContent className={`border border-gray-400 rounded-[6px]`}>
+                    <NavigationMenuContent className={` dark:border dark:border-gray-700 rounded-[6px]`}>
                         <section
                             className="relative flex md:w-[400px] xl:w-[450px] h-auto rounded-[5px] hover:rounded-[5px] outline-none border-5 border-none ring-0  bg-khotixs-background-white dark:bg-khotixs-background-dark ">
 
-                            <a className=" w-[50%] cursor-pointer p-[20px] rounded-[5px] hover:bg-secondary-color hover:text-secondary-color-text"
+                            <a className=" w-[50%] cursor-pointer p-[20px] rounded-l-[5px] hover:bg-gray-200 hover:text-black dark:hover:bg-opacity-5 dark:hover:text-white"
                                 href="/about">
                                 <div>
                                     <h1 className="  text-[10px] sm:text-sm lg:text-lg font-semibold ">About</h1>
@@ -32,7 +32,7 @@ export function NavigationMenuDemo() {
                                 </div>
                             </a>
 
-                            <a className=" w-[50%] cursor-pointer p-[20px] rounded-[5px] hover:rounded-[5px] hover:bg-secondary-color hover:text-secondary-color-text "
+                            <a className=" w-[50%] cursor-pointer p-[20px] rounded-r-[5px] hover:rounded-r-[5px] hover:bg-gray-200 hover:text-black dark:hover:bg-opacity-5 dark:hover:text-white"
                                 href="/contact-us">
                                 <div>
                                     <h1 className=" text-[10px] sm:text-sm lg:text-lg font-semibold ">Contact</h1>
