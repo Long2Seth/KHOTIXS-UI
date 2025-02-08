@@ -1,43 +1,45 @@
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+"use client";
 
+import { useState } from "react";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
+const categories = [
+    { id: "technology", name: "Technology" },
+    { id: "concert", name: "Concert" },
+    { id: "sport", name: "Sport" },
+    { id: "community", name: "Community" },
+    { id: "conferences", name: "Conferences" },
+    { id: "general", name: "General" }
+];
 
-export default function SearchComponent(){
-    return(
-        <section>
-            <section className="w-full container mx-auto h-auto flex justify-start items-start ">
-                <div>
-                    <h1 className={`  text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text`}> Filter Event Category</h1>
-                    <RadioGroup defaultValue="option-one">
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="technology" id="technology"/>
-                            <Label htmlFor="technology">Technology</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem className={` rounded-[5px] `} value="concert" id="concert"/>
-                            <Label htmlFor="concert">Concert</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="sport" id="sport"/>
-                            <Label htmlFor="sport">Sport</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="community" id="community"/>
-                            <Label htmlFor="community">Community</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="conferences" id="conferences"/>
-                            <Label htmlFor="conferences">Conferences</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="general" id="general"/>
-                            <Label htmlFor="general">General</Label>
-                        </div>
-                    </RadioGroup>
+export default function SearchComponent({ onFilterChange }: { onFilterChange: (category: string) => void }) {
+    const [selectedCategory, setSelectedCategory] = useState<string>("");
 
-                </div>
-            </section>
+    const handleCategoryChange = (value: string) => {
+        setSelectedCategory(value);
+        onFilterChange(value); // Notify parent about the selected category
+    };
+
+    return (
+        <section className="w-full h-full border-r-2 border-gray-200 mb-10 mt-10 container mx-auto flex flex-col items-start">
+            <h1 className="mb-4 uppercase text-title-color text-2xl xl:text-3xl font-bold dark:text-secondary-color-text">
+                Filters
+            </h1>
+            <p className="mb-5 text-label-text-secondary font-bold">Category</p>
+
+            <RadioGroup
+                value={selectedCategory}
+                onValueChange={handleCategoryChange}
+                className="space-y-3"
+            >
+                {categories.map((category) => (
+                    <div key={category.id} className="flex items-center space-x-2">
+                        <RadioGroupItem  value={category.id} id={category.id} className="rounded-[4px] border-primary focus:ring-primary" />
+                        <Label htmlFor={category.id} className="cursor-pointer">{category.name}</Label>
+                    </div>
+                ))}
+            </RadioGroup>
         </section>
-    )
+    );
 }

@@ -16,8 +16,8 @@ export default function MerchantsComponent() {
                     <h1 className="lg:text-4xl text-2xl font-bold">Do you Organize Events or
                         Manage a Venue?
                     </h1>
-                    <p className="text-lg">Become a Khotixs Partner today!</p>
-                    <p className="mt-4 text-lg">Take your events and venue management to the next level with Khotixs. Join us to access powerful
+                    <p className="text-lg">Become a KHOTIXS Partner today!</p>
+                    <p className="mt-4 text-lg">Take your events and venue management to the next level with KHOTIXS. Join us to access powerful
                         tools for ticket management, booking, and revenue tracking, and reach a wider audience through
                         our platform.</p>
                     <div className="flex gap-2">
@@ -47,7 +47,7 @@ export default function MerchantsComponent() {
             <section
                 className="grid my-20 w-full items-center justify-center px-5 lg:grid-cols-2 md:max-w-full md:px-[40px]">
                 <h1 className="lg:text-4xl mb-10 col-span-2 text-center text-2xl font-bold text-primary-color border-primary-color">Benefits
-                    of Khotixs</h1>
+                    of KHOTIXS</h1>
                 <motion.div
                     className="lg:w-[500px] xl:ml-20 text-center lg:h-[500px] hidden lg:block object-cover"
                     initial={{y: 10}}
