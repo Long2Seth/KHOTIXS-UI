@@ -1,14 +1,9 @@
 "use client"
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { useTicket } from "@/context/TicketContext";
-import { useQRContext } from "@/context/QRContext";
-import Image from "next/image";
+import QRCodeGenerator from "@/components/customer/qr/QrComponent";
 
 export default function QRGenerate() {
-    const { ticket } = useTicket()
-    const { qr } = useQRContext()
-    console.log(qr?.md5Hash)
     return (
         <div className="max-w-sm mx-auto p-4">
             <Card className="overflow-hidden">
@@ -17,13 +12,13 @@ export default function QRGenerate() {
                 </CardHeader>
                 <CardContent className="p-6 space-y-6">
                     <div className="space-y-2">
-                        {ticket.reserveTickets.map((e: any, index: number) => (
-                            <p key={index} className="text-sm text-gray-500">{e.event}</p>
-                        ))}
+                        {/*{ticket.reserveTickets.map((e: any, index: number) => (*/}
+                        {/*    <p key={index} className="text-sm text-gray-500">{e.event}</p>*/}
+                        {/*))}*/}
 
-                        <p className="text-3xl font-bold">
-                            {ticket.total} <span className="text-gray-500">$</span>
-                        </p>
+                        {/*<p className="text-3xl font-bold">*/}
+                        {/*    {ticket.total} <span className="text-gray-500">$</span>*/}
+                        {/*</p>*/}
 
 
                     </div>
@@ -31,18 +26,7 @@ export default function QRGenerate() {
                     <div className="border-t border-dashed my-4" />
 
                     <div className="flex justify-center p-4">
-                        <Image
-                            src={`data:image/png;base64,${qr?.qrData}`}
-                            alt="QR Code"
-                            width={200}
-                            height={200}
-                        />
-                        {/*<QRCode*/}
-                        {/*    value={qr ? "" : ""}*/}
-                        {/*    size={200}*/}
-                        {/*    style={{ height: "auto", maxWidth: "100%", width: "100%" }}*/}
-                        {/*    viewBox={`0 0 256 256`}*/}
-                        {/*/>*/}
+                        <QRCodeGenerator/>
                     </div>
                 </CardContent>
             </Card>

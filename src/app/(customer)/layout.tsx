@@ -5,9 +5,6 @@ import {FooterComponent} from "@/components/customer/footer/FooterComponent";
 import { Toaster } from "react-hot-toast";
 import ScrollToTopButton from "@/components/customer/home/ScrollToTopButton";
 import StoreProvider from "@/app/StoreProvider";
-import {TicketProvider} from "@/context/TicketContext";
-import {UserProvider} from "@/context/UserContext";
-import {QRProvider} from "@/context/QRContext";
 import GoogleAnalytics from "@/components/google/GoogleAnalytics";
 import React from "react";
 
@@ -28,14 +25,8 @@ export default function RootLayout({
                 disableTransitionOnChange
             >
                 <NavbarComponent/>
-                <TicketProvider>
-                    <UserProvider>
-                        <QRProvider>
                             <Toaster position="top-right" reverseOrder={false} />
                             {children}
-                        </QRProvider>
-                    </UserProvider>
-                </TicketProvider>
                 <FooterComponent/>
                 <ScrollToTopButton/>
             </ThemeProvider>

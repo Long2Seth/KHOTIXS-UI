@@ -9,6 +9,7 @@ type Ticket = {
 type OrderState = {
     eventId: string;
     tickets: Ticket[];
+    userId:string;
     formData: {
         fullName: string;
         email: string;
@@ -21,6 +22,7 @@ const initialState: OrderState = {
     eventId: '',
     tickets: [],
     formData: null,
+    userId: ''
 };
 
 const requirementSlice = createSlice({
@@ -31,6 +33,7 @@ const requirementSlice = createSlice({
             state.eventId = action.payload.eventId;
             state.tickets = action.payload.tickets;
             state.formData = action.payload.formData;
+            state.userId = action.payload.userId;
         },
     },
 });

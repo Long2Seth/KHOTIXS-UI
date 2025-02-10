@@ -1,3 +1,4 @@
+// src/components/customer/OrderInfoRequirementComponent/OrderInfoRequirementFormComponent.tsx
 'use client';
 
 import {Input} from "@/components/ui/input";
@@ -50,17 +51,16 @@ export default function OrderInfoRequirementFormComponent() {
         },
     });
 
-    const order = useSelector((state: RootState) => state.order);
+    const order = useSelector((state: RootState) => state.requirement);
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         if (values.fullName && values.email && values.phoneNumber) {
-            console.log("Form Data:", values);
 
             dispatch(setOrderData({
                 eventId: order.eventId || "",
                 tickets: order.tickets.map(ticket => ({
                     ...ticket,
-                    price: ticket.price.toString(), // Ensure price is a string
+                    price: ticket.price.toString(),
                 })),
                 formData: {
                     fullName: values.fullName,
@@ -68,6 +68,7 @@ export default function OrderInfoRequirementFormComponent() {
                     phoneNumber: values.phoneNumber,
                     userId: userProfile?.id || "",
                 },
+                userId: userProfile?.uuid || "",
             }));
 
             setLoading(true);

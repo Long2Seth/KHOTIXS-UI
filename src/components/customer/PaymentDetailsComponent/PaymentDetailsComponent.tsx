@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { MinusIcon, PlusIcon } from "lucide-react";
 import { useSelector } from "react-redux";
 import { useCreateOrderMutation } from "@/redux/feature/user/order/Order";
 import { RootState } from "@/lib/store";
@@ -22,6 +21,8 @@ export default function PaymentDetailsComponent() {
 
     // Calculate total price
     const totalPrice = orderData.tickets?.reduce((total, ticket) => total + (ticket.price * ticket.quantity), 0) || 0;
+
+    console.log("  ID Order", requirementData.userId);
 
     // Pay Now
     const payNow = async () => {

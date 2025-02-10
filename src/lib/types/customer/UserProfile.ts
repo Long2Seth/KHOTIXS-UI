@@ -12,4 +12,5 @@ export type UserProfileType = {
     position: string;
     email: string;
     businessName: string;
+    uuid: string;
 };
