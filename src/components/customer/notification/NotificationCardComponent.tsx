@@ -70,10 +70,11 @@ export default function NotificationCardComponent({ notification, onRead }: Prop
                         <div className="relative">
                             <Avatar className="h-10 w-10 flex items-center justify-center">
                                 <Image
-                                    src={notification.thumbnail || '/event/event-banner.png'}
+                                    src={notification.thumbnail ?? "/images/event-placeholder.jpg"}
                                     alt="notification.thumbnail"
                                     width={40}
                                     height={40}
+                                    unoptimized
                                     className="w-full h-full rounded-full"
                                 />
                             </Avatar>
@@ -96,13 +97,13 @@ export default function NotificationCardComponent({ notification, onRead }: Prop
                     </div>
                     <div className="flex items-center gap-2 ml-4">
                         <button className="flex-shrink-0 right-10 hover:bg-gray-100 rounded-full">
-                            <NotificationActionComponent id={notification.id as string | null}/>
+                            <NotificationActionComponent id={notification.id as string | null} />
                         </button>
                     </div>
                 </div>
             </Card>
             {isDialogOpen &&
-                <NotificationDetailComponent id={notification.id ?? null} onClose={() => setIsDialogOpen(false)}/>}
+                <NotificationDetailComponent id={notification.id ?? null} onClose={() => setIsDialogOpen(false)} />}
         </div>
     );
 }

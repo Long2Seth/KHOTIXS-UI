@@ -3,17 +3,17 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { useCreateOrderMutation } from "@/redux/feature/user/order/Order";
 import { RootState } from "@/lib/store";
-import { OrderResponseType } from "@/lib/types/customer/QrCode";
-import PayNowComponent from "@/components/customer/payNow/PayNowComponent";
+import { setOrderResponse } from "@/redux/feature/user/order/orderResponseSlice";
+
 
 export default function PaymentDetailsComponent() {
     const router = useRouter();
+    const dispatch = useDispatch();
     const [createOrder] = useCreateOrderMutation();
     const [isLoading, setIsLoading] = useState(false);
-    const [orderResponse, setOrderResponse] = useState<OrderResponseType | null>(null);
 
     // Get data from slices
     const orderData = useSelector((state: RootState) => state.order);
@@ -33,25 +33,21 @@ export default function PaymentDetailsComponent() {
                 fullName: requirementData.formData?.fullName,
                 email: requirementData.formData?.email,
                 phoneNumber: requirementData.formData?.phoneNumber,
-                eventId: orderData.eventId || undefined,
+                eventId: orderData.eventId ?? undefined,
                 tickets: orderData.tickets,
             };
 
-            const response = await createOrder(orderPayload).unwrap(); // Ensure promise resolution
-            setOrderResponse(response); // Ensure state update
-
-            console.log("Order Response", response.orderId);
-            console.log("Order Response", response.userId);
-            console.log("Order Response", response.total);
-
+            const response = await createOrder(orderPayload).unwrap();
+            console.log("Order response success :", response);
+            dispatch(setOrderResponse(response));
             router.push("/pay-now");
+
         } catch (error) {
             console.error("Error creating order:", error);
         } finally {
             setIsLoading(false);
         }
     };
-
     return (
         <div className="w-full lg:w-[670px] flex flex-col gap-5">
             {/* Order Details */}
@@ -123,16 +119,6 @@ export default function PaymentDetailsComponent() {
                 </div>
             </section>
 
-            {/* QR Code (Only Render When orderResponse is Set) */}
-            {orderResponse && orderResponse.orderId && orderResponse.userId && orderResponse.total !== undefined && (
-                <section>
-                    <PayNowComponent
-                        orderId={orderResponse.orderId}
-                        userId={orderResponse.userId}
-                        total={orderResponse.total}
-                    />
-                </section>
-            )}
         </div>
     );
 }

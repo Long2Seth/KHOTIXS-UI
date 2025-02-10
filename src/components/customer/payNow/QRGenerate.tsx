@@ -3,24 +3,19 @@
 import { QRCodeCanvas } from "qrcode.react"
 import { useGetQRCodeQuery } from "@/redux/feature/user/qrCode/QrCode"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { useSelector } from "react-redux"
+import { RootState} from "@/lib/store";
 
-type QRGenerateProps = {
-    orderId: string;
-    userId: string;
-    total: number;
-}
+export default function QRGenerate() {
+    const orderResponse = useSelector((state: RootState) => state.orderResponse.orderResponse)
 
-export default function QRGenerate({ orderId, userId, total }: QRGenerateProps) {
-    console.log(" Order ID IN generateQR : ", orderId);
-    console.log(" User ID IN generateQR : ", userId);
-    console.log(" Total IN generateQR : ", total);
 
     const { data } = useGetQRCodeQuery({
         accountId: "proeung_chiso@aclb",
         acquiringBank: "Acleda Bank Plc.",
-        amount: total,
-        userId: userId,
-        orderId: orderId,
+        amount: orderResponse?.total || 0,
+        userId: orderResponse?.userId || "",
+        orderId: orderResponse?.orderId || "",
     })
 
     return (

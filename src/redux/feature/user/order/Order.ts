@@ -10,7 +10,6 @@ export const orderEndpoint = khotixsApi.injectEndpoints({
                 method: 'POST',
                 body: newOrder,
             }),
-            invalidatesTags: [{type: 'EventOrganizer', id: "LIST"}],
         }),
     }),
 });
