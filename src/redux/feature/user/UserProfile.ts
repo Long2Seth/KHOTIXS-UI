@@ -1,6 +1,6 @@
 import {khotixsApi} from "@/lib/api";
-import {UserProfileType} from "@/lib/types/customer/userProfile";
-import {UserSettingType} from "@/lib/types/customer/userSetting";
+import {UserProfileType} from "@/lib/types/customer/UserProfile";
+import {UserSettingType} from "@/lib/types/customer/UserSetting";
 import {UpdateUserProfile, UserProfile} from "@/lib/types/navbar/UserProfile";
 
 export const getUserProfile = khotixsApi.injectEndpoints({

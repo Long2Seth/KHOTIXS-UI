@@ -8,7 +8,7 @@ import {IoLogoGithub} from "react-icons/io5";
 import {FaFacebook} from "react-icons/fa";
 import {FaTelegram} from "react-icons/fa";
 import {AiFillGoogleCircle} from "react-icons/ai";
-import {MemberData, MentorData} from "@/lib/types/customer/aboutUs";
+import {MemberData, MentorData} from "@/lib/types/customer/AboutUs";
 import ProfileCard from "@/components/customer/aboutus/ProfileCard";
 import Image from "next/image";
 

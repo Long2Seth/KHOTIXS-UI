@@ -8,7 +8,6 @@ import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { IoIosPower } from "react-icons/io";
 import { PiEye, PiEyeSlash } from "react-icons/pi";
-import { UpdateTicket } from "@/lib/types/customer/event";
 import EditTicket from "@/components/organizer/event/EditTicket";
 import { usePublishTicketMutation, useUnpublishTicketMutation, useDisplayTicketMutation, useHideTicketMutation, useDeleteTicketMutation } from "@/redux/feature/organizer/Ticket";
 

@@ -11,7 +11,7 @@ import {MapPin} from "lucide-react";
 import Image from "next/image";
 import EditProfile from "@/components/customer/User-Profile/user/EditProfile";
 import {ProfileComponentSkeleton} from "@/components/customer/User-Profile/user/ProfileComponentSkeleton";
-import {UserProfileType} from "@/lib/types/customer/userProfile";
+import {UserProfileType} from "@/lib/types/customer/UserProfile";
 
 type PropType = {
     id : string;

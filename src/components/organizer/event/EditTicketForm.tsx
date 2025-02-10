@@ -6,7 +6,7 @@ import {LoadingButton} from "@/components/ui/loading-button";
 import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {useUpdateTicketByIDMutation, useGetTicketByIdQuery} from "@/redux/feature/organizer/Ticket";
-import {UpdateTicket} from "@/lib/types/customer/event";
+import {UpdateTicket} from "@/lib/types/customer/Ticket";
 import {toast} from 'react-hot-toast';
 
 type PropType = {

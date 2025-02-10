@@ -11,7 +11,7 @@ import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { Badge } from "@/components/ui/badge";
-import { orderData } from "@/lib/types/organizer/orderData";
+import { orderData } from "@/lib/types/organizer/OrderData";
 import Image from "next/image";
 import { Pagination } from "@/components/ui/Pagination";
 

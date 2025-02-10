@@ -15,7 +15,7 @@ import {
 import {Avatar, AvatarImage} from "@/components/ui/avatar";
 import * as React from "react";
 import {useRouter} from "next/navigation";
-import {UserProfileType} from "@/lib/types/customer/userProfile";
+import {UserProfileType} from "@/lib/types/customer/UserProfile";
 import Image from "next/image";
 
 type PropTypes = {

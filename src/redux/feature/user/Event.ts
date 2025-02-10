@@ -1,7 +1,7 @@
 import {khotixsApi} from "@/lib/api";
-import {EventType, UpcomingEvent} from "@/lib/types/customer/event";
+import {EventType, UpcomingEvent} from "@/lib/types/customer/Event";
 
-export const getAllEventPublish = khotixsApi.injectEndpoints({
+export const eventEndpoint = khotixsApi.injectEndpoints({
             endpoints: (builder) => ({
                 getAllEventPublish: builder.query<EventType[], void>({
                     query: () => '/event-ticket/api/v1/events/published',
@@ -28,4 +28,4 @@ export const {
     useGetEventByIdQuery,
     useGetEventByCategoryQuery,
     useGetEventUpcomingQuery
-} = getAllEventPublish;
+} = eventEndpoint;

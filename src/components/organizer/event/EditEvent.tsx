@@ -22,7 +22,7 @@ import {cn} from "@/lib/types/utils";
 import {format} from "date-fns";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
-import {EventType} from "@/lib/types/customer/event";
+import {EventType} from "@/lib/types/customer/Event";
 import {LoadingButton} from "@/components/ui/loading-button";
 import {useUploadFileMutation} from "@/redux/feature/upload-file/UploadFile";
 import {useGetEventByIdQuery, useUpdateEventByIdMutation} from "@/redux/feature/organizer/Event";

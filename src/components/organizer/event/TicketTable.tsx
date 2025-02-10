@@ -8,7 +8,7 @@ import { RiStarFill } from "react-icons/ri";
 import { PiEye, PiEyeSlash } from "react-icons/pi";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
-import { Ticket } from "@/lib/types/customer/event";
+import { Ticket} from "@/lib/types/customer/Ticket";
 import TicketActionComponent from "@/components/organizer/event/TicketActionComponent";
 import Image from "next/image";
 import { Pagination } from "@/components/ui/Pagination";

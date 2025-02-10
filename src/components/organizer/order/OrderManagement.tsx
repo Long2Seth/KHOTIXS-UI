@@ -19,7 +19,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Calendar as CalendarComponent } from "@/components/ui/calendar"
 
 // Import data
-import {attendanceData} from "@/lib/types/organizer/attendanceData";
+import {attendanceData} from "@/lib/types/organizer/AttendanceData";
 import {Badge} from "@/components/ui/badge";
 
 export default function AttendanceTable() {

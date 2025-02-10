@@ -23,7 +23,7 @@ import {Badge} from "@/components/ui/badge"
 import {Checkbox} from "@/components/ui/checkbox";
 import {useRouter} from "next/navigation";
 import {RiStarFill} from "react-icons/ri";
-import {EventType, Ticket} from "@/lib/types/customer/event";
+import {EventType} from "@/lib/types/customer/Event";
 import {z} from 'zod';
 import {Button} from "@/components/ui/button";
 import LoadingComponent from "@/components/loading/LoadingComponent";
@@ -271,10 +271,10 @@ export function CreateTicketForm({id}: Props) {
                         <Table>
                             <TableHeader>
                                 <TableRow className="dark:border-label-text-primary">
-                                    <TableHead className="text-title-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">NAME</TableHead>
-                                    <TableHead className="text-title-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">TICKET TYPE</TableHead>
-                                    <TableHead className="text-title-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">PRICE</TableHead>
-                                    <TableHead className="text-title-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">CAPACITY</TableHead>
+                                    <TableHead className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">NAME</TableHead>
+                                    <TableHead className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">TICKET TYPE</TableHead>
+                                    <TableHead className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">PRICE</TableHead>
+                                    <TableHead className="text-lg font-medium text-primary-color-text dark:text-secondary-color-text">CAPACITY</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -294,29 +294,32 @@ export function CreateTicketForm({id}: Props) {
                                             </TableCell>
                                             <TableCell className="text-description-color text-sm md:text-base xl:text-lg dark:text-dark-description-color">
                                                 {ticket.type.toLowerCase() === 'vip' ? (
-                                                    <Badge className="bg-label-vip min-w-[100px] justify-center text-sm md:text-base xl:text-lg text-dark-description-color hover:bg-label-vip/90 rounded-[6px] font-normal flex w-14 items-center gap-x-1.5">
+                                                    <Badge className=" h-[30px] bg-label-vip justify-center text-lg text-dark-description-color hover:bg-label-vip/90 rounded-[6px] font-normal">
                                                         VIP
-                                                        <RiStarFill className="h-2.5 w-2.5" />
+                                                        <RiStarFill className="ml-2 h-4 w-4" />
                                                     </Badge>
                                                 ) : ticket.type.toLowerCase() === 'premium' ? (
-                                                    <Badge className="bg-label-premium min-w-[100px] justify-center text-sm md:text-base xl:text-lg text-dark-description-color hover:bg-label-premium/90 rounded-[6px] font-normal flex w-14 items-center gap-x-1.5">
-                                                        Premium
+                                                    <Badge className=" h-[30px] bg-label-premium justify-center text-lg text-dark-description-color hover:bg-label-premium/90 rounded-[6px] font-normal">
+                                                        PREMIUM
                                                     </Badge>
                                                 ) : ticket.type.toLowerCase() === 'regular' ? (
-                                                    <Badge className="bg-label-regular min-w-[100px] justify-center text-sm md:text-base xl:text-lg text-dark-description-color hover:bg-label-regular/90 rounded-[6px] font-normal flex w-14 items-center gap-x-1.5">
-                                                        Regular
+                                                    <Badge className=" h-[30px] bg-label-regular justify-center text-lg text-dark-description-color hover:bg-label-regular/90 rounded-[6px] font-normal">
+                                                        REGULAR
                                                     </Badge>
                                                 ) : (
-                                                    <Badge className="bg-label-free min-w-[100px] justify-center text-sm md:text-base xl:text-lg text-dark-description-color hover:bg-label-free/90 rounded-[6px] font-normal">
-                                                        Free
+                                                    <Badge className=" h-[30px] bg-label-free justify-center text-lg text-dark-description-color hover:bg-label-free/90 rounded-[6px] font-normal">
+                                                        FREE
                                                     </Badge>
                                                 )}
                                             </TableCell>
                                             <TableCell className="text-green-600 font-bold text-lg">
                                                 ${Number(ticket.price).toFixed(2)}
                                             </TableCell>
-                                            <TableCell className="text-sm md:text-base xl:text-lg text-start">
+                                            <TableCell className="text-lg text-start">
                                                 {ticket.capacity}
+                                            </TableCell>
+                                            <TableCell>
+
                                             </TableCell>
                                         </TableRow>
                                     ))

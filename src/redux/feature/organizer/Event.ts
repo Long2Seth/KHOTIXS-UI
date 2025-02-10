@@ -1,5 +1,5 @@
 import {khotixsApi} from "@/lib/api";
-import {EventResponse, EventType, SummaryEvent} from "@/lib/types/customer/event";
+import {EventResponse, EventType, SummaryEvent} from "@/lib/types/customer/Event";
 
 export const Event = khotixsApi.injectEndpoints({
     endpoints: (builder) => ({

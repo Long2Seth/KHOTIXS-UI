@@ -1,5 +1,6 @@
 import { khotixsApi } from "@/lib/api";
-import { EventType, Ticket, UpdateTicket } from "@/lib/types/customer/event";
+import { EventType } from "@/lib/types/customer/Event";
+import {Ticket, UpdateTicket} from "@/lib/types/customer/Ticket";
 
 export const TicketApi = khotixsApi.injectEndpoints({
     endpoints: build => ({

@@ -3,7 +3,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
 import React from "react";
 import { DataTableColumnHeader } from "@/components/ui/data-table-column-header";
-import { OrderData } from "@/lib/types/organizer/orderData";
+import { OrderData } from "@/lib/types/organizer/OrderData";
 import Image from "next/image";
 
 export const columnOrder: ColumnDef<OrderData>[] = [

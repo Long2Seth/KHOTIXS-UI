@@ -1,7 +1,7 @@
 'use client';
 import React, {useEffect, useState} from 'react';
 import {CardComponent} from "@/components/customer/card/CardComponent";
-import {EventType} from "@/lib/types/customer/event";
+import {EventType} from "@/lib/types/customer/Event";
 import {useGetEventByCategoryQuery} from "@/redux/feature/user/Event";
 import {EventCategorySkeleton} from "@/components/customer/event/EventCategorySkeleton";
 

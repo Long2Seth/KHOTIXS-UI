@@ -6,7 +6,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import Image from "next/image";
-import { Notification } from "@/lib/types/customer/notification";
+import { Notification } from "@/lib/types/customer/Notification";
 import { RiCalendarLine, RiMap2Line, RiTimerLine } from "react-icons/ri";
 import { useGetNotificationByIdMutation, useReadNotificationByIdMutation } from "@/redux/feature/user/notification/Notification";
 

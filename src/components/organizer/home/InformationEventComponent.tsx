@@ -11,7 +11,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Pagination } from "@/components/ui/Pagination";
-import { EventType } from "@/lib/types/customer/event";
+import { EventType } from "@/lib/types/customer/Event";
 import { Badge } from "@/components/ui/badge";
 import { useGetAllEventUpcomingQuery } from "@/redux/feature/organizer/Event";
 

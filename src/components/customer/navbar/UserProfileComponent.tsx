@@ -18,7 +18,7 @@ import {Avatar, AvatarImage} from "@/components/ui/avatar";
 import * as React from "react";
 import {useRouter} from "next/navigation";
 import {ModeToggleAfterLogin} from "@/components/customer/navbar/modeToggleAfterLogin";
-import {UserProfileType} from "@/lib/types/customer/userProfile";
+import {UserProfileType} from "@/lib/types/customer/UserProfile";
 import {useLogoutMutation} from "@/redux/feature/user/UserProfile";
 
 type UserProfileProps = {

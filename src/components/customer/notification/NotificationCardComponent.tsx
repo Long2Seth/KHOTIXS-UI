@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
-import { Notification } from "@/lib/types/customer/notification";
+import { Notification } from "@/lib/types/customer/Notification";
 import { Avatar } from "@/components/ui/avatar";
 import { NotificationActionComponent } from "@/components/customer/notification/NotificationActionComponent";
 import { NotificationDetailComponent } from "@/components/customer/notification/NotificationDetailComponent";

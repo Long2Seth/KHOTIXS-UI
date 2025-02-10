@@ -1,14 +1,5 @@
-export type Ticket = {
-    id: string;
-    ticketTitle: string;
-    type: string;
-    price: number;
-    capacity: number;
-    isPublish: string;
-    isDisplay: string;
-    isSoldOut: string;
-    quantity: number;
-};
+import {Ticket} from "@/lib/types/customer/Ticket";
+
 
 export type EventType = {
     id: string;
@@ -31,13 +22,6 @@ export type UpcomingEvent = {
     thumbnail: string;
 }
 
-export type UpdateTicket = {
-    eventUuid: string;
-    ticketTitle: string;
-    type: string;
-    price: number;
-    capacity: number;
-}
 
 export type SummaryEvent = {
     totalEvent: number;

@@ -1,12 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { khotixsApi } from '@/lib/api';
 import notificationCountReducer from '@/redux/feature/user/notification/notificationCountSlice';
+import orderReducer from '@/redux/feature/user/order/OrderSlice';
+import requirementSlice from "@/redux/feature/user/order/RequirementSlice";
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
             [khotixsApi.reducerPath]: khotixsApi.reducer,
             notificationCount: notificationCountReducer,
+            order: orderReducer,
+            requirement: requirementSlice,
         },
         middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(khotixsApi.middleware),
     });

@@ -2,7 +2,6 @@
 import Image from "next/image"
 import {MinusIcon, PlusIcon} from 'lucide-react'
 import Link from "next/link"
-import {useRouter} from "next/navigation";
 import {format, parseISO} from 'date-fns';
 import {
     Breadcrumb,
@@ -22,18 +21,32 @@ import {
     RiTimerLine
 } from "react-icons/ri"
 import {Button} from "@/components/ui/button"
+import {useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
-import {EventType, Ticket} from "@/lib/types/customer/event";
 import {useGetEventByIdQuery} from "@/redux/feature/user/Event";
+import {useReserveTicketMutation} from "@/redux/feature/user/ticket";
 import EventDetailsSkeleton from "@/components/customer/event/EventDetailsSkeleton";
+import {Ticket} from "@/lib/types/customer/Ticket";
+import {useDispatch} from 'react-redux';
+import {setOrder} from '@/redux/feature/user/order/OrderSlice';
 
 type PropsType = {
     id: string;
 }
 
+type ReserveTicketResponse = {
+    uuid: string;
+    status: boolean;
+    ticketName: string | null;
+};
+
 export default function EventDetails({id}: PropsType) {
+
     const {data: eventData, error, isLoading} = useGetEventByIdQuery(id);
     const [tickets, setTickets] = useState<Ticket[]>([]);
+    const [reserveTicket] = useReserveTicketMutation();
+    const router = useRouter();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (eventData) {
@@ -47,22 +60,57 @@ export default function EventDetails({id}: PropsType) {
         }
     }, [eventData]);
 
-    const updateQuantity = (id: string, increment: boolean) => {
-        setTickets((prevTickets) =>
-            prevTickets.map((ticket) => {
-                if (ticket.id === id) {
-                    const newQuantity = increment
-                        ? Math.min(ticket.quantity + 1, ticket.capacity)
-                        : Math.max(ticket.quantity - 1, 0);
-                    return {...ticket, quantity: newQuantity};
-                }
-                return ticket;
-            })
-        );
+    const handlePlaceOrder = () => {
+        const orderTickets = tickets.map(ticket => ({
+            ticketId: ticket.id,
+            quantity: ticket.quantity,
+            price: ticket.price,
+            ticketType: ticket.type
+        }));
+
+        console.log("BEFORE Order Data:", {eventId: id,eventTitle: eventData?.eventTitle || '', tickets: orderTickets});
+
+        dispatch(setOrder({eventId: id, eventTitle: eventData?.eventTitle || '', tickets: orderTickets}));
+        router.push('/order-info-requirement');
+    };
+
+    const updateQuantity = async (id: string, increment: boolean) => {
+        const updatedTickets = tickets.map((ticket) => {
+            if (ticket.id === id) {
+                const newQuantity = increment
+                    ? Math.min(ticket.quantity + 1, ticket.capacity)
+                    : Math.max(ticket.quantity - 1, 0);
+                return {...ticket, quantity: newQuantity};
+            }
+            return ticket;
+        });
+
+        const ticketToUpdate = updatedTickets.find(ticket => ticket.id === id);
+
+        if (ticketToUpdate) {
+            const response = await reserveTicket({
+                tickets: [{ticketId: ticketToUpdate.id, quantity: ticketToUpdate.quantity}]
+            }).unwrap();
+
+            const updatedTicketStatus = response.find((res: ReserveTicketResponse) => res.uuid === ticketToUpdate.id);
+
+            if (updatedTicketStatus && !updatedTicketStatus.status) {
+                // Rollback the quantity if the status is false
+                setTickets(tickets);
+            } else {
+                setTickets(updatedTickets);
+            }
+        }
     };
 
     const total = tickets.reduce(
         (sum, ticket) => sum + ticket.price * ticket.quantity,
+        0
+    );
+
+
+    const totalQuantity = tickets.reduce(
+        (sum, ticket) => sum + ticket.quantity,
         0
     );
 
@@ -176,7 +224,7 @@ export default function EventDetails({id}: PropsType) {
                                     </p>
                                 </section>
                                 {/*Note*/}
-                                <p className="text-description-color text-base md:text-lg xl:text-xl text-red-700">ចំណាំ:
+                                <p className=" text-base md:text-lg xl:text-xl text-red-700">ចំណាំ:
                                     សូមបង្ហាញកូដ QR
                                     ទៅកាន់ក្រុមការងារដើម្បីផ្ទៀងផ្ទាត់សំបុត្រមុនចូលទស្សនា។</p>
                             </section>
@@ -243,11 +291,12 @@ export default function EventDetails({id}: PropsType) {
                                                             </>
                                                         ) : (
                                                             <>
-                                                                {/*<div className={` flex flex-col gap-2`}>*/}
-                                                                    <p className="rounded-[6px] w-auto bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-label-premium">Price : ${ticket.price.toFixed(2)}</p>
+                                                                <div className={` flex flex-col sm:flex-row gap-2`}>
+                                                                    <p className="rounded-[6px] w-auto bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-label-premium">Price
+                                                                        : ${ticket.price.toFixed(2)}</p>
                                                                     <p className="rounded-[6px] w-auto bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-label-premium">Capacity
                                                                         : {ticket.capacity}</p>
-                                                                {/*</div>*/}
+                                                                </div>
                                                                 {ticket.isSoldOut === 'true' ? (
                                                                     <p className="rounded-[6px] dark:bg-label-text-primary bg-red-100 dark:bg-opacity-70 bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-red-600">SOLD
                                                                         OUT</p>
@@ -296,20 +345,25 @@ export default function EventDetails({id}: PropsType) {
                                                 <span
                                                     className="font-bold text-lg lg:text-2xl text-label-free uppercase">$ free</span>
                                                 <Button
+                                                    onClick={handlePlaceOrder}
                                                     className="bg-primary-color hover:bg-primary-color hover:bg-opacity-85 text-label-text-primary rounded-[6px] h-[45px] font-bold">
-                                                    Place Order <RiArrowRightLine/>
+                                                    Place Order
+                                                    <RiArrowRightLine/>
                                                 </Button>
                                             </section>
                                         ) : (
-                                            <section
-                                                className="flex items-center justify-between border p-4 pl-6 rounded-[8px]">
-                                            <span
-                                                className="font-bold text-lg lg:text-2xl text-label-paid">${total.toFixed(2)}</span>
-                                                <Button
-                                                    className="bg-primary-color hover:bg-primary-color hover:bg-opacity-85 text-label-text-primary rounded-[6px] h-[45px] font-bold">Place
-                                                    Order <RiArrowRightLine/>
-                                                </Button>
-                                            </section>
+                                            totalQuantity > 0 && (
+                                                <section
+                                                    className="flex items-center justify-between border p-4 pl-6 rounded-[8px]">
+                                                    <span
+                                                        className="font-bold text-lg lg:text-2xl text-label-paid">${total.toFixed(2)}</span>
+                                                    <Button
+                                                        onClick={handlePlaceOrder}
+                                                        className="bg-primary-color hover:bg-primary-color hover:bg-opacity-85 text-label-text-primary rounded-[6px] h-[45px] font-bold">
+                                                        Place Order <RiArrowRightLine/>
+                                                    </Button>
+                                                </section>
+                                            )
                                         )}
                                         <div
                                             className="flex items-center space-x-2 dark:text-label-text-primary text-label-description">
@@ -364,24 +418,26 @@ export default function EventDetails({id}: PropsType) {
 
                             {/* event location*/}
                             <section className="space-y-2">
-                                <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text ">LOCATION</h2>
-                                <div
-                                    className="flex items-start dark:text-label-text-primary text-label-description">
-                                    <div className="w-10 mt-1.5">
+                                <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text">LOCATION</h2>
+                                <div className="flex items-start dark:text-label-text-primary text-label-description">
+                                    <div className="w-8 mt-1.5">
                                         <RiMap2Line className="w-5"/>
                                     </div>
                                     <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">{eventData?.location}</p>
                                 </div>
                             </section>
-                        </section>
 
-                        {/* event description*/}
-                        <section className="col-span-1 md:col-span-2 space-y-2 mt-6 md:mt-0">
-                            <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text">EVENT
-                                DESCRIPTION</h2>
-                            <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color ">
-                                {eventData?.description}
-                            </p>
+                            {/* event description*/}
+                            <section className="space-y-2">
+                                <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold dark:text-secondary-color-text">EVENT
+                                    DESCRIPTION</h2>
+                                <p className="text-description-color text-base md:text-lg xl:text-xl dark:text-dark-description-color">
+                                    {eventData?.description}
+                                </p>
+                            </section>
+                            {/*Note*/}
+                            <p className="text-base md:text-lg xl:text-xl text-red-700">ចំណាំ: សូមបង្ហាញកូដ QR
+                                ទៅកាន់ក្រុមការងារដើម្បីផ្ទៀងផ្ទាត់សំបុត្រមុនចូលទស្សនា។</p>
                         </section>
                     </section>
                 )}

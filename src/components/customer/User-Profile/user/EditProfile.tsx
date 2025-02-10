@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Camera } from "lucide-react";
 import Image from "next/image";
-import { UserProfileType } from "@/lib/types/customer/userProfile";
+import { UserProfileType } from "@/lib/types/customer/UserProfile";
 import { useUploadFileMutation } from "@/redux/feature/upload-file/UploadFile";
 import { useUpdateUserProfileMutation } from "@/redux/feature/user/UserProfile";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";

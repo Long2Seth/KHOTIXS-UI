@@ -1,113 +1,82 @@
 'use client'
 
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { MinusIcon, PlusIcon } from "lucide-react";
-import {useTicket} from "@/context/TicketContext";
-import {useUserContext} from "@/context/UserContext";
-import {useQRContext} from "@/context/QRContext";
-
-
+import { useSelector } from "react-redux";
+import { useCreateOrderMutation } from "@/redux/feature/user/order/Order";
+import { RootState } from "@/lib/store";
 
 export default function PaymentDetailsComponent() {
-    const {ticket} = useTicket()
-    const {user} = useUserContext()
-    const { setQR} = useQRContext()
-
-    // Access order information from context
-    // const { orderInfo } = useContext(OrderContext)!; // Use non-null assertion operator if you're confident it's always available.
-
-    // const PreOrder = {
-    //     fullName: orderInfo?.fullName,
-    //     email: orderInfo?.email,
-    //     phoneNumber: orderInfo?.phoneNumber,
-    // };
-
     const router = useRouter();
+    const [createOrder] = useCreateOrderMutation();
+    const [isLoading, setIsLoading] = useState(false);
 
-    // Style
+    // Get data from slices
+    const orderData = useSelector((state: RootState) => state.order);
+    const requirementData = useSelector((state: RootState) => state.requirement);
+
     const detailStyle = "text-[16px] font-medium";
 
-    // Total Price (Use dynamic or fetched value)
-    const totalPrice = ticket.total
-
-    const generateQR = async  () => {
-        try {
-            const response = await fetch("http://localhost:8081/api/khqr/generate", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    "amount": totalPrice,
-                    "currency": "USD",
-                    "merchantName": "istad shop",
-                    "bankAccount": "vuth_sarandy1@aclb",
-                    "storeLabel": "My Store",
-                    "terminalId": "POS-01",
-                    "bankType": "ABA"
-                }),
-
-            })
-            if (!response.ok) {
-                throw new Error("Failed to submit user data");
-            }
-            const data = await response.json();
-            setQR(data)
-        }catch (error) {
-            console.log(error)
-        }
-    }
-
+    // Calculate total price
+    const totalPrice = orderData.tickets?.reduce((total, ticket) => total + (ticket.price * ticket.quantity), 0) || 0;
 
     // Pay Now
-    function payNow() {
-        generateQR()
+    const payNow = async () => {
+        setIsLoading(true);
+        // Create order
+        const orderPayload = {
+            fullName: requirementData.formData?.fullName,
+            email: requirementData.formData?.email,
+            phoneNumber: requirementData.formData?.phoneNumber,
+            eventId: orderData.eventId || undefined,
+            tickets: orderData.tickets,
+        };
 
-       router.push("/pay-now");
+        console.log("  orderPayload", orderPayload);
 
-    }
+        await createOrder(orderPayload);
 
-   // console.log("PreOrder:", PreOrder);
+        router.push("/pay-now");
+        setIsLoading(false);
+    };
 
     return (
         <div className="w-full lg:w-[670px] flex flex-col gap-5">
             {/* Card Your Order */}
             <section>
-                <div className="flex flex-col gap-5 w-full lg:w-[670px] border border-[#E5E7EB] dark:border-none bg-white dark:backdrop-blur dark:bg-opacity-5 rounded-[8px] p-[20px]">
+                <div
+                    className="flex flex-col gap-5 w-full lg:w-[670px] border border-[#E5E7EB] dark:border-none bg-white dark:backdrop-blur dark:bg-opacity-5 rounded-[8px] p-[20px]">
                     <h2 className="text-title-color text-base md:text-lg xl:text-xl font-bold uppercase dark:text-dark-description-color">
                         Your Order
                     </h2>
-                    {ticket.reserveTickets?.map((reserveTicket, index   ) => (
-                        <div key={index} className="flex items-center justify-between">
-                        <p className={`${detailStyle} dark:font-bold`}>{reserveTicket?.event}</p>
-                        <div
-                            className="flex gap-2.5 flex-col lg:flex-row items-start lg:items-center lg:justify-between">
-                            <p className={`${detailStyle} dark:font-bold`}>
-                                <span className="dark:font-normal text-label-description dark:text-label-text-primary">
-                                    Ticket Type:{" "}
-                                </span>
-                                {reserveTicket?.name}
-                            </p>
-                        </div>
-                        {/* Count Button */}
-                        <section className="w-fit flex items-center justify-end gap-1 lg:gap-2">
-                            <Button
-                                className="p-1 bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 text-label-premium w-[40px] h-[40px] rounded-[4px]"
-                            >
-                                <MinusIcon className="h-2 w-2"/>
-                            </Button>
-                            <span className="w-4 font-bold text-center">{reserveTicket?.quantity}</span>
-                            <Button
-                                className="p-1 bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 text-label-premium w-[40px] h-[40px] rounded-[4px]"
-                                size="sm"
-                            >
-                                <PlusIcon className="h-2 w-2"/>
-                            </Button>
-                        </section>
-                    </div>))}
+                    <p className={`${detailStyle} dark:font-bold`}>{orderData?.eventTitle}</p>
+                    <table className="w-full">
+                        <thead className={`font-medium`}>
+                        <tr>
+                            <th className="font-medium text-left">Ticket Type</th>
+                            <th className="font-medium text-center">Quantity</th>
+                            <th className="font-medium text-center">Price</th>
+                            <th className="font-medium text-center">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {orderData.tickets?.map((ticket, index) => (
+                            <tr key={index}>
+                                <td className={`${detailStyle} dark:font-bold`}>
+                            <span className="dark:font-normal text-label-description dark:text-label-text-primary">
+                                {ticket.ticketType}
+                            </span>
+                                </td>
+                                <td className="text-center">{ticket.quantity}</td>
+                                <td className="text-center">{ticket.price.toFixed(2)}</td>
+                                <td className="text-center">{(ticket.price * ticket.quantity).toFixed(2)}</td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
                 </div>
             </section>
 
@@ -119,17 +88,9 @@ export default function PaymentDetailsComponent() {
                         Personal Details
                     </h2>
                     <div className="flex flex-col gap-2.5">
-                        {/*{Object.entries(orderInfo).map(([key, value]) => (*/}
-                        {/*    <div className="grid grid-cols-2" key={key}>*/}
-                        {/*        <p className={`${detailStyle} text-label-description dark:text-label-text-primary`}>*/}
-                        {/*            {key.charAt(0).toUpperCase() + key.slice(1)}*/}
-                        {/*        </p>*/}
-                        {/*        <p className={`${detailStyle} dark:font-bold`}>{value ?? "Empty"}</p>*/}
-                        {/*    </div>*/}
-                        {/*))}*/}
-                        <p>{user?.fullName}</p>
-                        <p>{user?.phoneNumber}</p>
-                        <p>{user?.email}</p>
+                        <p>{requirementData.formData?.fullName}</p>
+                        <p>{requirementData.formData?.phoneNumber}</p>
+                        <p>{requirementData.formData?.email}</p>
                     </div>
                 </div>
             </section>
@@ -145,9 +106,10 @@ export default function PaymentDetailsComponent() {
 
             {/* Payment Method */}
             <section className="bg-white dark:backdrop-blur dark:bg-opacity-5 rounded-[8px]">
-                <div className="flex flex-col gap-5 w-full lg:w-[670px] border border-[#E5E7EB] dark:border-none rounded-[8px] p-[20px]">
+                <div
+                    className="flex flex-col gap-5 w-full lg:w-[670px] border border-[#E5E7EB] dark:border-none rounded-[8px] p-[20px]">
                     <h2 className="text-[18px] uppercase font-bold">Payment Method</h2>
-                    <Image src="/khqr/khqr.png" width={100} height={40} alt="Payment Method" />
+                    <Image src="/khqr/khqr.png" width={100} height={40} alt="Payment Method"/>
                 </div>
             </section>
 
@@ -155,15 +117,13 @@ export default function PaymentDetailsComponent() {
             <section>
                 <div className="flex gap-[10px] pt-[10px]">
                     <Button
-                        className="w-full hover:bg-label-paid hover:bg-opacity-20 p-[12px] text-red-600 border-[1px] border-red-600 dark:bg-backdrop-blur dark:bg-opacity-5 dark:text-red-600 dark:border-red-600 rounded-[6px]"
-                        onClick={() => router.back()}
-                    >
+                        className="w-full border border-red-600 text-red-600 hover:bg-red-600 hover:text-white rounded-[6px]"
+                        onClick={() => router.back()}>
                         Back
                     </Button>
-                    <Button
-                        onClick={payNow}
-                        className="w-full text-secondary-color-text bg-primary-color hover:bg-primary-color/90 rounded-[6px] border border-primary-color"
-                    >
+                    <Button onClick={payNow}
+                            className="w-full text-secondary-color-text bg-primary-color hover:bg-primary-color/90 rounded-[6px] border border-primary-color"
+                            disabled={isLoading}>
                         Pay Now
                     </Button>
                 </div>

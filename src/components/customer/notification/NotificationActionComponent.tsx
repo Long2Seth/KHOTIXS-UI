@@ -5,7 +5,7 @@ import { IoMdMore } from "react-icons/io";
 import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useDeleteNotificationByIdMutation } from "@/redux/feature/user/notification/Notification";
-import { WebSocketService } from "@/lib/types/customer/websocket";
+import { WebSocketService } from "@/lib/types/customer/Websocket";
 
 type Props = {
     id: string | null;

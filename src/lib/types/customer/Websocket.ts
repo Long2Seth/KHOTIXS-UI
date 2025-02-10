@@ -1,6 +1,6 @@
 import SockJS from 'sockjs-client';
 import { Client } from '@stomp/stompjs';
-import type { Notification } from '@/lib/types/customer/notification';
+import type { Notification } from '@/lib/types/customer/Notification';
 import { incrementUnreadCount } from '@/redux/feature/user/notification/notificationCountSlice';
 import { store } from '@/lib/store'; // Correctly import the store
 

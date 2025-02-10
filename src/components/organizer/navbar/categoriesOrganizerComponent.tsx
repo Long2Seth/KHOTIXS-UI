@@ -2,7 +2,7 @@
 import {useState, useEffect} from 'react';
 import {Card, CardContent} from "@/components/ui/card";
 import {Badge} from "@/components/ui/badge";
-import {navItems} from "@/lib/types/organizer/navData";
+import {navItems} from "@/lib/types/organizer/NavData";
 import {useRouter, usePathname} from "next/navigation";
 
 export default function CategoriesOrganizerComponent() {

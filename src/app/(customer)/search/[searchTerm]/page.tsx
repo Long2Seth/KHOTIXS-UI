@@ -1,6 +1,6 @@
 import SearchComponent from "@/components/customer/search/SearchComponent";
 import { CardComponent } from "@/components/customer/card/CardComponent";
-import { EventType } from "@/lib/types/customer/event";
+import { EventType } from "@/lib/types/customer/Event";
 
 type Prop = {
     params: Promise<{ searchTerm: string }>

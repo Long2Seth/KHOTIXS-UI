@@ -1,4 +1,4 @@
-import { payments } from "./tablePaymentData"
+import { payments } from "./TablePaymentData"
 
 export function calculateRevenue() {
     const totalRevenue = payments.reduce((sum, payment) => sum + payment.amount, 0)

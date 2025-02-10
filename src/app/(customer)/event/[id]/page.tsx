@@ -1,6 +1,6 @@
 import EventDetails from "@/components/customer/event/EventDetail";
 import type {Metadata, ResolvingMetadata} from "next";
-import {EventType} from "@/lib/types/customer/event";
+import {EventType} from "@/lib/types/customer/Event";
 
 
 
@@ -36,13 +36,14 @@ export async function generateMetadata(
 
     const previousImages = (await parent).openGraph?.images || [];
 
+    console.log(" IMAGE: ", event.thumbnail);
     return {
         title: event.eventTitle,
         description: event.description,
         openGraph: {
             title: event.eventTitle,
             description: event.description,
-            images: [event.thumbnail, ...previousImages],
+            images: [event.thumbnail],
         },
     };
 }

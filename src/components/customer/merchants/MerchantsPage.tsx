@@ -5,7 +5,7 @@ import React from "react";
 import {motion} from 'framer-motion';
 import {RiCheckDoubleLine} from "react-icons/ri";
 import { useRouter } from "next/navigation";
-import {benefits} from "@/lib/types/customer/benefits";
+import {benefits} from "@/lib/types/customer/Benefits";
 
 export default function MerchantsComponent() {
     const router = useRouter();

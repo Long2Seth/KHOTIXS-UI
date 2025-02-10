@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { FiBell } from "react-icons/fi";
 import NotificationCardComponent from "@/components/customer/notification/NotificationCardComponent";
-import { Notification } from "@/lib/types/customer/notification";
-import { WebSocketService } from "@/lib/types/customer/websocket";
+import { Notification } from "@/lib/types/customer/Notification";
+import { WebSocketService } from "@/lib/types/customer/Websocket";
 import { useDeleteNotificationByIdMutation } from "@/redux/feature/user/notification/Notification";
 import {
     decrementUnreadCount,
