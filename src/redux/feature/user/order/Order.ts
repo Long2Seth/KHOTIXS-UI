@@ -1,9 +1,10 @@
 import {khotixsApi} from "@/lib/api";
 import {OrderType} from "@/lib/types/customer/Order";
+import {OrderResponseType} from "@/lib/types/customer/QrCode";
 
 export const orderEndpoint = khotixsApi.injectEndpoints({
     endpoints: (builder) => ({
-        createOrder: builder.mutation<OrderType, Partial<OrderType>>({
+        createOrder: builder.mutation<OrderResponseType, Partial<OrderType>>({
             query: (newOrder) => ({
                 url: '/order/api/v1/orders',
                 method: 'POST',

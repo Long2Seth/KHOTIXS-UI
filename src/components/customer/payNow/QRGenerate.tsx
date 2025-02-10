@@ -1,9 +1,28 @@
 "use client"
 
+import { QRCodeCanvas } from "qrcode.react"
+import { useGetQRCodeQuery } from "@/redux/feature/user/qrCode/QrCode"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import QRCodeGenerator from "@/components/customer/qr/QrComponent";
 
-export default function QRGenerate() {
+type QRGenerateProps = {
+    orderId: string;
+    userId: string;
+    total: number;
+}
+
+export default function QRGenerate({ orderId, userId, total }: QRGenerateProps) {
+    console.log(" Order ID IN generateQR : ", orderId);
+    console.log(" User ID IN generateQR : ", userId);
+    console.log(" Total IN generateQR : ", total);
+
+    const { data } = useGetQRCodeQuery({
+        accountId: "proeung_chiso@aclb",
+        acquiringBank: "Acleda Bank Plc.",
+        amount: total,
+        userId: userId,
+        orderId: orderId,
+    })
+
     return (
         <div className="max-w-sm mx-auto p-4">
             <Card className="overflow-hidden">
@@ -11,26 +30,21 @@ export default function QRGenerate() {
                     <h2 className="text-2xl font-bold text-white">KHQR</h2>
                 </CardHeader>
                 <CardContent className="p-6 space-y-6">
-                    <div className="space-y-2">
-                        {/*{ticket.reserveTickets.map((e: any, index: number) => (*/}
-                        {/*    <p key={index} className="text-sm text-gray-500">{e.event}</p>*/}
-                        {/*))}*/}
-
-                        {/*<p className="text-3xl font-bold">*/}
-                        {/*    {ticket.total} <span className="text-gray-500">$</span>*/}
-                        {/*</p>*/}
-
-
-                    </div>
-
-                    <div className="border-t border-dashed my-4" />
-
                     <div className="flex justify-center p-4">
-                        <QRCodeGenerator/>
+                        <QRCodeCanvas
+                            value={data?.data.qr || ""}
+                            size={200}
+                            imageSettings={{
+                                src: "https://api.nuget.org/v3-flatcontainer/kh.org.nbc.bakongkhqr/1.0.0.9/icon",
+                                height: 35,
+                                width: 35,
+                                opacity: 1,
+                                excavate: true,
+                            }}
+                        />
                     </div>
                 </CardContent>
             </Card>
         </div>
     )
 }
-

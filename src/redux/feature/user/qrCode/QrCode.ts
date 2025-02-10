@@ -1,9 +1,9 @@
 import {khotixsApi} from "@/lib/api";
-import {QrCodeType} from "@/lib/types/customer/QrCode";
+import {QrCodeResponseType} from "@/lib/types/customer/QrCode";
 
 export const getQRCode = khotixsApi.injectEndpoints({
     endpoints: (builder) => ({
-        getQRCode: builder.query<QrCodeType, {
+        getQRCode: builder.query<QrCodeResponseType, {
             accountId: string,
             acquiringBank: string,
             amount: number,
@@ -11,7 +11,7 @@ export const getQRCode = khotixsApi.injectEndpoints({
             orderId: string
         }>({
             query: (body) => ({
-                url: "/payment-service/api/khqr/generate",
+                url: "/payment/api/khqr/generate",
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
