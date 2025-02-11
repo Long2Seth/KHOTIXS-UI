@@ -15,6 +15,17 @@ export function NotificationActionComponent({ id }: Props) {
     const [deleteNotificationById] = useDeleteNotificationByIdMutation();
     const wsServer = new WebSocketService('/communication/ws', 'USER');
 
+    const handleDelete = async () => {
+        if (id) {
+            try {
+                await deleteNotificationById(id).unwrap();
+                // Optionally, you can add additional logic here, such as notifying the user or updating the UI
+            } catch (error) {
+                console.error('Failed to delete notification:', error);
+            }
+        }
+    };
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -24,7 +35,9 @@ export function NotificationActionComponent({ id }: Props) {
                 className="bg-white dark:bg-khotixs-background-dark dark:border-none rounded-[6px] shadow-lg"
             >
                 <DropdownMenuItem
-                    className={`cursor-pointer text-red-600 hover:bg-gray-100 rounded-[6px] dark:hover:bg-white dark:hover:backdrop-blur dark:hover:bg-opacity-10`}>
+                    onClick={handleDelete}
+                    className={`cursor-pointer text-red-600 hover:bg-gray-100 rounded-[6px] dark:hover:bg-white dark:hover:backdrop-blur dark:hover:bg-opacity-10`}
+                >
                     <AiOutlineDelete className="h-5 w-5" />
                     <span className={`ml-2 text-sm md:text-base`}>Delete </span>
                 </DropdownMenuItem>

@@ -3,6 +3,7 @@ import { khotixsApi } from '@/lib/api';
 import notificationCountReducer from '@/redux/feature/user/notification/notificationCountSlice';
 import orderReducer from '@/redux/feature/user/order/OrderSlice';
 import requirementSlice from "@/redux/feature/user/order/RequirementSlice";
+import orderResponseSlice from "@/redux/feature/user/order/orderResponseSlice";
 
 export const makeStore = () => {
     return configureStore({
@@ -11,6 +12,7 @@ export const makeStore = () => {
             notificationCount: notificationCountReducer,
             order: orderReducer,
             requirement: requirementSlice,
+            orderResponse: orderResponseSlice,
         },
         middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(khotixsApi.middleware),
     });

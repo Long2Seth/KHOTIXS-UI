@@ -1,4 +1,4 @@
-import {khotixsApi} from "@/lib/api";
+import { khotixsApi } from "@/lib/api";
 
 export const notification = khotixsApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -8,7 +8,7 @@ export const notification = khotixsApi.injectEndpoints({
                 url: `/communication/api/v1/notifications/publish-event/${id}`,
                 method: 'PUT',
             }),
-            invalidatesTags: [{type: 'Notification', id: 'LIST'}],
+            invalidatesTags: [{ type: 'Notification', id: 'LIST' }],
         }),
 
         getNotificationById: builder.mutation({
@@ -16,7 +16,7 @@ export const notification = khotixsApi.injectEndpoints({
                 url: `/communication/api/v1/notifications/publish-event/notification/${id}`,
                 method: 'GET',
             }),
-            invalidatesTags: [{type: 'Notification', id: 'LIST'}],
+            invalidatesTags: [{ type: 'Notification', id: 'LIST' }],
         }),
 
         deleteNotificationById: builder.mutation({
@@ -24,13 +24,22 @@ export const notification = khotixsApi.injectEndpoints({
                 url: `/communication/api/v1/notifications/publish-event/${id}`,
                 method: 'DELETE',
             }),
-            invalidatesTags: [{type: 'Notification', id: 'LIST'}],
-        })
+            invalidatesTags: [{ type: 'Notification', id: 'LIST' }],
+        }),
+
+        getAllNotification: builder.query({
+            query: ({ order, role }: { order: string, role: string }) => ({
+                url: `/communication/api/v1/notifications/publish-event/${role}?order=${order}`,
+                method: 'GET',
+            }),
+            providesTags: [{ type: 'Notification', id: 'LIST' }],
+        }),
     }),
 });
 
 export const {
     useReadNotificationByIdMutation,
     useGetNotificationByIdMutation,
-    useDeleteNotificationByIdMutation
+    useDeleteNotificationByIdMutation,
+    useGetAllNotificationQuery
 } = notification;

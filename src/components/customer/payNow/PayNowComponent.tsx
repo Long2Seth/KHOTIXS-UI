@@ -5,10 +5,11 @@ import QRGenerate from "@/components/customer/payNow/QRGenerate";
 import {useSelector} from "react-redux";
 import {RootState} from "@/lib/store";
 
+
 export default function PayNowComponent() {
     const orderData = useSelector((state: RootState) => state.order);
 
-    console.log("  Order Data", orderData);
+    // console.log("  Order Data in paymentnow", orderData);
 
     const totalAmount = orderData.tickets.reduce((total, ticket) => total + ticket.price * ticket.quantity, 0);
 
@@ -53,10 +54,6 @@ export default function PayNowComponent() {
                                 <div
                                     className="flex md:flex-row lg:gap-2 md:gap-10 gap-4 md:items-start lg:items-center lg:flex-col flex-col items-center">
                                     <QRGenerate/>
-                                    <Link
-                                        className="text-sm md:text-base xl:text-lg underline underline-offset-4 font-bold hover:text-label-published/90 text-label-published"
-                                        href="your-deeplink-url" target="_blank" rel="noopener noreferrer">Open app to
-                                        pay</Link>
                                 </div>
                             </section>
                         </div>

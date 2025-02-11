@@ -2,7 +2,7 @@ import SockJS from 'sockjs-client';
 import { Client } from '@stomp/stompjs';
 import type { Notification } from '@/lib/types/customer/Notification';
 import { incrementUnreadCount } from '@/redux/feature/user/notification/notificationCountSlice';
-import { store } from '@/lib/store'; // Correctly import the store
+import { store } from '@/lib/store';
 
 export class WebSocketService {
     private wsUrl: string;
@@ -29,14 +29,6 @@ export class WebSocketService {
         });
     }
 
-    async fetchInitialNotifications(order: string): Promise<Notification[]> {
-        const notifications = await fetch(`/communication/api/v1/notifications/publish-event/${this.userRole}?order=${order}`)
-            .then((response) => response.json())
-            .then(data => data.content);
-
-        return notifications;
-    }
-
     connect(): void {
         this.client.activate();
     }
@@ -58,7 +50,6 @@ export class WebSocketService {
             this.client.subscribe(`/topic/notifications/`, (message) => {
                 const notification = JSON.parse(message.body) as Notification;
                 this.subscriptionCallback!(notification);
-
 
                 // Dispatch action to increment unread count if the notification is unread
                 if (!notification.isRead) {

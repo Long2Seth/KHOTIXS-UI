@@ -68,8 +68,6 @@ export default function EventDetails({id}: PropsType) {
             ticketType: ticket.type
         }));
 
-        console.log("BEFORE Order Data:", {eventId: id,eventTitle: eventData?.eventTitle || '', tickets: orderTickets});
-
         dispatch(setOrder({eventId: id, eventTitle: eventData?.eventTitle || '', tickets: orderTickets}));
         router.push('/order-info-requirement');
     };

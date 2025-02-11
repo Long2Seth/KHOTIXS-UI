@@ -8,15 +8,15 @@ import {Badge} from "@/components/ui/badge";
 import {EventType} from "@/lib/types/customer/Event";
 import { FaTicketAlt } from 'react-icons/fa';
 
-
 enum TicketType {
     VIP = 'VIP',
     REGULAR = 'REGULAR',
     PREMIUM = 'PREMIUM',
     FREE = 'FREE'
 }
+
 type EventTypes = {
-    event:EventType
+    event: EventType
 }
 
 export function CardComponent({event}: EventTypes) {
@@ -24,7 +24,7 @@ export function CardComponent({event}: EventTypes) {
     const month = date.toLocaleString('default', {month: 'short'});
     const day = String(date.getDate()).padStart(2, '0');
     const router = useRouter();
-
+    let checkfree = 0;
 
     const getLabelClass = (tickets: TicketType) => {
         switch (tickets) {
@@ -40,7 +40,6 @@ export function CardComponent({event}: EventTypes) {
                 return 'bg-label-free';
         }
     };
-
 
     return (
         <section
@@ -87,13 +86,20 @@ export function CardComponent({event}: EventTypes) {
                                 <span className="ml-2 text-white uppercase">Not Ticket</span>
                             </Badge>
                         ) : (
-                            event.tickets.map((ticket, index) => (
-                                <Badge
-                                    key={index}
-                                    className={`dark:text-black text-white rounded-[6px] mx-0.5 ${getLabelClass(ticket.type as TicketType)}`}>
-                                    <span> {ticket.type === TicketType.FREE ? "FREE" : `$${ticket.price}`}</span>
-                                </Badge>
-                            ))
+                            event.tickets.map((ticket, index) => {
+                                if (ticket.type === TicketType.FREE) {
+                                    checkfree++;
+                                }
+                                if (checkfree <= 1 || ticket.type !== TicketType.FREE) {
+                                    return (
+                                        <Badge
+                                            key={index}
+                                            className={`dark:text-black text-white rounded-[6px] mx-0.5 ${getLabelClass(ticket.type as TicketType)}`}>
+                                            <span> {ticket.type === TicketType.FREE ? "FREE" : `$${ticket.price}`}</span>
+                                        </Badge>
+                                    );
+                                }
+                            })
                         )
                     }
                 </div>

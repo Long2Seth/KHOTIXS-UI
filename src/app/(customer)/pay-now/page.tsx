@@ -5,6 +5,12 @@ import { generateMetadata } from './metadata';
 
 export { generateMetadata };
 
+type PayNowProps = {
+    orderId: string;
+    userId: string;
+    total: number;
+}
+
 export default function PayNow(){
     return (
         <>

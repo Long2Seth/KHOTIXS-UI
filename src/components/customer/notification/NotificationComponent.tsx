@@ -13,7 +13,7 @@ import {
     selectUnreadCount,
     incrementUnreadCount
 } from '@/redux/feature/user/notification/notificationCountSlice';
-import {useGetUserProfileQuery} from "@/redux/feature/user/UserProfile";
+import { useFetchInitialNotifications } from "@/components/customer/notification/useFetchInitialNotifications";
 
 export default function NotificationComponent() {
     const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -21,13 +21,14 @@ export default function NotificationComponent() {
     const [deleteNotification] = useDeleteNotificationByIdMutation();
     const dispatch = useDispatch();
     const unreadCount = useSelector(selectUnreadCount);
-    const {data: userProfile, error} = useGetUserProfileQuery();
+
+    const { notifications: initialNotifications } = useFetchInitialNotifications("desc", userRole);
 
     useEffect(() => {
         const wsServer = new WebSocketService('/communication/ws', userRole);
 
         // Set up notification callback
-        wsServer.onNotification((notification) => {
+        wsServer.onNotification((notification: Notification) => {
             setNotifications((prev) => [notification, ...prev]);
             if (!notification.isRead) {
                 dispatch(incrementUnreadCount());
@@ -35,7 +36,7 @@ export default function NotificationComponent() {
         });
 
         // Set up readDetailNotification callback
-        wsServer.onReadDetailNotification((notificationId) => {
+        wsServer.onReadDetailNotification((notificationId: string) => {
             setNotifications((prev) =>
                 prev.map((notification) =>
                     notification.id === notificationId ? { ...notification, readDetailNotification: true } : notification
@@ -46,26 +47,26 @@ export default function NotificationComponent() {
         // Connect to WebSocket
         wsServer.connect();
 
-        // Fetch initial notifications
-        wsServer.fetchInitialNotifications("desc").then((initialNotifications) => {
-            setNotifications(initialNotifications);
-            const unreadCount = initialNotifications.filter(notification => !notification.isRead).length;
-            dispatch(setUnreadCount(unreadCount));
-        });
+        // Set initial notifications
+        setNotifications(initialNotifications);
+        const unreadCount = initialNotifications.filter((notification: Notification) => !notification.isRead).length;        dispatch(setUnreadCount(unreadCount));
 
         // Cleanup on unmount
         return () => {
             wsServer.disconnect();
         };
-    }, [userRole, dispatch]);
+    }, [userRole, dispatch, initialNotifications]);
 
     const handleNotificationRead = (id: string) => {
         setNotifications((prev) =>
-            prev.map((notification) =>
-                notification.id === id ? { ...notification, isRead: true } : notification
-            )
+            prev.map((notification) => {
+                if (notification.id === id && !notification.isRead) {
+                    dispatch(decrementUnreadCount());
+                    return { ...notification, isRead: true };
+                }
+                return notification;
+            })
         );
-        dispatch(decrementUnreadCount());
     };
 
     const handleNotificationDelete = async (id: string) => {
@@ -80,18 +81,20 @@ export default function NotificationComponent() {
     return (
         <Sheet>
             <SheetTrigger asChild>
-                <div className={`relative border-none mr-2 md:mx-4 cursor-pointer`}>
-                    <p className={`absolute top-[-5px] right-[-5px] text-[6px] sm:text-[8px] md:text-sm font-semibold text-white bg-red-500 rounded-full ${unreadCount > 9 ? 'md:px-[4px] px-[3px]' : 'px-[8px]'} flex justify-center items-center`}>
+                <div className={`relative border-none md:mx-4 mr-2 cursor-pointer`}>
+                    <p className={`absolute top-[-3px] right-[-4px] md:top-[-8px] md:right-[-8px] text-[6px] md:text-sm font-semibold text-white bg-red-500 rounded-full ${unreadCount > 9 ? 'px-[3px] md:px-[4px]' : 'px-[8px]'} flex justify-center items-center`}>
                         {unreadCount > 9 ? '+9' : unreadCount}
                     </p>
-                    <FiBell className="md:h-8 md:w-8 w-4 h-4 text-primary-color" />
+                    <FiBell className="md:h-8 md:w-8 h-5 w-5 text-primary-color" />
                 </div>
             </SheetTrigger>
-            <SheetContent className={`${userProfile ? 'mt-[48px]' : 'mt-1'} no-scrollbar rounded-tl-[6px] w-[270px] h-auto md:w-[370px] bg-white bg-opacity-95 absolute`}>
+            <SheetContent
+                className={`no-scrollbar w-[270px] md:w-[370px] bg-white bg-opacity-95 mt-[48px] rounded-[6px]`}>
                 <SheetHeader>
-                    <SheetTitle className={`text-start dark:text-label-text-secondary text-2xl`}>Notification</SheetTitle>
+                    <SheetTitle
+                        className={`text-start dark:text-label-text-secondary text-2xl`}>Notification</SheetTitle>
                 </SheetHeader>
-                <section className="md:p-4 py-2 space-y-2 overflow-y-scroll h-[800px] no-scrollbar ">
+                <section className="md:p-4 py-2 space-y-2 overflow-y-scroll h-[700px] no-scrollbar ">
                     {notifications?.map((notification) => (
                         <NotificationCardComponent
                             key={notification.id}
