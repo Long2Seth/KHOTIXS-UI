@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import {useState, useEffect} from 'react';
-import {IoMenu, IoSearch} from 'react-icons/io5';
+import {IoMenu} from 'react-icons/io5';
 import {IoMdCloseCircle} from 'react-icons/io';
 import {FaArrowRightLong} from "react-icons/fa6";
 import {menuItems, MenuType} from "@/lib/types/navbar/navbar";
@@ -24,14 +24,9 @@ const NavbarComponent = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isMenuOpen, setMenuOpen] = useState(false);
     const [activeItem, setActiveItem] = useState<string | null>(null);
-    const [selectedLocation, setSelectedLocation] = React.useState<string | undefined>();
-    const [date, setDate] = React.useState<Date>();
     const router = useRouter();
     const {data: userProfile, error} = useGetUserProfileQuery();
     const [dynamicMenuItems, setDynamicMenuItems] = useState<MenuType[]>(menuItems);
-    const route = useRouter();
-    const [notifications, setNotifications] = useState<any[]>([]);
-    const [unreadCount, setUnreadCount] = useState<number>(0);
     const [lastCheckedTime, setLastCheckedTime] = useState<number>(0);
 
     useEffect(() => {
@@ -92,7 +87,7 @@ const NavbarComponent = () => {
                                 Become a Partner<FaArrowRightLong className="w-16 p-0.5 md:p-0"/>
                             </Button>
                         </section>
-                        ) : null }
+                    ) : null}
 
                     <section
                         className="container mx-auto w-full md:py-[15px] md:px-5 lg:px-10">
@@ -145,7 +140,8 @@ const NavbarComponent = () => {
                                 {isMenuOpen ? <IoMdCloseCircle/> : <IoMenu/>}
                             </div>
                         </SheetTrigger>
-                        <SheetContent className={`${userProfile ? 'mt-[48px]' : 'mt-1'} w-[270px] rounded-tl-[6px] bg-white bg-opacity-95`}>
+                        <SheetContent
+                            className={`${userProfile ? 'mt-[48px]' : 'mt-1'} w-[270px] rounded-tl-[6px] bg-white bg-opacity-95`}>
                             <SheetHeader>
                                 <SheetTitle
                                     className={`text-label-text-secondary uppercase text-start`}>Menu</SheetTitle>

@@ -80,8 +80,8 @@ export default function NotificationComponent() {
     return (
         <Sheet>
             <SheetTrigger asChild>
-                <div className={`relative border-none mr-2 md:mr-0 md:mx-4 cursor-pointer`}>
-                    <p className={`absolute top-[-5px] right-[-5px] text-[6px] sm:text-[8px] md:text-sm font-semibold text-white bg-red-500 rounded-full ${unreadCount > 9 ? 'px-[3px]' : 'px-[8px]'} flex justify-center items-center`}>
+                <div className={`relative border-none mr-2 md:mx-4 cursor-pointer`}>
+                    <p className={`absolute top-[-5px] right-[-5px] text-[6px] sm:text-[8px] md:text-sm font-semibold text-white bg-red-500 rounded-full ${unreadCount > 9 ? 'md:px-[4px] px-[3px]' : 'px-[8px]'} flex justify-center items-center`}>
                         {unreadCount > 9 ? '+9' : unreadCount}
                     </p>
                     <FiBell className="md:h-8 md:w-8 w-4 h-4 text-primary-color" />
