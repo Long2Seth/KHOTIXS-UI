@@ -19,7 +19,7 @@ export function ModeToggle() {
 
     return (
         <div
-            className=" cursor-pointer hover:bg-gray-100 border-0 rounded-[6px] min-h-10 min-w-10 flex justify-center items-center mr-[35px] sm:mr-20 md:mr-0  text-primary-color hover:text-primary-color "
+            className=" cursor-pointer hover:bg-gray-100 border-0 rounded-[6px] min-h-10 min-w-10 flex justify-center items-center mr-4 md:mr-0  text-primary-color hover:text-primary-color "
             onClick={toggleTheme}
         >
             {isDark ? (

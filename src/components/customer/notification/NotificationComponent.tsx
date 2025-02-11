@@ -13,6 +13,7 @@ import {
     selectUnreadCount,
     incrementUnreadCount
 } from '@/redux/feature/user/notification/notificationCountSlice';
+import {useGetUserProfileQuery} from "@/redux/feature/user/UserProfile";
 
 export default function NotificationComponent() {
     const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -20,6 +21,7 @@ export default function NotificationComponent() {
     const [deleteNotification] = useDeleteNotificationByIdMutation();
     const dispatch = useDispatch();
     const unreadCount = useSelector(selectUnreadCount);
+    const {data: userProfile, error} = useGetUserProfileQuery();
 
     useEffect(() => {
         const wsServer = new WebSocketService('/communication/ws', userRole);
@@ -78,14 +80,14 @@ export default function NotificationComponent() {
     return (
         <Sheet>
             <SheetTrigger asChild>
-                <div className={`relative border-none mx-4 cursor-pointer`}>
-                    <p className={`absolute top-[-8px] right-[-8px] text-sm font-semibold text-white bg-red-500 rounded-full ${unreadCount > 9 ? 'px-[5px]' : 'px-[8px]'} flex justify-center items-center`}>
+                <div className={`relative border-none mr-2 md:mr-0 md:mx-4 cursor-pointer`}>
+                    <p className={`absolute top-[-5px] right-[-5px] text-[6px] sm:text-[8px] md:text-sm font-semibold text-white bg-red-500 rounded-full ${unreadCount > 9 ? 'px-[3px]' : 'px-[8px]'} flex justify-center items-center`}>
                         {unreadCount > 9 ? '+9' : unreadCount}
                     </p>
-                    <FiBell className="h-8 w-8 text-primary-color" />
+                    <FiBell className="md:h-8 md:w-8 w-4 h-4 text-primary-color" />
                 </div>
             </SheetTrigger>
-            <SheetContent className={`no-scrollbar w-[270px] h-auto md:w-[370px] bg-white bg-opacity-95 absolute top-[145px]`}>
+            <SheetContent className={`${userProfile ? 'mt-[48px]' : 'mt-1'} no-scrollbar rounded-tl-[6px] w-[270px] h-auto md:w-[370px] bg-white bg-opacity-95 absolute`}>
                 <SheetHeader>
                     <SheetTitle className={`text-start dark:text-label-text-secondary text-2xl`}>Notification</SheetTitle>
                 </SheetHeader>

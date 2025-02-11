@@ -41,7 +41,7 @@ export function UpcomingEventComponent() {
 
     return (
         <section
-            className="space-y-10 p-5 container mx-auto sm:w-full bg-khotixs-background-white dark:bg-khotixs-background-dark flex flex-col justify-center items-center h-auto">
+            className="space-y-10 md:p-5 container mx-auto sm:w-full bg-khotixs-background-white dark:bg-khotixs-background-dark flex w-[300px] md:w-full flex-col justify-center items-center h-auto">
             <section className="space-y-4 w-full flex flex-col justify-center items-center">
                 <h1 className="text-title-color text-lg md:text-2xl xl:text-4xl font-bold dark:text-secondary-color-text">
                     UPCOMING EVENTS
@@ -53,8 +53,8 @@ export function UpcomingEventComponent() {
                 </p>
             </section>
 
-            <section className="w-full px-40">
-                <div className="grid grid-cols-12 gap-4">
+            <section className="w-full lg:px-40">
+                <div className="grid grid-cols-12 gap-4 py-[15px] w-[300px] md:w-full justify-center items-center">
                     {shuffledData.map((event: Event, index: number) => {
                         const date = new Date(event.startedDate);
                         const day = date.getDate();
@@ -65,20 +65,20 @@ export function UpcomingEventComponent() {
                             <section
                                 key={event.id}
                                 onClick={() => router.push(`/event/${event.id}`)}
-                                className={`${index < 2 ? "col-span-6" : "col-span-4"} cursor-pointer rounded-[6px]`}>
+                                className={`${index < 2 ? "md:col-span-6 col-span-12" : "md:col-span-4 hidden md:block"} cursor-pointer rounded-[6px] items-center w-[300px] md:w-auto md:h-auto`}>
                                 <div
-                                    className="rounded-[6px] w-full h-72 bg-cover bg-center transform transition-transform duration-300 group-hover:scale-110 flex items-end"
+                                    className="rounded-[6px] w-full md:h-72 h-60 bg-cover bg-center transform transition-transform duration-300 group-hover:scale-110 flex items-end"
                                     style={{backgroundImage: `url(${event.thumbnail})`}}>
-                                    <div className="bg-secondary-color bg-opacity-70 rounded-t-[6px] w-full">
-                                        <div className="flex relative px-10 py-[15px]">
+                                     <div className="bg-secondary-color bg-opacity-70 rounded-t-[6px] w-full">
+                                        <div className="flex relative md:px-10 p-4 md:py-[15px]">
                                             <div>
-                                                <div className="flex">
-                                                    <RiCalendarLine className="w-4 h-4 text-white mt-1"/>
-                                                    <h2 className="text-white text-base pl-2">
+                                                <div className="flex items-center">
+                                                    <RiCalendarLine className="md:mt-1 text-white my-2 w-[10px] h-[10px] md:w-[18px] md:h-[18px] lg:top-[-8px] lg:w-[20px] lg:h-[20px] xl:top-[-9px] xl:w-[25px] xl:h-[25px] dark:text-dark-description-color"/>
+                                                    <h2 className="pl-2 text-white text-[10px] md:text-lg xl:text-xl uppercase dark:text-white line-clamp-1">
                                                         {day} {month} {year}
                                                     </h2>
                                                 </div>
-                                                <h1 className="text-white font-semibold text-lg line-clamp-1">
+                                                <h1 className="text-white text-[10px] md:text-lg xl:text-xl font-bold uppercase dark:text-secondary-color-text line-clamp-1">
                                                     {event.eventTitle}
                                                 </h1>
                                             </div>
