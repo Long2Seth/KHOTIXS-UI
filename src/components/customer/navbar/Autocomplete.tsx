@@ -54,7 +54,7 @@ const Autocomplete = () => {
     };
 
     return (
-        <div className="relative w-full flex items-center">
+        <div className="relative shadow-md rounded-[6px] w-full flex items-center">
             <input
                 type="text"
                 placeholder="Search events name"

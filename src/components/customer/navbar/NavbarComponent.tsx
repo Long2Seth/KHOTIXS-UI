@@ -73,7 +73,7 @@ const NavbarComponent = () => {
     return (
         <>
             {isLoading ? <SkeletonNavbarComponent/> :
-                <nav className="w-full top-[0px] sticky z-50 bg-white flex flex-col dark:bg-khotixs-background-dark">
+                <nav className="w-full top-[0px] sticky z-50 bg-white flex flex-col dark:border-b dark:border-gray-700 dark:bg-khotixs-background-dark">
                     {userProfile ? (
                         <section
                             className="container mx-auto h-[40px] md:h-[60px] bg-white py-[10px] flex items-center md:px-5 lg:px-10 justify-center gap-5 dark:bg-khotixs-background-dark">
@@ -90,7 +90,7 @@ const NavbarComponent = () => {
                     ) : null}
 
                     <section
-                        className="container mx-auto w-full md:py-[15px] md:px-5 lg:px-10">
+                        className="container mx-auto w-full md:py-[15px] md:px-5  lg:px-10">
                         <div className="flex justify-between h-12 md:h-14 items-center">
                             <Link href="/" className="flex items-center">
                                 <Image className="w-[40px] h-40px] lg:w-[50px] lg:h-[50px] xl:w-[60px] xl:h-[60px] "
@@ -99,18 +99,18 @@ const NavbarComponent = () => {
 
                             <section className="rounded-[5px] flex justify-center drop-shadow-xl w-[60%]">
                                 <div
-                                    className="md:w-full w-[170px] rounded-[5px] flex items-center">
+                                    className="md:w-full w-[220px] rounded-[5px] flex items-center">
                                     <Autocomplete/>
                                 </div>
                             </section>
 
-                            <div className="justify-center items-center flex gap-2 md:gap-0">
+                            <div className="justify-center items-center pr-4 flex gap-2 md:gap-0">
                                 {userProfile ? null : <ModeToggle/>}
                                 <NavigationMenuDemo/>
 
                                 <div className="flex items-center justify-center">
                                     {userProfile ? (
-                                        <div className={`flex items-center lg:gap-x-4 `}>
+                                        <div className={`flex items-center lg:gap-x-4 gap-2 `}>
                                             <NotificationComponent/>
                                             <UserProfileComponent data={userProfile}/>
                                         </div>
@@ -132,7 +132,7 @@ const NavbarComponent = () => {
                     <Sheet>
                         <SheetTrigger>
                             <div
-                                className={`absolute cursor-pointer ${userProfile ? 'top-[48px]' : 'top-2'} hover:bg-gray-50 hover:rounded-[6px] sm:mr-[70px] items-center justify-center md:mr-0 lg:pr-10 right-0 inline-flex w-8 h-8 text-2xl text-primary-color md:hidden focus:outline-none dark:text-primary-color`}
+                                className={`absolute cursor-pointer mr-2 ${userProfile ? 'top-[48px]' : 'top-2'} hover:bg-gray-50 hover:rounded-[6px] sm:mr-[70px] items-center justify-center md:mr-0 lg:pr-10 right-0 inline-flex w-8 h-8 text-2xl text-primary-color md:hidden focus:outline-none dark:text-primary-color`}
                                 aria-controls="mega-menu-full"
                                 aria-expanded={isMenuOpen ? "true" : "false"}
                             >
