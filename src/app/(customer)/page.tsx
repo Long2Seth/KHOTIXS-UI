@@ -10,7 +10,7 @@ export const metadata: Metadata = {
         siteName: 'KHOTIXS',
         images: [
             {
-                url: 'https://khotixs.istad.co/asset/api/v1/files/view/22b0d35d-8687-452e-98ee-9d0ffe0dafbe.jpg',
+                url: 'https://khotixs.istad.co/asset/api/v1/files/view/53fbacb0-250d-4d41-8c60-198c4c923a0d.jpg',
                 alt: 'KHOTIXS'
             },
         ],

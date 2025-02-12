@@ -22,7 +22,7 @@ const Autocomplete = () => {
 
     const search = async (term: string) => {
         console.log('Searching for:', term);
-        const response = await fetch(`http://35.225.212.218:9200/khotixs-elastic.public.events/_search?source=%7B%22query%22%3A%7B%22bool%22%3A%7B%22must%22%3A%7B%22wildcard%22%3A%7B%22event_title%22%3A%22*${term}*%22%7D%7D%2C%22filter%22%3A%7B%22term%22%3A%7B%22is_publish%22%3Atrue%7D%7D%7D%7D%2C%22_source%22%3A%5B%22event_title%22%2C%22is_publish%22%5D%7D&source_content_type=application/json`);
+        const response = await fetch(`https://elastic.panda.engineer/khotixs-elastic.public.events/_search?source=%7B%22query%22%3A%7B%22bool%22%3A%7B%22must%22%3A%7B%22wildcard%22%3A%7B%22event_title%22%3A%22*${term}*%22%7D%7D%2C%22filter%22%3A%7B%22term%22%3A%7B%22is_publish%22%3Atrue%7D%7D%7D%7D%2C%22_source%22%3A%5B%22event_title%22%2C%22is_publish%22%5D%7D&source_content_type=application/json`);
         const data = await response.json();
         console.log('Search results:', data);
         const hits = data.hits.hits.map((hit: any) => hit._source.event_title);
@@ -50,7 +50,7 @@ const Autocomplete = () => {
     }, []);
 
     const handleSearch = () => {
-         router.push(`/search/${searchTerm}`)
+        router.push(`/search/${searchTerm}`)
     };
 
     return (
@@ -60,14 +60,14 @@ const Autocomplete = () => {
                 placeholder="Search events name"
                 value={searchTerm}
                 onChange={handleInputChange}
-                className="w-full bg-transparent border-0 rounded-tl-[5px] text-[12px] lg:text-lg focus:text-gray-500 rounded-bl-[5px] md:pl-5 pl-2 lg:pl-2 xl:pl-5 focus:outline-none pr-4 border-gray-100 dark:bg-gray-100 focus:ring-0 px-0 py-2 dark:text-primary-color-text h-[30px] sm:h-[45px] lg:h-[50px]"
+                className="w-full bg-transparent h-full rounded-tl-[5px] text-base lg:text-lg focus:text-gray-500 rounded-bl-[5px] md:pl-5 pl-2 lg:pl-2 xl:pl-5 focus:outline-none pr-4 border-0 focus:ring-0 px-0 py-2 dark:text-primary-color-text"
             />
             <button
-                className="flex flex-row items-center h-[30px] sm:h-[45px] lg:h-[50px] rounded-r-[6px] "
+                className="flex flex-row items-center h-[40px] sm:h-[45px] lg:h-[50px] rounded-r-[6px] "
                 onClick={handleSearch}
             >
                 <div className="bg-primary-color text-white h-full rounded-r-[6px] flex items-center px-2 ">
-                    <IoSearch className="md:w-7 md:h-7"/>
+                    <IoSearch className="w-7 h-7"/>
                 </div>
             </button>
             {searchTerm && results.length > 0 && (
