@@ -35,7 +35,7 @@ export default function SearchComponent() {
             >
                 {categories.map((category) => (
                     <div key={category.id} className="flex items-center space-x-2">
-                        <RadioGroupItem  value={category.id} id={category.id} className="rounded-[4px] border-primary focus:ring-primary" />
+                        <RadioGroupItem  value={category.id} id={category.id} className="rounded-full border-primary focus:ring-primary" />
                         <Label htmlFor={category.id} className="cursor-pointer">{category.name}</Label>
                     </div>
                 ))}

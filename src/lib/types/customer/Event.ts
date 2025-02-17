@@ -10,6 +10,7 @@ export type EventType = {
     startedDate: string;
     endedDate: string;
     capacity: number;
+    availableQuantity: number;
     thumbnail: string;
     isPublish: string;
     tickets: Ticket[];

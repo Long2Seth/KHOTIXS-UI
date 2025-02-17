@@ -18,7 +18,7 @@ import {UserProfileComponent} from "@/components/customer/navbar/UserProfileComp
 import NotificationComponent from "@/components/customer/notification/NotificationComponent";
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet";
 import {useGetUserProfileQuery} from "@/redux/feature/user/UserProfile";
-import Autocomplete from '@/components/customer/navbar/Autocomplete';
+import SearchBar from "@/components/customer/navbar/SearchBar";
 
 const NavbarComponent = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -103,7 +103,7 @@ const NavbarComponent = () => {
                             <section className="rounded-[5px] flex justify-center drop-shadow-xl w-[60%]">
                                 <div
                                     className="w-full h-[40px] sm:h-[45px] lg:h-[50px] rounded-[5px] bg-gray-50 flex items-center">
-                                    <Autocomplete/>
+                                    <SearchBar/>
                                 </div>
                             </section>
 

@@ -9,6 +9,16 @@ type Prop = {
 export default async function SearchPage({ params }: Prop) {
     const { searchTerm } = await params;
 
+
+
+    const search = async (term: string) => {
+        const response = await fetch(`https://elastic.panda.engineer/khotixs-elastic.public.events/_search?source=%7B%22query%22%3A%7B%22wildcard%22%3A%7B%22event_title%22%3A%22*${searchTerm}*%22%7D%7D%7D&source_content_type=application/json`);
+        const data = await response.json();
+        console.log('Search results:', data);
+        const hits = data.hits.hits.map((hit: any) => hit._source.event_title);
+    };
+
+
     // const handleFilterChange = (category: string) => {
     //     console.log("Selected category:", category);
     // };
@@ -32,7 +42,6 @@ export default async function SearchPage({ params }: Prop) {
             <SearchComponent />
             <section className="col-span-4 mt-10 sm:w-auto grid gap-3 justify-center items-center lg:px-[30px] xl:gap-10">
                 <div className="container mx-auto py-[15px] w-[300px] sm:w-auto grid gap-3 grid-cols-1 sm:grid-cols-1 md:gap-5 md:grid-cols-2 lg:max-w-full justify-center items-center">
-                    <CardComponent event={sampleEvent} />
                     <CardComponent event={sampleEvent} />
                 </div>
             </section>

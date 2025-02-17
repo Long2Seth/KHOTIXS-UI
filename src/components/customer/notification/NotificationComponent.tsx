@@ -89,12 +89,12 @@ export default function NotificationComponent() {
                 </div>
             </SheetTrigger>
             <SheetContent
-                className={`no-scrollbar w-[270px] md:w-[370px] bg-white bg-opacity-95 absolute top-[145px]`}>
+                className={`no-scrollbar w-[270px] md:w-[370px] bg-white bg-opacity-95 absolute top-[145px] h-screen`}>
                 <SheetHeader>
                     <SheetTitle
                         className={`text-start dark:text-label-text-secondary text-2xl`}>Notification</SheetTitle>
                 </SheetHeader>
-                <section className="md:p-4 py-2 space-y-2 overflow-y-scroll h-[700px] no-scrollbar ">
+                <section className="md:p-4 py-2 space-y-2 overflow-y-scroll h-[750px] no-scrollbar ">
                     {notifications?.map((notification) => (
                         <NotificationCardComponent
                             key={notification.id}

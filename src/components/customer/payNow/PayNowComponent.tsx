@@ -21,7 +21,7 @@ export default function PayNowComponent() {
                     <div
                         className="flex flex-col gap-5 w-full rounded-[8px] p-5 bg-white dark:backdrop-blur dark:bg-opacity-5">
                         <div className="flex flex-col lg:flex-row md:gap-3 gap-5">
-                            <section className="w-full space-y-2">
+                            <section className="w-[50%] space-y-2">
                                 <p className="uppercase text-description-color text-sm md:text-base xl:text-lg dark:text-white font-semibold">{orderData.eventTitle}</p>
 
                                 {orderData.tickets.map((ticket, index) => (
@@ -50,7 +50,7 @@ export default function PayNowComponent() {
                                     <p className="text-label-paid text-sm md:text-base xl:text-2xl font-semibold">${totalAmount}</p>
                                 </div>
                             </section>
-                            <section className="flex mt-5 lg:mt-0">
+                            <section className="w-[50%] flex mt-5 lg:mt-0 justify-end">
                                 <div
                                     className="flex md:flex-row lg:gap-2 md:gap-10 gap-4 md:items-start lg:items-center lg:flex-col flex-col items-center">
                                     <QRGenerate/>

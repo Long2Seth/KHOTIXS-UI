@@ -7,6 +7,7 @@ type TicketOrderType = {
 export type OrderType = {
     fullName: string;
     email: string;
+    userUuid: string;
     phoneNumber: string;
     eventId: string;
     tickets: TicketOrderType[];

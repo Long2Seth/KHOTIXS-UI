@@ -20,7 +20,7 @@ export default function QRGenerate() {
 
     return (
         <div className="max-w-sm mx-auto p-4">
-            <Card className="overflow-hidden">
+            <Card className="overflow-hidden border rounded-[5px] bg-white bg-opacity-50">
                 <CardHeader className="bg-red-600 p-4">
                     <h2 className="text-2xl font-bold text-white">KHQR</h2>
                 </CardHeader>
@@ -28,11 +28,11 @@ export default function QRGenerate() {
                     <div className="flex justify-center p-4">
                         <QRCodeCanvas
                             value={data?.data.qr || ""}
-                            size={200}
+                            size={250}
                             imageSettings={{
-                                src: "https://api.nuget.org/v3-flatcontainer/kh.org.nbc.bakongkhqr/1.0.0.9/icon",
-                                height: 35,
-                                width: 35,
+                                src: "/khotixs_logo.png",
+                                height: 50,
+                                width: 50,
                                 opacity: 1,
                                 excavate: true,
                             }}

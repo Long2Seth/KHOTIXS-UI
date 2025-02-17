@@ -32,6 +32,7 @@ export default function PaymentDetailsComponent() {
             const orderPayload = {
                 fullName: requirementData.formData?.fullName,
                 email: requirementData.formData?.email,
+                userUuid: orderData.userUuid ?? undefined,
                 phoneNumber: requirementData.formData?.phoneNumber,
                 eventId: orderData.eventId ?? undefined,
                 tickets: orderData.tickets,

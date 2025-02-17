@@ -54,7 +54,7 @@ export function NotificationDetailComponent({ onClose, id }: NotificationDetailC
                             alt="Event banner"
                             width={800}
                             height={600}
-                            className="object-cover h-full w-full rounded-xl"
+                            className="object-cover h-[500px] w-[500px] rounded-xl"
                             priority
                         />
                     </section>

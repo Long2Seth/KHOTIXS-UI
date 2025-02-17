@@ -28,26 +28,19 @@ import {useReserveTicketMutation} from "@/redux/feature/user/ticket";
 import EventDetailsSkeleton from "@/components/customer/event/EventDetailsSkeleton";
 import {Ticket} from "@/lib/types/customer/Ticket";
 import {useDispatch} from 'react-redux';
-import {setOrder} from '@/redux/feature/user/order/OrderSlice';
+import {setOrder, setUserUuid} from '@/redux/feature/user/order/OrderSlice';
 
 type PropsType = {
     id: string;
 }
 
-type ReserveTicketResponse = {
-    uuid: string;
-    status: boolean;
-    ticketName: string | null;
-};
-
 export default function EventDetails({id}: PropsType) {
-
     const {data: eventData, error, isLoading} = useGetEventByIdQuery(id);
     const [tickets, setTickets] = useState<Ticket[]>([]);
     const [reserveTicket] = useReserveTicketMutation();
     const router = useRouter();
     const dispatch = useDispatch();
-
+    const [userUuidState, setUserUuidState] = useState<string | null>(null);
     useEffect(() => {
         if (eventData) {
             setTickets(
@@ -60,6 +53,47 @@ export default function EventDetails({id}: PropsType) {
         }
     }, [eventData]);
 
+    const updateQuantity = async (id: string, increment: boolean) => {
+        console.log(`Updating quantity for ticket ID: ${id}, increment: ${increment}`);
+
+        const updatedTickets = tickets.map((ticket) => {
+            if (ticket.id === id) {
+                const newQuantity = increment
+                    ? Math.min(ticket.quantity + 1, ticket.capacity)
+                    : Math.max(ticket.quantity - 1, 0);
+                return { ...ticket, quantity: newQuantity };
+            }
+            return ticket;
+        });
+
+        const ticketToUpdate = updatedTickets.find(ticket => ticket.id === id);
+        console.log('Updated tickets:', updatedTickets);
+        console.log('Ticket to update:', ticketToUpdate);
+
+        if (ticketToUpdate) {
+            const response = await reserveTicket({
+                userUuid: userUuidState,
+                tickets: [{ ticketId: ticketToUpdate.id, quantity: ticketToUpdate.quantity, ticketTitle: ticketToUpdate.ticketTitle }]
+            }).unwrap();
+
+            console.log('Reserve ticket response:', response);
+
+            const updatedTicketStatus = response.ticketReserveds.find((res) => res.uuid === ticketToUpdate.id);
+
+            if (updatedTicketStatus && !updatedTicketStatus.status) {
+                console.log('Reservation failed, rolling back quantity');
+                setTickets(tickets);
+            } else {
+                console.log('Reservation successful, updating tickets');
+                setTickets(updatedTickets);
+                if (!userUuidState) {
+                    setUserUuidState(response.userUuid);
+                    console.log('User UUID set:', response.userUuid);
+                }
+            }
+        }
+    };
+
     const handlePlaceOrder = () => {
         const orderTickets = tickets.map(ticket => ({
             ticketId: ticket.id,
@@ -68,44 +102,27 @@ export default function EventDetails({id}: PropsType) {
             ticketType: ticket.type
         }));
 
-        dispatch(setOrder({eventId: id, eventTitle: eventData?.eventTitle || '', tickets: orderTickets}));
+        console.log('Placing order with tickets:', orderTickets);
+
+        dispatch(setOrder({
+            eventId: id,
+            eventTitle: eventData?.eventTitle || '',
+            tickets: orderTickets
+        }));
+
+        if (userUuidState) {
+            dispatch(setUserUuid(userUuidState));
+            console.log('User UUID dispatched:', userUuidState);
+        }
+
         router.push('/order-info-requirement');
     };
 
-    const updateQuantity = async (id: string, increment: boolean) => {
-        const updatedTickets = tickets.map((ticket) => {
-            if (ticket.id === id) {
-                const newQuantity = increment
-                    ? Math.min(ticket.quantity + 1, ticket.capacity)
-                    : Math.max(ticket.quantity - 1, 0);
-                return {...ticket, quantity: newQuantity};
-            }
-            return ticket;
-        });
-
-        const ticketToUpdate = updatedTickets.find(ticket => ticket.id === id);
-
-        if (ticketToUpdate) {
-            const response = await reserveTicket({
-                tickets: [{ticketId: ticketToUpdate.id, quantity: ticketToUpdate.quantity}]
-            }).unwrap();
-
-            const updatedTicketStatus = response.find((res: ReserveTicketResponse) => res.uuid === ticketToUpdate.id);
-
-            if (updatedTicketStatus && !updatedTicketStatus.status) {
-                // Rollback the quantity if the status is false
-                setTickets(tickets);
-            } else {
-                setTickets(updatedTickets);
-            }
-        }
-    };
 
     const total = tickets.reduce(
         (sum, ticket) => sum + ticket.price * ticket.quantity,
         0
     );
-
 
     const totalQuantity = tickets.reduce(
         (sum, ticket) => sum + ticket.quantity,
@@ -293,7 +310,7 @@ export default function EventDetails({id}: PropsType) {
                                                                     <p className="rounded-[6px] w-auto bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-label-premium">Price
                                                                         : ${ticket.price.toFixed(2)}</p>
                                                                     <p className="rounded-[6px] w-auto bg-blue-100 bg-opacity-70 hover:bg-blue-100 hover:bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-label-premium">Capacity
-                                                                        : {ticket.capacity}</p>
+                                                                        : {ticket.availableQuantity}</p>
                                                                 </div>
                                                                 {ticket.isSoldOut === 'true' ? (
                                                                     <p className="rounded-[6px] dark:bg-label-text-primary bg-red-100 dark:bg-opacity-70 bg-opacity-70 lg:px-2 lg:py-1 px-1.5 py-0.5 text-sm font-bold text-red-600">SOLD
