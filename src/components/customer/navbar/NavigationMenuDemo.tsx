@@ -17,7 +17,8 @@ export function NavigationMenuDemo() {
         <NavigationMenu className=" hidden md:block dark:bg-khotixs-background-dark ">
             <NavigationMenuList>
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger className=" lg:w-auto text-[10px] sm:text-sm lg:text-lg font-medium dark:bg-khotixs-background-dark lg:px-4 ">About & Contact</NavigationMenuTrigger>
+                    <NavigationMenuTrigger className="hidden lg:block lg:w-auto text-[10px] sm:text-sm lg:text-lg font-medium dark:bg-khotixs-background-dark lg:px-4 ">About & Contact</NavigationMenuTrigger>
+                    <NavigationMenuTrigger className="lg:hidden lg:w-auto text-[10px] sm:text-sm lg:text-lg font-medium dark:bg-khotixs-background-dark lg:px-4 ">About & <br/> Contact</NavigationMenuTrigger>
                     <NavigationMenuContent className={` dark:border dark:border-gray-700 rounded-[6px]`}>
                         <section
                             className="relative flex md:w-[400px] xl:w-[450px] h-auto rounded-[5px] hover:rounded-[5px] outline-none border-5 border-none ring-0  bg-khotixs-background-white dark:bg-khotixs-background-dark ">

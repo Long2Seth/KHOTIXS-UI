@@ -34,7 +34,8 @@ export default async function SearchPage({ params }: Prop) {
         capacity: 500,
         thumbnail: "/images/sample-event.jpg",
         isPublish: "true",
-        tickets: []
+        tickets: [],
+        availableQuantity: 100 // Add this line
     };
 
     return (

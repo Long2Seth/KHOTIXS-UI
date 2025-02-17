@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import {useState, useEffect} from 'react';
-import {IoMenu, IoSearch} from 'react-icons/io5';
+import {IoMenu} from 'react-icons/io5';
 import {IoMdCloseCircle} from 'react-icons/io';
 import {FaArrowRightLong} from "react-icons/fa6";
 import {menuItems, MenuType} from "@/lib/types/navbar/navbar";
@@ -24,14 +24,9 @@ const NavbarComponent = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isMenuOpen, setMenuOpen] = useState(false);
     const [activeItem, setActiveItem] = useState<string | null>(null);
-    const [selectedLocation, setSelectedLocation] = React.useState<string | undefined>();
-    const [date, setDate] = React.useState<Date>();
     const router = useRouter();
     const {data: userProfile, error} = useGetUserProfileQuery();
     const [dynamicMenuItems, setDynamicMenuItems] = useState<MenuType[]>(menuItems);
-    const route = useRouter();
-    const [notifications, setNotifications] = useState<any[]>([]);
-    const [unreadCount, setUnreadCount] = useState<number>(0);
     const [lastCheckedTime, setLastCheckedTime] = useState<number>(0);
 
     useEffect(() => {
@@ -78,22 +73,24 @@ const NavbarComponent = () => {
     return (
         <>
             {isLoading ? <SkeletonNavbarComponent/> :
-                <nav className="w-full top-[0px] sticky z-50 bg-white flex flex-col dark:bg-khotixs-background-dark">
-                    <section
-                        className="container mx-auto h-[40px] md:h-[60px] bg-white py-[10px] flex items-center md:px-5 lg:px-10 justify-center gap-5 dark:bg-khotixs-background-dark">
-                        <CiBullhorn
-                            className="p-1.5 md:w-[40px] md:h-[40px] md:p-[8px] rounded-[100%] text-gray-400 bg-gray-200 h-8 w-8"/>
-                        <p className="text-[10px] sm:text-sm lg:text-lg font-semibold flex items-center">Do you
-                            organize events? </p>
-                        <Button
-                            onClick={() => router.push("/merchants")}
-                            className="text-[10px] sm:text-sm lg:text-lg p-2 md:px-4 font-semibold text-white hover:bg-primary-color bg-primary-color rounded-[5px] h-8 md:h-10">
-                            Become a Partner<FaArrowRightLong className="w-16 p-0.5 md:p-0"/>
-                        </Button>
-                    </section>
+                <nav className="w-full top-[0px] sticky z-50 bg-white flex flex-col dark:border-b dark:border-gray-700 dark:bg-khotixs-background-dark">
+                    {userProfile ? (
+                        <section
+                            className="container mx-auto h-[40px] md:h-[60px] bg-white py-[10px] flex items-center md:px-5 lg:px-10 justify-center gap-5 dark:bg-khotixs-background-dark">
+                            <CiBullhorn
+                                className="p-1.5 md:w-[40px] md:h-[40px] md:p-[8px] rounded-[100%] text-gray-400 bg-gray-200 h-8 w-8"/>
+                            <p className="text-[10px] sm:text-sm lg:text-lg font-semibold flex items-center">Do you
+                                organize events? </p>
+                            <Button
+                                onClick={() => router.push("/merchants")}
+                                className="text-[10px] sm:text-sm lg:text-lg p-2 md:px-4 font-semibold text-white hover:bg-primary-color bg-primary-color rounded-[5px] h-8 md:h-10">
+                                Become a Partner<FaArrowRightLong className="w-16 p-0.5 md:p-0"/>
+                            </Button>
+                        </section>
+                    ) : null}
 
                     <section
-                        className="container mx-auto w-full md:py-[15px] md:px-5 lg:px-10">
+                        className="container mx-auto w-full md:py-[15px] md:px-5  lg:px-10">
                         <div className="flex justify-between h-12 md:h-14 items-center">
                             <Link href="/" className="flex items-center">
                                 <Image className="w-[40px] h-40px] lg:w-[50px] lg:h-[50px] xl:w-[60px] xl:h-[60px] "
@@ -102,18 +99,18 @@ const NavbarComponent = () => {
 
                             <section className="rounded-[5px] flex justify-center drop-shadow-xl w-[60%]">
                                 <div
-                                    className="w-full h-[40px] sm:h-[45px] lg:h-[50px] rounded-[5px] bg-gray-50 flex items-center">
+                                    className="md:w-full w-[220px] rounded-[5px] flex items-center">
                                     <SearchBar/>
                                 </div>
                             </section>
 
-                            <div className="justify-center items-center flex gap-2 md:gap-0">
+                            <div className="justify-center items-center pr-4 flex gap-2 md:gap-0">
                                 {userProfile ? null : <ModeToggle/>}
                                 <NavigationMenuDemo/>
 
-                                <div className="flex items-center">
+                                <div className="flex items-center justify-center">
                                     {userProfile ? (
-                                        <div className={`flex items-center lg:gap-x-4 `}>
+                                        <div className={`flex items-center lg:gap-x-4 gap-2 `}>
                                             <NotificationComponent/>
                                             <UserProfileComponent data={userProfile}/>
                                         </div>
@@ -135,7 +132,7 @@ const NavbarComponent = () => {
                     <Sheet>
                         <SheetTrigger>
                             <div
-                                className="absolute cursor-pointer top-[48px] hover:bg-gray-50 hover:rounded-[6px] sm:mr-[70px] items-center justify-center md:mr-0 lg:pr-10 right-0 inline-flex w-8 h-8 text-2xl text-primary-color md:hidden focus:outline-none dark:text-primary-color"
+                                className={`absolute cursor-pointer mr-2 ${userProfile ? 'top-[48px]' : 'top-2'} hover:bg-gray-50 hover:rounded-[6px] sm:mr-[70px] items-center justify-center md:mr-0 lg:pr-10 right-0 inline-flex w-8 h-8 text-2xl text-primary-color md:hidden focus:outline-none dark:text-primary-color`}
                                 aria-controls="mega-menu-full"
                                 aria-expanded={isMenuOpen ? "true" : "false"}
                             >
@@ -143,7 +140,8 @@ const NavbarComponent = () => {
                                 {isMenuOpen ? <IoMdCloseCircle/> : <IoMenu/>}
                             </div>
                         </SheetTrigger>
-                        <SheetContent className="mt-[48px] w-[270px] rounded-tl-[6px] bg-white bg-opacity-95">
+                        <SheetContent
+                            className={`${userProfile ? 'mt-[48px]' : 'mt-1'} w-[270px] rounded-tl-[6px] bg-white bg-opacity-95`}>
                             <SheetHeader>
                                 <SheetTitle
                                     className={`text-label-text-secondary uppercase text-start`}>Menu</SheetTitle>

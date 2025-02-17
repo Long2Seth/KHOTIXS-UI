@@ -81,20 +81,20 @@ export default function NotificationComponent() {
     return (
         <Sheet>
             <SheetTrigger asChild>
-                <div className={`relative border-none mx-4 cursor-pointer`}>
-                    <p className={`absolute top-[-8px] right-[-8px] text-sm font-semibold text-white bg-red-500 rounded-full ${unreadCount > 9 ? 'px-[5px]' : 'px-[8px]'} flex justify-center items-center`}>
+                <div className={`relative border-none md:mx-4 mr-2 cursor-pointer`}>
+                    <p className={`absolute top-[-3px] right-[-4px] md:top-[-8px] md:right-[-8px] text-[6px] md:text-sm font-semibold text-white bg-red-500 rounded-full ${unreadCount > 9 ? 'px-[3px] md:px-[4px]' : 'px-[8px]'} flex justify-center items-center`}>
                         {unreadCount > 9 ? '+9' : unreadCount}
                     </p>
-                    <FiBell className="h-8 w-8 text-primary-color" />
+                    <FiBell className="md:h-8 md:w-8 h-5 w-5 text-primary-color" />
                 </div>
             </SheetTrigger>
             <SheetContent
-                className={`no-scrollbar w-[270px] md:w-[370px] bg-white bg-opacity-95 absolute top-[145px] h-screen`}>
+                className={`no-scrollbar w-[270px] md:w-[370px] bg-white bg-opacity-95 mt-[48px] rounded-[6px]`}>
                 <SheetHeader>
                     <SheetTitle
                         className={`text-start dark:text-label-text-secondary text-2xl`}>Notification</SheetTitle>
                 </SheetHeader>
-                <section className="md:p-4 py-2 space-y-2 overflow-y-scroll h-[750px] no-scrollbar ">
+                <section className="md:p-4 py-2 space-y-2 overflow-y-scroll h-[700px] no-scrollbar ">
                     {notifications?.map((notification) => (
                         <NotificationCardComponent
                             key={notification.id}
